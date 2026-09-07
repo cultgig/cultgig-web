@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, X } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { saveLead } from "../../lib/appwriteSubmissions";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
 import { Button, IconButton } from "../ui/Button";
@@ -23,6 +23,13 @@ export function LeadCaptureModal({
   const [form, setForm] = useState<Record<string, string>>({});
   const ref = useRef<HTMLDivElement>(null);
   useFocusTrap(ref, open, onClose);
+  useEffect(() => {
+    if (open) {
+      setRole(initialRole);
+      setSubmitted(false);
+      setError("");
+    }
+  }, [initialRole, open]);
 
   const update = (key: string, value: string) => setForm((current) => ({ ...current, [key]: value }));
   const close = () => {
@@ -30,6 +37,7 @@ export function LeadCaptureModal({
     setBusy(false);
     setError("");
     setForm({});
+    setRole(undefined);
     onClose();
   };
   const submit = async (event: React.FormEvent) => {
