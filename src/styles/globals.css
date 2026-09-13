@@ -31,7 +31,7 @@
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; color: var(--cultgig-text); background: var(--cultgig-bg); font-family: Lexend, sans-serif; overflow-x: hidden; }
+body { margin: 0; color: var(--cultgig-text); background: var(--cultgig-bg); font-family: Lexend, sans-serif; }
 button, input, textarea { font: inherit; }
 button, a { transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease; }
 a { color: inherit; text-decoration: none; }
@@ -66,7 +66,7 @@ h2 { font-size: clamp(34px, 4vw, 54px); font-weight: 600; }
 h3 { font-size: 26px; }
 p { line-height: 1.58; }
 .lede { max-width: 620px; font-size: 18px; line-height: 1.55; }
-.marketing-page { overflow: hidden; }
+.marketing-page { overflow: clip; }
 .home-hero { min-height: 680px; padding: 124px var(--page-edge) 74px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, .9fr); align-items: center; gap: clamp(44px, 6vw, 96px); color: var(--cultgig-text); background: var(--cultgig-bg); }
 .home-hero-copy { max-width: 680px; }
 .home-hero-copy h1 { max-width: 670px; color: var(--cultgig-plum-deep); }
@@ -293,7 +293,7 @@ p { line-height: 1.58; }
 .category-detail-cta p { max-width: 600px; color: var(--cultgig-blush); line-height: 1.7; }
 .category-detail-cta .button { margin: 12px 10px 0 0; }
 @media (max-width: 800px) {
-  .header-inner { min-height: 68px; padding: 0 20px; }
+  .header-inner { width: 100%; min-width: 0; min-height: 68px; padding: 0 20px; }
   .header-nav, .header-actions { display: none; }
   .menu-button { display: grid; margin-left: auto; }
   .logo-badge { display: none; }
@@ -310,7 +310,8 @@ p { line-height: 1.58; }
   .story-intro > div { padding-top: 0; }
   .story-intro, .split-story, .audience-section, .how-section, .categories-section, .why-section, .page-hero, .feature-list, .simple-cta, .faq-list, .contact-grid, .legal-page, .closing-cta { padding-top: 78px; padding-bottom: 78px; }
   .split-story { padding-left: 24px; padding-right: 24px; }
-  .audience-grid, .tracks, .category-grid, .why-grid { grid-template-columns: 1fr; }
+  .audience-grid, .tracks, .why-grid { grid-template-columns: 1fr; }
+  .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .product-reveal, .marketplace-loop { padding-top: 78px; padding-bottom: 78px; }
   .product-moments { grid-template-columns: 1fr; gap: 0; }
   .product-moments article { min-height: 245px; }
@@ -324,8 +325,11 @@ p { line-height: 1.58; }
   .category-gallery-2 { grid-column: span 1; }
   .category-gallery-3 { grid-row: span 1; }
   .category-gallery-4 { grid-column: span 2; }
-  .category-grid article { min-height: 190px; }
-  .category-card { min-height: 220px; }
+  .category-grid article { min-height: 170px; }
+  .category-card { min-height: 170px; padding: 15px; }
+  .category-card span { max-width: 130px; font-size: 15px; }
+  .category-card small { top: 12px; left: 14px; }
+  .category-card svg { right: 12px; bottom: 13px; }
   .opportunity-section { padding: 72px 24px; }
   .opportunity-card { grid-template-columns: 1fr; padding: 25px; gap: 24px; }
   .opportunity-status { padding: 22px 0 0; border-top: 1px solid var(--cultgig-border); border-left: 0; }
@@ -340,7 +344,7 @@ p { line-height: 1.58; }
   .page-hero img { height: 250px; }
   .simple-cta, .contact-grid { display: grid; }
   .footer-main { grid-template-columns: 1fr; gap: 50px; }
-  .footer-links { grid-template-columns: 1fr 1fr; }
+  .footer-links { grid-template-columns: 1fr; gap: 34px; }
   .app-strip { flex-wrap: wrap; }
   .app-strip strong { margin-right: 0; }
   .app-strip small { width: 100%; }
@@ -461,6 +465,10 @@ p { line-height: 1.58; }
   .page-hero > div { min-width: 0; }
   .page-hero h1 { max-width: 100%; font-size: clamp(36px, 10vw, 48px); overflow-wrap: break-word; }
   .page-hero .lede { max-width: 100%; font-size: 16px; }
-  .dev-role-switcher { right: 8px; bottom: 8px; max-width: calc(100vw - 16px); padding: 9px; font-size: 10px; }
-  .dev-role-switcher span { margin: 3px 0 6px; }
+  .home-hero-copy .button, .closing-cta .button, .contact-actions .button { width: 100%; margin-right: 0; }
+  .home-hero-copy > div, .closing-cta > div > div { display: grid; gap: 8px; }
+  .dev-role-switcher { right: 8px; bottom: 8px; max-width: calc(100vw - 16px); padding: 7px; font-size: 10px; }
+  .dev-role-switcher strong, .dev-role-switcher span { display: none; }
+  .dev-role-switcher div { gap: 4px; }
+  .dev-role-switcher button { padding: 4px 7px; }
 }
