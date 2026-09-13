@@ -8,6 +8,11 @@ import pageStory from "../assets/images/page-story.jpg";
 import pageArtists from "../assets/images/page-artists.jpg";
 import pageBusinesses from "../assets/images/page-businesses.jpg";
 import pageHowItWorks from "../assets/images/page-how-it-works.jpg";
+import creatorRhea from "../assets/images/creator-rhea.jpg";
+import creatorArjun from "../assets/images/creator-arjun.jpg";
+import creatorMeera from "../assets/images/creator-meera.jpg";
+import creatorNaina from "../assets/images/creator-naina.jpg";
+import creatorKabir from "../assets/images/creator-kabir.jpg";
 
 export interface ImageAsset {
   src: string;
@@ -65,4 +70,12 @@ export const pageImages = {
     src: pageHowItWorks,
     alt: "Live event with lights and performers",
   },
+};
+
+export const creatorImages: Record<string, ImageAsset> = {
+  rhea: { src: creatorRhea, alt: "Rhea, a musician, smiling between performances" },
+  arjun: { src: creatorArjun, alt: "Arjun, a creative professional, in a studio setting" },
+  meera: { src: creatorMeera, alt: "Meera, a photographer, holding her camera at work" },
+  naina: { src: creatorNaina, alt: "Naina, a makeup artist, preparing for a creative project" },
+  kabir: { src: creatorKabir, alt: "Kabir, an event creative, at a live gathering" },
 };

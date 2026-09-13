@@ -1,0 +1,3 @@
+import { MessageCircleMore, Smartphone } from "lucide-react";
+import { pageImages } from "../../content/images";
+export function TrustSection() { return <section className="trust-section"><div className="trust-image"><img src={pageImages.aboutStory.src} alt={pageImages.aboutStory.alt} /></div><div><p className="eyebrow">TRUST, BUILT INTO THE FLOW</p><h2>Clearer context makes a better first conversation.</h2><div className="trust-grid"><article><Smartphone size={21} /><h3>Phone-verified sign-up</h3><p>When Cultgig launches, account sign-up will be tied to a phone number.</p></article><article><MessageCircleMore size={21} /><h3>Reviews from real bookings</h3><p>Future reviews will be connected to completed work, not open comments.</p></article></div></div></section>; }
