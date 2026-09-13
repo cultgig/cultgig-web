@@ -1,4 +1,7 @@
-@import url("https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap");
+@import "@fontsource/lexend/400.css";
+@import "@fontsource/lexend/500.css";
+@import "@fontsource/lexend/600.css";
+@import "@fontsource/lexend/700.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -23,7 +26,7 @@
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; color: var(--cultgig-text); background: var(--cultgig-bg); font-family: Satoshi, sans-serif; overflow-x: hidden; }
+body { margin: 0; color: var(--cultgig-text); background: var(--cultgig-bg); font-family: Lexend, sans-serif; overflow-x: hidden; }
 button, input, textarea { font: inherit; }
 button, a { transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease; }
 a { color: inherit; text-decoration: none; }
@@ -142,6 +145,15 @@ p { line-height: 1.58; }
 .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 44px; }
 .category-grid article { min-height: 300px; padding: 22px; display: flex; align-items: end; background-position: center; background-size: cover; border-radius: var(--radius-sm); }
 .category-grid strong { font-size: 20px; }
+.category-grid > a { display: block; color: inherit; }
+.category-card-shell { height: 100%; }
+.category-card { min-height: 300px; position: relative; overflow: hidden; padding: 22px; display: flex; align-items: end; border-radius: var(--radius-sm); isolation: isolate; }
+.category-card img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.category-card-wash { position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgba(27,17,25,.92), transparent 70%); }
+.category-card small { position: absolute; top: 18px; left: 20px; color: var(--cultgig-blush); font-weight: 700; letter-spacing: .12em; }
+.category-card span { max-width: 180px; font-size: 20px; font-weight: 700; }
+.category-card svg { position: absolute; right: 18px; bottom: 21px; }
+.category-card:hover img { transform: scale(1.05); }
 .app-section { max-width: none; padding: 110px 7vw; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 8vw; color: #fff; background: var(--cultgig-plum-deep); }
 .app-section > div:first-child { max-width: 580px; }
 .app-section .eyebrow { color: var(--cultgig-blush); }
@@ -243,6 +255,32 @@ p { line-height: 1.58; }
 .lead-success { padding: 35px 0 15px; }
 .success-icon { width: 48px; height: 48px; display: grid; place-items: center; color: #fff; background: #2f8c67; border-radius: 50%; }
 .lead-success p:not(.eyebrow) { max-width: 450px; color: var(--cultgig-text-secondary); }
+.dev-role-switcher { position: fixed; right: 14px; bottom: 14px; z-index: 100; max-width: 310px; padding: 12px; color: #fff; background: var(--cultgig-dark); border: 1px solid var(--cultgig-blush); border-radius: 10px; box-shadow: var(--shadow-soft); font-size: 12px; }
+.dev-role-switcher strong, .dev-role-switcher span { display: block; }
+.dev-role-switcher strong { color: var(--cultgig-blush); letter-spacing: .05em; }
+.dev-role-switcher span { margin: 5px 0 9px; color: #ddcfdb; }
+.dev-role-switcher div { display: flex; flex-wrap: wrap; gap: 6px; }
+.dev-role-switcher button { padding: 5px 8px; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,.4); border-radius: 5px; cursor: pointer; }
+.category-index-hero { min-height: 440px; grid-template-columns: 1fr; }
+.category-detail-hero { min-height: 590px; padding: 150px 7vw 70px; display: flex; flex-direction: column; justify-content: space-between; color: #fff; background-position: center; background-size: cover; }
+.category-detail-hero > div { max-width: 700px; }
+.category-detail-hero h1 { margin: 12px 0 18px; font-size: clamp(46px, 6vw, 76px); line-height: 1.05; }
+.category-detail-hero p:not(.eyebrow) { max-width: 570px; color: #f0e9ee; font-size: 18px; line-height: 1.7; }
+.back-link { display: inline-flex; align-items: center; gap: 8px; color: #fff; font-size: 14px; }
+.opportunity-section { max-width: 1280px; margin: auto; padding: 110px 28px; }
+.opportunity-card { padding: 40px; display: grid; grid-template-columns: 1.5fr .8fr; gap: 42px; background: #fff; border: 1px solid var(--cultgig-border); border-radius: var(--radius-md); box-shadow: var(--shadow-soft); }
+.example-label { display: inline-block; padding: 6px 9px; color: var(--cultgig-plum); background: var(--cultgig-plum-soft); border-radius: var(--radius-pill); font-size: 10px; font-weight: 700; letter-spacing: .08em; }
+.opportunity-card h2 { margin: 18px 0 10px; font-size: 32px; }
+.opportunity-card p { color: var(--cultgig-text-secondary); line-height: 1.7; }
+.opportunity-meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 24px; color: var(--cultgig-text-secondary); font-size: 14px; }
+.opportunity-meta span { display: inline-flex; align-items: center; gap: 7px; }
+.opportunity-status { display: grid; align-content: center; gap: 14px; padding-left: 30px; border-left: 1px solid var(--cultgig-border); }
+.opportunity-status span { color: var(--cultgig-text-secondary); font-size: 14px; }
+.opportunity-status span::before { content: ""; width: 8px; height: 8px; display: inline-block; margin-right: 9px; background: var(--cultgig-plum); border-radius: 50%; }
+.category-detail-cta { margin-top: 26px; padding: 46px; color: #fff; background: var(--cultgig-plum); border-radius: var(--radius-md); }
+.category-detail-cta h2 { margin: 0; font-size: 34px; }
+.category-detail-cta p { max-width: 600px; color: var(--cultgig-blush); line-height: 1.7; }
+.category-detail-cta .button { margin: 12px 10px 0 0; }
 @media (max-width: 800px) {
   .header-inner { min-height: 68px; padding: 0 20px; }
   .header-nav, .header-actions { display: none; }
@@ -276,6 +314,12 @@ p { line-height: 1.58; }
   .category-gallery-3 { grid-row: span 1; }
   .category-gallery-4 { grid-column: span 2; }
   .category-grid article { min-height: 190px; }
+  .category-card { min-height: 220px; }
+  .opportunity-section { padding: 72px 24px; }
+  .opportunity-card { grid-template-columns: 1fr; padding: 25px; gap: 24px; }
+  .opportunity-status { padding: 22px 0 0; border-top: 1px solid var(--cultgig-border); border-left: 0; }
+  .category-detail-hero { min-height: 500px; padding: 110px 24px 45px; }
+  .category-detail-cta { padding: 28px 24px; }
   .app-section { gap: 40px; }
   .app-preview { min-height: auto; grid-template-columns: 1fr 1fr; }
   .app-preview-main { grid-column: 1 / -1; grid-row: 1; }

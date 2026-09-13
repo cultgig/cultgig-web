@@ -3,6 +3,7 @@ import { Footer } from "../components/layout/Footer";
 import { Header } from "../components/layout/Header";
 import { LeadCaptureModal } from "../components/early-access/LeadCaptureModal";
 import { AboutPage, ContactPage, FAQPage, HomePage, HowItWorksPage, AudiencePage, LegalPage, NotFoundPage } from "../routes/Pages";
+import { CategoriesPage, CategoryDetailPage } from "../routes/CategoriesPage";
 type LeadRole = "artist" | "business";
 
 type Navigate = (to: string) => void;
@@ -24,6 +25,7 @@ export default function App() {
   switch (path) {
     case "/": page = <HomePage openLead={openLead} />; break;
     case "/how-it-works": page = <HowItWorksPage openLead={openLead} />; break;
+    case "/categories": page = <CategoriesPage />; break;
     case "/for-artists": page = <AudiencePage kind="artist" openLead={openLead} />; break;
     case "/for-businesses": page = <AudiencePage kind="business" openLead={openLead} />; break;
     case "/about": page = <AboutPage openLead={openLead} />; break;
@@ -31,7 +33,7 @@ export default function App() {
     case "/contact": page = <ContactPage openLead={openLead} />; break;
     case "/privacy": page = <LegalPage kind="Privacy Policy" />; break;
     case "/terms": page = <LegalPage kind="Terms" />; break;
-    default: page = <NotFoundPage openLead={openLead} />;
+    default: page = path.startsWith("/categories/") ? <CategoryDetailPage slug={path.split("/")[2]} openLead={openLead} /> : <NotFoundPage openLead={openLead} />;
   }
   return <NavContext.Provider value={navigate}><Header currentPath={path} openLead={openLead} /><div>{page}</div><Footer openLead={openLead} /><LeadCaptureModal open={lead.open} role={lead.role} onClose={() => setLead({ open: false })} /></NavContext.Provider>;
 }

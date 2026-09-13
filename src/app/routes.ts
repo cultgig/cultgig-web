@@ -2,6 +2,7 @@ export type RoutePath =
   | "/"
   | "/about"
   | "/how-it-works"
+  | "/categories"
   | "/for-artists"
   | "/for-businesses"
   | "/faq"

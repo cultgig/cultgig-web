@@ -28,14 +28,14 @@ export const siteConfig = {
 export const pageDescriptions: Record<string, string> = {
   "The future of creative discovery":
     "Cultgig is building a trusted space where artists and businesses can discover each other and build meaningful professional connections.",
-  "A better place for creative work.":
+  "Why Cultgig exists":
     "Learn why Cultgig is building a more thoughtful starting point for creative work in India.",
   "How Cultgig works": "See how Cultgig is building a clearer path to creative connection.",
   "For Artists": "Your work deserves to be discovered. Join the Cultgig early-access list.",
   "For Businesses": "Better creative connections start here. Get Cultgig launch updates.",
   "Frequently Asked Questions":
     "Straight answers about Cultgig profiles, onboarding, supported creative categories, and the marketplace roadmap.",
-  "Let’s talk.":
+  "Contact Cultgig":
     "Contact Cultgig about artist support, general questions, or partnership conversations.",
   "Privacy Policy":
     "Read how Cultgig handles information submitted during profile onboarding.",
