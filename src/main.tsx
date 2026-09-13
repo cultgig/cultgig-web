@@ -7,6 +7,6 @@ import "./styles/globals.css";
 import "./styles/visual.css";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AuthProviderRoot><App /><DevRoleSwitcher /></AuthProviderRoot>
+    <AuthProviderRoot><App />{import.meta.env.DEV && <DevRoleSwitcher />}</AuthProviderRoot>
   </StrictMode>,
 );
