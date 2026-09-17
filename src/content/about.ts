@@ -1,6 +1,6 @@
 export const aboutContent = {
   vision: {
-    eyebrow: "OUR VISION",
+    eyebrow: "Our vision",
     heading: "Make creative work easier to discover, understand, and support.",
     paragraphs: [
       "Cultgig is building a more thoughtful starting point for independent artists and the businesses looking for creative talent.",
@@ -8,7 +8,7 @@ export const aboutContent = {
     ],
   },
   team: {
-    eyebrow: "THE PEOPLE BEHIND CULTGIG",
+    eyebrow: "The people behind Cultgig",
     heading: "A small team building with the creative community.",
     empty: "Team profiles will be added here as official names, roles, images, and social links are approved.",
     members: [] as TeamMember[],

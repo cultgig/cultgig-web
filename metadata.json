@@ -1,0 +1,8 @@
+{
+  "name": "Cultgig",
+  "description": "Where artists & gigs get discovered. A creative marketplace connecting artists and businesses.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
