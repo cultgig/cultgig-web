@@ -30,6 +30,20 @@ export default {
           warm: '#B88E52',
           dark: '#181016',
         },
+        neutral: {
+          canvas: 'var(--cultgig-bg, #FCFAFB)',
+          surface: '#FFFFFF',
+          textPrimary: 'var(--cultgig-text, #20151E)',
+          textSecondary: 'var(--cultgig-text-secondary, #5C4E58)',
+          textMuted: 'var(--cultgig-muted, #84747F)',
+          border: 'var(--cultgig-border, #E5DCE2)',
+          borderLight: 'var(--cultgig-border-light, #F0E8EE)',
+        },
+        semantic: {
+          success: '#2E7D32',
+          warning: '#B88E52',
+          error: '#C62828',
+        },
       },
       fontFamily: {
         heading: ['Lexend', 'sans-serif'],

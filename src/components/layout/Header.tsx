@@ -39,6 +39,9 @@ export function Header({ currentPath, openLead }: { currentPath: string; openLea
           ))}
         </nav>
         <div className="header-actions">
+          <Button variant="outline" onClick={() => openLead("business")}>
+            For businesses
+          </Button>
           <Button variant="primary" onClick={() => openLead("artist")}>
             Join as an artist
           </Button>

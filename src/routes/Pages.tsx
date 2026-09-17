@@ -6,7 +6,6 @@ import { aboutContent } from "../content/about";
 import { creatorImages, pageImages } from "../content/images";
 import { detailedFaqList } from "../content/faq";
 import { usePageMeta } from "../hooks/usePageMeta";
-import { ArtistPreviewCard } from "../components/marketplace/ArtistPreviewCard";
 import { OpportunityPreviewCard } from "../components/marketplace/OpportunityPreviewCard";
 import { MarketplaceFlow } from "../components/marketplace/MarketplaceFlow";
 import { ConversationPreview } from "../components/marketplace/ConversationPreview";

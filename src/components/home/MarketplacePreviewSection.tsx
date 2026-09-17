@@ -24,6 +24,19 @@ export function MarketplacePreviewSection() {
 
           <h3 className="preview-card-title">{opportunity.title}</h3>
           
+          <div className="preview-host-header">
+            <img
+              src={creatorImages.naina.src}
+              alt={creatorImages.naina.alt}
+              className="preview-host-avatar"
+              loading="lazy"
+            />
+            <div className="preview-host-info">
+              <span className="preview-host-name">Naina Mathur</span>
+              <span className="preview-host-role">Hospitality Programming Lead · Bandra Boutique Hotel</span>
+            </div>
+          </div>
+
           <div className="preview-meta-list">
             <div className="preview-meta-row">
               <MapPin size={15} className="text-brand shrink-0" />
