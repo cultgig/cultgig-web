@@ -1,10 +1,10 @@
-import { Calendar, CheckCircle2, MapPin, Music, Volume2 } from "lucide-react";
+import { Calendar, CheckCircle2, MapPin, MessageSquare, Music, Volume2 } from "lucide-react";
 import { homepageContent } from "../../content/homepage";
 import { categoryImages, creatorImages } from "../../content/images";
 
 export function MarketplacePreviewSection() {
   const { marketplaceShowcase } = homepageContent;
-  const { opportunity, artist } = marketplaceShowcase;
+  const { opportunity, artist, conversation } = marketplaceShowcase;
 
   return (
     <section className="section-container bg-neutral-canvas" aria-labelledby="marketplace-heading">
@@ -14,8 +14,8 @@ export function MarketplacePreviewSection() {
         <p className="section-lead">{marketplaceShowcase.lead}</p>
       </div>
 
-      <div className="marketplace-preview-grid">
-        {/* Left: Illustrative Event Brief */}
+      <div className="marketplace-preview-flow">
+        {/* Step 1: Illustrative Event Brief */}
         <div className="preview-card-wrapper">
           <div className="preview-card-header">
             <span className="card-badge">{opportunity.badge}</span>
@@ -32,8 +32,8 @@ export function MarketplacePreviewSection() {
               loading="lazy"
             />
             <div className="preview-host-info">
-              <span className="preview-host-name">Naina Mathur</span>
-              <span className="preview-host-role">Hospitality Programming Lead · Bandra Boutique Hotel</span>
+              <span className="preview-host-name">{opportunity.hostName}</span>
+              <span className="preview-host-role">{opportunity.hostRole}</span>
             </div>
           </div>
 
@@ -60,7 +60,7 @@ export function MarketplacePreviewSection() {
           </div>
         </div>
 
-        {/* Right: Illustrative Artist Profile */}
+        {/* Step 2: Illustrative Artist Profile */}
         <div className="preview-card-wrapper">
           <div className="preview-card-header">
             <span className="card-badge">{artist.badge}</span>
@@ -110,6 +110,53 @@ export function MarketplacePreviewSection() {
               </p>
             </div>
             <Music size={16} className="text-neutral-textMuted shrink-0 ml-auto" />
+          </div>
+        </div>
+
+        {/* Step 3: Illustrative Conversation */}
+        <div className="preview-card-wrapper">
+          <div className="preview-card-header">
+            <span className="card-badge">{conversation.badge}</span>
+            <span className="preview-category-tag flex items-center gap-1">
+              <MessageSquare size={12} className="text-brand" />
+              Direct message
+            </span>
+          </div>
+
+          <h3 className="preview-card-title">{conversation.title}</h3>
+          
+          <div className="conversation-thread">
+            {conversation.messages.map((msg) => {
+              const isHost = msg.role === "Venue Curator";
+              const avatar = isHost ? creatorImages.naina.src : creatorImages.rhea.src;
+              return (
+                <div
+                  key={msg.text}
+                  className={`conversation-bubble-row ${isHost ? "host-message" : "artist-message"}`}
+                >
+                  <img
+                    src={avatar}
+                    alt={msg.sender}
+                    className="conversation-avatar"
+                    loading="lazy"
+                  />
+                  <div className="conversation-bubble">
+                    <div className="conversation-bubble-meta">
+                      <span className="conversation-sender">{msg.sender}</span>
+                      <span className="conversation-time">{msg.time}</span>
+                    </div>
+                    <p className="conversation-text">{msg.text}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="conversation-status-bar">
+            <span className="conversation-status-dot" />
+            <span className="text-xs text-neutral-textSecondary font-medium">
+              Brief linked · Details agreed upfront · No hidden agency fee
+            </span>
           </div>
         </div>
       </div>

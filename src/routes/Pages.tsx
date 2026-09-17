@@ -10,11 +10,13 @@ import { OpportunityPreviewCard } from "../components/marketplace/OpportunityPre
 import { MarketplaceFlow } from "../components/marketplace/MarketplaceFlow";
 import { ConversationPreview } from "../components/marketplace/ConversationPreview";
 
-// 11 Modular Homepage Sections
+// Homepage Sections
 import { HomeHero } from "../components/home/HomeHero";
 import { HumanTensionSection } from "../components/home/HumanTensionSection";
 import { TheCultgigIdeaSection } from "../components/home/TheCultgigIdeaSection";
 import { MarketplacePreviewSection } from "../components/home/MarketplacePreviewSection";
+import { CategoryShowcaseSection } from "../components/home/CategoryShowcaseSection";
+import { WhoItsForSection } from "../components/home/WhoItsForSection";
 import { ArtistStorySection } from "../components/home/ArtistStorySection";
 import { BusinessStorySection } from "../components/home/BusinessStorySection";
 import { IndianCreativeMomentsSection } from "../components/home/IndianCreativeMomentsSection";
@@ -140,18 +142,17 @@ export function HomePage({ openLead }: { openLead: OpenLead }) {
   return (
     <Page
       title="Where artists & gigs get discovered"
-      description="Cultgig gives independent musicians, photographers, decorators, and stylists a place to show real work — and gives businesses a clear brief to start the conversation."
+      description="Cultgig connects independent musicians, photographers, decorators, and performers with venues, brands, and celebrations looking for them across India."
     >
       <HomeHero openLead={openLead} />
       <HumanTensionSection />
       <TheCultgigIdeaSection />
       <MarketplacePreviewSection />
-      <ArtistStorySection openLead={openLead} />
-      <BusinessStorySection openLead={openLead} />
+      <CategoryShowcaseSection />
+      <WhoItsForSection openLead={openLead} />
       <IndianCreativeMomentsSection />
-      <HowItWorksDualSection openLead={openLead} />
-      <TrustSectionHome />
       <BookingScenarioSection />
+      <TrustSectionHome />
       <FinalCTASection openLead={openLead} />
     </Page>
   );

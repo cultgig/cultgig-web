@@ -26,34 +26,39 @@ export interface CreativeMoment {
 
 export const homepageContent = {
   hero: {
-    badge: "Creative discovery in India",
-    heading: "Where artists and events find each other with context.",
-    lead: "Cultgig gives independent musicians, photographers, decorators, and stylists a place to show real work — and gives businesses a clear brief to start the conversation.",
+    badge: "Creative discovery across India",
+    heading: "The right creative person changes the whole feel of a moment.",
+    lead: "Cultgig connects independent musicians, photographers, decorators, and performers with venues, brands, and celebrations looking for them across India. Real craft. Clear briefs. Direct conversations.",
     primaryCta: "Join as an artist",
     secondaryCta: "For businesses",
-    clarityNote: "Free at launch · Phone-verified sign-up · Direct conversations",
+    clarityNote: "Free at launch · Phone-verified early access · Zero commission",
     briefPreview: {
-      tag: "Illustrative brief",
-      title: "Weekend acoustic terrace residency",
+      tag: "Event brief",
+      title: "Sunset acoustic terrace set",
       location: "Bandra West, Mumbai",
-      format: "2-hour sunset set · Warm contemporary sound",
+      format: "2-hour sunset set · In-house PA provided",
+    },
+    artistPreview: {
+      name: "Rhea Kapoor",
+      role: "Acoustic Vocalist & Songwriter · Mumbai",
+      status: "Open for weekend bookings",
     }
   },
 
   tension: {
-    badge: "The gap today",
+    badge: "Why Cultgig exists",
     heading: "Creative booking is broken on both sides.",
-    lead: "Today, connecting an artist to a real event relies on forwarded phone numbers, messy DMs, and zero creative context.",
+    lead: "Today, connecting an artist to a real event relies on forwarded phone numbers, vague WhatsApp DMs, and zero creative context.",
     sides: [
       {
         role: "The artist's reality",
-        quote: "You spend years perfecting your acoustic set or visual craft. Then someone forwards your number to a WhatsApp group asking: 'Can you play Saturday? Rate?' with no word on the room, crowd, or sound setup.",
-        summary: "Artists are treated like commodity rate cards rather than creative professionals with a distinct style.",
+        quote: "You spend years perfecting your sound. Then someone forwards your number to a WhatsApp group asking: 'Can you play Saturday? Rate?' with zero word on the room, crowd, or sound setup.",
+        summary: "Artists are treated like commodity rate cards instead of craftspeople with a distinct style.",
       },
       {
         role: "The business reality",
-        quote: "You are hosting a boutique hotel evening or an intimate wedding dinner. You want talent whose style genuinely fits the room, but your search is limited to whoever a friend happens to remember.",
-        summary: "Organizers waste days chasing dead-end recommendations and scrolling social media without knowing availability or fit.",
+        quote: "You are hosting an intimate dinner or a rooftop launch. You need talent whose style fits the room, but your search is limited to whoever a friend happens to remember.",
+        summary: "Curators waste days chasing dead-end recommendations without knowing fit or availability.",
       }
     ]
   },
@@ -65,8 +70,8 @@ export const homepageContent = {
     steps: [
       {
         number: "01",
-        title: "See the work first",
-        description: "Explore focused portfolios with real performance clips, photography samples, and style notes — not follower vanity metrics.",
+        title: "See the craft first",
+        description: "Explore focused portfolios with real audio clips, recorded acoustic sets, and photography samples — not follower vanity metrics.",
       },
       {
         number: "02",
@@ -76,19 +81,61 @@ export const homepageContent = {
       {
         number: "03",
         title: "Start a direct conversation",
-        description: "Connect directly with complete context in hand. Discuss details, logistics, and arrangements without middleman friction.",
+        description: "Connect directly with complete context in hand. Discuss details, logistics, and soundcheck without middleman friction.",
       }
     ] as StepItem[]
   },
 
+  categories: {
+    badge: "Explore creative categories",
+    heading: "Craft that shapes Indian gatherings.",
+    lead: "From intimate café sets to multi-day celebrations, discover independent talent across four core creative disciplines.",
+    list: [
+      {
+        slug: "musicians-djs",
+        key: "musicians",
+        number: "01",
+        title: "Musicians & DJs",
+        description: "Acoustic soloists, indie bands, percussionists, and DJs for sundowners, receptions, and cultural evenings.",
+        examples: "Acoustic sets · Sangeet music · Rooftop jazz · Indie folk",
+      },
+      {
+        slug: "photo-video",
+        key: "photographers",
+        number: "02",
+        title: "Photographers & Videographers",
+        description: "Visual storytellers, candid wedding photographers, and cinematic filmmakers who capture authentic emotion.",
+        examples: "Candid wedding · Brand editorial · Live concert · Portraiture",
+      },
+      {
+        slug: "decor-event",
+        key: "decorators",
+        number: "03",
+        title: "Decorators & Scenographers",
+        description: "Creative event designers, floral stylists, and ambient lighting artists who transform spaces into memorable environments.",
+        examples: "Terrace ambiance · Floral styling · Stage aesthetic · Intimate dinners",
+      },
+      {
+        slug: "beauty-dance",
+        key: "beautyDance",
+        number: "04",
+        title: "Makeup, Beauty & Dance",
+        description: "Bridal and editorial makeup artists, hair stylists, and expressive classical or contemporary dancers.",
+        examples: "Bridal styling · Contemporary dance · Editorial makeup · Cultural sets",
+      },
+    ]
+  },
+
   marketplaceShowcase: {
     badge: "The product in practice",
-    heading: "What a thoughtful booking looks like.",
-    lead: "Here is how a real requirement and a creative profile meet on Cultgig. These examples illustrate the upcoming product experience.",
+    heading: "What a thoughtful introduction looks like.",
+    lead: "Here is how a real requirement and a verified creative profile meet on Cultgig. These examples illustrate the upcoming product experience.",
     opportunity: {
-      badge: "Illustrative event brief",
+      badge: "01 · The Event Brief",
       category: "Musicians & live performers",
       title: "Weekend acoustic evening for terrace dining",
+      hostName: "Naina Mathur",
+      hostRole: "Hospitality Curator · Bandra Boutique Hotel",
       venue: "Boutique hospitality space · Bandra West, Mumbai",
       timing: "Saturday, 7:00 PM – 9:30 PM",
       scope: "Looking for an acoustic duo or solo vocalist capable of building a warm, contemporary ambiance. In-house PA and basic monitor provided.",
@@ -99,50 +146,76 @@ export const homepageContent = {
       ]
     },
     artist: {
-      badge: "Illustrative artist profile",
+      badge: "02 · The Artist Profile",
       name: "Rhea Kapoor",
-      craft: "Vocalist · Acoustic performer",
+      craft: "Vocalist · Acoustic Performer",
       city: "Mumbai",
       bio: "Crafting intimate acoustic sets and soulful renditions for hospitality evenings, cultural gatherings, and celebrations.",
       tags: ["Soul & Indie", "Acoustic Duo", "English & Hindi"],
-      sampleTitle: "Live sunset session at Carter Road",
+      sampleTitle: "Live sunset session at Carter Road (2:45 min audio)",
+    },
+    conversation: {
+      badge: "03 · The Direct Conversation",
+      title: "First message with full context attached",
+      messages: [
+        {
+          sender: "Naina Mathur",
+          role: "Venue Curator",
+          time: "Thursday 6:12 PM",
+          text: "Hi Rhea, loved your Carter Road acoustic set. We're hosting 60 guests for an intimate sunset terrace dinner this Saturday — your sound fits the room's mood perfectly."
+        },
+        {
+          sender: "Rhea Kapoor",
+          role: "Artist",
+          time: "Thursday 6:28 PM",
+          text: "Thank you Naina! A warm 2-hour set sounds ideal for that crowd. I'll bring my acoustic guitar and vocal mic for the 6:30 PM soundcheck."
+        }
+      ]
     }
   },
 
-  artistStory: {
-    badge: "For independent artists",
-    heading: "A portfolio that speaks before a rate card.",
-    lead: "Your work deserves better than a brief comment asking 'What is your price?' Cultgig lets you show your style, repertoire, equipment needs, and past performances so hosts approach you with genuine appreciation for your craft.",
-    points: [
-      "Present audio, video, and high-resolution visual proof in one clean profile.",
-      "Receive inquiries that already include the date, vibe, and format.",
-      "Keep full control over your calendar, rates, and artistic choices.",
-      "Build a verified reputation backed by genuine post-event reviews."
-    ],
-    cta: "Join as an artist"
-  },
-
-  businessStory: {
-    badge: "For venues, brands & hosts",
-    heading: "Find talent that elevates your experience.",
-    lead: "Whether you run a café residency, coordinate a brand launch, or plan a family sangeet, Cultgig helps you discover creative professionals whose aesthetic already aligns with your vision.",
-    points: [
-      "Filter by specific creative category, city, and performance style.",
-      "Review actual recordings and portfolios rather than forwarded contacts.",
-      "Send a clear brief once instead of repeating details across multiple phone calls.",
-      "Work directly with verified professionals who take their craft seriously."
-    ],
-    cta: "Explore for businesses"
+  whoItsFor: {
+    badge: "Two sides. One shared standard.",
+    heading: "Built with quiet respect for the people behind the work.",
+    lead: "Whether you create the art or curate the room, Cultgig gives you the clarity you have been missing.",
+    artist: {
+      badge: "For independent artists",
+      heading: "A portfolio that speaks before a rate card.",
+      personName: "Meera Joshi",
+      personRole: "Visual Storyteller & Photographer · New Delhi",
+      lead: "Your work deserves better than a cold comment asking 'What is your price?' Cultgig lets you show your style, repertoire, equipment needs, and past performances so hosts approach you with genuine appreciation for your craft.",
+      points: [
+        "Present audio, video, and high-resolution visual proof in one clean profile.",
+        "Receive inquiries that already include the date, vibe, format, and sound setup.",
+        "Keep full control over your calendar, rates, and artistic choices.",
+        "Build a verified reputation backed by genuine post-event reviews."
+      ],
+      cta: "Join as an artist"
+    },
+    business: {
+      badge: "For venues, brands & hosts",
+      heading: "Find talent that genuinely elevates your experience.",
+      personName: "Arjun Varma",
+      personRole: "Hospitality Curator & Event Lead · Mumbai",
+      lead: "Whether you run a café residency, coordinate a brand launch, or plan an intimate celebration, Cultgig helps you discover creative professionals whose aesthetic already aligns with your vision.",
+      points: [
+        "Filter by specific creative category, city, and performance style.",
+        "Review actual recordings and portfolios rather than forwarded phone contacts.",
+        "Send your brief once instead of repeating details across ten phone calls.",
+        "Work directly with verified professionals who take their craft seriously."
+      ],
+      cta: "For businesses"
+    }
   },
 
   moments: {
     badge: "Real creative moments",
     heading: "Built for the cultural occasions that bring India together.",
-    lead: "From intimate café sessions to multi-day celebrations, discover how different spaces and occasions connect with creative talent.",
+    lead: "From intimate café sessions to multi-day celebrations, creative craft is woven into how India celebrates, gathers, and connects.",
     list: [
       {
         id: "shaadi",
-        title: "Sangeet & intimate celebrations",
+        title: "Sangeet & courtyard celebrations",
         setting: "Heritage courtyard, Jaipur",
         category: "Live musicians & choreographers",
         description: "Folk-fusion singers, acoustic sets, and choreographers crafting unforgettable family memories.",
@@ -150,7 +223,7 @@ export const homepageContent = {
       },
       {
         id: "hospitality",
-        title: "Hotel cultural evenings",
+        title: "Hotel cultural evenings & sundowners",
         setting: "Rooftop lounge, Bengaluru",
         category: "Jazz trios & instrumentalists",
         description: "Curated soundscapes that turn dinner into an immersive sensory experience.",
@@ -171,78 +244,6 @@ export const homepageContent = {
         category: "Photographers & makeup artists",
         description: "Visual storytellers capturing authentic aesthetic narratives for modern brands.",
         imageKey: "photographers"
-      }
-    ]
-  },
-
-  howItWorks: {
-    badge: "How it works",
-    heading: "A simple, parallel path for both sides.",
-    lead: "No complicated commission models or opaque algorithms. Just a clear sequence from requirement to soundcheck.",
-    artistTrack: {
-      title: "For artists",
-      subtitle: "Showcase your craft and receive qualified inquiries.",
-      steps: [
-        {
-          number: "01",
-          title: "Build your verified profile",
-          description: "Upload your performance reels, portfolio galleries, city availability, and sound requirements."
-        },
-        {
-          number: "02",
-          title: "Review incoming event briefs",
-          description: "See the date, location, atmosphere, and format upfront before deciding to respond."
-        },
-        {
-          number: "03",
-          title: "Direct confirmation & prep",
-          description: "Message directly with the host to finalize logistics, setlists, and schedule soundcheck."
-        }
-      ]
-    },
-    businessTrack: {
-      title: "For businesses & hosts",
-      subtitle: "Find the right creative partner with total clarity.",
-      steps: [
-        {
-          number: "01",
-          title: "Describe your occasion",
-          description: "Specify the timing, venue ambiance, sound setup, and the creative mood you are looking for."
-        },
-        {
-          number: "02",
-          title: "Explore relevant artists",
-          description: "Browse portfolios with real audio and visual samples tailored to your event category."
-        },
-        {
-          number: "03",
-          title: "Connect directly",
-          description: "Start a conversation with all brief details attached, ensuring a smooth collaboration."
-        }
-      ]
-    }
-  },
-
-  trust: {
-    badge: "Trust through transparency",
-    heading: "Honest foundations. No fabricated metrics.",
-    lead: "We do not manufacture fake review counts or claim thousands of phantom bookings. Trust on Cultgig is earned through practical product safeguards.",
-    pillars: [
-      {
-        title: "Phone-verified sign-up",
-        description: "Every artist and business account is verified via phone OTP before connecting, eliminating anonymous spam."
-      },
-      {
-        title: "Proof before conversation",
-        description: "Real portfolios, video excerpts, and photos are required so hosts can assess craft before reaching out."
-      },
-      {
-        title: "Mutual post-event reviews",
-        description: "Reviews can only be submitted after a verified booking takes place, ensuring authentic peer accountability."
-      },
-      {
-        title: "Direct terms & free at launch",
-        description: "No hidden middleman cuts during our early launch period. Conversations and negotiations remain transparent."
       }
     ]
   },
@@ -280,12 +281,36 @@ export const homepageContent = {
     ]
   },
 
+  trust: {
+    badge: "Trust through transparency",
+    heading: "Honest foundations. No fabricated metrics.",
+    lead: "We do not manufacture fake review counts or claim thousands of phantom bookings. Trust on Cultgig is earned through practical product safeguards.",
+    pillars: [
+      {
+        title: "Phone-verified sign-up",
+        description: "Every artist and business account is verified via phone OTP before connecting, eliminating anonymous spam."
+      },
+      {
+        title: "Proof before conversation",
+        description: "Real portfolios, video excerpts, and photos are required so hosts can assess craft before reaching out."
+      },
+      {
+        title: "Mutual post-event reviews",
+        description: "Reviews can only be submitted after a verified booking takes place, ensuring authentic peer accountability."
+      },
+      {
+        title: "Direct terms & free at launch",
+        description: "No hidden middleman cuts during our early launch period. Conversations and negotiations remain transparent."
+      }
+    ]
+  },
+
   finalCta: {
     badge: "Join the early cohort",
-    heading: "Be part of a better way to book creative work.",
-    lead: "Whether you are an independent artist looking for quality gigs or a business searching for the right creative fit, join early access today.",
+    heading: "Good creative work deserves the right room.",
+    lead: "Whether you want to be found for your craft or find the right person for your moment, join Cultgig early access today.",
     artistButton: "Join as an artist",
     businessButton: "For businesses",
-    note: "Early access members receive priority onboarding and direct profile review."
+    note: "Phone-verified early access · Free at launch · Priority profile onboarding"
   }
 } as const;
