@@ -43,7 +43,7 @@ export function ArtistStorySection({ openLead }: { openLead: OpenLead }) {
           </p>
 
           <ul className="story-points-list" role="list">
-            {artistStory.points.map((point) => (
+            {artistStory.points.map((point: string) => (
               <li key={point} className="story-point-item">
                 <span className="story-point-icon">
                   <Check size={14} className="text-brand" />

@@ -1,5 +1,5 @@
 import { UserRound, Building2 } from "lucide-react";
-import { homepageContent } from "../../content/homepage";
+import { homepageContent, type StepItem } from "../../content/homepage";
 import { Button } from "../ui/Button";
 
 type OpenLead = (role?: "artist" | "business") => void;
@@ -30,7 +30,7 @@ export function HowItWorksDualSection({ openLead }: { openLead: OpenLead }) {
           </div>
 
           <div className="how-steps-list">
-            {artistTrack.steps.map((step) => (
+            {artistTrack.steps.map((step: StepItem) => (
               <div key={step.number} className="how-step-item">
                 <span className="how-step-num">{step.number}</span>
                 <div className="how-step-body">
@@ -66,7 +66,7 @@ export function HowItWorksDualSection({ openLead }: { openLead: OpenLead }) {
           </div>
 
           <div className="how-steps-list">
-            {businessTrack.steps.map((step) => (
+            {businessTrack.steps.map((step: StepItem) => (
               <div key={step.number} className="how-step-item">
                 <span className="how-step-num">{step.number}</span>
                 <div className="how-step-body">

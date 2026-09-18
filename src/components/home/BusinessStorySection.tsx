@@ -27,7 +27,7 @@ export function BusinessStorySection({ openLead }: { openLead: OpenLead }) {
           </p>
 
           <ul className="story-points-list" role="list">
-            {businessStory.points.map((point) => (
+            {businessStory.points.map((point: string) => (
               <li key={point} className="story-point-item">
                 <span className="story-point-icon">
                   <Check size={14} className="text-brand" />

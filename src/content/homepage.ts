@@ -208,6 +208,60 @@ export const homepageContent = {
     }
   },
 
+  artistStory: {
+    badge: "For independent artists",
+    heading: "A portfolio that speaks before a rate card.",
+    personName: "Meera Joshi",
+    personRole: "Visual Storyteller & Photographer · New Delhi",
+    lead: "Your work deserves better than a cold comment asking 'What is your price?' Cultgig lets you show your style, repertoire, equipment needs, and past performances so hosts approach you with genuine appreciation for your craft.",
+    points: [
+      "Present audio, video, and high-resolution visual proof in one clean profile.",
+      "Receive inquiries that already include the date, vibe, format, and sound setup.",
+      "Keep full control over your calendar, rates, and artistic choices.",
+      "Build a verified reputation backed by genuine post-event reviews."
+    ],
+    cta: "Join as an artist"
+  },
+
+  businessStory: {
+    badge: "For venues, brands & hosts",
+    heading: "Find talent that genuinely elevates your experience.",
+    personName: "Arjun Varma",
+    personRole: "Hospitality Curator & Event Lead · Mumbai",
+    lead: "Whether you run a café residency, coordinate a brand launch, or plan an intimate celebration, Cultgig helps you discover creative professionals whose aesthetic already aligns with your vision.",
+    points: [
+      "Filter by specific creative category, city, and performance style.",
+      "Review actual recordings and portfolios rather than forwarded phone contacts.",
+      "Send your brief once instead of repeating details across ten phone calls.",
+      "Work directly with verified professionals who take their craft seriously."
+    ],
+    cta: "For businesses"
+  },
+
+  howItWorks: {
+    badge: "Two simple pathways",
+    heading: "How Cultgig works for both sides.",
+    lead: "Whether you create the craft or curate the room, the process is clear and direct.",
+    artistTrack: {
+      title: "For independent artists",
+      subtitle: "From creating your profile to arriving at soundcheck",
+      steps: [
+        { number: "01", title: "Build your craft profile", description: "Upload audio, video clips, and high-resolution photo proof of your live performances." },
+        { number: "02", title: "Review incoming briefs", description: "Receive direct booking requests with clear date, venue, timing, and sound requirements." },
+        { number: "03", title: "Confirm & soundcheck", description: "Agree on details directly with the host and arrive ready for a great performance." }
+      ]
+    },
+    businessTrack: {
+      title: "For venues, brands & hosts",
+      subtitle: "From creative requirement to a memorable gathering",
+      steps: [
+        { number: "01", title: "Post a focused brief", description: "Describe the vibe, date, timing, and sound setup you need for your space or event." },
+        { number: "02", title: "Explore verified portfolios", description: "Listen to real recordings and review past performances of verified talent." },
+        { number: "03", title: "Direct introduction", description: "Connect directly with complete context in hand without middleman friction." }
+      ]
+    }
+  },
+
   moments: {
     badge: "Real creative moments",
     heading: "Built for the cultural occasions that bring India together.",

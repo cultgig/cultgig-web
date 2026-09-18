@@ -17,10 +17,7 @@ import { TheCultgigIdeaSection } from "../components/home/TheCultgigIdeaSection"
 import { MarketplacePreviewSection } from "../components/home/MarketplacePreviewSection";
 import { CategoryShowcaseSection } from "../components/home/CategoryShowcaseSection";
 import { WhoItsForSection } from "../components/home/WhoItsForSection";
-import { ArtistStorySection } from "../components/home/ArtistStorySection";
-import { BusinessStorySection } from "../components/home/BusinessStorySection";
 import { IndianCreativeMomentsSection } from "../components/home/IndianCreativeMomentsSection";
-import { HowItWorksDualSection } from "../components/home/HowItWorksDualSection";
 import { TrustSectionHome } from "../components/home/TrustSectionHome";
 import { BookingScenarioSection } from "../components/home/BookingScenarioSection";
 import { FinalCTASection } from "../components/home/FinalCTASection";
