@@ -1,124 +1,152 @@
-import { Menu, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import { Link } from "../../app/App";
-import { primaryNavigation, mobileExtras } from "../../config/navigation";
-import { useFocusTrap } from "../../hooks/useFocusTrap";
-import { Button, IconButton } from "../ui/Button";
+import React, { useEffect, useState } from "react";
+import { brandConfig } from "../../config/brand";
+import { servicesData } from "../../data/services";
+import { citiesData } from "../../data/cities";
+import { NavDropdown } from "./NavDropdown";
+import { MobileMenu } from "./MobileMenu";
 
-type LeadRole = "artist" | "business";
-
-export function Header({ currentPath, openLead }: { currentPath: string; openLead: (role?: LeadRole) => void }) {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const ref = useRef<HTMLElement>(null);
-  useFocusTrap(ref, open, () => setOpen(false));
+export const Header: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const update = () => setScrolled(window.scrollY > 16);
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, target: string) => {
+    e.preventDefault();
+    const el = document.querySelector(target);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <header className={`site-header ${scrolled ? "site-header-scrolled" : ""}`}>
-      <div className="header-inner">
-        <Link className="logo" to="/" aria-label="Cultgig home">
-          <span className="logo-text">Cultgig</span>
-          <span className="logo-badge">Creative discovery</span>
-        </Link>
-        <nav aria-label="Primary navigation" className="header-nav">
-          {primaryNavigation.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={currentPath === item.path ? "active" : ""}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="header-actions">
-          <Button variant="outline" onClick={() => openLead("business")}>
-            For businesses
-          </Button>
-          <Button variant="primary" onClick={() => openLead("artist")}>
-            Join as an artist
-          </Button>
-        </div>
-        <IconButton
-          label="Open navigation menu"
-          className="menu-button"
-          onClick={() => setOpen(true)}
+    <header
+      className={`sticky top-0 z-40 w-full h-[64px] bg-white transition-all duration-200 ${
+        isScrolled
+          ? "border-b border-border shadow-sm bg-white/95 backdrop-blur-sm"
+          : "border-b border-transparent"
+      }`}
+    >
+      <div className="max-w-[1200px] h-full mx-auto px-5 sm:px-8 lg:px-10 flex items-center justify-between">
+        {/* Brand wordmark logo */}
+        <a
+          href="#hero"
+          onClick={(e) => handleSmoothScroll(e, "#hero")}
+          className="flex items-center gap-1 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 rounded-md"
+          aria-label="Pronto Home"
         >
-          <Menu size={22} />
-        </IconButton>
+          <img
+            src={brandConfig.logo.green}
+            alt={brandConfig.logo.alt}
+            width="120"
+            height="32"
+            className="h-[28px] sm:h-[30px] w-auto object-contain"
+          />
+        </a>
+
+        {/* Desktop Navigation */}
+        <nav
+          aria-label="Primary"
+          className="hidden lg:flex items-center gap-8 text-[14px] font-medium text-ink"
+        >
+          <a
+            href="#why-us"
+            onClick={(e) => handleSmoothScroll(e, "#why-us")}
+            className="py-1 hover:text-green-600 transition-colors whitespace-nowrap"
+          >
+            Why us
+          </a>
+
+          <NavDropdown
+            label="Services"
+            items={servicesData.map((s) => ({
+              id: s.id,
+              name: s.name,
+              href: "#services",
+            }))}
+            viewAllText="View all services"
+            viewAllHref="#services"
+            columns={3}
+            onItemClick={() => {
+              const el = document.querySelector("#services");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }}
+          />
+
+          <NavDropdown
+            label="Cities"
+            items={citiesData.map((c) => ({
+              id: c.id,
+              name: c.name,
+              href: "#hero",
+            }))}
+            viewAllText="View all cities"
+            viewAllHref="#hero"
+            columns={2}
+          />
+
+          <a
+            href="#how-it-works"
+            onClick={(e) => handleSmoothScroll(e, "#how-it-works")}
+            className="py-1 hover:text-green-600 transition-colors whitespace-nowrap"
+          >
+            How it works
+          </a>
+
+          <a
+            href="#faqs"
+            onClick={(e) => handleSmoothScroll(e, "#faqs")}
+            className="py-1 hover:text-green-600 transition-colors whitespace-nowrap"
+          >
+            FAQs
+          </a>
+        </nav>
+
+        {/* Mobile menu toggle button */}
+        <div className="lg:hidden flex items-center">
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+            className="w-11 h-11 flex items-center justify-center rounded-lg text-ink hover:text-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600"
+          >
+            {mobileMenuOpen ? (
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
 
-      {open && (
-        <aside
-          ref={ref}
-          className="drawer"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Mobile navigation"
-        >
-          <div className="drawer-header">
-            <Link className="logo" to="/" onClick={() => setOpen(false)}>
-              Cultgig
-            </Link>
-            <IconButton
-              label="Close navigation menu"
-              onClick={() => setOpen(false)}
-            >
-              <X size={20} />
-            </IconButton>
-          </div>
-          <div className="drawer-links">
-            {primaryNavigation.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={() => setOpen(false)}
-                className={currentPath === item.path ? "active" : ""}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <div className="drawer-divider" />
-            {mobileExtras.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-          <div className="drawer-actions">
-            <Button
-              variant="primary"
-              onClick={() => {
-                setOpen(false);
-                openLead("artist");
-              }}
-            >
-              Join as an artist
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => {
-                setOpen(false);
-                openLead("business");
-              }}
-            >
-              For businesses
-            </Button>
-          </div>
-        </aside>
-      )}
+      <MobileMenu
+        isOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+      />
     </header>
   );
-}
-
+};

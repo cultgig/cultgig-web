@@ -1,71 +1,58 @@
-# Cultgig Website
+# Pronto — Household Services Landing Page Recreation
 
-Cultgig is the web entry point for a two-sided creative marketplace. This MVP lets independent artists and businesses create a real profile through an email-verified onboarding flow.
-
-## Scope
-
-Built now: marketing pages, responsive navigation, profile onboarding, Appwrite email-token verification, uploads, and one onboarding collection. Not built: search, public profiles, sign-in sessions, bookings, payments, messaging, gig posts, or notifications.
-
-## Stack
-
-React 18, TypeScript (strict), Vite, Tailwind CSS, CSS design tokens, Framer Motion, lucide-react, and Appwrite. Routing is a small in-house History API layer in `src/app/App.tsx`.
-
-## Routes
-
-`/`, `/about`, `/how-it-works`, `/for-artists`, `/for-businesses`, `/faq`, `/contact`, `/privacy`, `/terms`, plus an on-brand 404.
+A production-ready, pixel-faithful, responsive recreation of the Pronto household services landing page built with React 18, Vite, TypeScript, and Tailwind CSS.
 
 ## Architecture
 
-- `src/app` — application shell and routing
-- `src/components` — UI, layout, and onboarding components
-- `src/config` / `src/content` — site settings, navigation, and FAQ content
-- `src/lib` — isolated Appwrite client, auth, storage, and submission modules
-- `src/state` / `src/types` — reducer-backed onboarding state and typed data contracts
-- `src/routes` / `src/styles` — pages and global design tokens
+- **Primary Visual Reference**: Built to faithfully match the composition, layout, color rhythm, typography, card structures, and visual assets of the live Pronto website.
+- **Brand Centralization (`src/config/brand.ts`)**: All brand-specific configuration (brand name, logos, app store URLs, ratings, emails, social handles, links) is isolated in a single config file so the brand can be rebranded or swapped in one place.
+- **Typed Datasets (`src/data/`)**:
+  - `services.ts` — 20 household service offerings in exact catalogue order
+  - `cities.ts` — 11 live Indian cities with popular badges
+  - `stats.ts` — 3 key proof statistics (181,379+ Homes, 362,759+ Hours saved, 3,627+ Pros)
+  - `steps.ts` — 3 How-It-Works steps with multi-screen phone frames
+  - `testimonials.ts` — 8 verified customer reviews split across two marquee rows
+  - `faqs.ts` — 21 collapsible FAQ accordions
+  - `press.ts` — 7 featured publication logos
+  - `footer.ts` — Support, Company, Legal, Press, All Services, and All Cities links
+- **Typography**:
+  - Headings, Big Numbers, and Card Titles: **League Spartan** (500, 600, 700, 800)
+  - Body, Navigation, Buttons, Badges, and FAQs: **DM Sans** (400, 500, 600, 700)
+- **Design Tokens**:
+  - Emerald Green: `#05AC5F` (primary accent, chips, icons, active borders)
+  - Mint: `#DAF3E7` (stat cards, closing CTA panel, soft hero wash)
+  - Ink: `#0C0C0C` (How-It-Works section, footer, deep text)
+  - Grey: `#F9FAFC` (Why-Us section background)
 
-## Onboarding
+## Section Order
 
-Artist flow: email → OTP → role → name → location/travel → optional bio → category → optional portfolio/social → budget → optional experience/interests → submission.
+1. **Header**: Sticky navigation with green wordmark, Services dropdown (20 services), Cities dropdown (11 cities), anchor links, and mobile slide-down menu.
+2. **Hero**: Split layout with trust chip, H1 ("Trusted house help in minutes!"), value proposition, tally.so locality link, store badges, star rating, city tags, and cutout of the Pronto professional.
+3. **Featured In**: 7 press publications (TechCrunch, Bloomberg, Business Standard, The Economic Times, India Today, YourStory, Inc42).
+4. **Why Us**: 3 mint stat cards with animated count-up numbers.
+5. **Our Services**: 6-column desktop catalogue of 20 services with 3D diorama illustrations.
+6. **How It Works**: Dark background with 3 step cards featuring emerald phone frames with auto-cycling screens.
+7. **Testimonials**: Two-row infinite auto-scrolling marquee pausing on hover/focus.
+8. **FAQs**: 21 accessible accordions with smooth height transitions and single-open state.
+9. **Closing CTA**: Centered mint panel with fanned smartphone mockups and store download badges.
+10. **Footer**: 5-column navigation, full services/cities SEO link lists, and social channels.
 
-Business flow: email → OTP → role → name → optional contact details → location → optional business story → business type → optional social/photos → submission.
+## Asset Replacement Guide
 
-Profiles are saved into one Appwrite collection. Artist/client submissions preserve the field contract in `src/types/onboarding.ts`.
-
-## Appwrite setup
-
-Create an Appwrite web platform for your deployed domain, an onboarding database/collection, and an `onboarding-media` storage bucket. Configure collection attributes for the documented submission fields: email, role, fullName, photoUrl, city, bio, category, portfolioUrls, social links, artist budget/travel/experience/interests, and client business details.
-
-Copy `.env.example` to `.env` and set:
-
-```env
-VITE_APPWRITE_ENDPOINT=
-VITE_APPWRITE_PROJECT_ID=
-VITE_APPWRITE_DATABASE_ID=
-VITE_APPWRITE_ONBOARDING_COLLECTION_ID=
-VITE_APPWRITE_MEDIA_BUCKET_ID=
-```
-
-Never commit `.env`. Without Appwrite values, production email verification reports a configuration error; local development has a clearly labelled dev-only OTP preview.
+All visual assets reside in `/public/assets/` and can be replaced directly:
+- `/assets/brand/logo-green.svg` & `logo-white.svg` — Brand wordmarks
+- `/assets/brand/badge-google-play.png` & `badge-app-store.png` — Official app store badges
+- `/assets/hero/hero-pro-namaste.png` — Hero professional cutout
+- `/assets/press/*.svg` — Press logos
+- `/assets/services/*.webp` — 20 service 3D diorama cards
+- `/assets/app-screens/*.webp` — App UI mockup screens
+- `/assets/cta/closing-cta-fan.webp` — Fanned phones illustration
 
 ## Commands
 
 ```bash
 npm install
-npm run dev
-npm run build
-npm run preview
+npm run dev      # Starts dev server on port 3000
+npm run build    # Typechecks and builds production dist
+npm run lint     # Runs TypeScript verification
 ```
-
-Deploy the generated `dist/` directory to static hosting with SPA history fallback enabled.
-
-## Design and accessibility
-
-The exact Cultgig plum/blush token palette, Poppins headings, Inter UI/body text, rounded pill buttons, and rounded cards are defined in `src/styles/globals.css` and exposed to Tailwind. Navigation and modal controls include accessible names, keyboard focus handling, Escape support, focus trapping, visible focus states, responsive drawer navigation, labelled form controls, and reduced-motion support.
-
-## Known limitations and roadmap
-
-Photography is stored in `src/assets/images` and imported through `src/content/images.ts`, so Vite emits cache-busted asset names. The minimal `public/` directory is intentional: Vite copies it as-is for root-served `robots.txt`, `sitemap.xml`, and the stable `og-image.jpg`; it is not a duplicate source tree or second application. Deployment-specific support, legal, and social values are configured through the variables documented in `.env.example`. Client-side metadata includes canonical, Open Graph, and Twitter/X tags; static hosting still serves the Vite shell before JavaScript executes, so prerendering remains a deployment consideration for full per-route crawler coverage.
-
-The motion system uses named `micro`, `fast`, `standard`, `reveal`, and `emphasis` durations plus the shared spring token in `src/styles/motion.ts`. `HumanImageCard` supports `rect`, `circular`, `offset`, and `overlap` compositions for representative creator imagery.
-
-Future work, explicitly not included here: browse/search, public profiles, real login/session management, bookings, messaging, and gig posting.

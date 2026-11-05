@@ -1,0 +1,324 @@
+# Pronto Landing Page — Reverse-Engineering Report + Google AI Studio Master Prompt
+
+---
+
+# PART A — FINDINGS FROM THE REVERSE-ENGINEERING ANALYSIS
+
+All measurements below are **estimates** from a scaled full-page screenshot (approx. 500px wide render of a ~1440px desktop page, so multiply visual sizes by ~2.9). They are not verified source CSS. Content (copy, links, FAQ, cities, testimonials) was verified against the live site on 5 Nov 2026.
+
+## A. Layout structure
+- Page is a single long column of full-width bands; content inside is centred in a constrained container (est. 1200–1280px max; hero and services feel closer to 1200, FAQ is a narrow ~760px column, final CTA panel ~900–1000px).
+- Hero: two columns (~55% text / ~45% image). The professional's cutout is large, bleeds to the right edge and sits on a soft mint wash that fades to white at lower-left.
+- Alternating background rhythm: white (hero) → white (press strip, with hairline top/bottom border) → light grey #F9FAFC (Why us) → white (services) → near-black (How it works) → white (testimonials) → white (FAQ) → white with a large mint rounded panel (CTA) → near-black footer.
+- Services grid: 6 columns desktop, 20 cards → last row has only 2 cards, left-aligned (not centred).
+
+## B. Section order (verified)
+1. Header 2. Hero 3. Featured-in strip 4. Why us (3 stat cards) 5. Our services (20 cards) 6. How it works (dark, 3 phone cards) 7. Testimonials (two-row auto-scrolling marquee) 8. FAQ (20 accordion rows) 9. Closing CTA (mint panel with fanned phones) 10. Footer (dark).
+
+## C. Navigation (verified)
+Logo left (green wordmark). Right-aligned: Why us · Services ▾ · Cities ▾ · How it works · FAQs. Services dropdown lists all 20 services + "View all services →". Cities dropdown lists 11 cities + "View all cities →". Anchor links `#why-us`, `#how-it-works`, `#faqs`. Header is small (est. 56–64px high), text ~13–14px, very light and minimal.
+
+## D. Typography (mandated)
+League Spartan (headings, big numbers, card titles) + DM Sans (everything else). Headings are tight, bold/semibold, left-aligned with ~1.05 line-height, sentences end with full stops ("Book trusted house help."). Eyebrows are tiny, uppercase, letter-spaced, green.
+
+## E. Colour
+Emerald #05AC5F (eyebrows, icons, phone frames, badges accents) · Mint #DAF3E7 (stat cards, CTA panel, hero wash) · Pale green #D2ECDE (secondary) · Near-black #0C0C0C (How it works + footer) · Light grey #F9FAFC (Why us) · White. No other hues. Body greys are neutral.
+
+## F. Spacing rhythm
+Section vertical padding est. 96–128px desktop, 64–80px mobile. 8-pt scale. Headings sit ~16px above their paragraph and ~48–56px above their content grid.
+
+## G. Imagery
+- Hero: realistic cutout PNG of a smiling Pronto professional (green uniform, hands in namaste) — extremely high impact.
+- Services: soft, consistent, miniature 3D-ish "diorama" product illustrations on white/pale cards — each one distinct but same lighting/angle/style.
+- How it works: real app screenshots inside phone mockups, sitting on bright emerald rounded frames. Step 1 and Step 3 are *slideshows* of 3 screens each (live site); Step 2 is a single screen.
+- Testimonials: no photos; coloured initial avatar only.
+- Closing CTA: three phones fanned/overlapping, top-centre of the mint panel.
+
+## H. Components
+- **Stat cards:** mint, ~16px radius, small green circular icon, big League Spartan number with "+", small grey caption. (Live site count-ups from 0.)
+- **Service cards:** white, 1px light border, ~20px radius, square illustration area, 12px label bottom-left, tiny arrow bottom-right.
+- **Step cards:** emerald rounded visual frame (~24px radius) containing phone mockup cropped at the bottom; "STEP n" tiny green label; white bold title; grey-on-black description.
+- **Testimonial cards:** white, light border, small radius, 5 green stars, ~13px text, initial avatar + name + locality. Two rows scroll in opposite/same direction as marquee.
+- **FAQ rows:** white, light border, ~12px radius, ~52px tall, chevron right, centred ~760px column.
+
+## I. Buttons & CTAs
+Official black Google Play / App Store badges (images). Text action "Request Pronto in your locality" (small green underlined/text link). Rating row: 5 green stars + "4.5 from 42,700+ ratings". "Live in" row of city text chips + "+ 4 more cities".
+
+## J. Design language
+Calm, spacious, bright, trust-first. Almost no shadows, almost no gradients (only the hero mint wash). No glass, no blobs.
+
+## K. Conversion strategy
+Hero states value + two app badges immediately → social proof (rating, 500,000+ homes, live cities) → press credibility → three big numbers → catalogue proves breadth and flat pricing → 3 steps remove friction → reviews → FAQ handles safety/price/cancellation objections (heavily trust-oriented: background verification, Pronto Verified) → repeat the same CTA → footer SEO links (all services, all cities).
+
+## Differences noticed between screenshot and live site
+- Screenshot press strip shows 7 logos (TechCrunch, Bloomberg, Business Standard, Economic Times, India Today, YourStory, Inc42). Live site also has Reuters and Entrackr and animates as a marquee. **Follow the screenshot (7 logos)**, optionally allow the array to hold more.
+- Live stat numbers animate from 0; screenshot shows final values 181,379+ / 362,759+ / 3,627+. Use final values as configurable data.
+- Screenshot FAQ shows 20 questions (all collapsed). Live site has full answers (included below).
+- Hero chip reads "Trusted by 500,000+ homes · 11 cities live".
+
+---
+
+# PART B — COMPLETE GOOGLE AI STUDIO BUILD PROMPT
+
+> Copy everything between the lines into Google AI Studio. Attach the full-page screenshot with it.
+
+---
+
+```
+# ROLE
+You are a senior frontend engineer and art-directed product designer. Build a production-ready, pixel-faithful, responsive recreation of a household-services landing page. You will write the actual code for a complete React + Vite + TypeScript project.
+
+# PRIMARY VISUAL AUTHORITY
+The attached full-page screenshot is the MAIN visual reference. Match its composition, section order, proportions, white-space, backgrounds, card styles, image placement and footer organisation. Where your default design instincts conflict with the screenshot, THE SCREENSHOT WINS. Do not simplify, restyle into a generic SaaS template, or add/remove sections.
+Original reference site (for content understanding only): https://www.withpronto.com/
+Note: the screenshot is a scaled-down full-page capture (~500px wide for a ~1440px desktop page). Do not treat its pixel sizes as real CSS pixels; scale up mentally by ~2.9x. All measurements in this prompt are estimates, not verified source CSS.
+
+# BRANDING SAFETY (IMPORTANT)
+This is a design recreation for a portfolio/learning project. Put ALL brand-specific values in a single `src/config/brand.ts` file (brand name, logo path, email addresses, app-store URLs, rating, stats, city list, socials) so the brand can be swapped in one place. Use the brand name "Pronto" and the copy below by default. For third-party press logos, the professional photograph, app screenshots and illustrations: use clearly-named local placeholder assets under `/public/assets/...` (see ASSET PLAN) and make them trivially replaceable. Never hotlink external images. Never fabricate claims beyond the copy supplied below.
+
+# TECH STACK (STRICT)
+- React 18 + Vite + TypeScript (strict mode). Single-page app, no routing library required (anchor links + `href="#"` placeholders for inner pages, see LINKS).
+- Tailwind CSS (v3.4) with a custom theme extension for tokens + modern CSS (Grid, Flexbox, custom properties, clamp()).
+- Selective Aceternity UI patterns only where genuinely useful (e.g. an infinite-moving-cards marquee for testimonials). Copy the needed component source into `src/components/ui/` rather than adding heavy dependencies. 
+- GSAP (+ ScrollTrigger) for entrance/scroll reveals and the stat count-up. Native CSS transitions for hover/accordion/dropdown.
+- Allowed deps ONLY: react, react-dom, gsap, tailwindcss, postcss, autoprefixer, clsx, tailwind-merge, (optional) lucide-react for tiny icons. NO jQuery, NO Next.js/Angular/Vue, NO extra UI/animation libraries, NO backend.
+- Fonts: League Spartan (headings, card titles, big numbers) and DM Sans (body, nav, buttons, labels, FAQ). Load via Google Fonts `<link>` with `display=swap` and preconnect; weights: League Spartan 500/600/700/800, DM Sans 400/500/600/700.
+
+# DESIGN TOKENS
+Define in `tailwind.config.ts` AND mirror as CSS variables in `src/index.css`:
+- --green-600: #05AC5F (primary emerald) ; --green-700: #048A4C (hover/pressed, derived)
+- --mint-100: #DAF3E7 ; --mint-200: #D2ECDE
+- --ink: #0C0C0C ; --grey-50: #F9FAFC ; --white: #FFFFFF
+- --text-muted: #5B6470 on light, rgba(255,255,255,.65) on dark ; --border: #E8ECEF
+- No blue/purple/orange accents anywhere. These hex values are estimates from the screenshot, not official brand tokens.
+- Radii: 12px (FAQ rows), 16px (stat cards, testimonial cards), 20px (service cards), 24px (step visual frames), 32px (closing CTA panel), 999px (pills).
+- Spacing: strict 8-point scale. Section vertical padding: py-16 (mobile) / py-24 (tablet) / py-28 to py-32 (desktop).
+- Container: `max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10`. FAQ inner column `max-w-[760px]`. Closing CTA panel `max-w-[1000px]`.
+- Shadows: almost none. Only a very soft hover shadow on service/testimonial cards (0 8px 24px rgba(12,12,12,.06)).
+
+# TYPOGRAPHY SYSTEM (fluid, use clamp)
+- Hero H1 (League Spartan 700): clamp(40px, 6vw, 80px), line-height 1.02, letter-spacing -0.02em.
+- Section H2 (League Spartan 700): clamp(32px, 4.4vw, 60px), line-height 1.05, letter-spacing -0.015em.
+- Card titles (League Spartan 600): 20–24px. Big stat numbers (League Spartan 700): clamp(32px, 3.6vw, 48px).
+- Eyebrow labels (DM Sans 600): 12px, uppercase, tracking 0.14em, color --green-600.
+- Body (DM Sans 400): 16–18px / line-height 1.6, max width ~52ch for paragraphs. Small text 13–14px.
+- Headings keep their trailing full stops exactly as in the copy. Use `text-balance` for headings.
+
+# PROJECT STRUCTURE
+```
+pronto-landing/
+  index.html            (SEO meta, OG tags, fonts, JSON-LD Organization)
+  package.json, vite.config.ts, tsconfig.json, tailwind.config.ts, postcss.config.js, vercel.json (optional SPA fallback)
+  public/assets/{brand,hero,press,services,app-screens,cta,icons}/
+  src/
+    main.tsx, App.tsx, index.css
+    config/brand.ts
+    data/{services.ts, cities.ts, faqs.ts, testimonials.ts, steps.ts, press.ts, stats.ts, footer.ts}
+    types/index.ts
+    hooks/{useReducedMotion.ts, useCountUp.ts, useClickOutside.ts, useScrollReveal.ts}
+    components/
+      layout/{Header.tsx, NavDropdown.tsx, MobileMenu.tsx, Footer.tsx}
+      sections/{Hero.tsx, PressStrip.tsx, WhyUs.tsx, Services.tsx, HowItWorks.tsx, Testimonials.tsx, Faq.tsx, ClosingCta.tsx}
+      ui/{StoreBadges.tsx, StatCard.tsx, ServiceCard.tsx, StepCard.tsx, PhoneFrame.tsx, TestimonialCard.tsx, AccordionItem.tsx, Eyebrow.tsx, SectionHeading.tsx, Marquee.tsx, Stars.tsx}
+```
+No monolithic component. Every list is rendered from typed data with stable keys.
+
+# SECTION-BY-SECTION SPEC (follow screenshot order exactly)
+
+## 1. HEADER
+- Height ~64px, white, bottom hairline appears only after scroll (subtle sticky: `position: sticky; top:0`, white/90 with no blur effect; do not change its look).
+- Left: green "Pronto" wordmark logo (`/assets/brand/logo-green.svg`, height ~28px).
+- Right (desktop ≥1024): nav items in DM Sans 14px/500, ink color: **Why us** (#why-us), **Services ▾**, **Cities ▾**, **How it works** (#how-it-works), **FAQs** (#faqs). Gap ~32px.
+- Services dropdown: panel (white, 1px border, 16px radius, soft shadow), 3-column grid of the 20 services, plus "View all services →" link in green at bottom. Cities dropdown: 2-column grid of 11 cities + "View all cities →".
+- Dropdown behaviour: open on hover (desktop) AND on click/Enter/Space; close on Esc, outside click, focus leaving; `aria-haspopup="true"`, `aria-expanded`, arrow keys move between items; 150ms fade+translateY(4px) transition. Chevron rotates 180° when open.
+- Mobile (<1024): logo left, hamburger button right (44x44 touch target, `aria-label="Open menu"`, `aria-expanded`, `aria-controls`). Full-height slide-down panel, white, with Why us / How it works / FAQs links and two accordion groups (Services, Cities). Lock body scroll when open, trap focus, Esc closes, close on link click.
+
+## 2. HERO
+- Layout: 2 columns on ≥1024 (grid 1.15fr / 1fr, items-center), min-height ~640px (mobile auto). Background: white with a soft mint radial wash behind the person on the right and a faint mint fade at lower-left corner (single subtle gradient only; no blobs). Optional very light dotted pattern (small, low-opacity, bottom-right).
+- LEFT column (top to bottom):
+  1. Small pill/chip: a tiny green dot or shield icon + "Trusted by 500,000+ homes · 11 cities live" (DM Sans 12–13px, pale mint background or plain text with green icon).
+  2. H1: "Trusted house help in minutes!" (breaks as "Trusted house help / in minutes!" on desktop).
+  3. Paragraph: "Your home, professionally cleaned - exactly when you need it." (DM Sans 18px, muted).
+  4. Small green text link: "Request Pronto in your locality" → https://tally.so/r/rjRabo (opens new tab, rel="noopener noreferrer"), with an arrow icon.
+  5. Store badges row: Google Play + App Store images (height 44–48px each, gap 12px). Google Play → https://play.google.com/store/apps/details?id=com.company.pronto&hl=en_IN ; App Store → https://apps.apple.com/in/app/pronto-house-help-in-minutes/id6743402816 . Hover: translateY(-2px) + slight opacity change. Visible focus ring.
+  6. Rating line: 5 small green stars + "4.5 from 42,700+ ratings" (13px).
+  7. "Live in" row: tiny uppercase green label "LIVE IN" followed by city text links: Bengaluru, Delhi, Noida, Gurgaon, Mumbai, Pune, Hyderabad, then "+ 4 more cities" (links to #cities / /cities). Separated by thin spacing, 13px, wraps neatly into two lines.
+- RIGHT column: large cutout PNG of a smiling professional in a green uniform with hands in a namaste gesture (`/assets/hero/hero-pro-namaste.png`), anchored to the right and bottom of the hero, height ~ 560–640px desktop, never cropped at the head. Soft mint circular/organic wash behind. Use `loading="eager"`, `fetchpriority="high"`, explicit width/height.
+- Mobile: stack — text first, then the image full-width (max-w ~420px, centred, still large), badges remain side by side if they fit (else wrap). Keep headline dominant (min 40px).
+- Entrance animation (GSAP timeline, ~0.7s total): eyebrow/H1/paragraph/badges fade+rise 16px with 80ms stagger; image fades in with slight scale 0.98→1. Content must be visible without JS and with reduced motion.
+
+## 3. FEATURED-IN PRESS STRIP
+- Tiny centred uppercase label "FEATURED IN" (green or muted) above a single row of 7 logos in this order: TechCrunch, Bloomberg, Business Standard, The Economic Times, India Today, YourStory, Inc42. Grayscale-to-colour not required; keep as shown in the screenshot (logos in their own colours, restrained size, optically equal height ~28–36px, evenly spaced).
+- Hairline top and bottom borders, white background, py-10.
+- Desktop: static evenly spaced row. Mobile: infinite slow marquee (CSS animation, paused when `prefers-reduced-motion`) OR horizontally scrollable strip with hidden scrollbar—no clipping of logos. Each logo wrapped in a link with accessible name (e.g. "Read TechCrunch coverage") — use `#` hrefs by default, configurable in `press.ts`. `data/press.ts` must allow extra logos (e.g. Reuters, Entrackr) but render only the 7 above by default.
+
+## 4. WHY US (trust statistics)
+- id="why-us". Background --grey-50. Left-aligned heading block (matches screenshot, NOT centred):
+  - Eyebrow: "WHY US?"
+  - H2: "No more planning around your house help." (wraps to 3 lines on desktop within ~560px)
+  - Paragraph: "Our team of verified Pronto Professionals are always on time."
+- Below: 3 mint (#DAF3E7) cards in a row (desktop grid-cols-3, gap 24px; mobile stack). Each card is horizontally laid out: small green circular icon at left (home / clock / user icons, 40px), big number + small muted caption right of/under it:
+  1. "181,379+" — "Homes that trust us"
+  2. "362,759+" — "Hours saved"
+  3. "3,627+" — "Pronto Professionals"
+- Numbers come from `data/stats.ts` (configurable placeholders — flagged in comments as "replace with verified values"). Count-up via GSAP/ScrollTrigger once when ≥40% visible (duration 1.4s, easeOut, `toLocaleString('en-IN')` formatting, final value always rendered in markup for no-JS/reduced-motion/SEO).
+
+## 5. OUR SERVICES (catalogue)
+- id="services". White background. Left-aligned heading block:
+  - Eyebrow: "OUR SERVICES"
+  - H2: "Book trusted house help."
+  - Paragraph: "From hourly bookings to express cleans to daily upkeep, Pronto's got you covered. 20 services, transparent flat pricing."
+- Grid: `grid-cols-2` (<640) → `sm:grid-cols-3` → `md:grid-cols-4` → `lg:grid-cols-6`, gap 16–20px. 20 cards in this exact order (last desktop row has 2 cards, left-aligned):
+  1 Hourly bookings · 2 Bathroom Cleaning · 3 Fridge Cleaning · 4 Packing or Unpacking · 5 Utensils · 6 Kitchen Prep · 7 Dusting & Wiping · 8 Sweeping & Mopping · 9 Pre-Party Express Clean · 10 Complete Wardrobe Cleaning · 11 After-Party Express Clean · 12 Ironing & Folding · 13 Window Cleaning · 14 Laundry · 15 Kitchen Cleaning · 16 Balcony Cleaning · 17 Fan Cleaning · 18 Kitchen Cabinet Cleaning · 19 Plant Care · 20 Car Surface Cleaning
+- ServiceCard: `<a>` card, white, 1px --border, radius 20px, padding 12–16px. Top: square (aspect-square) illustration area with soft off-white (#F7F8FA) background and the service illustration `object-contain` (consistent miniature diorama style, same lighting/angle). Bottom row: label (DM Sans 12–14px/500, max 2 lines) at left, small arrow-up-right icon at right (muted → green on hover). Hover: translateY(-4px), border turns mint, soft shadow, illustration scales 1.04. Images `loading="lazy"`, width/height set. Alt text = service name.
+- Reveal: cards fade/rise in with a gentle 40ms stagger via ScrollTrigger batch (disabled for reduced motion). Hrefs default to `#` (configurable `href` in data: `/services/<slug>`).
+
+## 6. HOW IT WORKS (dark)
+- id="how-it-works". Full-width background --ink (#0C0C0C). Text white.
+  - Eyebrow (green): "HOW IT WORKS"
+  - H2 (white): "Simple steps to a cleaner home."
+  - Paragraph (white 65%): "Follow these simple steps to get house help in 15 minutes."
+- 3 equal-size cards (desktop grid-cols-3, gap 24–32px). Each card: top = emerald (#05AC5F) rounded frame (radius 24px, aspect ~ 3/4) containing a phone mockup (bezel black, rounded 32px, notch/pill) with a real app screenshot, phone cropped by the bottom of the frame and horizontally centred; below the frame:
+  - tiny green uppercase label "STEP 1/2/3"
+  - Title (League Spartan, white, 22–26px) and description (DM Sans, white 65%).
+  1. STEP 1 — "Pick from 20 trusted services" — "Browse 20 services in the Pronto app - from hourly bookings to per-task jobs to express cleans."
+  2. STEP 2 — "Add it to your cart" — "Stack multiple tasks into one booking. Your Pro handles them all in a single visit."
+  3. STEP 3 — "Choose instant, scheduled, or recurring. Pay & done!" — "Get a Pro in minutes, book for later, or set up a recurring slot."
+- Steps 1 and 3 show an auto-cycling 3-screen crossfade (every ~3.2s, paused on hover/focus and when reduced motion; pagination dots optional and accessible). Step 2 shows one screen. All three phone frames identical size.
+- Mobile: stack vertically with the same visual card size (max-w 420px centred) or use a snap-x horizontal scroller with peeking next card; text remains readable.
+
+## 7. TESTIMONIALS
+- White background. Left-aligned heading:
+  - Eyebrow: "OUR TESTIMONIALS"
+  - H2: "Loved by Pronto homes."
+  - Paragraph: "Real reviews from real homes across India."
+- Two rows of equal-sized review cards (card ~ 320–360px wide, ~170px tall) that auto-scroll as an infinite marquee (Aceternity-style infinite moving cards), full-bleed to viewport edges (cards visibly cut at both edges as in screenshot). Row 1 moves left, row 2 moves left slower/offset (or opposite direction). Pause on hover/focus; no motion for reduced-motion users (render as horizontally scrollable `overflow-x-auto snap-x` rows instead). On mobile, rows stay as marquees but cards are ~280px.
+- Card: white, 1px border, radius 16px, padding 20px. Top: 5 small green stars. Body: review text (DM Sans 13–14px, ink 80%). Bottom: circular initial avatar (mint bg, green letter) + name (600) + locality (muted).
+- USE ONLY THESE SUPPLIED REVIEWS (they come from the reference page; keep exact text and make them replaceable in `data/testimonials.ts`; add a code comment: "Replace with your own real reviews"):
+  1. Kirti, Sector 56 — "I'd say it was great value for money. The urgency was handled well, without compromising quality. Really satisfied with the experience."
+  2. Neha, Sector 57 — "The service was simple and effective. It met my expectations without any hassle. Good overall experience."
+  3. Pradnyesh, Suncity — "Great work, my home was left spotless and fresh. The cleaning was thorough, and I appreciated the attention to detail. I'll recommend it. 👍🏼"
+  4. Ridhi Saluja, Sector 56 — "The services have definitely improved from the first time. Preferences are kept as top priority. Thank you for making our lives easier with Pronto!"
+  5. Ritika, Sector 57 — "Seamless experience from booking to completion. The staff was courteous, punctual, and did a fantastic job."
+  6. Sameer, Sector 57 — "Really liked your service, it was smooth, efficient, and just what I needed. Would definitely recommend to others. 🌟"
+  7. Karishma, Suncity — "Absolutely excellent service! The team was prompt and professional throughout. Would love to use it again."
+  8. Rabia, Suncity — "Really impressive compared to other platforms. The service was reliable and professional. Communication was clear and fast - very pleased!"
+  Row 1 = reviews 1–4 (duplicated for loop), Row 2 = reviews 5–8 (duplicated). Duplicates must be `aria-hidden="true"` and non-focusable.
+
+## 8. FAQ
+- id="faqs". White background. Centred block: eyebrow "FAQ'S" (small, green or muted), centred H2 "Frequently Asked Questions" (League Spartan, ~48–56px, 2 lines allowed on mobile).
+- Single column, `max-w-[760px]`, 20 accordion rows with 12px gap: white, 1px border, radius 12px, padding 16px 20px, question in DM Sans 15–16px/600 left, chevron-down right (rotates 180° when open). All collapsed by default (as in screenshot). Only one open at a time (or independent — choose single-open).
+- Accessibility: each header is a `<button>` inside an `<h3>` with `aria-expanded`, `aria-controls`; panel has `role="region"` + `aria-labelledby`; Enter/Space toggles; ArrowUp/Down/Home/End move between headers. Height animation via CSS grid-template-rows 0fr→1fr (200–250ms ease), reduced-motion = instant.
+- Questions & answers (exact order, answers may be lightly condensed but keep meaning):
+  1. What is Pronto? — "Pronto is an on-demand as well as subscription-based house help platform designed for urban convenience. We connect trained professionals with those in need of help with household chores such as cleaning, laundry, kitchen, and bathroom upkeep. You can schedule our services for later or book instant service which will reach you within 15 minutes."
+  2. What is Pronto Verified? — "Pronto Verified is a premium booking where a certified partner records your session. The recording is encrypted and anonymised. It is only used if you raise a dispute and is deleted afterwards. Only the work activity is captured, faces are automatically blurred, and raw footage is deleted immediately after processing. You can choose to review the anonymised footage for 48 hours after the job is complete."
+  3. Who can see my footage for Pronto Verified? — "Nobody. The footage is encrypted and anonymised as soon as it is processed. Even the company team and the service partner cannot access it. It exists only if you raise a dispute and is deleted once the retention period ends."
+  4. Why do I need to give consent for Pronto Verified? — "The law requires your consent to record inside your home. This consent must be explicit and separate from the standard terms and conditions, so you'll see a dedicated consent screen before confirming your booking. You give consent each time you book, on behalf of everyone in your house."
+  5. Where is consent recorded for Pronto Verified? — "Consent is recorded at two points: (1) before you make the payment, on a dedicated consent screen; (2) before the booking starts, after the partner arrives - sharing the start-service OTP confirms your consent to begin recording." (Render as a short ordered list.)
+  6. What if I have a dispute after the session for Pronto Verified? — "Contact support through the in-app support chat. The team will review the recorded footage as the objective record of what happened, keep you updated throughout, and share the outcome once the review is complete."
+  7. Can I book Pronto Verified as a recurring booking? — "Not yet. Each Pronto Verified session must currently be booked individually. The additional cost covers a certified service partner, camera equipment, and guaranteed scheduling. Recurring bookings are planned for the future."
+  8. How is Pronto different from hiring house help directly? — "With Pronto you get a trained, background-verified Pro, transparent in-app pricing, on-demand booking within 15 minutes, and the ability to pause or reschedule without awkward conversations. There's no advance payment, no informal commitments, and no risk of a no-show with no recourse - if a Pro can't make it, the app re-assigns automatically."
+  9. How do I download the Pronto app? — "The Pronto app is available on the Google Play Store (Android) and Apple App Store (iPhone). Search for \"Pronto - house help\" or use the download links anywhere on this site. Sign up takes under a minute - just your phone number, address, and OTP."
+  10. How do I book services? — "Book through the Pronto app on Google Play or the App Store. Select the chores you need help with, pick a time, and we will send a verified professional who will take it from there!"
+  11. How quickly can a Pronto Professional reach my home? — "For instant bookings, a verified Pro reaches you within 15 minutes of confirmation. You can also schedule a Pro for later in the day or set up a recurring slot for the same time each week."
+  12. Can I book multiple services in one visit? — "Yes. The app lets you stack tasks - say sweeping, mopping, utensils, and ironing - into a single booking. One Pro handles all of them in one visit, so you don't coordinate multiple visits or pay multiple booking fees."
+  13. Can I book a recurring service? — "Yes. Pronto supports recurring bookings - daily, weekly, or a custom cadence. Set it up once and the system auto-assigns the best available trained Pro for every visit. You can pause, reschedule, or cancel any visit before it starts."
+  14. Can I cancel a Pronto booking? — "Yes, from the app before the Pro arrives. Cancellations made well in advance are free; those close to the booking time may carry a small charge. See our Cancellation Policy for the exact timing tiers." (link "Cancellation Policy" → /cancellation-policy)
+  15. Are Pronto Professionals background-verified? — "Yes. Every Pro completes a formal training program and a thorough background check before their first booking, and quality is continuously monitored through customer ratings and feedback after every visit."
+  16. How can I trust your service? — "All professionals undergo formal training and a thorough background check. If anything makes you uncomfortable, reach out immediately and our team will work promptly to resolve it. We have proudly cleaned over 15,000 homes with an over 99% satisfaction rate."
+  17. What if I'm not happy with the service? — "Reach out immediately at help@withpronto.com or via chat support in the app. We work to resolve the issue, send a replacement Pro if needed, and process a refund where appropriate."
+  18. How are your services priced? — "Pricing is transparent and shown upfront in the app. Each service is priced per visit - no per-bedroom multipliers, no hidden charges, no advance deposits. Hourly bundles start from 30-minute slots. Enter your address in the app to see live prices for your locality."
+  19. Is Pronto available in my area? — "Pronto is live in 11 Indian cities: Bangalore, Delhi, Faridabad, Ghaziabad, Gurgaon, Hyderabad, Mumbai, Navi Mumbai, Noida, Pune, and Thane. Enter your address in the app to confirm availability at your exact location."
+  20. Where can I use Pronto? — "Pronto is live in 11 cities across India. Open the app and enter your address to confirm availability. Don't see your city? We are expanding fast. Request Pronto in your locality →" (link to https://tally.so/r/rjRabo)
+  21. How do I contact support? — "Contact Pronto Support only via help@withpronto.com or the chat support inside the app, and be cautious of scams or anyone claiming to represent Pronto through other channels."
+  (The screenshot shows these as ~20 rows; render all of the above in this order, merging none. Questions must be data-driven so rows can be added/removed.)
+- Add FAQPage JSON-LD generated from the same data.
+
+## 9. CLOSING CTA
+- White section background. Centred large mint (#DAF3E7) rounded panel (radius 32px, max-w ~1000px, padding ~64px top, 56px bottom), very subtle inner pale-green radial highlight allowed.
+- Top: image of three overlapping/fanned smartphone screens (`/assets/cta/closing-cta-fan.webp`), centred, ~460–560px wide, top of phones near the panel's top edge, phones partially bleeding up out of the panel by ~24px is acceptable.
+- Below: H2 centred "Get trusted house help in minutes." (League Spartan, 48–60px), paragraph "Download the Pronto app and book your first service today.", then the same two store badges centred.
+- Mobile: panel full-width with 16px margins, image scaled to ~85% width, headline ~34px.
+
+## 10. FOOTER
+- Full-width --ink background, white text, py-16.
+- Row 1 (desktop 5-col grid): 
+  - Brand column: white logo (`logo-white.svg`), "Feel free to reach us at:" + help@withpronto.com (mailto, green), "Careers:" + careers@withpronto.com (mailto).
+  - SUPPORT: Contact Us · Blog · Frequently Asked Questions · Delete Account
+  - COMPANY: Become a Pronto Professional · Become a Pronto Buddy · Request Pronto in your locality
+  - LEGAL: Terms & Conditions · Privacy Policy · Cancellation Policy · Photo Credits
+  - PRESS: press@withpronto.com (mailto) · Press Kit
+  Column headings are tiny uppercase letter-spaced (white 60%), links DM Sans 14px white 85% with hover → green.
+- Row 2: "ALL SERVICES" — the 20 services in a 3-column list. "ALL CITIES" — the 11 cities in a 3-column list (Bangalore, Delhi, Faridabad, Ghaziabad, Gurgaon, Hyderabad, Mumbai, Navi Mumbai, Noida, Pune, Thane).
+- Row 3: social icons (Instagram, LinkedIn, YouTube — inline SVG, 20px, aria-labels, links https://www.instagram.com/withpronto/ , https://www.linkedin.com/company/withpronto , https://www.youtube.com/@with_pronto) at left; "Pronto © 2026" muted at right. Thin white/10 divider above row 3.
+- Mobile: single column, groups stack; Services and Cities lists in 2 columns; Support/Company/Legal/Press may be 2-up.
+
+# LINKS
+Inner pages (services/cities/legal/blog etc.) do not exist in this project: render them as `<a href="#">` with `onClick` preventing default scroll jump OR link to the original site paths via config flag `brand.linkMode = 'placeholder' | 'external'`. Default: 'placeholder'. App store links, tally.so link, mailto links and social links must be real as given above.
+
+# RESPONSIVE REQUIREMENTS
+Verify at 360, 375, 390, 430, 768, 1024, 1280, 1440, 1600 px.
+Breakpoints: sm 640 / md 768 / lg 1024 / xl 1280 / 2xl 1536.
+- ≥1024: full desktop layouts described above. 
+- 768–1023: hero stacks with the image below (or reduced two-column with smaller type), services 4 cols, steps may be 3 cols compact or horizontal snap scroller, mobile menu used.
+- <768: single column hero, services 2 cols (3 cols from 480 only if labels stay readable), steps stacked/snap scroller, marquee cards narrower, FAQ full width, footer stacked.
+- No horizontal page scroll at any width (`overflow-x: clip` on body is a safety net, NOT a fix). Touch targets ≥ 44px. Images responsive with `max-w-full h-auto` and explicit width/height/aspect-ratio to avoid CLS.
+
+# MOTION RULES
+- GSAP: hero entrance timeline, section reveal (fade + 24px rise, once, via ScrollTrigger), service-card batch stagger, stat count-up. Use `gsap.context()` inside `useLayoutEffect` and `ctx.revert()` on unmount; kill all ScrollTriggers on cleanup.
+- CSS transitions only for hover/dropdowns/accordion/menu.
+- Respect `prefers-reduced-motion: reduce`: skip GSAP animations (render final state), stop marquees and slideshow auto-cycling.
+- No parallax, no looping decorative motion, nothing that hides essential content before JS loads.
+
+# ASSET PLAN (local, no hotlinks)
+Create these exact paths and wire them up. If real files are unavailable, generate tidy placeholder assets with the same file names so the owner can drop in replacements without code changes:
+- /assets/brand/logo-green.svg, logo-white.svg, favicon.svg, og-image.png (1200x630)
+- /assets/brand/badge-google-play.png, badge-app-store.png (use official-style black badge artwork or clean SVG recreations with correct proportions; do NOT use text-only buttons)
+- /assets/hero/hero-pro-namaste.png (transparent-background cutout of a smiling professional in a green uniform)
+- /assets/press/{techcrunch,bloomberg,business-standard,economic-times,india-today,yourstory,inc42}.svg
+- /assets/services/{slug}.webp ×20 (square, consistent miniature-diorama illustration style, soft neutral background). Slugs: hourly-bookings, bathroom-cleaning, fridge-cleaning, packing-unpacking, utensils, kitchen-prep, dusting-wiping, sweeping-mopping, pre-party-express-clean, complete-wardrobe-cleaning, after-party-express-clean, ironing-folding, window-cleaning, laundry, kitchen-cleaning, balcony-cleaning, fan-cleaning, kitchen-cabinet-cleaning, plant-care, car-surface-cleaning
+- /assets/app-screens/{step-1-a,step-1-b,step-1-c,step-2,step-3-a-instant,step-3-b-scheduled,step-3-c-recurring}.webp (portrait app UI screens, ~9:19.5)
+- /assets/cta/closing-cta-fan.webp
+- Placeholders must look intentional (clean, on-palette, consistent), never broken-image icons, never emoji as main illustrations, never random stock photos. Add width/height attributes to every `<img>` and a descriptive alt (decorative images `alt=""`).
+
+# SEO, ACCESSIBILITY, PERFORMANCE
+- `index.html`: title "Pronto - Trusted house help in minutes", meta description "House help in 11 Indian cities. Book a trained Pronto Pro in minutes - cleaning, laundry, kitchen prep, hourly bookings, and more. In-app booking.", canonical, Open Graph + Twitter card tags, theme-color #05AC5F, lang="en-IN", JSON-LD (Organization + FAQPage).
+- Semantic landmarks: `<header>`, `<nav aria-label="Primary">`, `<main>`, one `<h1>`, `<section aria-labelledby>` per section, `<footer>`. Skip-to-content link. Logical heading hierarchy (h1 → h2 per section → h3 for cards/FAQ).
+- Visible focus rings (2px --green-600 offset 2px) on every interactive element. WCAG AA contrast: ensure green text on white meets AA for ≥18px or bold only; use --green-700 for small green text if needed; white-on-emerald only for large text.
+- Performance: hero image eager + preloaded; everything below the fold `loading="lazy"` `decoding="async"`; font `display=swap`; no layout shift; code-split nothing unnecessary; target Lighthouse ≥ 90 on Performance/Accessibility/Best Practices/SEO.
+- Zero console errors/warnings, no React key warnings, no unused dependencies, no `any` types, no `console.log`, no dev-only code in production.
+
+# VERCEL DEPLOYMENT
+- `package.json` scripts: `dev`, `build` (`tsc -b && vite build`), `preview`. Vite output `dist`. Base path `/`. Asset URLs must be root-relative (`/assets/...`). Provide `vercel.json` only if needed (rewrite all to /index.html). No env vars, no backend, no absolute local file paths. The build must pass on Vercel with Node 18+.
+
+# QUALITY RULES — DO NOT DO
+- Do not add sections, testimonial names, stats, ratings or press logos beyond what is specified.
+- No glassmorphism, no gradient blobs, no glows, no random floating shapes, no extra card containers, no heavy shadows, no unrelated accent colours.
+- Do not center-align the section headings that are left-aligned in the screenshot (Why us, Services, How it works, Testimonials). Only FAQ and closing CTA are centred.
+- Do not shrink the hero image or let the hero feel cramped; the H1 and the professional photograph must dominate.
+- Do not make all cards look identical: stat cards (mint), service cards (white bordered), step cards (emerald frame on black), testimonial cards (white, lightweight), FAQ rows (slim) each have their own character.
+
+# VALIDATION (do this after building, and fix problems rather than just describing them)
+1. Run `npm run build`; fix every TypeScript and build error. 2. Confirm no console errors/warnings. 3. Check every image path resolves. 4. Test nav links and anchor scrolling (with sticky-header offset using `scroll-margin-top`). 5. Test both dropdowns with mouse and keyboard, and the mobile menu. 6. Open/close every FAQ item with mouse and keyboard. 7. Check all CTA/store/mailto/social links. 8. Compare desktop render against the screenshot section by section (order, proportions, whitespace, backgrounds, card styles) and correct deviations. 9. Inspect 360/390/768/1024/1440/1600 widths for horizontal overflow, clipped imagery, awkward heading wraps, unreadable card labels. 10. Verify reduced-motion behaviour and GSAP cleanup. 11. Confirm the production build would succeed on Vercel.
+If the result looks materially different from the screenshot, REVISE THE IMPLEMENTATION rather than explaining the difference.
+
+# OUTPUT
+Return the full project: file tree followed by the complete contents of every file (config, data, components, styles), ready to run with `npm install && npm run dev`, plus a short README with replace-your-assets instructions.
+```
+
+---
+
+# PART C — WHAT YOU (THE PROJECT OWNER) NEED TO SUPPLY
+
+1. **The full-page screenshot** — attach it with the prompt (primary reference). If AI Studio's image size limit crops it, also attach 3–4 cropped section screenshots (hero, services grid, how-it-works, footer) for sharper detail.
+2. **Brand decision:** Pronto is a real company with trademarked logo, press logos, a real person's photo and real app UI. For a portfolio piece, either (a) rebrand like your other recreations (new name, logo, colours optional, own copy/stats, replace press strip with "Featured in" placeholders or remove claims) or (b) keep clearly labelled as a design study and don't present stats/reviews/press as your own. Edit `src/config/brand.ts` + `data/*` accordingly.
+3. **Assets** (drop into `/public/assets/...` using the exact names in the ASSET PLAN):
+   - logo (green + white SVG), favicon, OG image
+   - official Google Play / App Store badge artwork (download from Google/Apple brand-guideline pages)
+   - hero cutout PNG (transparent background; if you rebrand, a licensed/AI-generated professional in a green uniform)
+   - 20 service illustrations in one consistent style (generate as a batch with the same prompt/style reference so lighting and angle match)
+   - 7 app-screen images (portrait) for the phone mockups + 1 "fan of three phones" image for the closing CTA
+   - press logos only if you have the right to show them
+4. **Verified data you may want to change:** stat numbers (181,379+ / 362,759+ / 3,627+), "500,000+ homes", "4.5 from 42,700+ ratings", the 8 testimonials, FAQ answers (especially Pronto Verified, pricing, cancellation), support/press/careers emails, store URLs, social links.
+5. **Domain/deployment:** a GitHub repo + Vercel project (or upload the AI Studio output into a new repo); optional custom domain.
+6. **Optional fonts check:** League Spartan and DM Sans load from Google Fonts — no licence files needed.
