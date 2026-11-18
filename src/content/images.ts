@@ -3,6 +3,11 @@ import categoryMusicians from "../assets/images/category-musicians.jpg";
 import categoryPhotographers from "../assets/images/category-photographers.jpg";
 import categoryDecorators from "../assets/images/category-decorators.jpg";
 import categoryBeautyDance from "../assets/images/category-beauty-dance.jpg";
+import categoryMehendi from "../assets/images/category_mehendi_artist_1794987790348.jpg";
+import categoryMural from "../assets/images/category_mural_artist_1794987791462.jpg";
+import categorySaree from "../assets/images/category_saree_stylist_1794987791698.jpg";
+import categoryEmcee from "../assets/images/category_emcee_host_1794987791272.jpg";
+import guideCreativeBrief from "../assets/images/guide_creative_brief_1794987791735.jpg";
 import pageAbout from "../assets/images/page-about.jpg";
 import pageStory from "../assets/images/page-story.jpg";
 import pageArtists from "../assets/images/page-artists.jpg";
@@ -17,65 +22,210 @@ import creatorKabir from "../assets/images/creator-kabir.jpg";
 export interface ImageAsset {
   src: string;
   alt: string;
+  source: string;
+  licenceBasis: string;
+  acquiredAt: string;
+  cropIntent: "landscape" | "portrait" | "square" | "hero";
   category?: string;
-  credit?: string;
 }
 
-export const heroImage: ImageAsset = {
-  src: heroPerformance,
-  alt: "Vibrant live performance artist engaging audience with music and lighting",
-};
+export const imageManifest = {
+  heroPerformance: {
+    src: heroPerformance,
+    alt: "Live singer and musician performing under warm stage lights in front of an audience",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
+    cropIntent: "hero",
+  },
+  categoryMusicians: {
+    src: categoryMusicians,
+    alt: "Acoustic guitarist and vocalist performing live with microphone",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
+    cropIntent: "landscape",
+    category: "Music & bands",
+  },
+  categoryPhotographers: {
+    src: categoryPhotographers,
+    alt: "Event photographer capturing candid cultural celebration moments",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
+    cropIntent: "landscape",
+    category: "Photography & videography",
+  },
+  categoryDecorators: {
+    src: categoryDecorators,
+    alt: "Event decorator arranging florals and warm ambient lighting",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
+    cropIntent: "landscape",
+    category: "Decorators & florists",
+  },
+  categoryBeautyDance: {
+    src: categoryBeautyDance,
+    alt: "Makeup artist and dancer preparing backstage for a live performance",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
+    cropIntent: "landscape",
+    category: "Dance & choreography",
+  },
+  categoryMehendi: {
+    src: categoryMehendi,
+    alt: "Indian mehendi artist applying intricate henna design in warm courtyard daylight",
+    source: "Generated editorial asset",
+    licenceBasis: "Project-generated editorial illustration",
+    acquiredAt: "2026-11-17",
+    cropIntent: "landscape",
+    category: "Mehendi artists",
+  },
+  categoryMural: {
+    src: categoryMural,
+    alt: "Indian muralist painting a contemporary artwork on a textured brick wall",
+    source: "Generated editorial asset",
+    licenceBasis: "Project-generated editorial illustration",
+    acquiredAt: "2026-11-17",
+    cropIntent: "landscape",
+    category: "Wall art & murals",
+  },
+  categorySaree: {
+    src: categorySaree,
+    alt: "Wardrobe stylist carefully draping pleats on a handloom silk saree",
+    source: "Generated editorial asset",
+    licenceBasis: "Project-generated editorial illustration",
+    acquiredAt: "2026-11-17",
+    cropIntent: "landscape",
+    category: "Saree draping & styling",
+  },
+  categoryEmcee: {
+    src: categoryEmcee,
+    alt: "Event emcee and stage host speaking with a microphone at an evening gathering",
+    source: "Generated editorial asset",
+    licenceBasis: "Project-generated editorial illustration",
+    acquiredAt: "2026-11-17",
+    cropIntent: "landscape",
+    category: "Emcees & event hosts",
+  },
+  guideCreativeBrief: {
+    src: guideCreativeBrief,
+    alt: "Event planner working with floral moodboards, stage notes, and fabric swatches",
+    source: "Generated editorial asset",
+    licenceBasis: "Project-generated editorial illustration",
+    acquiredAt: "2026-11-17",
+    cropIntent: "landscape",
+  },
+  pageAbout: {
+    src: pageAbout,
+    alt: "Creative community gathered at an evening cultural showcase",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
+    cropIntent: "landscape",
+  },
+  pageStory: {
+    src: pageStory,
+    alt: "Musician practicing and composing on acoustic guitar",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
+    cropIntent: "landscape",
+  },
+  pageArtists: {
+    src: pageArtists,
+    alt: "Performer sharing live work on stage",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
+    cropIntent: "landscape",
+  },
+  pageBusinesses: {
+    src: pageBusinesses,
+    alt: "Hospitality venue styled for an evening gathering",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
+    cropIntent: "landscape",
+  },
+  pageHowItWorks: {
+    src: pageHowItWorks,
+    alt: "Live cultural event with lighting and performers",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
+    cropIntent: "landscape",
+  },
+  creatorRhea: {
+    src: creatorRhea,
+    alt: "Illustrative artist portrait: vocalist in warm ambient lighting",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
+    cropIntent: "portrait",
+  },
+  creatorArjun: {
+    src: creatorArjun,
+    alt: "Illustrative artist portrait: creative professional in studio lighting",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
+    cropIntent: "portrait",
+  },
+  creatorMeera: {
+    src: creatorMeera,
+    alt: "Illustrative artist portrait: photographer holding a camera",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
+    cropIntent: "portrait",
+  },
+  creatorNaina: {
+    src: creatorNaina,
+    alt: "Illustrative artist portrait: makeup and beauty stylist",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
+    cropIntent: "portrait",
+  },
+  creatorKabir: {
+    src: creatorKabir,
+    alt: "Illustrative artist portrait: event creative at a venue",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
+    cropIntent: "portrait",
+  },
+} satisfies Record<string, ImageAsset>;
+
+export const heroImage = imageManifest.heroPerformance;
 
 export const categoryImages: Record<string, ImageAsset> = {
-  musicians: {
-    src: categoryMusicians,
-    alt: "Musician performing live on acoustic guitar and microphone",
-    category: "Musicians & DJs",
-  },
-  photographers: {
-    src: categoryPhotographers,
-    alt: "Event photographer capturing candid cultural moments",
-    category: "Photographers & Videographers",
-  },
-  decorators: {
-    src: categoryDecorators,
-    alt: "Creative event designer styling warm ambient lighting and florals",
-    category: "Decorators & Event Managers",
-  },
-  beautyDance: {
-    src: categoryBeautyDance,
-    alt: "Makeup artist and classical performer preparing backstage",
-    category: "Makeup, Beauty & Dance",
-  },
+  musicians: imageManifest.categoryMusicians,
+  photographers: imageManifest.categoryPhotographers,
+  decorators: imageManifest.categoryDecorators,
+  beautyDance: imageManifest.categoryBeautyDance,
+  mehendi: imageManifest.categoryMehendi,
+  mural: imageManifest.categoryMural,
+  saree: imageManifest.categorySaree,
+  emcee: imageManifest.categoryEmcee,
 };
 
 export const pageImages = {
-  aboutHero: {
-    src: pageAbout,
-    alt: "Creative community gathered at an event",
-  },
-  aboutStory: {
-    src: pageStory,
-    alt: "Musician creating music with a guitar",
-  },
-  forArtistsHero: {
-    src: pageArtists,
-    alt: "Performer sharing their work on stage",
-  },
-  forBusinessesHero: {
-    src: pageBusinesses,
-    alt: "Business event prepared for a creative gathering",
-  },
-  howItWorksHero: {
-    src: pageHowItWorks,
-    alt: "Live event with lights and performers",
-  },
+  aboutHero: imageManifest.pageAbout,
+  aboutStory: imageManifest.pageStory,
+  forArtistsHero: imageManifest.pageArtists,
+  forBusinessesHero: imageManifest.pageBusinesses,
+  howItWorksHero: imageManifest.pageHowItWorks,
+  guideBrief: imageManifest.guideCreativeBrief,
 };
 
-export const creatorImages: Record<string, ImageAsset> = {
-  rhea: { src: creatorRhea, alt: "Rhea, a musician, smiling between performances" },
-  arjun: { src: creatorArjun, alt: "Arjun, a creative professional, in a studio setting" },
-  meera: { src: creatorMeera, alt: "Meera, a photographer, holding her camera at work" },
-  naina: { src: creatorNaina, alt: "Naina, a makeup artist, preparing for a creative project" },
-  kabir: { src: creatorKabir, alt: "Kabir, an event creative, at a live gathering" },
+export const creatorImages = {
+  rhea: imageManifest.creatorRhea,
+  arjun: imageManifest.creatorArjun,
+  meera: imageManifest.creatorMeera,
+  naina: imageManifest.creatorNaina,
+  kabir: imageManifest.creatorKabir,
 };

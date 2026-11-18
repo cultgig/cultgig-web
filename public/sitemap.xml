@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://cultgig.com/</loc></url>
-  <url><loc>https://cultgig.com/about</loc></url>
-  <url><loc>https://cultgig.com/how-it-works</loc></url>
+  <url><loc>https://cultgig.com/explore</loc></url>
   <url><loc>https://cultgig.com/categories</loc></url>
-  <url><loc>https://cultgig.com/categories/musicians-djs</loc></url>
-  <url><loc>https://cultgig.com/categories/photo-video</loc></url>
-  <url><loc>https://cultgig.com/categories/decor-event</loc></url>
-  <url><loc>https://cultgig.com/categories/beauty-dance</loc></url>
+  <url><loc>https://cultgig.com/categories/music-and-bands</loc></url>
+  <url><loc>https://cultgig.com/categories/singers-and-vocalists</loc></url>
+  <url><loc>https://cultgig.com/categories/djs-and-instrumentalists</loc></url>
+  <url><loc>https://cultgig.com/categories/dance-and-choreography</loc></url>
+  <url><loc>https://cultgig.com/categories/photography-and-videography</loc></url>
+  <url><loc>https://cultgig.com/categories/mehendi-artists</loc></url>
+  <url><loc>https://cultgig.com/categories/makeup-and-beauty</loc></url>
+  <url><loc>https://cultgig.com/categories/saree-draping-and-styling</loc></url>
+  <url><loc>https://cultgig.com/categories/painters-and-illustrators</loc></url>
+  <url><loc>https://cultgig.com/categories/wall-art-and-murals</loc></url>
+  <url><loc>https://cultgig.com/categories/models-and-fashion-talent</loc></url>
+  <url><loc>https://cultgig.com/categories/tattoo-artists</loc></url>
+  <url><loc>https://cultgig.com/categories/decorators-and-florists</loc></url>
+  <url><loc>https://cultgig.com/categories/emcees-and-event-hosts</loc></url>
+  <url><loc>https://cultgig.com/categories/other-creative-professionals</loc></url>
+  <url><loc>https://cultgig.com/how-it-works</loc></url>
   <url><loc>https://cultgig.com/for-artists</loc></url>
   <url><loc>https://cultgig.com/for-businesses</loc></url>
+  <url><loc>https://cultgig.com/about</loc></url>
+  <url><loc>https://cultgig.com/pricing</loc></url>
+  <url><loc>https://cultgig.com/guides</loc></url>
   <url><loc>https://cultgig.com/faq</loc></url>
+  <url><loc>https://cultgig.com/safety</loc></url>
   <url><loc>https://cultgig.com/contact</loc></url>
-  <url><loc>https://cultgig.com/privacy</loc></url>
-  <url><loc>https://cultgig.com/terms</loc></url>
+  <url><loc>https://cultgig.com/support</loc></url>
+  <url><loc>https://cultgig.com/legal/terms</loc></url>
+  <url><loc>https://cultgig.com/legal/privacy</loc></url>
+  <url><loc>https://cultgig.com/legal/refunds</loc></url>
+  <url><loc>https://cultgig.com/legal/cancellation</loc></url>
+  <url><loc>https://cultgig.com/legal/community-guidelines</loc></url>
+  <url><loc>https://cultgig.com/legal/artist-agreement</loc></url>
+  <url><loc>https://cultgig.com/legal/client-agreement</loc></url>
 </urlset>

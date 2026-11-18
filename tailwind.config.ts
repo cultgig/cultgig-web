@@ -5,47 +5,63 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: {
-          green: '#05AC5F',
-          'green-dark': '#048A4C',
-          mint: '#DAF3E7',
-          'mint-pale': '#D2ECDE',
-          ink: '#0C0C0C',
+        plum: {
+          DEFAULT: '#6A2E62',
+          primary: '#6A2E62',
+          hover: '#54234E',
+          active: '#421A3D',
+          soft: '#F8F3F7',
+          tint: '#EEDFEA',
+          border: '#DFC9DA',
         },
-        green: {
-          600: '#05AC5F',
-          700: '#048A4C',
+        canvas: '#FCFAFB',
+        surface: {
+          DEFAULT: '#FFFFFF',
+          raised: '#FBF9FA',
+          muted: '#F4EFF2',
         },
-        mint: {
-          100: '#DAF3E7',
-          200: '#D2ECDE',
+        ink: {
+          primary: '#20151E',
+          secondary: '#5C4E58',
+          muted: '#84747F',
+          dark: '#181016',
         },
-        ink: '#0C0C0C',
-        grey: {
-          50: '#F9FAFC',
-          100: '#F4F6F8',
-          200: '#E8ECEF',
-          500: '#5B6470',
+        line: {
+          light: '#F0E8EE',
+          DEFAULT: '#E5DCE2',
+          strong: '#CBBEC8',
         },
-        border: '#E8ECEF',
+        semantic: {
+          success: '#2B7A58',
+          'success-bg': '#EEF7F2',
+          warning: '#A8681E',
+          'warning-bg': '#FDF6EC',
+          error: '#B02A37',
+          'error-bg': '#FDF2F3',
+          info: '#26689A',
+          'info-bg': '#EDF5FB',
+        },
+        ochre: {
+          DEFAULT: '#B88E52',
+          bg: '#FAF5ED',
+        },
       },
       fontFamily: {
-        heading: ['"League Spartan"', 'sans-serif'],
-        sans: ['"DM Sans"', 'sans-serif'],
+        sans: ['"Lexend"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        heading: ['"Lexend"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       borderRadius: {
-        'faq': '12px',
-        'stat': '16px',
-        'card': '20px',
-        'frame': '24px',
-        'panel': '32px',
+        sm: '8px',
+        md: '12px',
+        lg: '16px',
+        xl: '20px',
       },
       boxShadow: {
-        'card-soft': '0 8px 24px rgba(12, 12, 12, 0.06)',
-        'dropdown': '0 12px 32px rgba(12, 12, 12, 0.08)',
+        soft: '0 2px 10px rgba(32, 21, 30, 0.04)',
+        card: '0 6px 20px rgba(32, 21, 30, 0.06)',
+        elevated: '0 14px 36px rgba(32, 21, 30, 0.10)',
       },
     },
   },
   plugins: [],
 } satisfies Config;
-

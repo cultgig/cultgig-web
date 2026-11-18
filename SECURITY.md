@@ -1,54 +1,37 @@
 # Security Policy
 
-## Verified ✓
+## Verified Controls in Current Codebase
 
-- **npm dependencies**: 0 vulnerabilities (confirmed via `npm audit`)
-- **Hardcoded credentials**: None found in source code; `.env` is properly `.gitignore`'d and has never been committed to git history
-- **XSS protection**: No `dangerouslySetInnerHTML`, `innerHTML`, or `eval()` usage anywhere in the codebase
-- **Production source maps**: Disabled (Vite default); source maps are never shipped in production builds
-- **Environment variables**: All secrets loaded via `.env`; Appwrite client SDK uses public project ID and endpoint (intentional for browser clients)
-- **Dev bypass removal**: The application OTP bypass branch is correctly gated by `import.meta.env.DEV`; application-specific bypass strings are absent from the production bundle. A generic `123456` numeric alphabet appears in bundled dependency data and is unrelated to OTP handling.
-- **Security headers**: Configure CSP, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, HSTS, and frame protection at the hosting/CDN layer. These headers are intentionally not encoded in the Vite client bundle. If using the current hosted Satoshi stylesheet, CSP must allow `https://api.fontshare.com` and its font asset host; a licensed local Satoshi variable file can remove that external dependency.
-- **Public URL handling**: Deployment-provided social links accept only valid HTTPS URLs; contact email values are validated before rendering.
-- **Upload handling**: Client uploads are limited to supported image/video MIME types and 10 MB per file before Appwrite storage is called. Server-side Appwrite bucket limits and MIME validation must still be configured.
-
-## ⚠️ Pre-Launch Action Required
-
-**Appwrite Collection Permissions** — This cannot be verified from code and MUST be checked manually in the Appwrite console before launch:
-
-1. Navigate to your Appwrite console → **Databases** → **submissions** collection (or your onboarding collection name)
-2. Open the **Settings** tab and check the **Permissions** section
-3. Verify that guest/public users have:
-   - ✅ `create` permission (to submit new profiles)
-   - ❌ **NO** `read` permission (otherwise anyone can query all submitted profiles)
-4. Verify that only authenticated admin/team roles have `read` and `update` permissions
-
-**Why this matters**: Submissions include personal data (email, phone numbers, business addresses, portfolio URLs). If `read` is set to "Any," the Appwrite API will allow unauthenticated requests to query all profiles via direct API calls, even though your frontend doesn't expose a UI for this.
-
-**Recommended permission model**:
-```
-guest/any: create only
-admin/team: read, update, delete
-```
-
-If this cannot be confirmed before launch, **do not deploy to production**.
-
-Also verify the media bucket separately:
-
-- Guests may create files only through the intended onboarding flow.
-- File read/view access must match the product decision for profile media; do not make private submissions broadly readable.
-- Configure file size, MIME-type, and rate limits in Appwrite as a server-side control. Client validation is only a first line of defense.
-
-## Image Asset Migration
-
-Images have been migrated from `public/images/` to `src/assets/images/` to enable:
-- **Filename hashing** for automatic cache-busting (e.g., `hero-performance-DFQuTzyl.jpg`)
-- **Import-time optimization** via Vite's asset pipeline
-
-All 15 images are now imported as ES modules in `src/content/images.ts` and automatically include hashed filenames in production builds.
+- **npm dependencies**: Audited via `npm install` with no custom untrusted forks.
+- **No secrets in frontend bundle**: `.env` is `.gitignore`'d; `.env.example` contains only placeholder variable names (`VITE_*` for public client config only). No payment gateway secret keys, Appwrite API server keys, or Cloudinary API secrets exist in `src/`.
+- **XSS protection**: Zero use of `dangerouslySetInnerHTML`, `innerHTML`, or `eval()`.
+- **Production source maps**: Disabled by Vite default.
+- **Public URL & Email validation**: `src/config/site.ts` validates `https:` protocol for social URLs and email format before rendering `mailto:` or external links.
+- **Dev auth & OTP gating**: `import.meta.env.DEV` strictly gates local development preview helpers in `src/lib/appwriteAuth.ts` and `src/components/dev/DevRoleSwitcher.tsx`. Production builds disable local OTP bypasses.
+- **Client-side upload validation**: `src/lib/appwriteStorage.ts` enforces max 10 MB and explicit image/video MIME checks before upload. Server-side Appwrite bucket rules and Cloudinary signed-upload rules are required in production.
+- **Security headers**: Configured in `vercel.json` (`X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`, `X-Frame-Options: DENY`).
 
 ---
 
-**Last Updated**: 2026-08-19  
-**Audit Scope**: Source code, dependencies, build config  
-**Next Review**: Before production launch
+## Mandatory Pre-Launch Infrastructure Checklist
+
+### 1. Appwrite Console Permissions (Manual Verification Required)
+Before launching with live user data:
+- **Onboarding / Submissions collection**: `any/guest` may have `create` only; **remove `read`/`update`/`delete` for guests**. Only authenticated team/admin roles may read all submissions.
+- **Private user profiles, messages, proposals, bookings, paymentRecords**: Restrict read/write to explicit document owner/participant user IDs (`user:<id>`) and server Functions. Never trust client-submitted verification badges, booking paid statuses, or fee calculations.
+- **Media Storage Bucket**: Enforce maximum file size, allowed MIME extensions, and anti-abuse rate limits inside the Appwrite console.
+
+### 2. Cloudinary Signed Uploads (Backend Required)
+When activating live Cloudinary portfolio uploads:
+- Generate upload signatures inside a server-side Appwrite Function or serverless endpoint using `CLOUDINARY_API_SECRET` (server env only).
+- Whitelist target folders, strip EXIF/GPS metadata where appropriate, and validate file magic bytes server-side.
+
+### 3. Payment Security (Backend Required)
+- Do not activate checkout until Razorpay Route or Cashfree Easy Split approves Cultgig's legal entity and marketplace model.
+- Compute `grossAmount`, `platformFee`, `taxes`, and `artistShare` in integer paise strictly on the server from the mutually accepted proposal record.
+- Verify cryptographic webhook signatures and enforce idempotency keys and event deduplication before confirming bookings.
+
+---
+
+**Last Updated**: 2026-11-17  
+**Next Review**: Prior to Appwrite production database provisioning & payment gateway onboarding
