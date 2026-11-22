@@ -94,7 +94,7 @@ export function LogoStripSection() {
 
   return (
     <section
-      aria-label="Trusted startups hiring on Wellfound"
+      aria-label="Trusted startups hiring on Cultgig"
       className="bg-[#FAFAFA] border-y border-[#EDEDED] py-10 sm:py-12 overflow-hidden"
     >
       <Container>

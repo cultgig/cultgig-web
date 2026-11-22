@@ -54,7 +54,7 @@ export function Footer() {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              aria-label="Back to top of Wellfound"
+              aria-label="Back to top of Cultgig"
               className="inline-flex items-center"
             >
               <BrandWordmark variant="light" />
@@ -75,7 +75,7 @@ export function Footer() {
                   key={social.label}
                   type="button"
                   onClick={() => openInfo('about')}
-                  aria-label={`Wellfound on ${social.label}`}
+                  aria-label={`Cultgig on ${social.label}`}
                   className="w-8 h-8 rounded-full border border-white/15 bg-white/[0.03] text-white/70 hover:text-white hover:border-white/35 text-[11px] font-semibold flex items-center justify-center transition-colors"
                 >
                   {social.short}
@@ -148,7 +148,7 @@ export function Footer() {
 
         {/* Bottom Copyright */}
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[11.5px] text-white/45">
-          <p>© {copyrightYear} Wellfound. All rights reserved.</p>
+          <p>© {copyrightYear} Cultgig. All rights reserved.</p>
           <div className="flex items-center gap-5">
             <button
               type="button"

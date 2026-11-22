@@ -56,7 +56,7 @@ export function Header() {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            aria-label="Wellfound home"
+            aria-label="Cultgig home"
             className="inline-flex items-center focus-visible:rounded-md"
           >
             <BrandWordmark variant="dark" />

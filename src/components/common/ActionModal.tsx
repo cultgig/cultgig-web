@@ -139,14 +139,14 @@ export function ActionModal() {
   const infoEntry =
     modal.type === 'info'
       ? siteConfig.infoDrawerContent[modal.infoKey] || {
-          eyebrow: 'WELLFOUND PLATFORM',
+          eyebrow: 'CULTGIG PLATFORM',
           title: modal.infoKey
             .replace(/-/g, ' ')
             .replace(/\b\w/g, (c) => c.toUpperCase()),
           summary:
-            'Explore how Wellfound helps startups and candidates connect directly with transparent compensation, AI sourcing agents, and hands-on recruiting.',
+            'Explore how Cultgig helps startups and candidates connect directly with transparent compensation, AI sourcing agents, and hands-on recruiting.',
           highlights: [
-            '27,000+ startups hiring directly on Wellfound',
+            '27,000+ startups hiring directly on Cultgig',
             '10M+ opted-in startup candidates across engineering, product, and design',
             'SOC 2 aligned privacy and human-calibrated AI sourcing controls',
           ],
@@ -158,7 +158,7 @@ export function ActionModal() {
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#051315]/60 backdrop-blur-[2px]"
       role="dialog"
       aria-modal="true"
-      aria-label="Interactive Wellfound action dialog"
+      aria-label="Interactive Cultgig action dialog"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -180,7 +180,7 @@ export function ActionModal() {
               {authMode === 'sign-up' ? 'CREATE YOUR ACCOUNT' : 'WELCOME BACK'}
             </p>
             <h2 className="mt-1.5 font-display font-bold text-[26px] leading-[1.15] text-[#051315]">
-              {authMode === 'sign-up' ? 'Join Wellfound' : 'Log in to Wellfound'}
+              {authMode === 'sign-up' ? 'Join Cultgig' : 'Log in to Cultgig'}
             </h2>
 
             {/* Audience Toggle */}
@@ -287,7 +287,7 @@ export function ActionModal() {
             </form>
 
             <p className="mt-4 text-center text-[12px] text-[#646A6B]">
-              {authMode === 'sign-up' ? 'Already have an account?' : 'New to Wellfound?'}{' '}
+              {authMode === 'sign-up' ? 'Already have an account?' : 'New to Cultgig?'}{' '}
               <button
                 type="button"
                 onClick={() =>
@@ -306,9 +306,9 @@ export function ActionModal() {
           <div>
             <p className="text-[10.5px] font-semibold tracking-[0.14em] uppercase text-[#D11F68]">
               {modal.mode === 'demo'
-                ? 'WELLFOUND REACH & AUTOPILOT'
+                ? 'CULTGIG REACH & AUTOPILOT'
                 : modal.mode === 'contact'
-                  ? 'CONTACT WELLFOUND'
+                  ? 'CONTACT CULTGIG'
                   : 'FOR HIRING TEAMS'}
             </p>
             <h2 className="mt-1.5 font-display font-bold text-[26px] leading-[1.15] text-[#051315]">
@@ -316,7 +316,7 @@ export function ActionModal() {
                 ? 'Schedule a recruiting demo'
                 : modal.mode === 'contact'
                   ? 'Get in touch with our team'
-                  : 'Start hiring on Wellfound'}
+                  : 'Start hiring on Cultgig'}
             </h2>
             <p className="mt-2 text-[13px] text-[#646A6B]">
               Tell us about your team and the roles you are hiring for.
@@ -591,7 +591,7 @@ export function ActionModal() {
                   onSwitchModal({ type: 'auth', mode: 'sign-up', audience: 'candidate' })
                 }
               >
-                Get started on Wellfound
+                Get started on Cultgig
               </Button>
               <Button
                 variant="outline-light"

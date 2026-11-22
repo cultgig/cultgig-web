@@ -14,8 +14,8 @@ import {
 } from '../types';
 
 export const siteConfig = {
-  brandName: 'wellfound:',
-  brandTitle: 'Wellfound',
+  brandName: 'cultgig:',
+  brandTitle: 'Cultgig',
   copyrightYear: 2026,
   navigation: [
     { label: 'For companies', href: '#for-companies', action: 'scroll' },
@@ -101,10 +101,10 @@ export const siteConfig = {
   },
 
   trustedCompanies: {
-    heading: "The teams building what's next hire on Wellfound.",
+    heading: "The teams building what's next hire on Cultgig.",
     supportingPrefix: '+',
     supportingHighlight: '27,000',
-    supportingSuffix: 'MORE STARTUPS HIRING ON WELLFOUND TODAY',
+    supportingSuffix: 'MORE STARTUPS HIRING ON CULTGIG TODAY',
     logos: [
       { name: 'scale', displayStyle: 'scale' },
       { name: 'Neuralink', displayStyle: 'neuralink' },
@@ -128,27 +128,27 @@ export const siteConfig = {
     headingLine2: 'that ',
     headingAccent: "defines what's next.",
     description:
-      'The team you hire is the company you become. Wellfound is where startup people come to be found, and where AI finds the ones who fit your roles.',
+      'The team you hire is the company you become. Cultgig is where startup people come to be found, and where AI finds the ones who fit your roles.',
     primaryCta: 'Find your next hire',
     secondaryCta: 'Schedule a demo',
     features: [
       {
         number: '01',
-        eyebrow: '01 · WELLFOUND JOBS',
+        eyebrow: '01 · CULTGIG JOBS',
         heading: 'Post once. Reach startup talent.',
         description:
-          'Post free and get in front of 10M candidates who joined Wellfound because they want startup opportunities.',
+          'Post free and get in front of 10M candidates who joined Cultgig because they want startup opportunities.',
       },
       {
         number: '02',
-        eyebrow: '02 · WELLFOUND REACH',
+        eyebrow: '02 · CULTGIG REACH',
         heading: 'Find the candidates other searches miss.',
         description:
           'Search 500M+ profiles, uncover adjacent experience, and run personalized outreach from your inbox.',
       },
       {
         number: '03',
-        eyebrow: '03 · WELLFOUND AUTOPILOT',
+        eyebrow: '03 · CULTGIG AUTOPILOT',
         heading: 'Hire faster with hands-on support.',
         description:
           'Get a dedicated recruiter who sources, pitches, and schedules qualified candidates onto your calendar.',
@@ -286,7 +286,7 @@ export const siteConfig = {
   ] satisfies CandidateBenefitItem[],
 
   reachSection: {
-    eyebrow: 'FEATURED · WELLFOUND REACH',
+    eyebrow: 'FEATURED · CULTGIG REACH',
     headingLine1: 'Reach the right',
     headingLine2: 'candidates.',
     headingAccent: 'Automatically.',
@@ -330,7 +330,7 @@ export const siteConfig = {
   },
 
   testimonials: {
-    eyebrow: 'HIRED ON WELLFOUND',
+    eyebrow: 'HIRED ON CULTGIG',
     headingLead: 'Jobs found. ',
     headingAccent: 'Teams built.',
     items: [
@@ -338,21 +338,21 @@ export const siteConfig = {
         id: 't1',
         roleLabel: 'CANDIDATE',
         quote:
-          '"I got my tech job on Wellfound 4 years ago and I\'m still happy! Pays well, great culture, and unlimited PTO."',
+          '"I got my tech job on Cultgig 4 years ago and I\'m still happy! Pays well, great culture, and unlimited PTO."',
         variant: 'pink',
       },
       {
         id: 't2',
         roleLabel: 'RECRUITER',
         quote:
-          '"Half of the offers I give are sourced from Wellfound. It\'s the best product for anyone looking for startup talent."',
+          '"Half of the offers I give are sourced from Cultgig. It\'s the best product for anyone looking for startup talent."',
         variant: 'dark',
       },
       {
         id: 't3',
         roleLabel: 'CANDIDATE',
         quote:
-          '"I love Wellfound. I got my current job entirely through the site last year. Super easy to use and I love the UI."',
+          '"I love Cultgig. I got my current job entirely through the site last year. Super easy to use and I love the UI."',
         variant: 'pink',
       },
       {
@@ -372,39 +372,39 @@ export const siteConfig = {
     items: [
       {
         id: 'faq-1',
-        question: 'What is Wellfound?',
+        question: 'What is Cultgig?',
         answer:
-          'Wellfound is the hiring marketplace for startups: post jobs for free with Wellfound Jobs, source with AI agents through Wellfound Reach, or get done-for-you recruiting with Wellfound Autopilot, connected to a network of 10M+ opted-in candidates.',
+          'Cultgig is the hiring marketplace for startups: post jobs for free with Cultgig Jobs, source with AI agents through Cultgig Reach, or get done-for-you recruiting with Cultgig Autopilot, connected to a network of 10M+ opted-in candidates.',
       },
       {
         id: 'faq-2',
-        question: 'Is Wellfound free to post jobs?',
+        question: 'Is Cultgig free to post jobs?',
         answer:
-          'Yes. Any startup or hiring team can post roles and receive inbound applications on Wellfound Jobs completely free. Paid tiers unlock Wellfound Reach AI sourcing agents and Autopilot managed recruiting.',
+          'Yes. Any startup or hiring team can post roles and receive inbound applications on Cultgig Jobs completely free. Paid tiers unlock Cultgig Reach AI sourcing agents and Autopilot managed recruiting.',
       },
       {
         id: 'faq-3',
-        question: 'Is Wellfound free for job seekers?',
+        question: 'Is Cultgig free for job seekers?',
         answer:
-          'Yes, Wellfound is 100% free for candidates. You can create a profile, browse transparent salary and equity ranges, and apply directly to founders and hiring managers with no fees.',
+          'Yes, Cultgig is 100% free for candidates. You can create a profile, browse transparent salary and equity ranges, and apply directly to founders and hiring managers with no fees.',
       },
       {
         id: 'faq-4',
-        question: 'How many startups and candidates are on Wellfound?',
+        question: 'How many startups and candidates are on Cultgig?',
         answer:
-          'Over 27,000+ startups actively hire on Wellfound, alongside a network of 10M+ startup-ready candidates and 500M+ searchable profiles across engineering, product, design, AI, and operations.',
+          'Over 27,000+ startups actively hire on Cultgig, alongside a network of 10M+ startup-ready candidates and 500M+ searchable profiles across engineering, product, design, AI, and operations.',
       },
       {
         id: 'faq-5',
-        question: 'Does Wellfound offer AI recruiting software?',
+        question: 'Does Cultgig offer AI recruiting software?',
         answer:
-          'Yes. Wellfound Reach deploys autonomous sourcing agents that calibrate on your role, evaluate hundreds of candidate profiles beyond rigid keyword filters, and run personalized outreach directly from your inbox.',
+          'Yes. Cultgig Reach deploys autonomous sourcing agents that calibrate on your role, evaluate hundreds of candidate profiles beyond rigid keyword filters, and run personalized outreach directly from your inbox.',
       },
       {
         id: 'faq-6',
-        question: 'Who is Wellfound for?',
+        question: 'Who is Cultgig for?',
         answer:
-          'Wellfound is built for venture-backed startups, frontier technology teams, and high-impact builders—from seed-stage founders making their first hires to growth-stage engineering and product organizations.',
+          'Cultgig is built for venture-backed startups, frontier technology teams, and high-impact builders—from seed-stage founders making their first hires to growth-stage engineering and product organizations.',
       },
     ] satisfies FaqItem[],
   },
@@ -419,7 +419,7 @@ export const siteConfig = {
 
   footer: {
     description:
-      'Wellfound is the AI recruiting platform and talent marketplace for startups. Post jobs, search for candidates with AI agents, or partner with a dedicated recruiter.',
+      'Cultgig is the AI recruiting platform and talent marketplace for startups. Post jobs, search for candidates with AI agents, or partner with a dedicated recruiter.',
     columns: [
       {
         heading: 'FOR COMPANIES',
@@ -530,8 +530,8 @@ export const siteConfig = {
 
   infoDrawerContent: {
     blog: {
-      eyebrow: 'WELLFOUND EDITORIAL',
-      title: 'The Wellfound Journal',
+      eyebrow: 'CULTGIG EDITORIAL',
+      title: 'The Cultgig Journal',
       summary:
         'Field notes on startup hiring, founder-led recruiting, compensation benchmarks, and how AI agents are reshaping technical talent discovery.',
       highlights: [
@@ -544,18 +544,18 @@ export const siteConfig = {
       eyebrow: 'PLANS & PRICING',
       title: 'Start free. Scale with AI sourcing.',
       summary:
-        'Post unlimited roles on Wellfound Jobs for $0. Upgrade to Wellfound Reach for autonomous candidate sourcing or Autopilot for dedicated recruiting.',
+        'Post unlimited roles on Cultgig Jobs for $0. Upgrade to Cultgig Reach for autonomous candidate sourcing or Autopilot for dedicated recruiting.',
       highlights: [
-        'Wellfound Jobs — Free forever for startups posting roles and reviewing inbound applicants',
-        'Wellfound Reach — Autonomous AI sourcing agents calibrated to your engineering & product bar',
-        'Wellfound Autopilot — Embedded recruiter managing sourcing, outreach, and interview scheduling',
+        'Cultgig Jobs — Free forever for startups posting roles and reviewing inbound applicants',
+        'Cultgig Reach — Autonomous AI sourcing agents calibrated to your engineering & product bar',
+        'Cultgig Autopilot — Embedded recruiter managing sourcing, outreach, and interview scheduling',
       ],
     },
     about: {
-      eyebrow: 'ABOUT WELLFOUND',
+      eyebrow: 'ABOUT CULTGIG',
       title: 'Connecting the world’s builders with frontier startups.',
       summary:
-        'Formerly AngelList Talent, Wellfound connects over 10M+ startup-minded candidates directly with founders and hiring managers at 27,000+ startups.',
+        'Cultgig connects over 10M+ startup-minded candidates directly with founders and hiring managers at 27,000+ startups.',
       highlights: [
         'Direct-to-founder applications without third-party agency noise',
         'Transparent salary and equity ranges displayed upfront on every listing',
@@ -566,7 +566,7 @@ export const siteConfig = {
       eyebrow: 'TRUST & GOVERNANCE',
       title: 'AI Audit Centre',
       summary:
-        'Wellfound Reach evaluates skills, shipped projects, and role alignment under transparent human-in-the-loop calibration.',
+        'Cultgig Reach evaluates skills, shipped projects, and role alignment under transparent human-in-the-loop calibration.',
       highlights: [
         'No automated rejections — human hiring teams review and approve outreach criteria',
         'Audit logs of agent evaluation rubrics and candidate matching signals',
