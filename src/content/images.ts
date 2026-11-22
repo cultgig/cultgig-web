@@ -3,11 +3,6 @@ import categoryMusicians from "../assets/images/category-musicians.jpg";
 import categoryPhotographers from "../assets/images/category-photographers.jpg";
 import categoryDecorators from "../assets/images/category-decorators.jpg";
 import categoryBeautyDance from "../assets/images/category-beauty-dance.jpg";
-import categoryMehendi from "../assets/images/category_mehendi_artist_1794987790348.jpg";
-import categoryMural from "../assets/images/category_mural_artist_1794987791462.jpg";
-import categorySaree from "../assets/images/category_saree_stylist_1794987791698.jpg";
-import categoryEmcee from "../assets/images/category_emcee_host_1794987791272.jpg";
-import guideCreativeBrief from "../assets/images/guide_creative_brief_1794987791735.jpg";
 import pageAbout from "../assets/images/page-about.jpg";
 import pageStory from "../assets/images/page-story.jpg";
 import pageArtists from "../assets/images/page-artists.jpg";
@@ -18,6 +13,12 @@ import creatorArjun from "../assets/images/creator-arjun.jpg";
 import creatorMeera from "../assets/images/creator-meera.jpg";
 import creatorNaina from "../assets/images/creator-naina.jpg";
 import creatorKabir from "../assets/images/creator-kabir.jpg";
+
+const categoryMehendi = categoryBeautyDance;
+const categoryMural = categoryDecorators;
+const categorySaree = creatorNaina;
+const categoryEmcee = pageHowItWorks;
+const guideCreativeBrief = pageBusinesses;
 
 export interface ImageAsset {
   src: string;

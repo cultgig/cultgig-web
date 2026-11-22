@@ -1,0 +1,1178 @@
+# MASTER BUILD PROMPT — WELLFOUND-INSPIRED PRODUCTION-READY LANDING PAGE
+
+## 1. YOUR ROLE
+
+Act as a world-class Senior Product Designer, UI/UX Architect, Creative Director, and Senior React Frontend Engineer.
+
+Your task is to analyse the attached Wellfound landing page screenshot and create a production-ready, highly polished, pixel-accurate landing page inspired by its visual design, layout, structure, typography hierarchy, colour system, spacing, UI components, and interaction patterns.
+
+Reference website: https://wellfound.com/
+
+The uploaded screenshot is the primary visual reference. Study it carefully before writing any code.
+
+Do not create a generic SaaS landing page.
+
+Do not create an ordinary AI-generated website with random gradients, oversized decorative elements, excessive glassmorphism, generic cards, or unnecessary animations.
+
+The objective is to reproduce the design language and visual composition of the reference as faithfully as possible while writing clean, maintainable, responsive, production-quality code.
+
+Think like a senior designer building a premium technology startup website.
+
+---
+
+# 2. TECHNOLOGY STACK
+
+Use the following technologies.
+
+### Frontend
+
+- HTML5
+- CSS3
+- ReactJS
+- Vite
+- TypeScript
+- Tailwind CSS
+- Aceternity UI (selectively, only when useful)
+- Modern CSS Flexbox
+- CSS Grid
+- Lucide React icons where appropriate
+
+### Backend and infrastructure
+
+- Appwrite: User information, authentication, database and lead management.
+- Cloudinary: Image and video storage, optimisation and delivery.
+- Vercel: Production deployment.
+
+### Technical restrictions
+
+1. Do not use Next.js.
+2. Do not use Bootstrap.
+3. Do not use Material UI.
+4. Do not introduce unnecessary component libraries.
+5. Do not generate unnecessary dependencies.
+6. Use custom CSS for specific visual treatments.
+7. Use reusable React components.
+8. Use proper TypeScript interfaces and types.
+9. Keep the code modular and maintainable.
+10. Use semantic HTML5.
+
+Interpret the requirement to avoid additional frameworks as avoiding any unrequested UI or CSS framework beyond the explicitly selected stack.
+
+---
+
+# 3. DESIGN SYSTEM
+
+## Brand typography
+
+Use these fonts throughout the website.
+
+### Primary font: Bricolage Grotesque
+
+Use for:
+- Main hero heading.
+- Section headings.
+- Large headlines.
+- Featured statements.
+- Important highlighted words.
+- Major CTA headings.
+
+### Secondary font: Poppins
+
+Use for:
+- Navigation.
+- Paragraphs.
+- Buttons.
+- Form fields.
+- Cards.
+- UI labels.
+- Product interface previews.
+- Footer content.
+- Small metadata.
+
+Load the fonts properly using Google Fonts or an equivalent reliable approach.
+
+Define global typography variables and consistent font weights.
+
+Recommended weights:
+
+Bricolage Grotesque: 400, 500, 600, 700, 800.
+
+Poppins: 400, 500, 600, 700.
+
+## Colour palette
+
+Use the following colour system based on the uploaded reference image.
+
+| Purpose | Colour |
+|---|---|
+| Primary dark | #051315 |
+| Primary background | #FFFFFF |
+| Secondary background | #FAFAFA |
+| Primary accent | #D11F68 |
+| Soft pink | #FDF1F8 |
+| Main dark typography | #051315 |
+| Secondary text | #646A6B |
+| Dark section text | #FFFFFF |
+| Dark card background | #1B1818 |
+| Border | #EDEDED |
+
+Create CSS variables for all colours.
+
+The visual identity should be based on dark green-black, white, pale pink, and a strong pink accent.
+
+Do not introduce random blue, purple, green, or orange colours.
+
+Use pink strategically for emphasis, important labels, buttons and selected typography.
+
+## Design philosophy
+
+The design should feel:
+
+- Premium.
+- Minimal.
+- Editorial.
+- Modern.
+- Sophisticated.
+- Technology-oriented.
+- Conversion-focused.
+- Clean and spacious.
+
+Avoid overdesigning.
+
+Whitespace is an important part of the design.
+
+---
+
+# 4. COMPLETE LANDING PAGE STRUCTURE
+
+Build the entire page in the exact following order.
+
+Do not skip any section.
+
+## SECTION 01 — HEADER / NAVIGATION
+
+Create a minimal white header.
+
+Layout:
+
+Left:
+- Brand wordmark: wellfound:
+
+Centre:
+- For companies
+- For job seekers
+- Blog
+
+Right:
+- Log in
+- Sign up
+
+Design requirements:
+
+- Compact navigation height.
+- White background.
+- Clean typography.
+- Minimal bottom border.
+- Consistent horizontal alignment.
+- Brand wordmark should be visually prominent but not oversized.
+- Sign up button should use the primary dark treatment.
+- Navigation links should have subtle hover transitions.
+
+Interactions:
+
+- Every navigation item must be a functional link.
+- Add a sticky header with a subtle background/shadow transition after scrolling.
+- Create a mobile navigation menu.
+- Ensure keyboard navigation works.
+- Use accessible menu controls and appropriate ARIA attributes.
+
+Do not create large or unnecessary dropdown menus.
+
+## SECTION 02 — HERO SECTION
+
+This is the most important section.
+
+Reproduce the composition of the screenshot carefully.
+
+### Layout
+
+Create a centred hero section with generous whitespace.
+
+At the top, include a large two-line headline:
+
+"Where great companies
+meet great people."
+
+Typography:
+
+- Bricolage Grotesque.
+- Bold heading weight.
+- Large desktop font size.
+- Tight line height.
+- Dark first line.
+- Pink italic second line.
+- Carefully controlled letter spacing.
+
+The second line should use pink italic styling.
+
+Under the heading, add a concise description:
+
+"The startup job search and AI recruiting platform. Apply directly to founders, or post jobs free and hire with AI sourcing agents."
+
+Keep the paragraph narrow and centred.
+
+### Floating notification elements
+
+Create small floating notification pills near the hero area.
+
+Examples:
+- Interview booked · just now
+- Chime · applicants
+- Replies · this morning
+
+Design:
+
+- Small white rounded pills.
+- Soft shadow.
+- Tiny status indicators.
+- Minimal typography.
+- Subtle floating animation.
+
+Do not let these elements interfere with the main heading.
+
+### Dual audience cards
+
+Directly below the description, create two side-by-side cards.
+
+CARD A — FOR CANDIDATES
+
+Background: #051315
+
+Content:
+- Small pink uppercase eyebrow: FOR CANDIDATES.
+- Heading: Find your next job.
+- Supporting paragraph about applying directly to founders and hiring managers.
+- Primary pink CTA: Sign up to find a job.
+- A compact job-preview panel.
+
+The job-preview panel should show:
+- Small company logo/avatar.
+- Job title.
+- Company name.
+- Location.
+- Salary or relevant metadata.
+- Small hiring status badge.
+
+CARD B — FOR COMPANIES
+
+Background: #FDF1F8
+
+Content:
+- Small pink eyebrow: FOR COMPANIES.
+- Heading: Find your next hire.
+- Supporting paragraph about posting jobs and finding candidates.
+- Primary pink CTA: Start hiring.
+- A compact recruiter activity preview.
+
+The preview should show:
+- Small profile avatars.
+- Candidate names.
+- Experience or job title.
+- Recruitment activity status.
+- Small status badges.
+
+### Card design
+
+- Two-column layout.
+- Balanced card widths.
+- Rounded corners around 16–20px.
+- Subtle borders.
+- Internal padding.
+- Realistic product UI.
+- Excellent text alignment.
+
+Below the cards, add a small text link:
+
+"Just looking? Browse jobs"
+
+Maintain generous whitespace around the hero.
+
+On mobile, stack the cards vertically.
+
+---
+
+## SECTION 03 — TRUSTED COMPANIES / LOGO MARQUEE
+
+Create a full-width light-grey section.
+
+At the top, add a centred statement:
+
+"The teams building what's next hire on Wellfound."
+
+Below it, display a horizontal strip of company logos.
+
+Reference logos include:
+- Scale AI
+- Neuralink
+- Cognition
+- Brex
+- Lovable
+- Chime
+- Postman
+- Klaviyo
+- Braze
+- Zipline
+- Applied Intuition
+- Astranis
+
+Use appropriate brand logo assets only when available and permitted. Otherwise use carefully styled text wordmarks or neutral placeholders.
+
+Requirements:
+
+- One horizontal logo row.
+- Consistent logo height.
+- Balanced spacing.
+- Logos should not dominate the section.
+- Optional subtle continuous marquee movement.
+- Pause movement when the user prefers reduced motion.
+
+Add a small supporting statement below the logos mentioning the scale of the startup network.
+
+---
+
+## SECTION 04 — FOR COMPANIES
+
+Create a full-width deep green-black section.
+
+Background: #051315.
+
+Use a two-column desktop grid.
+
+### Left column
+
+Small pink eyebrow:
+
+FOR COMPANIES
+
+Large headline:
+
+"Build the team
+that defines
+what's next."
+
+Make "defines what's next" italic and pink.
+
+Paragraph:
+
+"The team you hire is the company you become. Wellfound is where startup people come to be found, and where AI finds the ones who fit your roles."
+
+Add two buttons:
+
+- Find your next hire.
+- Schedule a demo.
+
+### Right column
+
+Create three vertically stacked feature blocks.
+
+FEATURE 01
+
+Eyebrow: 01 · WELLFOUND JOBS
+
+Heading: Post once. Reach startup talent.
+
+Description: Post free and get in front of startup candidates looking for new opportunities.
+
+FEATURE 02
+
+Eyebrow: 02 · WELLFOUND REACH
+
+Heading: Find the candidates other searches miss.
+
+Description: Search candidate profiles, uncover adjacent experience, and run personalised outreach.
+
+FEATURE 03
+
+Eyebrow: 03 · WELLFOUND AUTOPILOT
+
+Heading: Hire faster with hands-on support.
+
+Description: Get dedicated recruitment support to source, pitch and schedule qualified candidates.
+
+### Design requirements
+
+- Maintain high contrast.
+- White headings.
+- Muted grey paragraphs.
+- Pink eyebrow labels.
+- Horizontal dividers between feature blocks.
+- Minimal layout.
+- Plenty of negative space.
+
+Use responsive stacking on smaller screens.
+
+---
+
+## SECTION 05 — FOR CANDIDATES
+
+White background.
+
+Create a two-column desktop layout.
+
+### Left column
+
+Pink uppercase eyebrow:
+
+FOR CANDIDATES
+
+Heading:
+
+"Find work
+that matters."
+
+Make "that matters" italic and pink.
+
+Description:
+
+"Find the next company that's going to change the world, and the role that changes yours."
+
+Buttons:
+- Sign up for free.
+- Learn more.
+
+### Right column
+
+Create a realistic job-search interface preview.
+
+This is a crucial visual component.
+
+DO NOT use a generic dashboard image.
+
+Build the UI using actual React components and CSS.
+
+The preview should contain:
+
+1. Search input.
+2. Job role selector.
+3. Location filter.
+4. Experience filter.
+5. Search button.
+6. "Matches for you" heading.
+7. Recruiters active status.
+8. Company cards.
+9. Company descriptions.
+10. Job titles.
+11. Relevant tags.
+12. Job location and metadata.
+13. Save and View buttons.
+
+Design the preview within a rounded white interface container with a pale pink outer frame.
+
+Use realistic mock data.
+
+Keep the internal interface compact, sophisticated and believable.
+
+---
+
+## SECTION 06 — CANDIDATE BENEFITS
+
+Place this immediately below the candidate introduction.
+
+Use a 2 × 2 grid.
+
+Create four numbered feature blocks.
+
+01 — Dream roles at the companies building what's next.
+
+High-growth teams in AI, infrastructure, robotics, fintech and other emerging categories.
+
+02 — Companies come find you.
+
+AI sourcing helps relevant recruiters discover your profile and reach you.
+
+03 — Talk to the people doing the actual hiring.
+
+Direct access to founders and hiring managers rather than unnecessary intermediaries.
+
+04 — Show what you can do, not just where you've been.
+
+Your profile highlights projects, work, skills and what you can contribute.
+
+Design:
+
+- Small pink numerical labels.
+- Dark bold headings.
+- Muted body text.
+- Spacious grid.
+- No heavy card backgrounds.
+- Consistent vertical rhythm.
+
+---
+
+## SECTION 07 — AI RECRUITMENT / WELLFOUND REACH
+
+Create another white section with two columns.
+
+### Left column
+
+Small eyebrow:
+
+FEATURED · WELLFOUND REACH
+
+Headline:
+
+"Reach the right
+candidates.
+Automatically."
+
+Make "Automatically" pink and italic.
+
+Description:
+
+"The agentic recruiting platform that does what manual screening can't: it evaluates every candidate, surfaces the ones who'd get filtered out, and runs personalized outreach until they reply. Done by AI, guided by you."
+
+CTA:
+
+Explore AI candidate sourcing.
+
+Use a dark filled pill-shaped button.
+
+### Right column
+
+Create a sophisticated dark AI recruitment activity dashboard.
+
+Build the dashboard with React components rather than an image.
+
+Appearance:
+
+- Dark black card.
+- Rounded corners.
+- Soft shadow.
+- Compact rows.
+- Small status indicators.
+- Pink and green activity badges.
+- Minimal typography.
+
+Include an activity heading:
+
+"3 agents working" and a live status indicator.
+
+Create three activity rows:
+
+1. NYC Senior · Backend
+   241 evaluated · 117 matched
+   12 pitched · 3 replied
+
+2. React Focused · Remote
+   183 evaluated · 94 matched
+   8 pitched · 2 replied
+
+3. Fintech Experience
+   117 evaluated · 75 matched
+   6 pitched · 1 replied
+
+Include a tiny recent activity indicator at the bottom.
+
+The preview should feel like a real AI product, not a decorative black rectangle.
+
+---
+
+## SECTION 08 — TESTIMONIALS / SOCIAL PROOF
+
+Use a light background.
+
+Centred heading:
+
+"Jobs found.
+Teams built."
+
+Make "Teams built." pink and italic.
+
+Add four testimonial cards in a 2 × 2 grid.
+
+Alternate between:
+
+- Pale pink background.
+- Dark green-black background.
+
+Each card should contain:
+
+- Small uppercase role label.
+- Testimonial text.
+- Appropriate contrasting typography.
+
+Use realistic candidate and recruiter testimonials as reference content.
+
+Design requirements:
+
+- Rounded corners.
+- No unnecessary shadows.
+- Balanced card height.
+- Consistent padding.
+- Comfortable readability.
+
+Do not introduce unnecessary profile photographs.
+
+---
+
+## SECTION 09 — FAQ
+
+Create a full-width very light grey section.
+
+Centred heading:
+
+"Common questions."
+
+Make "questions." pink and italic.
+
+Create a narrow centred accordion.
+
+Include these questions:
+
+1. What is Wellfound?
+2. Is Wellfound free to post jobs?
+3. Is Wellfound free for job seekers?
+4. How many startups and candidates are on Wellfound?
+5. Does Wellfound offer AI recruiting software?
+6. Who is Wellfound for?
+
+Accordion behaviour:
+
+- First question expanded by default.
+- Other questions collapsed.
+- Plus icon for closed items.
+- Minus icon for expanded item.
+- Smooth open/close transition.
+- Subtle horizontal separators.
+- Accessible keyboard interactions.
+- Proper ARIA expanded state.
+
+Use accurate corresponding descriptions.
+
+Keep the FAQ width narrow and readable.
+
+---
+
+## SECTION 10 — FINAL CTA AND FOOTER
+
+Create a large deep green-black section.
+
+### Final CTA
+
+Centred headline:
+
+"What's your next move?"
+
+Make "your next move?" italic and pink.
+
+Supporting paragraph:
+
+"The right job, or the right hire. Both start here."
+
+Add two buttons:
+
+- Sign up to find a job.
+- Start hiring.
+
+Place a subtle pink radial glow behind the CTA area.
+
+The gradient must be restrained and sophisticated.
+
+### Footer
+
+Create a large, carefully structured footer.
+
+First row:
+
+Brand column:
+- Wellfound wordmark.
+- Short description.
+- Social media links.
+
+Navigation columns:
+
+FOR COMPANIES
+- Recruiting platform.
+- Post jobs for free.
+- AI candidate sourcing.
+- Managed recruiting.
+- Plans and pricing.
+
+FOR CANDIDATES
+- Candidate overview.
+- Startup jobs.
+- Remote jobs.
+- Remote work guide.
+- Get discovered.
+
+COMPANY
+- About.
+- Customer stories.
+- Blog.
+- Careers.
+- Contact.
+
+TRUST & SUPPORT
+- Help centre.
+- Trust centre.
+- AI audit centre.
+- Platform status.
+- Privacy & cookies.
+- Terms & risks.
+
+Add a horizontal divider.
+
+### SEO browse section
+
+Below the main footer, include organised link groups:
+
+- Jobs by role.
+- Remote jobs.
+- Jobs by location.
+- Job collections.
+- Browse all.
+
+Create small outlined pill-style links.
+
+Finish with copyright text and the year.
+
+Requirements:
+
+- Responsive footer.
+- Consistent column spacing.
+- Readable small typography.
+- Proper link hierarchy.
+- Subtle hover effects.
+
+On mobile, stack footer columns or use accessible collapsible groups.
+
+---
+
+# 5. PIXEL-PERFECT VISUAL IMPLEMENTATION
+
+Treat the screenshot as a visual specification.
+
+Before implementation, identify:
+
+- Horizontal alignment.
+- Section proportions.
+- Content widths.
+- Typography scale.
+- Card proportions.
+- Card spacing.
+- Border radius.
+- Background transitions.
+- Visual hierarchy.
+- Heading alignment.
+- Button shapes.
+- Product preview positioning.
+
+Use a consistent maximum-width container.
+
+Recommended:
+
+- Desktop container: 1120–1200px.
+- Large-screen horizontal padding: 32–48px.
+- Tablet horizontal padding: 24px.
+- Mobile horizontal padding: 18–20px.
+
+Use CSS Grid for the two-column sections and Flexbox for navigation and smaller layouts.
+
+Avoid arbitrary positioning that causes responsive breakage.
+
+Do not make every section the same height.
+
+Maintain the reference's alternating visual rhythm.
+
+---
+
+# 6. ANIMATION AND INTERACTIONS
+
+Animations must be subtle and professional.
+
+Implement:
+
+1. Smooth page scrolling.
+2. Subtle section reveal on scroll.
+3. Gentle floating hero notification pills.
+4. Button hover transitions.
+5. Card hover transitions.
+6. Logo marquee movement.
+7. FAQ accordion animation.
+8. Sticky navigation transition.
+9. Subtle pink glow animation in the final CTA.
+
+Animation specifications:
+
+- Mostly 180–300ms transitions.
+- No exaggerated bouncing.
+- No unnecessary parallax.
+- No excessive scale effects.
+- Respect prefers-reduced-motion.
+- Avoid heavy animation dependencies.
+
+Use CSS animations and transitions wherever possible.
+
+---
+
+# 7. RESPONSIVE DESIGN REQUIREMENTS
+
+The website must work properly across:
+
+- 1440px desktop.
+- 1280px desktop.
+- 1024px laptop/tablet.
+- 768px tablet.
+- 430px mobile.
+- 390px mobile.
+- 375px mobile.
+- 320px small mobile.
+
+Requirements:
+
+- No horizontal scrolling.
+- No overflowing text.
+- No overlapping elements.
+- No broken grids.
+- No clipped UI previews.
+- No tiny unreadable typography.
+- Buttons should remain easy to tap.
+- Header must adapt properly.
+- Footer must reorganise naturally.
+- Hero content should remain visually balanced.
+
+For mobile:
+
+- Stack the two hero cards.
+- Stack split sections.
+- Put product previews below their associated text.
+- Use a simplified navigation.
+- Adjust heading line breaks intentionally.
+- Reduce unnecessary background decorations.
+- Use a single-column testimonial grid.
+- Make the FAQ easy to interact with.
+
+Do not simply scale desktop elements down.
+
+---
+
+# 8. APPWRITE BACKEND INTEGRATION
+
+Use Appwrite for backend functionality that actually requires persistence.
+
+Prepare a reusable Appwrite client configuration.
+
+Environment variables:
+
+VITE_APPWRITE_ENDPOINT=
+VITE_APPWRITE_PROJECT_ID=
+VITE_APPWRITE_DATABASE_ID=
+VITE_APPWRITE_LEADS_COLLECTION_ID=
+
+Use TypeScript service modules for backend communication.
+
+Potential functionality:
+
+- User authentication.
+- Lead registration.
+- Contact form submissions.
+- Newsletter subscription.
+- Storing user information.
+
+Do not make every landing page component depend directly on Appwrite.
+
+Keep backend integration isolated inside services.
+
+Security requirements:
+
+- Never expose Appwrite API keys or privileged credentials in frontend code.
+- Use correct collection permissions.
+- Validate user input.
+- Handle failed requests.
+- Show loading, success and error states.
+- Prevent repeated form submissions.
+- Use server-side or Appwrite Function validation for public lead submissions where appropriate.
+
+If backend credentials are unavailable, the landing page must still render normally.
+
+Do not fabricate successful backend submissions.
+
+---
+
+# 9. CLOUDINARY INTEGRATION
+
+Use Cloudinary for images and videos.
+
+Create a reusable media configuration.
+
+Environment variables:
+
+VITE_CLOUDINARY_CLOUD_NAME=
+VITE_CLOUDINARY_UPLOAD_PRESET=
+
+Requirements:
+
+- Optimised image delivery.
+- Responsive image sizing.
+- Lazy loading.
+- Modern image formats.
+- Appropriate aspect ratios.
+- Video optimisation where applicable.
+
+Use restricted unsigned upload presets only for suitable public uploads. Use signed uploads through a trusted backend for protected uploads.
+
+Do not store large base64 images inside React components.
+
+Do not unnecessarily use stock photographs.
+
+Prioritise component-built product mockups for the interface previews.
+
+---
+
+# 10. CODE ARCHITECTURE
+
+Create a clean, scalable folder structure.
+
+Suggested structure:
+
+src/
+  assets/
+  components/
+    common/
+    layout/
+    navigation/
+    cards/
+    buttons/
+    product-previews/
+    footer/
+  sections/
+    HeroSection.tsx
+    CompanySection.tsx
+    CandidateSection.tsx
+    CandidateBenefits.tsx
+    ReachSection.tsx
+    TestimonialsSection.tsx
+    FAQSection.tsx
+    FinalCTASection.tsx
+  config/
+    siteConfig.ts
+    appwrite.ts
+    cloudinary.ts
+  services/
+    appwriteService.ts
+    leadService.ts
+  hooks/
+  styles/
+    globals.css
+    animations.css
+  types/
+  App.tsx
+  main.tsx
+
+Use reusable components.
+
+Keep the content separate from the UI wherever practical.
+
+Use TypeScript interfaces for:
+- Navigation links.
+- Job previews.
+- Company cards.
+- Candidate profiles.
+- Testimonials.
+- FAQ items.
+- Footer links.
+
+Do not create one enormous component containing the entire website.
+
+Centralise the brand name, CTA destinations and editable content in appropriate configuration files.
+
+---
+
+# 11. SEO, ACCESSIBILITY AND PERFORMANCE
+
+### SEO
+
+Implement:
+
+- Descriptive page title.
+- Meta description.
+- Open Graph metadata.
+- Appropriate heading hierarchy.
+- Semantic HTML.
+- Descriptive image alt text.
+- Canonical URL configuration.
+- Favicon support.
+- Sitemap and robots.txt where appropriate.
+
+### Accessibility
+
+Target WCAG 2.2 AA principles.
+
+Implement:
+
+- Keyboard accessibility.
+- Visible focus states.
+- Proper colour contrast.
+- Accessible buttons.
+- Accessible forms.
+- Correct ARIA attributes.
+- Semantic landmarks.
+- Reduced motion support.
+
+### Performance
+
+Optimise for:
+
+- Fast initial rendering.
+- Minimal JavaScript.
+- Component reuse.
+- Lazy loading.
+- Responsive images.
+- Efficient CSS.
+- Avoiding unnecessary dependencies.
+- Avoiding layout shifts.
+
+Do not introduce unnecessary client-side rendering or backend requests.
+
+---
+
+# 12. VERCEL DEPLOYMENT
+
+Prepare the application for Vercel deployment.
+
+Requirements:
+
+- Correct Vite production build.
+- Appropriate environment variable configuration.
+- SPA routing configuration if needed.
+- No hardcoded production secrets.
+- No development-only code in the production build.
+- No console errors.
+- No broken assets.
+- No missing routes.
+
+Verify:
+
+npm install
+
+npm run dev
+
+npm run build
+
+npm run preview
+
+Fix all TypeScript errors and production build errors.
+
+Provide an example environment file without real credentials.
+
+---
+
+# 13. QUALITY CONTROL — VERY IMPORTANT
+
+Before completing the task, perform a full visual and technical review.
+
+### Visual checklist
+
+- [ ] Header matches the reference composition.
+- [ ] Hero headline is correctly styled.
+- [ ] Pink italic typography is consistent.
+- [ ] Both hero cards have balanced proportions.
+- [ ] Floating notification pills are positioned properly.
+- [ ] Company logo strip is aligned.
+- [ ] Dark company section matches the reference hierarchy.
+- [ ] Candidate section contains a realistic job-search UI.
+- [ ] Candidate benefit grid is correctly spaced.
+- [ ] AI recruitment preview looks like a genuine product.
+- [ ] Testimonials alternate between pink and dark cards.
+- [ ] FAQ is centred and properly aligned.
+- [ ] Final CTA includes the subtle pink glow.
+- [ ] Footer contains properly aligned navigation columns.
+
+### Technical checklist
+
+- [ ] All React components are reusable.
+- [ ] TypeScript is properly implemented.
+- [ ] No unnecessary dependencies.
+- [ ] No missing assets.
+- [ ] No broken routes.
+- [ ] No horizontal overflow.
+- [ ] Mobile navigation works.
+- [ ] FAQ accordion works.
+- [ ] Buttons have functional destinations.
+- [ ] Forms have validation and feedback.
+- [ ] Backend functionality handles errors.
+- [ ] Environment variables are documented.
+- [ ] Production build succeeds.
+
+### Visual verification
+
+Compare your implementation against the uploaded screenshot.
+
+Check the entire page, not just the first screen.
+
+Take screenshots at desktop, tablet and mobile viewport sizes.
+
+Identify visual mismatches and fix them iteratively.
+
+Pay particular attention to:
+
+- Section proportions.
+- Text wrapping.
+- Typography.
+- Alignment.
+- Spacing.
+- Card dimensions.
+- Background colours.
+- Border radii.
+- Product interface details.
+- Footer layout.
+
+Do not declare the implementation complete merely because the page renders.
+
+---
+
+# 14. FINAL EXECUTION INSTRUCTIONS
+
+Work in this order:
+
+PHASE 1 — Reference analysis:
+Study the supplied screenshot and establish the layout, design tokens, content hierarchy and component structure.
+
+PHASE 2 — Design system:
+Implement fonts, colours, spacing variables, typography and reusable design components.
+
+PHASE 3 — Page development:
+Build all landing page sections in the exact specified order.
+
+PHASE 4 — Responsive implementation:
+Optimise all sections for desktop, tablet and mobile.
+
+PHASE 5 — Functionality:
+Implement navigation, buttons, accordion, forms and relevant backend integration.
+
+PHASE 6 — Performance and SEO:
+Optimise rendering, images, accessibility, metadata and loading behaviour.
+
+PHASE 7 — Visual QA:
+Compare screenshots against the uploaded reference and fix visual discrepancies.
+
+PHASE 8 — Production readiness:
+Run the complete production build and fix all issues.
+
+IMPORTANT:
+
+- Do not stop after producing the hero section.
+- Do not produce a wireframe.
+- Do not deliver a generic template.
+- Do not use placeholder lorem ipsum.
+- Do not leave empty sections.
+- Do not use random stock illustrations.
+- Do not make decorative elements more prominent than the content.
+- Do not ignore mobile responsiveness.
+- Do not pretend non-functional elements are functional.
+
+Build the complete working landing page.
+
+Prioritise design fidelity, visual polish, maintainable code, responsiveness and production quality.
+
+The finished result should look like a carefully art-directed, professionally engineered startup product website rather than an automatically generated template.
