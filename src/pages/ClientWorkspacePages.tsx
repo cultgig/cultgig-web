@@ -81,23 +81,23 @@ export function ClientDashboardPage() {
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-surface border border-line rounded-lg p-5">
-          <p className="type-caption text-ink-muted">Active / draft briefs</p>
+          <p className="type-caption text-ink-secondary">Active / draft briefs</p>
           <p className="text-[24px] font-bold text-ink-primary tabular-nums mt-1">{gigs.length}</p>
         </div>
         <div className="bg-surface border border-line rounded-lg p-5">
-          <p className="type-caption text-ink-muted">Saved artists</p>
+          <p className="type-caption text-ink-secondary">Saved artists</p>
           <p className="text-[24px] font-bold text-ink-primary tabular-nums mt-1">
             {savedArtistIds.length}
           </p>
         </div>
         <div className="bg-surface border border-line rounded-lg p-5">
-          <p className="type-caption text-ink-muted">Active threads</p>
+          <p className="type-caption text-ink-secondary">Active threads</p>
           <p className="text-[24px] font-bold text-ink-primary tabular-nums mt-1">
             {conversations.length}
           </p>
         </div>
         <div className="bg-surface border border-line rounded-lg p-5">
-          <p className="type-caption text-ink-muted">Bookings</p>
+          <p className="type-caption text-ink-secondary">Bookings</p>
           <p className="text-[24px] font-bold text-ink-primary tabular-nums mt-1">
             {bookings.length}
           </p>
@@ -480,7 +480,7 @@ export function ClientNewGigPage() {
           {budgetMode !== "open_to_quotes" && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="budget-min" className="block type-caption text-ink-muted mb-1">
+                <label htmlFor="budget-min" className="block type-caption text-ink-secondary mb-1">
                   {budgetMode === "fixed" ? "Amount (₹ INR)" : "Minimum (₹ INR)"}
                 </label>
                 <input
@@ -494,7 +494,7 @@ export function ClientNewGigPage() {
               </div>
               {budgetMode === "range" && (
                 <div>
-                  <label htmlFor="budget-max" className="block type-caption text-ink-muted mb-1">
+                  <label htmlFor="budget-max" className="block type-caption text-ink-secondary mb-1">
                     Maximum (₹ INR)
                   </label>
                   <input
@@ -521,7 +521,7 @@ export function ClientNewGigPage() {
               <span>Outstation travel / accommodation covered separately</span>
             </label>
             <div>
-              <label htmlFor="gig-deadline" className="block type-caption text-ink-muted mb-1">
+              <label htmlFor="gig-deadline" className="block type-caption text-ink-secondary mb-1">
                 Application deadline
               </label>
               <input
@@ -673,7 +673,7 @@ export function ClientGigDetailPage({ gigId }: { gigId: string }) {
                   </span>
                 </div>
                 <p className="type-body text-ink-secondary">{app.message}</p>
-                <p className="type-body-sm text-ink-muted">
+                <p className="type-body-sm text-ink-secondary">
                   Scope: {app.scopeSummary} · Valid until {formatReadableDate(app.validUntil)}
                 </p>
                 <div className="pt-2">
@@ -753,7 +753,7 @@ export function ClientBookingsPage() {
         {bookings.map((b) => (
           <article key={b.id} className="bg-surface border border-line rounded-lg p-5 flex flex-wrap items-center justify-between gap-4">
             <div className="space-y-1">
-              <p className="type-caption text-ink-muted">
+              <p className="type-caption text-ink-secondary">
                 {b.city} · {formatReadableDate(b.eventDate)} · Status:{" "}
                 <strong className="text-plum">{b.status}</strong>
               </p>
@@ -814,20 +814,20 @@ export function BookingDetailPage({ bookingId }: { bookingId: string }) {
       <div className="bg-surface border border-line rounded-xl p-6 space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-4 border-b border-line-light">
           <div>
-            <p className="type-caption text-ink-muted">Event date & city</p>
+            <p className="type-caption text-ink-secondary">Event date & city</p>
             <p className="type-h4 text-ink-primary inline-flex items-center gap-1.5 mt-0.5">
               <Calendar size={14} className="text-plum" aria-hidden="true" />
               {formatReadableDate(booking.eventDate)} · {booking.city}
             </p>
           </div>
           <div>
-            <p className="type-caption text-ink-muted">Artist</p>
+            <p className="type-caption text-ink-secondary">Artist</p>
             <Link to={`/artists/${booking.artistSlug}`} className="type-h4 text-plum hover:underline">
               {booking.artistName}
             </Link>
           </div>
           <div>
-            <p className="type-caption text-ink-muted">Agreed offer (Proposal v{booking.acceptedProposalVersion})</p>
+            <p className="type-caption text-ink-secondary">Agreed offer (Proposal v{booking.acceptedProposalVersion})</p>
             <p className="text-[20px] font-bold text-ink-primary tabular-nums">
               {formatPaiseToInr(booking.grossAmountPaise)}
             </p>

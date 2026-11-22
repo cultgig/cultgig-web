@@ -53,7 +53,7 @@ export function DevRoleSwitcher() {
           <button
             type="button"
             onClick={() => logout()}
-            className="px-2 py-1 rounded text-ink-muted hover:text-semantic-error"
+            className="px-2 py-1 rounded text-ink-secondary hover:text-semantic-error"
           >
             Out
           </button>

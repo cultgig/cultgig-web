@@ -27,7 +27,7 @@ export function GigCard({
 
   return (
     <article className="bg-surface border border-line rounded-lg p-5 flex flex-col gap-3 hover:border-plum-border hover:shadow-soft transition-all">
-      <div className="flex flex-wrap items-center justify-between gap-2 text-ink-muted type-caption">
+      <div className="flex flex-wrap items-center justify-between gap-2 text-ink-secondary type-caption">
         <span>
           {category?.label ?? gig.category}
           <span aria-hidden="true"> · </span>
@@ -67,7 +67,7 @@ export function GigCard({
 
       <div className="pt-3 mt-auto border-t border-line-light flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="type-caption text-ink-muted">Budget approach</p>
+          <p className="type-caption text-ink-secondary">Budget approach</p>
           <p className="type-h4 text-ink-primary tabular-nums">{budgetLabel}</p>
         </div>
         <Link

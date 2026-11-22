@@ -12,23 +12,23 @@ export function HeroAudienceCards() {
   return (
     <div className="max-w-[920px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5 items-stretch">
       {/* Card A — FOR CANDIDATES */}
-      <article className="relative rounded-[18px] bg-[#051315] border border-white/10 p-6 sm:p-8 text-left flex flex-col justify-between overflow-hidden shadow-card hover:-translate-y-0.5 transition-transform duration-200">
+      <article className="relative rounded-[18px] bg-obsidian border border-white/10 p-6 sm:p-8 text-left flex flex-col justify-between overflow-hidden shadow-card hover:-translate-y-0.5 transition-transform duration-200">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-20 right-0 w-72 h-72 rounded-full opacity-25"
           style={{
-            background: 'radial-gradient(circle, rgba(209, 31, 104, 0.55) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(178, 194, 72, 0.38) 0%, transparent 70%)',
           }}
         />
         <div className="relative z-10">
-          <p className="text-[10.5px] font-semibold tracking-[0.14em] uppercase text-[#D11F68]">
+          <p className="text-[10.5px] font-semibold tracking-[0.14em] uppercase text-brand-light">
             {candidateCard.eyebrow}
           </p>
-          <h2 className="mt-2 font-display font-bold text-[26px] sm:text-[28px] leading-[1.15] tracking-[-0.02em] text-white">
+          <h2 className="mt-2 font-display font-bold text-[26px] sm:text-[28px] leading-[1.15] tracking-[-0.02em] text-ink-inverse">
             {candidateCard.headingLead}
-            <span className="italic text-[#D11F68]">{candidateCard.headingAccent}</span>
+            <span className="italic text-brand-light">{candidateCard.headingAccent}</span>
           </h2>
-          <p className="mt-2.5 text-[13px] leading-[1.6] text-white/70 max-w-[330px]">
+          <p className="mt-2.5 text-[13px] leading-[1.6] text-ink-inverse/75 max-w-[330px]">
             {candidateCard.description}
           </p>
           <div className="mt-5">
@@ -40,12 +40,12 @@ export function HeroAudienceCards() {
         </div>
 
         {/* Compact Job Preview Panel */}
-        <div className="relative z-10 mt-7 rounded-[12px] bg-[#101D1F] border border-white/10 p-3.5">
+        <div className="relative z-10 mt-7 rounded-[12px] bg-white/[0.05] border border-white/10 p-3.5">
           <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-white/10">
-            <span className="text-[9.5px] font-semibold tracking-[0.1em] uppercase text-white/50">
+            <span className="text-[9.5px] font-semibold tracking-[0.1em] uppercase text-ink-inverse/60">
               {candidateCard.previewHeaderLeft}
             </span>
-            <span className="text-[9.5px] font-semibold tracking-[0.06em] uppercase text-[#F472B6] tabular-nums">
+            <span className="text-[9.5px] font-semibold tracking-[0.06em] uppercase text-brand-light tabular-nums">
               {candidateCard.previewHeaderRight}
             </span>
           </div>
@@ -67,15 +67,15 @@ export function HeroAudienceCards() {
                     {job.companyInitials}
                   </span>
                   <div className="min-w-0">
-                    <p className="text-[12px] font-semibold text-white truncate group-hover:text-[#F472B6] transition-colors">
+                    <p className="text-[12px] font-semibold text-ink-inverse truncate group-hover:text-brand-light transition-colors">
                       {job.title}
                     </p>
-                    <p className="text-[10.5px] text-white/55 truncate tabular-nums">
+                    <p className="text-[10.5px] text-ink-inverse/65 truncate tabular-nums">
                       {job.company} · {job.location} · {job.salary}
                     </p>
                   </div>
                 </div>
-                <span className="px-2 py-0.5 rounded-[5px] bg-[#D11F68]/20 border border-[#D11F68]/30 text-[9.5px] font-semibold tracking-[0.06em] text-[#F9A8D4] shrink-0">
+                <span className="px-2 py-0.5 rounded-[5px] bg-brand-light/15 border border-brand-light/30 text-[9.5px] font-semibold tracking-[0.06em] text-brand-light shrink-0">
                   {job.badge}
                 </span>
               </button>
@@ -85,16 +85,16 @@ export function HeroAudienceCards() {
       </article>
 
       {/* Card B — FOR COMPANIES */}
-      <article className="rounded-[18px] bg-[#FDF1F8] border border-[#F4DCEB] p-6 sm:p-8 text-left flex flex-col justify-between shadow-card hover:-translate-y-0.5 transition-transform duration-200">
+      <article className="rounded-[18px] bg-brand-subtle border border-accent-border p-6 sm:p-8 text-left flex flex-col justify-between shadow-card hover:-translate-y-0.5 transition-transform duration-200">
         <div>
-          <p className="text-[10.5px] font-semibold tracking-[0.14em] uppercase text-[#D11F68]">
+          <p className="text-[10.5px] font-semibold tracking-[0.14em] uppercase text-brand">
             {companyCard.eyebrow}
           </p>
-          <h2 className="mt-2 font-display font-bold text-[26px] sm:text-[28px] leading-[1.15] tracking-[-0.02em] text-[#051315]">
+          <h2 className="mt-2 font-display font-bold text-[26px] sm:text-[28px] leading-[1.15] tracking-[-0.02em] text-ink-strong">
             {companyCard.headingLead}
-            <span className="italic text-[#D11F68]">{companyCard.headingAccent}</span>
+            <span className="italic text-brand">{companyCard.headingAccent}</span>
           </h2>
-          <p className="mt-2.5 text-[13px] leading-[1.6] text-[#646A6B] max-w-[330px]">
+          <p className="mt-2.5 text-[13px] leading-[1.6] text-ink-primary max-w-[330px]">
             {companyCard.description}
           </p>
           <div className="mt-5">
@@ -106,14 +106,14 @@ export function HeroAudienceCards() {
         </div>
 
         {/* Compact Recruiter Activity Preview Panel */}
-        <div className="mt-7 rounded-[12px] bg-white border border-[#EDEDED] p-3.5 shadow-[0_2px_10px_rgba(5,19,21,0.03)]">
-          <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-[#F1F1F1]">
-            <span className="text-[9.5px] font-semibold tracking-[0.1em] uppercase text-[#646A6B]">
+        <div className="mt-7 rounded-[12px] bg-surface border border-line p-3.5 shadow-xs">
+          <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-line-light">
+            <span className="text-[9.5px] font-semibold tracking-[0.1em] uppercase text-ink-secondary">
               {companyCard.previewHeader}
             </span>
           </div>
 
-          <div className="divide-y divide-[#F3F3F3]">
+          <div className="divide-y divide-line-light">
             {companyCard.candidates.map((cand) => (
               <div
                 key={cand.id}
@@ -128,10 +128,10 @@ export function HeroAudienceCards() {
                     {cand.initials}
                   </span>
                   <div className="min-w-0">
-                    <p className="text-[12px] font-semibold text-[#051315] truncate">
+                    <p className="text-[12px] font-semibold text-ink-strong truncate">
                       {cand.name}
                     </p>
-                    <p className="text-[10.5px] text-[#646A6B] truncate tabular-nums">
+                    <p className="text-[10.5px] text-ink-secondary truncate tabular-nums">
                       {cand.experience}
                     </p>
                   </div>
@@ -139,8 +139,8 @@ export function HeroAudienceCards() {
                 <span
                   className={`px-2 py-0.5 rounded-[5px] text-[9.5px] font-semibold tracking-[0.06em] shrink-0 ${
                     cand.status === 'REPLIED'
-                      ? 'bg-[#EEF7F2] text-[#226F49] border border-[#D4ECDF]'
-                      : 'bg-[#FDF1F8] text-[#D11F68] border border-[#F3D5E7]'
+                      ? 'bg-semantic-success-bg text-semantic-success border border-[color:var(--color-success-border)]'
+                      : 'bg-brand-subtle text-brand border border-accent-border'
                   }`}
                 >
                   {cand.status}

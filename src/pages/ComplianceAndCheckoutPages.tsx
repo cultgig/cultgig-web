@@ -81,7 +81,7 @@ export function ContactAndSupportPage({ ticketId }: { ticketId?: string }) {
                 routes to Cultgig&apos;s support queue with email confirmation.
               </p>
               {existingTicket && (
-                <p className="type-caption text-ink-muted">
+                <p className="type-caption text-ink-secondary">
                   Issue: {existingTicket.issueType} · Logged {formatReadableDate(existingTicket.createdAt)}
                 </p>
               )}
@@ -183,19 +183,19 @@ export function ContactAndSupportPage({ ticketId }: { ticketId?: string }) {
             <h2 className="type-h3 text-ink-primary">Operator & grievance details</h2>
             <dl className="space-y-2 type-body-sm">
               <div>
-                <dt className="text-ink-muted">Legal entity</dt>
+                <dt className="text-ink-secondary">Legal entity</dt>
                 <dd className="text-ink-primary font-medium">{siteConfig.legalEntityName}</dd>
               </div>
               <div>
-                <dt className="text-ink-muted">Entity form</dt>
+                <dt className="text-ink-secondary">Entity form</dt>
                 <dd className="text-ink-primary">{siteConfig.entityType}</dd>
               </div>
               <div>
-                <dt className="text-ink-muted">Principal address</dt>
+                <dt className="text-ink-secondary">Principal address</dt>
                 <dd className="text-ink-primary">{siteConfig.registeredAddress}</dd>
               </div>
               <div>
-                <dt className="text-ink-muted">Support email</dt>
+                <dt className="text-ink-secondary">Support email</dt>
                 <dd className="text-ink-primary">
                   {siteConfig.supportEmail ? (
                     <a
@@ -211,7 +211,7 @@ export function ContactAndSupportPage({ ticketId }: { ticketId?: string }) {
                 </dd>
               </div>
               <div>
-                <dt className="text-ink-muted">Grievance officer</dt>
+                <dt className="text-ink-secondary">Grievance officer</dt>
                 <dd className="text-ink-primary">
                   {siteConfig.grievanceOfficerName}
                   {siteConfig.grievanceOfficerEmail ? ` · ${siteConfig.grievanceOfficerEmail}` : ""}

@@ -13,10 +13,10 @@ import { TestimonialsSection } from './sections/TestimonialsSection';
 
 export function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-white text-[#051315]">
+    <div className="min-h-screen flex flex-col bg-page text-ink-primary">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:rounded-full focus:bg-[#051315] focus:text-white focus:text-xs focus:font-semibold"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:rounded-full focus:bg-obsidian focus:text-ink-inverse focus:text-xs focus:font-semibold"
       >
         Skip to main content
       </a>

@@ -164,7 +164,7 @@ export function ExplorePage() {
             </label>
             <Search
               size={17}
-              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-muted"
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-secondary"
               aria-hidden="true"
             />
             <input
@@ -295,7 +295,7 @@ export function ExplorePage() {
                 setLoadingPreview(true);
                 setTimeout(() => setLoadingPreview(false), 350);
               }}
-              className="type-caption text-ink-muted hover:text-plum inline-flex items-center gap-1"
+              className="type-caption text-ink-secondary hover:text-plum inline-flex items-center gap-1"
             >
               <SlidersHorizontal size={13} aria-hidden="true" />
               Refresh results
@@ -321,7 +321,7 @@ export function ExplorePage() {
               key={filter.label}
               type="button"
               onClick={filter.clear}
-              className="inline-flex items-center gap-1.5 min-h-[34px] px-3 py-1 rounded-md bg-plum-soft border border-plum-border text-plum type-caption font-semibold hover:bg-plum-tint"
+              className="inline-flex items-center gap-1.5 min-h-[34px] px-3 py-1 rounded-md bg-plum-soft border border-[color:var(--color-border-subtle)] text-plum type-caption font-semibold hover:bg-plum-tint hover:text-ink-primary"
             >
               <span>{filter.label}</span>
               <X size={13} aria-hidden="true" />

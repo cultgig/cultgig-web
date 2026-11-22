@@ -95,10 +95,10 @@ export function LogoStripSection() {
   return (
     <section
       aria-label="Trusted startups hiring on Cultgig"
-      className="bg-[#FAFAFA] border-y border-[#EDEDED] py-10 sm:py-12 overflow-hidden"
+      className="bg-surface-low border-y border-line py-10 sm:py-12 overflow-hidden"
     >
       <Container>
-        <p className="text-center font-display font-medium text-[16px] sm:text-[18px] text-[#051315]">
+        <p className="text-center font-display font-medium text-[16px] sm:text-[18px] text-ink-strong">
           {trustedCompanies.heading}
         </p>
       </Container>
@@ -126,9 +126,9 @@ export function LogoStripSection() {
       </div>
 
       <Container>
-        <p className="mt-7 text-center text-[10px] font-semibold tracking-[0.14em] uppercase text-[#646A6B] tabular-nums">
+        <p className="mt-7 text-center text-[10px] font-semibold tracking-[0.14em] uppercase text-ink-secondary tabular-nums">
           {trustedCompanies.supportingPrefix}{' '}
-          <span className="text-[#D11F68]">{trustedCompanies.supportingHighlight}</span>{' '}
+          <span className="text-brand">{trustedCompanies.supportingHighlight}</span>{' '}
           {trustedCompanies.supportingSuffix}
         </p>
       </Container>

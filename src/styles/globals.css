@@ -3,17 +3,114 @@
 @tailwind utilities;
 
 :root {
-  --color-primary-dark: #051315;
-  --color-primary-bg: #FFFFFF;
-  --color-secondary-bg: #FAFAFA;
-  --color-primary-accent: #D11F68;
-  --color-primary-accent-hover: #B51758;
-  --color-soft-pink: #FDF1F8;
-  --color-text-dark: #051315;
-  --color-text-secondary: #646A6B;
-  --color-text-inverse: #FFFFFF;
-  --color-dark-card: #1B1818;
-  --color-border: #EDEDED;
+  color-scheme: light;
+
+  /* Brand */
+  --color-brand-primary: #5B6F00;
+  --color-brand-primary-hover: #435300;
+  --color-brand-primary-pressed: #354200;
+  --color-brand-primary-subtle: #F0F2E5;
+  --color-brand-light: #B2C248;
+  --color-brand-light-hover: #A5B43D;
+  --color-brand-light-subtle: #F5F6E9;
+  --color-brand-ink: #788C15;
+  --color-brand-tertiary: #E0C976;
+
+  /* Surfaces */
+  --color-page: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-surface-low: #F7F7F2;
+  --color-surface-container: #EAEBE5;
+  --color-surface-container-high: #D5D5D2;
+  --color-surface-disabled: #F7F7F2;
+  --color-dark-surface: #0E0F0C;
+
+  /* Text */
+  --color-text-primary: #292929;
+  --color-text-strong: #0E0F0C;
+  --color-text-secondary: #72726E;
+  --color-text-muted: #ACADA8;
+  --color-text-inverse: #FCFCF8;
+  --color-text-on-primary: #FFFFFF;
+  --color-text-on-light-accent: #292929;
+
+  /* Icons */
+  --color-icon-primary: #292929;
+  --color-icon-secondary: #72726E;
+  --color-icon-muted: #ACADA8;
+  --color-icon-inverse: #FCFCF8;
+
+  /* Borders */
+  --color-border: rgba(0, 0, 0, 0.10);
+  --color-border-light: rgba(0, 0, 0, 0.06);
+  --color-border-subtle: rgba(71, 67, 42, 0.20);
+  --color-border-strong: #D5D5D2;
+  --color-border-control: rgba(41, 41, 41, 0.18);
+  --color-border-focus: #788C15;
+  --color-border-selected: #5B6F00;
+  --color-hairline-dark: rgba(255, 255, 255, 0.12);
+
+  /* Overlays */
+  --color-overlay-warm: rgba(98, 90, 34, 0.06);
+  --color-overlay-black-04: rgba(0, 0, 0, 0.04);
+  --color-overlay-black-08: rgba(0, 0, 0, 0.08);
+  --color-overlay-black-20: rgba(0, 0, 0, 0.20);
+  --color-overlay-black-40: rgba(0, 0, 0, 0.40);
+  --color-overlay-white-70: rgba(255, 255, 255, 0.70);
+
+  /* Shadows */
+  --shadow-none: none;
+  --shadow-xs: 0 1px 2px rgba(14, 15, 12, 0.06);
+  --shadow-sm: 0 2px 8px rgba(14, 15, 12, 0.06);
+  --shadow-md: 0 8px 24px rgba(14, 15, 12, 0.08);
+  --shadow-lg: 0 16px 40px rgba(14, 15, 12, 0.10);
+  --shadow-brand: 0 4px 14px rgba(91, 111, 0, 0.14);
+
+  /* Status */
+  --color-success: #356B3D;
+  --color-success-soft: #EDF5EC;
+  --color-success-border: #C9DEC8;
+  --color-warning: #805B12;
+  --color-warning-soft: #FBF4E4;
+  --color-warning-border: #E9D7A8;
+  --color-error: #A33A32;
+  --color-error-soft: #FBEFED;
+  --color-error-border: #EBC8C4;
+  --color-info: #365F78;
+  --color-info-soft: #EDF4F7;
+  --color-info-border: #C9DCE5;
+
+  /* Decorative brand art gradient */
+  --gradient-brand-art: linear-gradient(115deg, #FEBE29 0%, #FF91E0 34%, #CEBEF8 68%, #D2E4F8 100%);
+
+  /* RGB channels for Tailwind opacity modifiers */
+  --rgb-brand-primary: 91 111 0;
+  --rgb-brand-primary-hover: 67 83 0;
+  --rgb-brand-primary-pressed: 53 66 0;
+  --rgb-brand-primary-subtle: 240 242 229;
+  --rgb-brand-light: 178 194 72;
+  --rgb-brand-light-hover: 165 180 61;
+  --rgb-brand-light-subtle: 245 246 233;
+  --rgb-brand-ink: 120 140 21;
+  --rgb-brand-tertiary: 224 201 118;
+  --rgb-page: 255 255 255;
+  --rgb-surface: 255 255 255;
+  --rgb-surface-low: 247 247 242;
+  --rgb-surface-container: 234 235 229;
+  --rgb-border-strong: 213 213 210;
+  --rgb-text-primary: 41 41 41;
+  --rgb-text-strong: 14 15 12;
+  --rgb-text-secondary: 114 114 110;
+  --rgb-text-muted: 172 173 168;
+  --rgb-text-inverse: 252 252 248;
+  --rgb-success: 53 107 61;
+  --rgb-success-soft: 237 245 236;
+  --rgb-warning: 128 91 18;
+  --rgb-warning-soft: 251 244 228;
+  --rgb-error: 163 58 50;
+  --rgb-error-soft: 251 239 237;
+  --rgb-info: 54 95 120;
+  --rgb-info-soft: 237 244 247;
 
   --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -24,15 +121,15 @@
     scroll-behavior: smooth;
     scroll-padding-top: 72px;
     font-family: var(--font-sans);
-    color: var(--color-text-dark);
-    background-color: var(--color-primary-bg);
+    color: var(--color-text-primary);
+    background-color: var(--color-page);
   }
 
   body {
     margin: 0;
     font-family: var(--font-sans);
-    color: var(--color-text-dark);
-    background-color: var(--color-primary-bg);
+    color: var(--color-text-primary);
+    background-color: var(--color-page);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -44,7 +141,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-primary-accent);
+    outline: 2px solid var(--color-border-focus);
     outline-offset: 2px;
   }
 }
@@ -56,8 +153,8 @@
 .hero-ambient-wash {
   background: radial-gradient(
     ellipse 62% 48% at 50% 42%,
-    rgba(253, 241, 248, 0.95) 0%,
-    rgba(253, 241, 248, 0.45) 48%,
+    rgba(240, 242, 229, 0.95) 0%,
+    rgba(240, 242, 229, 0.45) 48%,
     rgba(255, 255, 255, 0) 78%
   );
 }
@@ -65,9 +162,9 @@
 .final-cta-glow {
   background: radial-gradient(
     ellipse 55% 60% at 50% 48%,
-    rgba(209, 31, 104, 0.19) 0%,
-    rgba(209, 31, 104, 0.06) 45%,
-    rgba(5, 19, 21, 0) 75%
+    rgba(178, 194, 72, 0.16) 0%,
+    rgba(91, 111, 0, 0.08) 45%,
+    rgba(14, 15, 12, 0) 75%
   );
 }
 

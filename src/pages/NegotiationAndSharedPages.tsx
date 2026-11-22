@@ -37,7 +37,7 @@ export function MessagesInboxPage() {
               <p className="type-body-sm text-ink-secondary">
                 {thread.clientName} ↔ {thread.artistName}
               </p>
-              {lastMsg && <p className="type-caption text-ink-muted truncate">{lastMsg.body}</p>}
+              {lastMsg && <p className="type-caption text-ink-secondary truncate">{lastMsg.body}</p>}
             </Link>
           );
         })}
@@ -181,7 +181,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
               >
                 <div className="flex items-center justify-between gap-2 mb-1">
                   <span className="type-label text-ink-primary">{msg.senderName}</span>
-                  <span className="type-caption text-ink-muted">
+                  <span className="type-caption text-ink-secondary">
                     {formatReadableDate(msg.createdAt)}
                   </span>
                 </div>
@@ -228,7 +228,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
               </h3>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label htmlFor="prop-amt" className="block type-caption text-ink-muted mb-1">
+                  <label htmlFor="prop-amt" className="block type-caption text-ink-secondary mb-1">
                     Total amount (₹ INR)
                   </label>
                   <input
@@ -242,7 +242,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
                   />
                 </div>
                 <div>
-                  <label htmlFor="prop-date" className="block type-caption text-ink-muted mb-1">
+                  <label htmlFor="prop-date" className="block type-caption text-ink-secondary mb-1">
                     Event date
                   </label>
                   <input
@@ -255,7 +255,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
                 </div>
               </div>
               <div>
-                <label htmlFor="prop-dur" className="block type-caption text-ink-muted mb-1">
+                <label htmlFor="prop-dur" className="block type-caption text-ink-secondary mb-1">
                   Timing & duration
                 </label>
                 <input
@@ -267,7 +267,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
                 />
               </div>
               <div>
-                <label htmlFor="prop-inc" className="block type-caption text-ink-muted mb-1">
+                <label htmlFor="prop-inc" className="block type-caption text-ink-secondary mb-1">
                   Inclusions (comma separated)
                 </label>
                 <input
@@ -279,7 +279,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
                 />
               </div>
               <div>
-                <label htmlFor="prop-exc" className="block type-caption text-ink-muted mb-1">
+                <label htmlFor="prop-exc" className="block type-caption text-ink-secondary mb-1">
                   Exclusions
                 </label>
                 <input
@@ -291,7 +291,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
                 />
               </div>
               <div>
-                <label htmlFor="prop-cancel" className="block type-caption text-ink-muted mb-1">
+                <label htmlFor="prop-cancel" className="block type-caption text-ink-secondary mb-1">
                   Cancellation terms
                 </label>
                 <input
@@ -418,7 +418,7 @@ export function NotificationsPage() {
                 <button
                   type="button"
                   onClick={() => markNotificationRead(n.id)}
-                  className="type-caption text-ink-muted hover:text-ink-primary"
+                  className="type-caption text-ink-secondary hover:text-ink-primary"
                 >
                   Mark read
                 </button>

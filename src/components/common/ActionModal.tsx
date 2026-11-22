@@ -155,7 +155,7 @@ export function ActionModal() {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#051315]/60 backdrop-blur-[2px]"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-obsidian/60 backdrop-blur-[2px]"
       role="dialog"
       aria-modal="true"
       aria-label="Interactive Cultgig action dialog"
@@ -163,12 +163,12 @@ export function ActionModal() {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="relative w-full max-w-[540px] max-h-[90vh] overflow-y-auto rounded-[20px] bg-white border border-[#EDEDED] p-6 sm:p-8 shadow-elevated">
+      <div className="relative w-full max-w-[540px] max-h-[90vh] overflow-y-auto rounded-[20px] bg-surface border border-line p-6 sm:p-8 shadow-elevated">
         <button
           type="button"
           onClick={onClose}
           aria-label="Close modal"
-          className="absolute top-4 right-4 w-9 h-9 rounded-full border border-[#EDEDED] flex items-center justify-center text-[#646A6B] hover:text-[#051315] hover:bg-[#FAFAFA] transition-colors"
+          className="absolute top-4 right-4 w-9 h-9 rounded-full border border-line flex items-center justify-center text-ink-secondary hover:text-ink-strong hover:bg-surface-low transition-colors"
         >
           <X size={16} aria-hidden="true" />
         </button>
@@ -176,15 +176,15 @@ export function ActionModal() {
         {/* AUTH MODAL */}
         {modal.type === 'auth' && (
           <div>
-            <p className="text-[10.5px] font-semibold tracking-[0.14em] uppercase text-[#D11F68]">
+            <p className="text-[10.5px] font-semibold tracking-[0.14em] uppercase text-brand">
               {authMode === 'sign-up' ? 'CREATE YOUR ACCOUNT' : 'WELCOME BACK'}
             </p>
-            <h2 className="mt-1.5 font-display font-bold text-[26px] leading-[1.15] text-[#051315]">
+            <h2 className="mt-1.5 font-display font-bold text-[26px] leading-[1.15] text-ink-strong">
               {authMode === 'sign-up' ? 'Join Cultgig' : 'Log in to Cultgig'}
             </h2>
 
             {/* Audience Toggle */}
-            <div className="mt-5 inline-flex p-1 rounded-full bg-[#FAFAFA] border border-[#EDEDED]">
+            <div className="mt-5 inline-flex p-1 rounded-full bg-surface-low border border-line">
               {(['candidate', 'company'] as const).map((aud) => (
                 <button
                   key={aud}
@@ -192,8 +192,8 @@ export function ActionModal() {
                   onClick={() => setAuthAudience(aud)}
                   className={`px-4 py-1.5 rounded-full text-[12px] font-semibold transition-colors ${
                     authAudience === aud
-                      ? 'bg-[#051315] text-white'
-                      : 'text-[#646A6B] hover:text-[#051315]'
+                      ? 'bg-obsidian text-ink-inverse'
+                      : 'text-ink-secondary hover:text-ink-strong'
                   }`}
                 >
                   {aud === 'candidate' ? 'Job Seeker' : 'Hiring Team'}
@@ -206,7 +206,7 @@ export function ActionModal() {
                 <div>
                   <label
                     htmlFor="auth-name"
-                    className="block text-[12px] font-semibold text-[#051315] mb-1.5"
+                    className="block text-[12px] font-semibold text-ink-strong mb-1.5"
                   >
                     Full name
                   </label>
@@ -217,7 +217,7 @@ export function ActionModal() {
                     onChange={(e) => setAuthName(e.target.value)}
                     placeholder="Priya Shah"
                     required
-                    className="w-full h-11 px-3.5 rounded-[10px] border border-[#DEDEDE] text-[13.5px] text-[#051315] focus:outline-none focus:border-[#D11F68]"
+                    className="w-full h-11 px-3.5 rounded-[10px] border border-[color:var(--color-border-control)] text-[13.5px] text-ink-primary focus:outline-none focus:border-brand-ink"
                   />
                 </div>
               )}
@@ -225,7 +225,7 @@ export function ActionModal() {
               <div>
                 <label
                   htmlFor="auth-email"
-                  className="block text-[12px] font-semibold text-[#051315] mb-1.5"
+                  className="block text-[12px] font-semibold text-ink-strong mb-1.5"
                 >
                   Email address
                 </label>
@@ -236,14 +236,14 @@ export function ActionModal() {
                   onChange={(e) => setAuthEmail(e.target.value)}
                   placeholder="you@startup.com"
                   required
-                  className="w-full h-11 px-3.5 rounded-[10px] border border-[#DEDEDE] text-[13.5px] text-[#051315] focus:outline-none focus:border-[#D11F68]"
+                  className="w-full h-11 px-3.5 rounded-[10px] border border-[color:var(--color-border-control)] text-[13.5px] text-ink-primary focus:outline-none focus:border-brand-ink"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="auth-password"
-                  className="block text-[12px] font-semibold text-[#051315] mb-1.5"
+                  className="block text-[12px] font-semibold text-ink-strong mb-1.5"
                 >
                   Password
                 </label>
@@ -254,14 +254,14 @@ export function ActionModal() {
                   onChange={(e) => setAuthPassword(e.target.value)}
                   placeholder="Minimum 8 characters"
                   required
-                  className="w-full h-11 px-3.5 rounded-[10px] border border-[#DEDEDE] text-[13.5px] text-[#051315] focus:outline-none focus:border-[#D11F68]"
+                  className="w-full h-11 px-3.5 rounded-[10px] border border-[color:var(--color-border-control)] text-[13.5px] text-ink-primary focus:outline-none focus:border-brand-ink"
                 />
               </div>
 
               {authStatus.error && (
                 <p
                   role="alert"
-                  className="rounded-[10px] bg-[#FDF1F8] border border-[#F3D5E7] px-3.5 py-2.5 text-[12px] text-[#981249]"
+                  className="rounded-[10px] bg-semantic-error-bg border border-[color:var(--color-error-border)] px-3.5 py-2.5 text-[12px] text-semantic-error"
                 >
                   {authStatus.error}
                 </p>
@@ -270,7 +270,7 @@ export function ActionModal() {
               {authStatus.success && (
                 <p
                   role="status"
-                  className="rounded-[10px] bg-[#EEF7F2] border border-[#D4ECDF] px-3.5 py-2.5 text-[12px] text-[#226F49] flex items-center gap-2"
+                  className="rounded-[10px] bg-semantic-success-bg border border-[color:var(--color-success-border)] px-3.5 py-2.5 text-[12px] text-semantic-success flex items-center gap-2"
                 >
                   <CheckCircle2 size={15} aria-hidden="true" />
                   {authStatus.success}
@@ -286,14 +286,14 @@ export function ActionModal() {
               </Button>
             </form>
 
-            <p className="mt-4 text-center text-[12px] text-[#646A6B]">
+            <p className="mt-4 text-center text-[12px] text-ink-secondary">
               {authMode === 'sign-up' ? 'Already have an account?' : 'New to Cultgig?'}{' '}
               <button
                 type="button"
                 onClick={() =>
                   setAuthMode((prev) => (prev === 'sign-up' ? 'log-in' : 'sign-up'))
                 }
-                className="font-semibold text-[#D11F68] hover:underline"
+                className="font-semibold text-brand hover:underline"
               >
                 {authMode === 'sign-up' ? 'Log in' : 'Sign up'}
               </button>
@@ -304,21 +304,21 @@ export function ActionModal() {
         {/* LEAD / START HIRING / DEMO MODAL */}
         {modal.type === 'lead' && (
           <div>
-            <p className="text-[10.5px] font-semibold tracking-[0.14em] uppercase text-[#D11F68]">
+            <p className="text-[10.5px] font-semibold tracking-[0.14em] uppercase text-brand">
               {modal.mode === 'demo'
                 ? 'CULTGIG REACH & AUTOPILOT'
                 : modal.mode === 'contact'
                   ? 'CONTACT CULTGIG'
                   : 'FOR HIRING TEAMS'}
             </p>
-            <h2 className="mt-1.5 font-display font-bold text-[26px] leading-[1.15] text-[#051315]">
+            <h2 className="mt-1.5 font-display font-bold text-[26px] leading-[1.15] text-ink-strong">
               {modal.mode === 'demo'
                 ? 'Schedule a recruiting demo'
                 : modal.mode === 'contact'
                   ? 'Get in touch with our team'
                   : 'Start hiring on Cultgig'}
             </h2>
-            <p className="mt-2 text-[13px] text-[#646A6B]">
+            <p className="mt-2 text-[13px] text-ink-secondary">
               Tell us about your team and the roles you are hiring for.
             </p>
 
@@ -327,7 +327,7 @@ export function ActionModal() {
                 <div>
                   <label
                     htmlFor="lead-name"
-                    className="block text-[12px] font-semibold text-[#051315] mb-1"
+                    className="block text-[12px] font-semibold text-ink-strong mb-1"
                   >
                     Your name
                   </label>
@@ -338,13 +338,13 @@ export function ActionModal() {
                     onChange={(e) => setLeadName(e.target.value)}
                     placeholder="Alex Rivera"
                     required
-                    className="w-full h-10 px-3 rounded-[10px] border border-[#DEDEDE] text-[13px] text-[#051315] focus:outline-none focus:border-[#D11F68]"
+                    className="w-full h-10 px-3 rounded-[10px] border border-[color:var(--color-border-control)] text-[13px] text-ink-primary focus:outline-none focus:border-brand-ink"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="lead-email"
-                    className="block text-[12px] font-semibold text-[#051315] mb-1"
+                    className="block text-[12px] font-semibold text-ink-strong mb-1"
                   >
                     Work email
                   </label>
@@ -355,7 +355,7 @@ export function ActionModal() {
                     onChange={(e) => setLeadEmail(e.target.value)}
                     placeholder="alex@company.com"
                     required
-                    className="w-full h-10 px-3 rounded-[10px] border border-[#DEDEDE] text-[13px] text-[#051315] focus:outline-none focus:border-[#D11F68]"
+                    className="w-full h-10 px-3 rounded-[10px] border border-[color:var(--color-border-control)] text-[13px] text-ink-primary focus:outline-none focus:border-brand-ink"
                   />
                 </div>
               </div>
@@ -364,7 +364,7 @@ export function ActionModal() {
                 <div>
                   <label
                     htmlFor="lead-company"
-                    className="block text-[12px] font-semibold text-[#051315] mb-1"
+                    className="block text-[12px] font-semibold text-ink-strong mb-1"
                   >
                     Company name
                   </label>
@@ -374,13 +374,13 @@ export function ActionModal() {
                     value={leadCompany}
                     onChange={(e) => setLeadCompany(e.target.value)}
                     placeholder="Acme Robotics"
-                    className="w-full h-10 px-3 rounded-[10px] border border-[#DEDEDE] text-[13px] text-[#051315] focus:outline-none focus:border-[#D11F68]"
+                    className="w-full h-10 px-3 rounded-[10px] border border-[color:var(--color-border-control)] text-[13px] text-ink-primary focus:outline-none focus:border-brand-ink"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="lead-role"
-                    className="block text-[12px] font-semibold text-[#051315] mb-1"
+                    className="block text-[12px] font-semibold text-ink-strong mb-1"
                   >
                     Primary hiring focus
                   </label>
@@ -390,7 +390,7 @@ export function ActionModal() {
                     value={leadRole}
                     onChange={(e) => setLeadRole(e.target.value)}
                     required
-                    className="w-full h-10 px-3 rounded-[10px] border border-[#DEDEDE] text-[13px] text-[#051315] focus:outline-none focus:border-[#D11F68]"
+                    className="w-full h-10 px-3 rounded-[10px] border border-[color:var(--color-border-control)] text-[13px] text-ink-primary focus:outline-none focus:border-brand-ink"
                   />
                 </div>
               </div>
@@ -398,7 +398,7 @@ export function ActionModal() {
               <div>
                 <label
                   htmlFor="lead-notes"
-                  className="block text-[12px] font-semibold text-[#051315] mb-1"
+                  className="block text-[12px] font-semibold text-ink-strong mb-1"
                 >
                   Hiring timeline or notes (optional)
                 </label>
@@ -408,14 +408,14 @@ export function ActionModal() {
                   value={leadNotes}
                   onChange={(e) => setLeadNotes(e.target.value)}
                   placeholder="Looking to hire 2 senior backend engineers in NYC or remote..."
-                  className="w-full p-3 rounded-[10px] border border-[#DEDEDE] text-[13px] text-[#051315] focus:outline-none focus:border-[#D11F68]"
+                  className="w-full p-3 rounded-[10px] border border-[color:var(--color-border-control)] text-[13px] text-ink-primary focus:outline-none focus:border-brand-ink"
                 />
               </div>
 
               {leadStatus.error && (
                 <p
                   role="alert"
-                  className="rounded-[10px] bg-[#FDF1F8] border border-[#F3D5E7] px-3.5 py-2.5 text-[12px] text-[#981249]"
+                  className="rounded-[10px] bg-semantic-error-bg border border-[color:var(--color-error-border)] px-3.5 py-2.5 text-[12px] text-semantic-error"
                 >
                   {leadStatus.error}
                 </p>
@@ -424,7 +424,7 @@ export function ActionModal() {
               {leadStatus.success && (
                 <p
                   role="status"
-                  className="rounded-[10px] bg-[#EEF7F2] border border-[#D4ECDF] px-3.5 py-2.5 text-[12px] text-[#226F49] flex items-center gap-2"
+                  className="rounded-[10px] bg-semantic-success-bg border border-[color:var(--color-success-border)] px-3.5 py-2.5 text-[12px] text-semantic-success flex items-center gap-2"
                 >
                   <CheckCircle2 size={15} aria-hidden="true" />
                   {leadStatus.success}
@@ -441,17 +441,17 @@ export function ActionModal() {
         {/* BROWSE JOBS / JOB DETAIL MODAL */}
         {modal.type === 'jobs' && (
           <div>
-            <p className="text-[10.5px] font-semibold tracking-[0.14em] uppercase text-[#D11F68]">
+            <p className="text-[10.5px] font-semibold tracking-[0.14em] uppercase text-brand">
               STARTUP JOB DIRECTORY
             </p>
-            <h2 className="mt-1.5 font-display font-bold text-[24px] leading-[1.15] text-[#051315]">
+            <h2 className="mt-1.5 font-display font-bold text-[24px] leading-[1.15] text-ink-strong">
               Explore open startup roles
             </h2>
 
             <div className="mt-4 relative">
               <Search
                 size={15}
-                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#646A6B]"
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-secondary"
                 aria-hidden="true"
               />
               <input
@@ -460,20 +460,20 @@ export function ActionModal() {
                 onChange={(e) => setJobQuery(e.target.value)}
                 placeholder="Filter by company, role, or location..."
                 aria-label="Filter startup roles"
-                className="w-full h-10 pl-9 pr-3 rounded-[10px] bg-[#FAFAFA] border border-[#EDEDED] text-[13px] text-[#051315] focus:outline-none focus:border-[#D11F68]"
+                className="w-full h-10 pl-9 pr-3 rounded-[10px] bg-surface-low border border-line text-[13px] text-ink-primary focus:outline-none focus:border-brand-ink"
               />
             </div>
 
             <div className="mt-4 space-y-3">
               {filteredJobs.length === 0 ? (
-                <div className="rounded-[12px] bg-[#FAFAFA] border border-[#EDEDED] p-6 text-center">
-                  <p className="text-[13px] text-[#646A6B]">
+                <div className="rounded-[12px] bg-surface-low border border-line p-6 text-center">
+                  <p className="text-[13px] text-ink-secondary">
                     No featured roles matched &ldquo;{jobQuery}&rdquo;.
                   </p>
                   <button
                     type="button"
                     onClick={() => setJobQuery('')}
-                    className="mt-2 text-[12px] font-semibold text-[#D11F68] hover:underline"
+                    className="mt-2 text-[12px] font-semibold text-brand hover:underline"
                   >
                     Show all featured roles
                   </button>
@@ -485,17 +485,17 @@ export function ActionModal() {
                   return (
                     <div
                       key={job.id}
-                      className="rounded-[14px] border border-[#EDEDED] p-4 hover:border-[#D5D5D5] transition-colors"
+                      className="rounded-[14px] border border-line p-4 hover:border-line-strong transition-colors"
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div>
-                          <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#D11F68]">
+                          <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-brand">
                             {job.company} · Actively hiring
                           </p>
-                          <h3 className="mt-0.5 font-display font-bold text-[16px] text-[#051315]">
+                          <h3 className="mt-0.5 font-display font-bold text-[16px] text-ink-strong">
                             {job.roleTitle}
                           </h3>
-                          <p className="mt-1 text-[12px] text-[#646A6B] flex items-center gap-1.5 tabular-nums">
+                          <p className="mt-1 text-[12px] text-ink-secondary flex items-center gap-1.5 tabular-nums">
                             <MapPin size={12} aria-hidden="true" />
                             {job.location}
                           </p>
@@ -508,13 +508,13 @@ export function ActionModal() {
                             aria-pressed={isSaved}
                             className={`w-8 h-8 rounded-full border flex items-center justify-center transition-colors ${
                               isSaved
-                                ? 'border-[#D11F68] bg-[#FDF1F8] text-[#D11F68]'
-                                : 'border-[#EDEDED] bg-white text-[#646A6B] hover:text-[#051315]'
+                                ? 'border-brand bg-brand-subtle text-brand'
+                                : 'border-line bg-surface text-ink-secondary hover:text-ink-strong'
                             }`}
                           >
                             <Bookmark
                               size={13}
-                              className={isSaved ? 'fill-[#D11F68]' : ''}
+                              className={isSaved ? 'fill-brand' : ''}
                               aria-hidden="true"
                             />
                           </button>
@@ -523,15 +523,15 @@ export function ActionModal() {
                             onClick={() => markAppliedJob(job.id)}
                             className={`h-8 px-3.5 rounded-full text-[11.5px] font-semibold transition-colors ${
                               applied
-                                ? 'bg-[#EEF7F2] text-[#226F49] border border-[#D4ECDF]'
-                                : 'bg-[#051315] text-white hover:bg-[#1B1818]'
+                                ? 'bg-semantic-success-bg text-semantic-success border border-[color:var(--color-success-border)]'
+                                : 'bg-obsidian text-ink-inverse hover:bg-ink-primary'
                             }`}
                           >
                             {applied ? 'Saved to apply' : 'Quick apply'}
                           </button>
                         </div>
                       </div>
-                      <p className="mt-2.5 text-[12px] text-[#646A6B] leading-[1.5]">
+                      <p className="mt-2.5 text-[12px] text-ink-secondary leading-[1.5]">
                         {job.founderNote}
                       </p>
                     </div>
@@ -540,8 +540,8 @@ export function ActionModal() {
               )}
             </div>
 
-            <div className="mt-5 pt-4 border-t border-[#EDEDED] flex items-center justify-between gap-3">
-              <span className="text-[12px] text-[#646A6B]">
+            <div className="mt-5 pt-4 border-t border-line flex items-center justify-between gap-3">
+              <span className="text-[12px] text-ink-secondary">
                 Want access to 27,000+ startups?
               </span>
               <Button
@@ -560,23 +560,23 @@ export function ActionModal() {
         {/* INFO DRAWER / MODAL */}
         {modal.type === 'info' && infoEntry && (
           <div>
-            <p className="text-[10.5px] font-semibold tracking-[0.14em] uppercase text-[#D11F68]">
+            <p className="text-[10.5px] font-semibold tracking-[0.14em] uppercase text-brand">
               {infoEntry.eyebrow}
             </p>
-            <h2 className="mt-1.5 font-display font-bold text-[24px] leading-[1.15] text-[#051315]">
+            <h2 className="mt-1.5 font-display font-bold text-[24px] leading-[1.15] text-ink-strong">
               {infoEntry.title}
             </h2>
-            <p className="mt-3 text-[13.5px] leading-[1.65] text-[#646A6B]">
+            <p className="mt-3 text-[13.5px] leading-[1.65] text-ink-secondary">
               {infoEntry.summary}
             </p>
-            <ul className="mt-5 space-y-2.5 border-t border-[#EDEDED] pt-4">
+            <ul className="mt-5 space-y-2.5 border-t border-line pt-4">
               {infoEntry.highlights.map((item) => (
                 <li
                   key={item}
-                  className="text-[12.5px] leading-[1.55] text-[#051315] flex items-start gap-2.5"
+                  className="text-[12.5px] leading-[1.55] text-ink-primary flex items-start gap-2.5"
                 >
                   <span
-                    className="w-1.5 h-1.5 rounded-full bg-[#D11F68] mt-2 shrink-0"
+                    className="w-1.5 h-1.5 rounded-full bg-brand mt-2 shrink-0"
                     aria-hidden="true"
                   />
                   <span>{item}</span>

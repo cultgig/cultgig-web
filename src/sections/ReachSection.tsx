@@ -16,7 +16,7 @@ export function ReachSection() {
     <section
       id="reach"
       ref={ref}
-      className={`bg-white border-t border-[#EDEDED] py-20 sm:py-24 lg:py-28 reveal-section ${
+      className={`bg-page border-t border-line py-20 sm:py-24 lg:py-28 reveal-section ${
         visible ? 'is-visible' : ''
       }`}
     >
@@ -25,14 +25,14 @@ export function ReachSection() {
           {/* Left Column */}
           <div className="lg:col-span-5">
             <SectionEyebrow>{reachSection.eyebrow}</SectionEyebrow>
-            <h2 className="mt-3 font-display font-bold text-[34px] sm:text-[42px] leading-[1.08] tracking-[-0.025em] text-[#051315]">
+            <h2 className="mt-3 font-display font-bold text-[34px] sm:text-[42px] leading-[1.08] tracking-[-0.025em] text-ink-strong">
               {reachSection.headingLine1}
               <br />
               {reachSection.headingLine2}
               <br />
-              <span className="italic text-[#D11F68]">{reachSection.headingAccent}</span>
+              <span className="italic text-brand">{reachSection.headingAccent}</span>
             </h2>
-            <p className="mt-4 text-[14px] leading-[1.68] text-[#646A6B] max-w-[360px]">
+            <p className="mt-4 text-[14px] leading-[1.68] text-ink-secondary max-w-[360px]">
               {reachSection.description}
             </p>
             <div className="mt-7">

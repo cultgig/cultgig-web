@@ -16,14 +16,14 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
-  pink: 'bg-[#D11F68] text-white hover:bg-[#B51758] active:bg-[#981249] border border-transparent shadow-sm',
-  dark: 'bg-[#051315] text-white hover:bg-[#1B1818] active:bg-black border border-transparent',
+  pink: 'bg-brand text-white hover:bg-brand-hover active:bg-brand-pressed border border-transparent shadow-xs',
+  dark: 'bg-obsidian text-ink-inverse hover:bg-ink-primary active:bg-black border border-transparent',
   'outline-light':
-    'bg-transparent text-[#051315] border border-[#DEDEDE] hover:border-[#051315] hover:bg-[#FAFAFA]',
+    'bg-surface text-ink-primary border border-[color:var(--color-border-control)] hover:border-ink-strong hover:bg-surface-low',
   'outline-dark':
-    'bg-transparent text-white border border-white/25 hover:border-white/55 hover:bg-white/[0.06]',
+    'bg-transparent text-ink-inverse border border-white/25 hover:border-white/55 hover:bg-white/[0.06]',
   'ghost-dark':
-    'bg-transparent text-[#051315] hover:text-[#D11F68] border border-transparent',
+    'bg-transparent text-ink-primary hover:text-brand border border-transparent',
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -43,7 +43,7 @@ export function Button({
   return (
     <button
       type={type}
-      className={`inline-flex items-center justify-center gap-2 rounded-full whitespace-nowrap shrink-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D11F68] focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-full whitespace-nowrap shrink-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-ink focus-visible:ring-offset-2 disabled:bg-surface-high disabled:text-ink-secondary disabled:border-surface-high disabled:cursor-not-allowed ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       {...props}
     >
       {children}

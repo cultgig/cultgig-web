@@ -28,7 +28,7 @@ export function OptimizedMedia({
       <div
         role="img"
         aria-label={alt}
-        className={`flex items-center justify-center bg-[#FDF1F8] border border-[#F3D5E7] text-[#646A6B] text-xs font-medium p-4 ${className}`}
+        className={`flex items-center justify-center bg-brand-subtle border border-accent-border text-ink-primary text-xs font-medium p-4 ${className}`}
       >
         {fallbackLabel || alt}
       </div>

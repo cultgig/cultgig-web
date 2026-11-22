@@ -58,7 +58,7 @@ export function CategoriesIndexPage() {
                     <h3 className="type-h3 text-ink-primary group-hover:text-plum">{cat.label}</h3>
                     <p className="type-body-sm text-ink-secondary">{cat.description}</p>
                     {cat.complianceNote && (
-                      <p className="type-caption text-ink-muted pt-1">{cat.complianceNote}</p>
+                      <p className="type-caption text-ink-secondary pt-1">{cat.complianceNote}</p>
                     )}
                   </div>
                 </Link>
@@ -99,7 +99,7 @@ export function CategoryDetailPage({ slug }: { slug: string }) {
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-[#181016]/95 via-[#181016]/80 to-[#181016]/50"
+          className="absolute inset-0 bg-gradient-to-r from-obsidian/95 via-obsidian/80 to-obsidian/50"
         />
         <div className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-4">
           <Link

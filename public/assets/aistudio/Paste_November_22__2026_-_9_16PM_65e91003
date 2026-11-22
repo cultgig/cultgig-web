@@ -1,0 +1,470 @@
+oogle AI Studio Implementation Prompt — Cultgig Colour System Migration
+Role
+Act as a senior frontend engineer, design-systems engineer, accessibility specialist and visual QA lead. You are working on the existing Cultgig production website. Your task is a strict colour-system implementation, not a redesign.
+Source files and references
+You have been provided with:
+1. The complete Cultgig project ZIP: cultgig-web-main.zip (extract it and work against the actual project files).
+2. The colour-only design system: DESIGN(2).md (this is the source of truth for the new colour tokens, semantic roles, contrast requirements, interaction states, gradients, overlays and shadows).
+3. Live website: https://www.cultgig.com/
+4. GitHub repository: https://github.com/cultgig/cultgig-web.git
+Before changing any files, inspect the entire extracted project and its existing running website. Read DESIGN(2).md completely. Inspect the repository's current implementation and compare it with the live deployed website wherever the preview/browser is available. Use the uploaded ZIP as the primary source for code and data. Treat current live site content and the repository's actual code as authoritative; do not invent or replace content.
+1. The exact objective
+Implement the supplied DESIGN(2).md colour design system throughout Cultgig while preserving the current website exactly in every non-colour respect.
+
+This is a colour-only migration. The visual output should retain the exact existing page architecture, page composition, layout, spacing, component dimensions, typography, imagery, copy, content, routes, interactions and application behaviour. Only colour values and colour-dependent visual effects (backgrounds, text/icon colours, borders, focus colours, gradients, overlays and shadows) may change, in accordance with the design-system file.
+
+The final site must look like the same Cultgig website with the new colour identity applied consistently—not a new theme concept, redesigned page, or rebuilt application.
+Absolute non-negotiable constraints
+DO NOT change any of the following:
+- UI architecture, application architecture or component hierarchy.
+- Layout, grid, flex structure, positioning, alignment, sizing, max-widths, widths, heights or responsive breakpoints.
+- Spacing, padding, margin, gaps, section heights, card dimensions, image dimensions, aspect ratios or border radii.
+- Typography: font family, font files, font sizes, line heights, font weights, letter spacing, text transforms or text wrapping rules.
+- Any text, copywriting, labels, placeholder text, button labels, category names, testimonials, FAQ answers, legal text or metadata content.
+- Any existing images, video, icons, illustrations, logos, brand marks, favicon, OG image, press logos, artist photography or third-party assets. Do not replace, regenerate, recolour, crop, resize or reposition assets.
+- Data: category records, sample artist data, listings, testimonials, guides, pricing, configuration, site settings, form defaults, legal entity details, content objects, static data or API data.
+- Routes, route matching, route guards, navigation destinations, query string handling, redirects, page existence or URL structure.
+- Functionality: authentication, OTP, onboarding, Appwrite calls, storage, forms, validations, search, filters, sorting, favourites, modals, notifications, dropdowns, menus, artist/client workflows, messaging, booking, checkout, payment status, state management, localStorage or browser history.
+- Existing dependencies, package versions, build tooling, deployment settings, environment variable names, secrets handling or backend configuration.
+- Animations or motion behaviour. You may update only the colour values used inside an existing colour glow/gradient/shadow; do not change animation timing, easing, keyframes, transform or transition behaviour.
+- Accessibility semantics, HTML structure, ARIA attributes, tab order, keyboard behaviour or focus management.
+Do not perform opportunistic refactors, cleanup, dependency upgrades, architecture migrations or product improvements. Do not fix unrelated bugs. Do not add features. Do not delete unused-looking files or components.
+
+If a colour change appears to require a layout, markup, content or behaviour change, do not make that change. Find a token or CSS-only way to implement the colour instead.
+2. Mandatory first step: understand the real active application
+The archive contains a React 18 + TypeScript + Vite + Tailwind CSS 3 application. Its package scripts include:
+- npm run dev
+- npm run lint — TypeScript no-emit check
+- npm run build — TypeScript check followed by Vite production build
+The project includes Appwrite integration, Lucide React icons, local marketplace sample data and browser-local prototype workflows. Keep all of them unchanged.
+
+Important project files identified in the supplied ZIP:
+- src/main.tsx — current Vite entrypoint. It imports src/App.tsx, src/styles/globals.css and src/styles/animations.css.
+- src/App.tsx — a separate marketing-section composition using HeroSection, CompanySection, CandidateSection, CandidateBenefits, ReachSection, TestimonialsSection, FAQSection, FinalCTASection, LogoStripSection, ActionModal and its own header/footer components.
+- src/app/App.tsx — a separate, much larger marketplace router containing the Cultgig public pages, authentication, artist/client workspaces, messages, checkout and payment status routes.
+- src/styles/tokens.ts — central typed Cultgig tokens (currently includes Plum #6A2E62, its hover/active/tints, neutral, semantic and accent colours, and also spacing/typography constants).
+- src/styles/globals.css — currently includes a different set of legacy CSS variables and global styles.
+- src/styles/visual.css — currently minimal.
+- tailwind.config.ts — currently contains a separate Tailwind palette, font aliases, radii and shadow aliases.
+- src/components/layout/Header.tsx, src/components/layout/Footer.tsx — marketplace shell header/footer.
+- src/components/navigation/Header.tsx, src/components/footer/Footer.tsx — separate header/footer used by the other root composition.
+- src/pages/ — HomePage, ExplorePage, CategoriesPages, ArtistProfilePage, AuthPages, ClientWorkspacePages, ArtistWorkspacePages, MarketingAndGuidePages, NegotiationAndSharedPages, ComplianceAndCheckoutPages.
+- src/sections/ — separate marketing-section components.
+- src/components/ — common, buttons, cards, layout, marketplace, motion, navigation, product previews, and UI elements.
+- src/content/, src/data/, src/config/, src/state/, src/store/, src/services/, src/lib/ — content, data, settings, state, services and integration layers.
+There is an important two-root inconsistency in the archive: src/main.tsx currently imports src/App.tsx, while the larger routed marketplace is in src/app/App.tsx. Do not decide to change this architecture. Do not change the entrypoint, imports, route tree or active application root. Apply the requested colour system to every existing code path and reusable component so that whichever path is currently deployed remains consistent. Before finalizing, identify the root currently visible in the actual live preview and ensure the visible website is the one being validated. Do not silently swap from one root to the other.
+
+The ZIP also contains documentation (README.md, AUDIT.md, IMPLEMENTATION_PLAN.md, IMPLEMENTATION_STATUS.md, PAYMENTS_AND_COMPLIANCE.md, SECURITY.md). Read it for context, but do not modify those documents unless explicitly asked.
+3. Colour design system — implement exactly from DESIGN(2).md
+DESIGN(2).md is the canonical token reference. Reproduce its values faithfully. Do not substitute a different green, plum, pink, blue, gray or generic component-library palette.
+3.1 Core brand and neutral colours
+Semantic role	HEX	Rule
+Brand primary / action olive	#5B6F00	Main action, selected states, key links and high-emphasis brand mark contexts
+Brand light olive	#B2C248	Highlight, decorative emphasis and soft accent backgrounds; never white text on this colour
+Brand olive ink	#788C15	Accent text/links only where the exact background contrast is sufficient
+Page / primary surface	#FFFFFF	Main canvas and standard card surface
+Warm neutral surface	#F7F7F2	Alternate section bands and low-emphasis surfaces
+Container / inset surface	#EAEBE5	Cards, panels and inset areas where required by current layout
+Strong neutral fill/divider	#D5D5D2	Stronger separators and neutral hover/pressed fills; not full page backgrounds
+Muted gray	#ACADA8	Non-essential metadata/disabled content only; not small essential copy
+Secondary text	#72726E	Descriptions, helper text and supporting labels
+Primary text / graphite	#292929	Default headings, body text and icons
+Strong text / charcoal	#0E0F0C	Higher emphasis text
+Inverse text	#FCFCF8	Text on dark or olive backgrounds
+Pure white	#FFFFFF	White surfaces and labels on deep primary olive
+Black	#000000	Only where genuinely required by existing asset/glyph needs
+
+
+3.2 Brand interaction shades and tints
+Token	HEX	State
+brand.primary	#5B6F00	Default primary
+brand.primary-hover	#435300	Hover
+brand.primary-pressed	#354200	Pressed/active
+brand.primary-subtle	#F0F2E5	Selected/soft brand surface
+brand.light	#B2C248	Light highlight
+brand.light-hover	#A5B43D	Hover on light olive
+brand.light-subtle	#F5F6E9	Very soft highlight
+brand.ink	#788C15	Accent text only with contrast verification
+brand.tertiary	#E0C976	Restrained tertiary highlight
+link.hover	#435300	Hover link
+
+
+3.3 Border and divider values
+Token	Value
+Default border/divider	rgba(0, 0, 0, 0.10) / #0000001A
+Warm subtle border	rgba(71, 67, 42, 0.20) / #47432A33
+Strong border	#D5D5D2
+Control border	rgba(41, 41, 41, 0.18)
+Focus border	#788C15
+Selected border	#5B6F00
+
+
+Keep borders fine and subtle. Do not apply focus colour as a permanent border to all components.
+3.4 Background tints and overlays
+Token	Value
+Warm overlay	rgba(98, 90, 34, 0.06) / #625A220F
+Black overlay 4%	rgba(0, 0, 0, 0.04)
+Black overlay 8%	rgba(0, 0, 0, 0.08)
+Black scrim 20%	rgba(0, 0, 0, 0.20)
+Black scrim 40%	rgba(0, 0, 0, 0.40)
+White overlay 70%	rgba(255, 255, 255, 0.70)
+
+
+Use only where existing overlays/backdrops/glass effects already exist. Do not create new overlay elements.
+3.5 Shadows
+Use these recipes exactly when mapping existing shadow roles:
+--shadow-none: none;
+--shadow-xs: 0 1px 2px rgba(14, 15, 12, 0.06);
+--shadow-sm: 0 2px 8px rgba(14, 15, 12, 0.06);
+--shadow-md: 0 8px 24px rgba(14, 15, 12, 0.08);
+--shadow-lg: 0 16px 40px rgba(14, 15, 12, 0.10);
+--shadow-brand: 0 4px 14px rgba(91, 111, 0, 0.14);
+Shadows are soft, neutral and low-opacity. Do not increase shadow intensity, blur or offsets beyond the values above. Use shadow-brand rarely and only for existing primary-action emphasis.
+3.6 Decorative gradients
+These are optional artwork/gradient colours only. Never make them the default background for buttons, text, navigation or general sections.
+- Sun: #FEBE29
+- Pink: #FF91E0
+- Lavender: #CEBEF8
+- Pale blue: #D2E4F8
+Exact optional gradient:
+linear-gradient(115deg, #FEBE29 0%, #FF91E0 34%, #CEBEF8 68%, #D2E4F8 100%)
+Use this only where an existing decorative gradient or artwork region already exists and it fits the composition. Do not add any new gradient surfaces or effects simply to demonstrate the palette. Do not recolour third-party logos or photographic media.
+3.7 Semantic status colours
+These are functional states, not brand colours. Preserve their semantic purpose.
+Status	Foreground	Soft background	Border
+Success	#356B3D	#EDF5EC	#C9DEC8
+Warning	#805B12	#FBF4E4	#E9D7A8
+Error	#A33A32	#FBEFED	#EBC8C4
+Info	#365F78	#EDF4F7	#C9DCE5
+
+
+Do not use status colours for branding, navigation or decoration. Do not remove existing error/success/warning states or change their logic.
+3.8 Text and icon roles
+- Primary text/icons: #292929
+- Strong text: #0E0F0C
+- Secondary text/icons: #72726E
+- Muted/disabled text/icons: #ACADA8 only where not essential
+- Inverse text/icons: #FCFCF8
+- On primary olive: #FFFFFF
+- On light olive: #292929
+- Default link: #5B6F00
+- Hover link: #435300
+3.9 Contrast rules
+- Normal text: at least 4.5:1.
+- Large text: at least 3:1.
+- Essential non-text boundaries/icons: at least 3:1 against adjacent colours.
+- Never use white text on #B2C248 (about 2.2:1; fails normal text contrast).
+- Do not use #ACADA8 for essential small copy on white (about 2.3:1).
+- #72726E on white is the designated readable secondary text role.
+- #788C15 on white is not sufficient for normal-size text; use a darker #5B6F00 link for normal-size text unless another background produces verified contrast.
+- Primary action: #5B6F00 background with #FFFFFF foreground.
+- Light olive surface: #B2C248 background with #292929 foreground.
+If a token combination fails contrast, choose a compliant foreground/background pairing from the existing design-system tokens. Do not invent colours outside the token set to force a contrast fix.
+4. Project-specific implementation strategy
+4.1 Centralize the source of truth
+Implement the entire colour system centrally and wire all existing styling references to it.
+
+At minimum inspect and update as needed:
+1. src/styles/tokens.ts
+   - Update only the colors object to represent the new semantic palette.
+   - Preserve all existing spacing and typography exports byte-for-byte unless import/type compatibility makes a minimal nonvisual change unavoidable. Prefer not to modify them at all.
+   - Preserve as const typing and existing import compatibility.
+   - Add token keys that are needed to represent the full design system, but do not rename or remove existing keys while still referenced in the codebase. Keep compatibility aliases for existing key names where necessary.
+2. src/styles/globals.css
+   - Replace/extend colour-related CSS custom properties with the canonical tokens.
+   - Preserve all non-colour declarations, selectors, global layout styles, scroll behaviour, focus offset, font declarations, scrollbar behaviour and utility rules.
+   - Update colour values in existing .hero-ambient-wash and .final-cta-glow only as needed to use the approved palette. Keep their selector, geometry, radial gradient positions, sizes, stops/positions, and all other non-colour properties exactly as they are. Avoid adding a glow if one does not already exist in the active site.
+   - Do not switch the font system.
+3. tailwind.config.ts
+   - Keep Tailwind CSS v3.4.19 configuration structure.
+   - Map semantic names such as plum, plum-hover, plum-active, plum-soft, plum-tint, plum-border, canvas, surface, surface-muted, ink-primary, ink-secondary, ink-muted, ink-dark, line, line-light, line-strong, semantic-*, ochre, shadow-soft, shadow-card and shadow-elevated to the new semantic tokens, or provide backwards-compatible aliases.
+   - Important: old class names can remain in JSX; their resolved CSS values must now come from the new tokens. This avoids a markup-wide rewrite and preserves the UI architecture.
+   - Keep existing fontFamily, borderRadius and other non-colour Tailwind configuration unchanged. Update only colour and shadow values.
+   - Do not use Tailwind v4 @theme syntax in this Tailwind v3 project.
+4. src/styles/globals.css, src/styles/animations.css, and all other CSS files
+   - Search for every colour literal, rgba/hsla value, gradient stop, border colour, shadow colour, background colour, text colour and focus colour.
+   - Replace only actual UI theme colours with mapped semantic tokens.
+   - Do not change unrelated CSS rules or animations.
+5. All React components and pages
+   - Search every .tsx and .ts file for hard-coded colours and theme-related arbitrary Tailwind classes.
+   - Remove inconsistent old hard-coded theme colours by mapping them to new token classes/CSS variables.
+   - Where a component currently uses bg-[#...], text-[#...], border-[#...], arbitrary rgba, or inline colour styles, change only the colour value or use an existing semantic token class.
+   - Do not touch layout classes, component content, state, handlers, imports unrelated to styling, or markup hierarchy.
+   - Avoid global string replacements that could recolour images, embedded SVG marks or third-party brand logos incorrectly.
+4.2 Important existing style inconsistencies to resolve
+The supplied ZIP contains several competing/legacy colour systems. The current style layer includes:
+- src/styles/tokens.ts: Cultgig Plum (#6A2E62), dark plum/soft tints and Lexend design token documentation.
+- src/styles/globals.css: legacy #051315 dark / #D11F68 pink palette and Poppins/Bricolage font variables.
+- tailwind.config.ts: another #051315 dark / #D11F68 pink palette.
+- src/pages/: established marketplace classes such as bg-plum, text-plum, bg-canvas, text-ink-primary, border-line, bg-surface, bg-semantic-success-bg, and hard-coded hero tones.
+- src/sections/ and src/components/buttons/: legacy dark/pink literals such as #051315, #D11F68, #B51758 and #981249.
+- src/components/product-previews/: legacy dark/pink and status colours.
+- index.html: legacy theme colour, body text and selection colours.
+- src/components/footer/Footer.tsx: a separate footer currently uses #051315 background.
+- src/components/common/ActionModal.tsx: a separate marketing modal currently uses legacy dark/pink literals.
+Your task is to remove the conflicting colour identity at the styling level and route these through the same new shared semantic palette. The new system should look consistent throughout the entire application. However, do not assume that a visually dark section must become white just because the palette is light-first: preserve the current dark-vs-light section contrast pattern where it is clearly intentional, but map its dark surfaces to the approved deep neutral/olive-compatible system and make its foreground accessible. The supplied design system says the majority of the interface should remain white/warm off-white, with olive used as accent. Do not turn every section dark, and do not flatten existing intentional dark sections into white if doing so would materially change the existing visual hierarchy.
+
+Do not recolour actual logos, platform badges, third-party partner or press logos, artist photography, category artwork, screenshots, or uploaded user content. The colour migration applies to interface surfaces and UI chrome, not image pixels.
+4.3 Preserve the Cultgig brand wordmark and logo assets
+The site currently uses Cultgig-specific brand assets and/or rendered wordmarks. Preserve their exact asset files and image bytes. Do not replace the logo with Granola branding, and do not alter the Cultgig wordmark's wording or geometry. If a text wordmark is currently rendered using CSS colour, update only the CSS text colour using the semantic brand token, while keeping its typography and appearance dimensions unchanged.
+5. Full application coverage — do not stop at the homepage
+Inspect every route, page, reusable component, modal, menu, dropdown, form state, empty state, status state and footer. Apply the colour tokens everywhere that the existing application currently renders UI.
+
+The larger marketplace router in src/app/App.tsx contains the following route families. Ensure their styling is covered if those screens are reachable in the project:
+Public pages
+- /
+- /explore
+- /categories
+- /categories/:slug
+- /artists/:slug
+- /how-it-works
+- /for-artists
+- /for-businesses
+- /about
+- /pricing
+- /guides
+- /guides/:slug
+- /faq
+- /contact
+- /support
+- /support/requests/:id
+- /safety
+- /trust-and-safety
+- /legal/terms and /terms
+- /legal/privacy and /privacy
+- /legal/refunds
+- /legal/cancellation
+- /legal/community-guidelines
+- /legal/artist-agreement
+- /legal/client-agreement
+Authentication and onboarding
+- /sign-in
+- /sign-up
+- /verify-email
+- /forgot-password
+- /reset-password
+- /onboarding
+Client workspace
+- /client/dashboard
+- /client/gigs
+- /client/gigs/new
+- /client/gigs/:id
+- /client/artists/saved
+- /client/applications
+- /client/messages and /messages
+- /client/bookings
+- /client/bookings/:id
+- /client/settings/profile
+- /client/settings/billing
+Artist workspace
+- /artist/dashboard
+- /artist/profile/edit
+- /artist/portfolio
+- /artist/opportunities
+- /artist/opportunities/:id
+- /artist/applications
+- /artist/proposals
+- /artist/bookings
+- /artist/bookings/:id
+- /artist/availability
+- /artist/earnings
+- /artist/settings
+Shared / transactional
+- /messages/:conversationId
+- /notifications
+- /checkout/:bookingId
+- /payment/success
+- /payment/failed
+- /payment/pending
+- not-found route
+Do not add missing routes if not currently implemented. Do not make a page or a feature appear functional if it is currently a prototype or placeholder. Preserve current labels and honest product status.
+
+If the currently deployed app only exposes the separate root composition, still update the styling of that composition and its dependencies, but do not remove or rewrite the routed marketplace code.
+6. Practical mapping of the new colour roles to the existing Cultgig class vocabulary
+Use the following as the compatibility mapping for the established marketplace class vocabulary. It is a mapping of semantic names, not a request to change the JSX or markup.
+Existing class/token name	New semantic role
+plum	#5B6F00
+plum-hover	#435300
+plum-active	#354200
+plum-soft	#F0F2E5
+plum-tint	#B2C248 or an approved semantic light olive, selected according to the existing foreground use and contrast
+plum-border	#D5D5D2 or subtle approved neutral/olive border according to component role
+canvas	#FFFFFF or #F7F7F2 based on the original surface hierarchy; do not arbitrarily flatten alternating bands
+surface	#FFFFFF
+surface-muted	#EAEBE5
+ink-primary	#292929
+ink-secondary	#72726E
+ink-muted	#ACADA8 only for non-essential metadata/disabled content
+ink-dark	#0E0F0C or approved deep surface context
+line	rgba(0, 0, 0, 0.10)
+line-light	rgba(0, 0, 0, 0.06) or approved subtle neutral
+line-strong	#D5D5D2
+ochre	#E0C976
+semantic-success	#356B3D
+semantic-success-bg	#EDF5EC
+semantic-warning	#805B12
+semantic-warning-bg	#FBF4E4
+semantic-error	#A33A32
+semantic-error-bg	#FBEFED
+semantic-info	#365F78
+semantic-info-bg	#EDF4F7
+
+
+For utility aliases that currently have different names in tailwind.config.ts, keep backwards compatibility as needed. Avoid a mass JSX refactor just to rename CSS classes.
+
+Do not apply the plum-tint alias blindly: audit whether the element using the existing class has light or dark foreground content. Always preserve contrast and role intent.
+7. Special handling for mixed / dark sections and illustrations
+Some existing sections are intentionally dark or image-led. Preserve their structure and placement:
+- Image-led home hero with image overlay.
+- Dark feature or audience sections, if present in the actual active route composition.
+- Product-preview mock interfaces with dark surfaces.
+- Dark footer variant, if currently visible in the deployed app.
+- Modal scrims and modal surfaces.
+For each, retain image, overlay geometry, opacity structure where not colour-specific, text placement and component size. Only change the palette values. Use dark neutral values permitted by the supplied system (e.g. #0E0F0C or a compatible deep surface) and inverse text #FCFCF8 where it remains legible. The brand accent should be olive; do not leave old pink as the accent.
+
+Important: Some product-preview components may deliberately simulate third-party products or UI screenshots. Do not change colours that belong to a third-party logo or imported screenshot. Only change the surrounding Cultgig-created interface chrome and decorative components.
+
+For category showcase card backgrounds or arrays of different dark tones, do not remove individual cards or change their ordering. Map the tones to tasteful distinct approved surfaces or brand shades while preserving the number and sequence of entries. Do not invent extra colours outside the canonical system.
+8. Accessibility acceptance criteria
+Perform a contrast review for every combination of foreground/background after the migration:
+- Main headings and body copy.
+- Secondary text and helper text.
+- Links in default, hover, focus and visited states if visited styling exists.
+- Primary and secondary buttons in all states.
+- Disabled controls.
+- Input labels, placeholder text, borders, selected and focus states.
+- Navigation links, active links, dropdown items and menu controls.
+- Text over imagery and dark surfaces.
+- Status banners and inline error/success messages.
+- Icon-only controls and their boundaries.
+- Modal text, close controls and backdrop.
+Rules:
+- Text contrast must meet WCAG AA: 4.5:1 for normal text and 3:1 for large text.
+- UI component boundary/icon contrast must meet 3:1 where required.
+- Never rely only on colour to indicate success, error, warning, selected or active state; preserve existing textual/icon cues.
+- Maintain visible focus indicators. The exact focus colour may be changed, but do not remove :focus-visible styling or its outline offset.
+- Check text over image overlays at desktop and mobile widths; do not change overlay geometry just to hide weak contrast. Choose an approved foreground/background token combination.
+- Do not use muted gray #ACADA8 for essential small text.
+- Do not use white text on light olive.
+If the current site already has an accessibility issue unrelated to colour, report it separately rather than changing layout or semantics in this task.
+9. Implementation workflow — follow this order
+Phase A — Baseline capture and code audit (read-only)
+1. Extract the uploaded ZIP into a working directory.
+2. Read DESIGN(2).md completely.
+3. Read package.json, README.md, AUDIT.md, IMPLEMENTATION_STATUS.md, src/main.tsx, both app roots, src/app/App.tsx, src/styles/tokens.ts, src/styles/globals.css, src/styles/animations.css, tailwind.config.ts, index.html, headers, footers, all page files, all section files, all shared components, and all CSS files.
+4. Confirm the deployed website and which root it serves, if browser/preview access is available. Do not change entrypoint based on assumptions.
+5. Generate an internal checklist of every source location containing an interface colour literal or colour class.
+6. Identify which colour literals are UI colours and which are part of assets, brand logos, partner logos, photos, screenshots or third-party product previews. Do not change the latter.
+7. Capture the current homepage and representative public and interactive screens at desktop and mobile before making changes. Record screenshots for comparison.
+Phase B — Token migration
+1. Update the central colors export in src/styles/tokens.ts to the new system while preserving all other exports and compatibility.
+2. Update CSS variables in src/styles/globals.css to the new semantic palette.
+3. Update Tailwind v3 theme.extend.colors and theme.extend.boxShadow mappings while preserving existing key names used by JSX.
+4. Map every established plum, canvas, surface, ink, line, semantic, ochre and shadow alias to the correct new semantic role.
+5. Ensure all old legacy root colour variables are replaced or aliased so no conflicting pink/dark palette remains in the actual interface.
+6. Keep colour values centralized. Avoid duplicating random hex values in individual components.
+Phase C — Full source migration
+1. Update actual colour usages in all source components and route pages.
+2. Update all public pages, all existing protected workspace views, auth/onboarding, checkout, shared messaging/notifications, modals, dropdowns, menus, footers, buttons, cards, banners and empty/error/success states.
+3. Update both separate root compositions and all components referenced by them.
+4. Replace pink accent colours with approved olive roles where the colour is part of Cultgig UI. Do not recolour third-party logos or artwork.
+5. Replace legacy near-black and cool neutral UI colours with the approved neutral scale.
+6. Update existing gradient/shadow colours only, preserving geometry and effect placement.
+7. Update index.html theme-color, body text colour and selection colour to match the new system, without modifying titles, descriptions, SEO metadata, structured data or other HTML.
+8. Do not modify content/data/integration/state/route files unless the file itself contains an inline presentation colour that must be changed; even then, change only that literal.
+Phase D — Search for omissions
+Run a full source search for old and disallowed UI colour literals, including at least:
+- #6A2E62, #54234E, #421A3D, #F8F3F7, #EEDFEA, #DFC9DA
+- #051315, #1B1818, #0D1C1E, #142123
+- #D11F68, #B51758, #981249, #FDF1F8, #F3D5E7
+- #646A6B, #889091, #EDEDED, #FAFAFA, #DEDEDE
+- Old font colour classes or shadow values that still reference the legacy system.
+These old values may remain inside documentation or a third-party image/logo context if they genuinely belong there. They should not remain as active Cultgig UI theme colours. Do not blindly remove a hex value based only on its literal value if the value is embedded in an unchanged user image or external brand asset.
+
+Also search all src/ files for any remaining hard-coded colour literals, rgba/hsla values, gradients, inline styles, SVG fill/`stroke` presentation colours and Tailwind arbitrary colour utilities. Each remaining literal must be justified as either:
+- a semantic token definition;
+- a third-party/brand asset colour that must remain unchanged;
+- a data-driven colour that must remain unchanged;
+- a necessary value explicitly defined by DESIGN(2).md.
+If it is a generic Cultgig UI colour, convert it to a semantic token.
+Phase E — Build and visual QA
+1. Install dependencies using the lockfile already included. Do not upgrade dependencies.
+2. Run npm run lint.
+3. Run npm run build.
+4. Fix only colour-related implementation errors introduced by this migration.
+5. Start the Vite preview/dev server and inspect the actual application.
+6. Compare before/after screenshots at minimum:
+   - 1440px desktop width;
+   - 1280px desktop width;
+   - 768px tablet width;
+   - 390px mobile width;
+   - 360px narrow mobile width.
+7. Check every reachable page and key interactive states, not only the homepage.
+8. Verify the page is visually identical in layout and content; only colour is different.
+9. Verify no horizontal overflow, missing assets, hydration/runtime errors, broken links, dead controls or unexpected state changes.
+10. Re-test existing forms, navigation, dropdowns, accordions, modals, search, auth screens and prototype workspace interactions without changing their behaviour.
+11. Recheck focus rings, hover states, disabled states and status colours.
+12. Ensure reduced-motion behaviour is unchanged.
+10. Pixel-perfect visual comparison — what “pixel perfect” means here
+Pixel perfect means preserving the exact original layout and component geometry while applying consistent new colour values.
+
+For each before/after screenshot:
+- Header height and content position must be identical.
+- Footer start position, columns and spacing must be identical.
+- All section ordering, boundaries, widths and heights must remain identical.
+- All text must be the same and wrap at the same positions.
+- All images must be the same files, dimensions, crops and positions.
+- All cards, buttons, fields, chips, icons and controls must be the same size and in the same location.
+- All overlays must retain their previous position, extent, geometry and interaction behaviour.
+- The only expected pixel differences are the colour values and the resulting colour-only shadow/gradient pixels.
+Do not interpret “pixel perfect” as permission to reconstruct or redesign the site. Do not make improvements to layout even if you personally believe they would look better.
+11. Data and functionality regression checklist
+Confirm that the following are unchanged:
+- All category labels, category slugs, order, images and descriptions.
+- Artist names, profile copy, sample listings, testimonials, guides, FAQs and legal page copy.
+- Site name, positioning, existing claims and all product-status disclosures.
+- Search query behaviour and city filter behaviour.
+- All navigation link destinations and route guard behaviour.
+- Auth, OTP, onboarding form fields and Appwrite requests.
+- All input names, labels, placeholders, required flags and validation.
+- Form submit handlers and error/success messages.
+- Modals, dropdowns, tabs, accordions and interactive previews.
+- Client and artist workflow state, localStorage data and browser persistence.
+- Messaging, proposals, booking and checkout prototype flows.
+- API endpoints, Appwrite configuration, Cloudinary configuration and environment variable names.
+- SEO content, canonical URLs, metadata and structured data.
+- All image and public asset files.
+No fabricated data. No new marketing claims. No mock data additions. No content rewrites.
+12. File change policy
+Preferred files to change:
+- src/styles/tokens.ts — colour object only.
+- src/styles/globals.css — colour custom properties and existing colour-specific gradient stops only.
+- tailwind.config.ts — colour and box-shadow mappings only.
+- Existing .css files — colour values only.
+- Existing .tsx / .ts files — only inline presentation colour values or arbitrary colour classes, never logic or data.
+- index.html — theme-color, body colour classes and selection colour only.
+Do not create a new UI architecture, new component library, new design framework, new theme provider, or a second source of truth. Do not add new package dependencies. Avoid editing package.json and lockfiles.
+
+If possible, keep the migration concentrated in token/config files and update direct colour literals only where they bypass the token system. Do not leave a split system in which half the app is olive and the other half is still plum/pink or the legacy near-black theme.
+13. Expected final response from you after implementation
+When implementation is complete, provide a concise but detailed implementation report containing:
+1. Summary — confirm the colour-only migration is complete.
+2. Files changed — exact file paths and what colour-only change was made in each.
+3. Token mapping — how the old Cultgig colour aliases map to the new tokens.
+4. Coverage — list the route/page groups and reusable UI states checked.
+5. Validation — exact result of npm run lint, npm run build, and browser/device visual QA.
+6. Contrast audit — note any failing combinations and how you resolved them using approved tokens.
+7. Protected areas — explicitly confirm that layout, UI architecture, typography, assets, content, data, routes, functionality, backend settings and dependencies were not changed.
+8. Remaining blockers — report anything you could not inspect or validate. Never claim a route was visually tested if it was not.
+9. Diff summary — report changed file count and a useful summary of modifications.
+If a check fails, do not hide it or claim success. Report the exact failing command and issue. Do not leave broken code or remove unrelated files to make the check pass.
+14. Final instruction
+Proceed autonomously using the provided ZIP, DESIGN(2).md, repository and live preview access. Do not ask me to redesign anything, choose colours, approve layout changes, or confirm obvious technical steps. Do not stop after writing a plan: perform the implementation, test it and report the result.
+
+Priority order:
+1. Preserve the existing application exactly.
+2. Apply the DESIGN(2).md colour system consistently everywhere.
+3. Meet accessibility contrast requirements.
+4. Pass TypeScript and production build checks.
+5. Visually verify desktop, tablet and mobile without changing layout.
+This is a production codebase. Make the smallest safe code changes necessary to produce a consistent, pixel-perfect, production-ready colour-system migration only.

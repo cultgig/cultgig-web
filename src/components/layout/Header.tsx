@@ -41,7 +41,7 @@ export function Header() {
           aria-label="Cultgig home"
           className="text-[22px] leading-[28px] font-bold tracking-[-0.03em] text-plum whitespace-nowrap shrink-0"
         >
-          cultgig<span className="text-ochre">.</span>
+          cultgig<span className="text-brand-ink">.</span>
         </Link>
 
         {/* Zone 2: Concise single-line desktop navigation */}
@@ -137,7 +137,7 @@ export function Header() {
                   className="inline-flex items-center gap-2 min-h-[40px] px-3.5 py-2 rounded-md border border-line bg-surface hover:border-plum text-[13px] font-semibold text-ink-primary whitespace-nowrap shrink-0"
                 >
                   <span className="max-w-[130px] truncate">{user.displayName}</span>
-                  <span className="text-ink-muted font-normal">
+                  <span className="text-ink-secondary font-normal">
                     ({user.activeMode === "artist" ? "Artist" : "Client"})
                   </span>
                   <ChevronDown size={14} aria-hidden="true" />

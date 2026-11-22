@@ -7,11 +7,11 @@ const variantClasses: Record<ButtonVariant, string> = {
   primary:
     "bg-plum text-white hover:bg-plum-hover active:bg-plum-active border border-transparent shadow-soft",
   secondary:
-    "bg-plum-soft text-plum hover:bg-plum-tint border border-plum-border",
+    "bg-plum-soft text-plum hover:bg-plum-tint hover:text-ink-primary border border-[color:var(--color-border-subtle)]",
   outline:
     "bg-surface text-ink-primary border border-line-strong hover:border-plum hover:text-plum",
   "outline-light":
-    "bg-transparent text-white border border-white/40 hover:bg-white/10",
+    "bg-transparent text-ink-inverse border border-white/40 hover:bg-white/10",
   ghost:
     "bg-transparent text-ink-secondary hover:bg-surface-muted hover:text-ink-primary border border-transparent",
 };

@@ -42,13 +42,13 @@ export function Footer() {
                 to="/"
                 className="text-[20px] leading-[26px] font-bold tracking-[-0.02em] text-plum"
               >
-                cultgig<span className="text-ochre">.</span>
+                cultgig<span className="text-brand-ink">.</span>
               </Link>
               <span className="type-body-sm text-ink-secondary">
                 {siteConfig.legalEntityName} · {siteConfig.country}
               </span>
             </div>
-            <p className="type-caption text-ink-muted">
+            <p className="type-caption text-ink-secondary">
               {siteConfig.registeredAddress}
               {siteConfig.supportEmail
                 ? ` · Support: ${siteConfig.supportEmail}`
@@ -58,7 +58,7 @@ export function Footer() {
           </div>
 
           <div className="flex flex-wrap items-center gap-4">
-            <span className="type-caption text-ink-muted">INR (₹) · India</span>
+            <span className="type-caption text-ink-secondary">INR (₹) · India</span>
             {socials.length > 0 && (
               <div className="flex items-center gap-3">
                 {socials.map(({ label, href }) => (

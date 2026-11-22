@@ -56,7 +56,7 @@ export function ArtistCard({ artist }: { artist: SampleArtist }) {
             >
               {artist.displayName}
             </Link>
-            <p className="type-caption text-ink-muted truncate">
+            <p className="type-caption text-ink-secondary truncate">
               {category?.label ?? "Creative talent"}
             </p>
           </div>
@@ -70,7 +70,7 @@ export function ArtistCard({ artist }: { artist: SampleArtist }) {
         </Link>
 
         <div className="mt-auto pt-3 border-t border-line-light flex items-center justify-between gap-3">
-          <span className="type-body-sm text-ink-muted inline-flex items-center gap-1 truncate">
+          <span className="type-body-sm text-ink-secondary inline-flex items-center gap-1 truncate">
             <MapPin size={13} className="text-plum shrink-0" aria-hidden="true" />
             <span>{artist.city}</span>
             <span aria-hidden="true">·</span>

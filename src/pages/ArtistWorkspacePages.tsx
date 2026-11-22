@@ -75,23 +75,23 @@ export function ArtistDashboardPage() {
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-surface border border-line rounded-lg p-5">
-          <p className="type-caption text-ink-muted">Open sample briefs</p>
+          <p className="type-caption text-ink-secondary">Open sample briefs</p>
           <p className="text-[24px] font-bold text-ink-primary tabular-nums mt-1">{openGigs.length}</p>
         </div>
         <div className="bg-surface border border-line rounded-lg p-5">
-          <p className="type-caption text-ink-muted">Submitted applications</p>
+          <p className="type-caption text-ink-secondary">Submitted applications</p>
           <p className="text-[24px] font-bold text-ink-primary tabular-nums mt-1">
             {applications.length}
           </p>
         </div>
         <div className="bg-surface border border-line rounded-lg p-5">
-          <p className="type-caption text-ink-muted">Portfolio items</p>
+          <p className="type-caption text-ink-secondary">Portfolio items</p>
           <p className="text-[24px] font-bold text-ink-primary tabular-nums mt-1">
             {artistProfile.portfolio.length}
           </p>
         </div>
         <div className="bg-surface border border-line rounded-lg p-5">
-          <p className="type-caption text-ink-muted">Bookings</p>
+          <p className="type-caption text-ink-secondary">Bookings</p>
           <p className="text-[24px] font-bold text-ink-primary tabular-nums mt-1">{bookings.length}</p>
         </div>
       </div>
@@ -365,7 +365,7 @@ export function ArtistPortfolioPage() {
                   type="button"
                   onClick={() => removePortfolioItem(item.id)}
                   aria-label={`Remove ${item.title}`}
-                  className="p-2 text-ink-muted hover:text-semantic-error"
+                  className="p-2 text-ink-secondary hover:text-semantic-error"
                 >
                   <Trash2 size={16} aria-hidden="true" />
                 </button>
@@ -458,7 +458,7 @@ export function ArtistOpportunityDetailPage({ gigId }: { gigId: string }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <section className="lg:col-span-6 bg-surface border border-line rounded-xl p-6 space-y-4">
-          <p className="type-caption text-ink-muted">
+          <p className="type-caption text-ink-secondary">
             Posted by {gig.clientDisplayName} · {gig.city} · {formatReadableDate(gig.eventDate)}
           </p>
           <h2 className="type-h2 text-ink-primary">Event brief</h2>
@@ -536,7 +536,7 @@ export function ArtistOpportunityDetailPage({ gigId }: { gigId: string }) {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label htmlFor="app-travel" className="block type-caption text-ink-muted mb-1">
+                  <label htmlFor="app-travel" className="block type-caption text-ink-secondary mb-1">
                     Travel & extra expenses
                   </label>
                   <input
@@ -548,7 +548,7 @@ export function ArtistOpportunityDetailPage({ gigId }: { gigId: string }) {
                   />
                 </div>
                 <div>
-                  <label htmlFor="app-valid" className="block type-caption text-ink-muted mb-1">
+                  <label htmlFor="app-valid" className="block type-caption text-ink-secondary mb-1">
                     Proposal valid until
                   </label>
                   <input
@@ -561,7 +561,7 @@ export function ArtistOpportunityDetailPage({ gigId }: { gigId: string }) {
                 </div>
               </div>
               <div>
-                <label htmlFor="app-cancel" className="block type-caption text-ink-muted mb-1">
+                <label htmlFor="app-cancel" className="block type-caption text-ink-secondary mb-1">
                   Cancellation / reschedule note
                 </label>
                 <input
@@ -664,7 +664,7 @@ export function ArtistBookingsPage() {
             className="bg-surface border border-line rounded-lg p-5 flex flex-wrap items-center justify-between gap-4"
           >
             <div>
-              <p className="type-caption text-ink-muted">
+              <p className="type-caption text-ink-secondary">
                 {b.city} · {formatReadableDate(b.eventDate)} · Status: <strong>{b.status}</strong>
               </p>
               <h2 className="type-h3 text-ink-primary">{b.gigTitle}</h2>
@@ -751,7 +751,7 @@ export function ArtistSettingsPage() {
         <p className="type-body text-ink-secondary">
           Signed in as <strong>{user?.email}</strong> ({user?.authMode}).
         </p>
-        <p className="type-body-sm text-ink-muted">
+        <p className="type-body-sm text-ink-secondary">
           To switch to your Client / Event Host dashboard, use the account switcher in the top
           navigation bar.
         </p>

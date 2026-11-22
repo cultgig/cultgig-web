@@ -12,17 +12,17 @@ export function TestimonialsSection() {
     <section
       id="testimonials"
       ref={ref}
-      className={`bg-white border-t border-[#EDEDED] py-20 sm:py-24 reveal-section ${
+      className={`bg-page border-t border-line py-20 sm:py-24 reveal-section ${
         visible ? 'is-visible' : ''
       }`}
     >
       <Container narrow>
         <div className="text-center">
           <SectionEyebrow>{testimonials.eyebrow}</SectionEyebrow>
-          <h2 className="mt-2.5 font-display font-bold text-[34px] sm:text-[42px] leading-[1.08] tracking-[-0.025em] text-[#051315]">
+          <h2 className="mt-2.5 font-display font-bold text-[34px] sm:text-[42px] leading-[1.08] tracking-[-0.025em] text-ink-strong">
             {testimonials.headingLead}
             <br />
-            <span className="italic text-[#D11F68]">{testimonials.headingAccent}</span>
+            <span className="italic text-brand">{testimonials.headingAccent}</span>
           </h2>
         </div>
 

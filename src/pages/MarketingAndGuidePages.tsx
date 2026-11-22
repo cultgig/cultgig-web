@@ -344,7 +344,7 @@ export function GuidesIndexPage() {
               />
             </div>
             <div className="p-6 space-y-2">
-              <p className="type-caption text-ink-muted">
+              <p className="type-caption text-ink-secondary">
                 {guide.categoryLabel} · {guide.readTime}
               </p>
               <h2 className="type-h2 text-ink-primary group-hover:text-plum">{guide.title}</h2>

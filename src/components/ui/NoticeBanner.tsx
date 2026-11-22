@@ -18,8 +18,8 @@ export function NoticeBanner({
       role="status"
       className={`rounded-md border p-4 flex items-start gap-3 ${
         isWarning
-          ? "bg-semantic-warning-bg border-ochre/30 text-ink-primary"
-          : "bg-plum-soft border-plum-border text-ink-primary"
+          ? "bg-semantic-warning-bg border-[color:var(--color-warning-border)] text-ink-primary"
+          : "bg-plum-soft border-[color:var(--color-border-subtle)] text-ink-primary"
       } ${className}`}
     >
       {isWarning ? (

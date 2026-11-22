@@ -43,8 +43,8 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b transition-shadow duration-200 ${
-        scrolled ? 'border-[#E6E6E6] shadow-[0_4px_20px_rgba(5,19,21,0.06)]' : 'border-[#EDEDED]'
+      className={`sticky top-0 z-40 w-full bg-surface/95 backdrop-blur-md border-b transition-shadow duration-200 ${
+        scrolled ? 'border-line-strong shadow-sm' : 'border-line'
       }`}
     >
       <Container>
@@ -69,7 +69,7 @@ export function Header() {
                 key={item.label}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href, item.action, item.infoKey)}
-                className="text-[13px] font-medium text-[#646A6B] hover:text-[#051315] transition-colors duration-200 whitespace-nowrap shrink-0 py-1 border-b border-transparent hover:border-[#051315]"
+                className="text-[13px] font-medium text-ink-secondary hover:text-ink-strong transition-colors duration-200 whitespace-nowrap shrink-0 py-1 border-b border-transparent hover:border-ink-strong"
               >
                 {item.label}
               </a>
@@ -81,14 +81,14 @@ export function Header() {
             <button
               type="button"
               onClick={() => openAuth('log-in', 'candidate')}
-              className="text-[13px] font-medium text-[#051315] hover:text-[#D11F68] transition-colors duration-200 whitespace-nowrap shrink-0 px-2 py-1.5 rounded-md"
+              className="text-[13px] font-medium text-ink-primary hover:text-brand transition-colors duration-200 whitespace-nowrap shrink-0 px-2 py-1.5 rounded-md"
             >
               Log in
             </button>
             <button
               type="button"
               onClick={() => openAuth('sign-up', 'candidate')}
-              className="h-[34px] px-4 rounded-full bg-[#051315] text-white text-[12.5px] font-semibold hover:bg-[#1B1818] transition-colors duration-200 whitespace-nowrap shrink-0"
+              className="h-[34px] px-4 rounded-full bg-obsidian text-ink-inverse text-[12.5px] font-semibold hover:bg-ink-primary transition-colors duration-200 whitespace-nowrap shrink-0"
             >
               Sign up
             </button>
@@ -101,7 +101,7 @@ export function Header() {
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-navigation-drawer"
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-            className="md:hidden inline-flex items-center justify-center w-11 h-11 -mr-2 rounded-lg text-[#051315] hover:bg-[#FAFAFA] transition-colors"
+            className="md:hidden inline-flex items-center justify-center w-11 h-11 -mr-2 rounded-lg text-ink-strong hover:bg-surface-low transition-colors"
           >
             {mobileMenuOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
           </button>
@@ -111,7 +111,7 @@ export function Header() {
         {mobileMenuOpen && (
           <div
             id="mobile-navigation-drawer"
-            className="md:hidden pb-5 pt-2 border-t border-[#EDEDED] space-y-2"
+            className="md:hidden pb-5 pt-2 border-t border-line space-y-2"
           >
             <nav aria-label="Mobile navigation" className="flex flex-col">
               {siteConfig.navigation.map((item) => (
@@ -119,7 +119,7 @@ export function Header() {
                   key={item.label}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href, item.action, item.infoKey)}
-                  className="py-3 text-[14px] font-medium text-[#051315] hover:text-[#D11F68] border-b border-[#F3F3F3]"
+                  className="py-3 text-[14px] font-medium text-ink-primary hover:text-brand border-b border-line-light"
                 >
                   {item.label}
                 </a>
@@ -129,14 +129,14 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => openAuth('log-in', 'candidate')}
-                className="flex-1 h-11 rounded-full border border-[#EDEDED] text-[13.5px] font-semibold text-[#051315] hover:bg-[#FAFAFA]"
+                className="flex-1 h-11 rounded-full border border-line-strong text-[13.5px] font-semibold text-ink-primary hover:bg-surface-low"
               >
                 Log in
               </button>
               <button
                 type="button"
                 onClick={() => openAuth('sign-up', 'candidate')}
-                className="flex-1 h-11 rounded-full bg-[#051315] text-white text-[13.5px] font-semibold hover:bg-[#1B1818]"
+                className="flex-1 h-11 rounded-full bg-obsidian text-ink-inverse text-[13.5px] font-semibold hover:bg-ink-primary"
               >
                 Sign up
               </button>

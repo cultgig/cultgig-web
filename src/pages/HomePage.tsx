@@ -56,14 +56,14 @@ const iconMap: Record<CreativeCategory["iconName"], typeof Music> = {
 };
 
 const cardSurfaceTones = [
-  "bg-[#421A3D]",
-  "bg-[#54234E]",
-  "bg-[#3B2639]",
-  "bg-[#6A2E62]",
-  "bg-[#2F1D2E]",
-  "bg-[#5A3248]",
-  "bg-[#472540]",
-  "bg-[#3E2438]",
+  "bg-brand-pressed",
+  "bg-brand-hover",
+  "bg-ink-primary",
+  "bg-brand",
+  "bg-obsidian",
+  "bg-brand-hover",
+  "bg-brand-pressed",
+  "bg-ink-primary",
 ];
 
 const illustrativeMoments = [
@@ -173,7 +173,7 @@ export function HomePage() {
           />
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-r from-[#181016]/90 via-[#181016]/75 to-[#181016]/45"
+            className="absolute inset-0 bg-gradient-to-r from-obsidian/90 via-obsidian/75 to-obsidian/45"
           />
 
           <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
@@ -195,7 +195,7 @@ export function HomePage() {
                   className="bg-surface rounded-lg p-1.5 shadow-elevated flex flex-col sm:flex-row items-stretch sm:items-center gap-1.5"
                 >
                   <div className="flex-1 flex items-center gap-2.5 px-3 min-w-0">
-                    <Search size={18} className="text-ink-muted shrink-0" aria-hidden="true" />
+                    <Search size={18} className="text-ink-secondary shrink-0" aria-hidden="true" />
                     <label htmlFor="hero-search-input" className="sr-only">
                       Search by artist, creative category, or event type
                     </label>
@@ -251,7 +251,7 @@ export function HomePage() {
                         className="flex items-center justify-between px-3 py-2.5 rounded-md hover:bg-plum-soft text-ink-primary"
                       >
                         <span className="type-body font-medium">{item.label}</span>
-                        <span className="type-caption text-ink-muted">{item.hint}</span>
+                        <span className="type-caption text-ink-secondary">{item.hint}</span>
                       </Link>
                     ))}
                   </div>
@@ -492,7 +492,7 @@ export function HomePage() {
 
           <div className="lg:col-span-5">
             <div className="bg-surface text-ink-primary rounded-lg p-5 shadow-elevated space-y-4">
-              <div className="flex items-center justify-between gap-2 text-ink-muted type-caption">
+              <div className="flex items-center justify-between gap-2 text-ink-secondary type-caption">
                 <span>Illustrative event brief</span>
                 <span>Bandra West · Mumbai</span>
               </div>
@@ -511,7 +511,7 @@ export function HomePage() {
                   />
                   <div>
                     <p className="type-label text-ink-primary">Rhea Kapoor (Sample)</p>
-                    <p className="type-caption text-ink-muted">Proposal v2 · ₹20,500</p>
+                    <p className="type-caption text-ink-secondary">Proposal v2 · ₹20,500</p>
                   </div>
                 </div>
                 <Link
@@ -614,7 +614,7 @@ export function HomePage() {
           />
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-t from-[#181016]/90 via-[#181016]/35 to-transparent"
+            className="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-obsidian/35 to-transparent"
           />
           <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 text-white max-w-[720px] space-y-2">
             <h3 className="text-[20px] sm:text-[26px] leading-[1.25] font-bold text-white">
@@ -657,7 +657,7 @@ export function HomePage() {
                 />
               </div>
               <div className="p-5 space-y-2 flex-1 flex flex-col">
-                <p className="type-caption text-ink-muted">
+                <p className="type-caption text-ink-secondary">
                   {guide.categoryLabel}
                   <span aria-hidden="true"> · </span>
                   {guide.readTime}

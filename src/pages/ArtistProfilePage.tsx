@@ -132,7 +132,7 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
               className="w-20 h-20 rounded-full object-cover border-2 border-surface shadow-card shrink-0"
             />
             <div className="space-y-2">
-              <div className="flex flex-wrap items-center gap-2 text-ink-muted type-caption">
+              <div className="flex flex-wrap items-center gap-2 text-ink-secondary type-caption">
                 <span className="text-plum font-semibold">{category?.label}</span>
                 <span aria-hidden="true">·</span>
                 <span>{artist.verificationLabel}</span>
@@ -154,7 +154,7 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
 
           <div className="flex flex-wrap lg:flex-col items-stretch gap-2.5 shrink-0 lg:min-w-[230px]">
             <div className="bg-plum-soft border border-plum-border rounded-md p-3.5 text-left">
-              <p className="type-caption text-ink-muted">Pricing guide</p>
+              <p className="type-caption text-plum font-medium">Pricing guide</p>
               <p className="text-[20px] leading-[26px] font-bold text-ink-primary tabular-nums">
                 {formatArtistPrice(
                   artist.pricingMode,
@@ -241,7 +241,7 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
           <section className="bg-surface border border-line rounded-lg p-6 space-y-3">
             <h2 className="type-h2 text-ink-primary">About the craft</h2>
             <p className="type-body text-ink-secondary">{artist.bio}</p>
-            <p className="type-body-sm text-ink-muted inline-flex items-center gap-1.5 pt-1">
+            <p className="type-body-sm text-ink-secondary inline-flex items-center gap-1.5 pt-1">
               <Calendar size={14} className="text-plum" aria-hidden="true" />
               {artist.availabilitySummary}
             </p>
@@ -284,7 +284,7 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
                       <h3 className="type-h3 text-ink-primary">{pkg.title}</h3>
-                      <p className="type-body-sm text-ink-muted">Duration: {pkg.duration}</p>
+                      <p className="type-body-sm text-ink-secondary">Duration: {pkg.duration}</p>
                     </div>
                     <p className="type-h3 text-plum tabular-nums">
                       {pkg.priceInr ? formatInr(pkg.priceInr) : "Custom quote"}
@@ -307,7 +307,7 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
                       <p className="type-label text-ink-primary mb-1.5">Not included / host arranges</p>
                       <ul className="space-y-1">
                         {pkg.exclusions.map((exc) => (
-                          <li key={exc} className="type-body-sm text-ink-muted">
+                          <li key={exc} className="type-body-sm text-ink-secondary">
                             · {exc}
                           </li>
                         ))}
