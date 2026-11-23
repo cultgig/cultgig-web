@@ -64,7 +64,7 @@ export function OnboardingChooserPage() {
         <span className="text-brand">{icon}</span>
         <span className="type-h3 text-ink">{title}</span>
         <span className="type-body-sm text-ink-secondary">{body}</span>
-        <span className="mt-2 type-label text-brand">{done ? "Go to workspace →" : viewer.onboarding[role] === "draft" ? "Continue setup →" : "Set up →"}</span>
+        <span className="mt-2 type-label text-brand">{done ? "Go to workspace" : viewer.onboarding[role] === "draft" ? "Continue setup" : "Set up"}</span>
       </Link>
     );
   };
@@ -186,7 +186,7 @@ export function ArtistOnboardingPage() {
   })();
 
   return (
-    <OnboardingFrame title="Set up your artist profile" description="Six short steps. Save a draft any time — nothing is public until you finish.">
+    <OnboardingFrame title="Set up your artist profile" description="Six short steps. Save a draft any time; nothing is public until you finish.">
       <StepProgress steps={ARTIST_STEPS} current={step} />
       <StepCard>
         {step === 0 && (
@@ -364,7 +364,7 @@ export function ArtistOnboardingPage() {
                 <p className="type-h3 text-ink">{data.identity.displayName}</p>
                 <p className="type-body-sm text-ink-secondary">{data.identity.tagline}</p>
                 <p className="type-caption text-ink-secondary">
-                  {categoryLabel(data.identity.primaryCategory)} · {data.personal.city} · {data.identity.experienceYears} years
+                  {categoryLabel(data.identity.primaryCategory)}, {data.personal.city}, {data.identity.experienceYears} years
                 </p>
               </div>
             </div>
@@ -372,7 +372,7 @@ export function ArtistOnboardingPage() {
               {[
                 [Boolean(data.personal.avatarUrl), "Profile photo"],
                 [data.identity.bio.length >= 40, "Bio"],
-                [data.services.length > 0, `${data.services.length} service${data.services.length === 1 ? "" : "s"} · ${previewPrice}`],
+                [data.services.length > 0, `${data.services.length} service${data.services.length === 1 ? "" : "s"}, ${previewPrice}`],
                 [data.portfolio.length >= 3, `${data.portfolio.length} portfolio item${data.portfolio.length === 1 ? "" : "s"}${data.portfolio.length < 3 ? " (3+ recommended)" : ""}`],
                 [true, `${data.availability.unavailableDates.length} blocked date${data.availability.unavailableDates.length === 1 ? "" : "s"}`],
               ].map(([ok, label]) => (
@@ -525,7 +525,7 @@ export function ClientOnboardingPage() {
           <div className="space-y-5">
             <LabeledCheckboxGroup legend="What do you usually hire for?" options={creativeCategories.map((c) => ({ value: c.slug, label: c.shortLabel }))} value={data.profile.hiringInterests} onChange={(v) => setProfile({ hiringInterests: v })} />
             <LabeledCheckboxGroup legend="Typical events" options={eventTypes.map((t) => ({ value: t, label: t }))} value={data.profile.typicalEventTypes} onChange={(v) => setProfile({ typicalEventTypes: v })} />
-            <Field id="cl-budget" label="Typical budget per booking (₹)" hint="Optional — never shown to artists.">
+            <Field id="cl-budget" label="Typical budget per booking (₹)" hint="Optional, never shown to artists">
               <Input id="cl-budget" type="number" min={0} value={data.profile.typicalBudgetInr ?? ""} onChange={(e) => setProfile({ typicalBudgetInr: e.target.value === "" ? null : Number(e.target.value) })} />
             </Field>
           </div>

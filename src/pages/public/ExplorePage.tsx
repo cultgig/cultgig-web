@@ -241,7 +241,7 @@ export function ExplorePage() {
                 <Link to="/client/gigs/new" className="font-semibold text-brand hover:text-brand-hover">
                   Post a gig
                 </Link>{" "}
-                with your date, city and budget — artists will apply with quotes.
+                with your date, city and budget, and artists will apply with quotes.
               </p>
             </div>
           )}

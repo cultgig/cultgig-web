@@ -128,7 +128,7 @@ export function SignInPage() {
 
   return (
     <AuthLayout
-      title="Welcome back"
+      title="Sign in to Cultgig"
       description="Sign in to manage gigs, messages and bookings."
       footer={
         <>
@@ -142,7 +142,7 @@ export function SignInPage() {
       {isDemoMode && backend.auth.signInAsDemoUser && (
         <div className="space-y-2 rounded-xl border border-line-subtle bg-brand-light-subtle p-4">
           <p className="flex items-center gap-1.5 type-label text-ink">
-            <Flask aria-hidden /> Demo mode — try a sample account
+            <Flask aria-hidden /> Try a sample account
           </p>
           <p className="type-caption text-ink-secondary">These are illustrative accounts stored in this browser. No real people or payments.</p>
           <div className="grid gap-2 sm:grid-cols-2">

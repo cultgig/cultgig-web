@@ -151,7 +151,7 @@ function ThreadView({ thread }: { thread: ConversationThread }) {
 
   const respond = async (p: ProposalVersion, response: "accept" | "reject") => {
     const result = await run((b) => b.market.respondToProposal(thread.id, p.id, p.version, response), {
-      success: response === "accept" ? `Proposal v${p.version} accepted — booking created` : `Proposal v${p.version} declined`,
+      success: response === "accept" ? `Proposal v${p.version} accepted, booking created` : `Proposal v${p.version} declined`,
     });
     if (response === "accept" && result) navigate(`/bookings/${result}`);
   };
@@ -177,7 +177,7 @@ function ThreadView({ thread }: { thread: ConversationThread }) {
             {thread.isSample && <DemoBadge />}
           </div>
           <p className="truncate type-caption text-ink-secondary">
-            {thread.subject} · {categoryLabel(thread.category)} · {thread.city}
+            {thread.subject}, {categoryLabel(thread.category)}, {thread.city}
           </p>
         </div>
         <div className="flex items-center gap-1">
@@ -241,7 +241,7 @@ function ThreadView({ thread }: { thread: ConversationThread }) {
         {/* Current offer */}
         {pending && (
           <section aria-label="Current offer" className="space-y-2">
-            <p className="type-label-sm uppercase tracking-wide text-ink-secondary">Current offer</p>
+            <p className="type-label-sm text-ink-secondary">Current offer</p>
             <ProposalCard
               proposal={pending}
               viewerId={viewerId}
@@ -333,7 +333,7 @@ function ThreadView({ thread }: { thread: ConversationThread }) {
                 <li key={m.id} className="flex justify-center">
                   <p className="max-w-md rounded-full bg-surface-low px-3 py-1 text-center type-caption text-ink-secondary">
                     <HandCoins size={12} className="mr-1 inline" aria-hidden />
-                    {m.body} · {formatRelative(m.createdAt)}
+                    {m.body}, {formatRelative(m.createdAt)}
                   </p>
                 </li>
               );
@@ -341,10 +341,10 @@ function ThreadView({ thread }: { thread: ConversationThread }) {
             const mine = m.senderUserId === viewerId;
             return (
               <li key={m.id} className={cn("flex", mine ? "justify-end" : "justify-start")}>
-                <div className={cn("max-w-[85%] rounded-2xl px-3.5 py-2.5 sm:max-w-[70%]", mine ? "rounded-br-sm bg-brand text-ink-inverse" : "rounded-bl-sm border border-line bg-surface text-ink")}>
+                <div className={cn("max-w-[85%] rounded-2xl px-3.5 py-2.5 sm:max-w-[70%]", mine ? "rounded-br-md border border-line-subtle bg-brand-subtle text-ink" : "rounded-bl-md border border-line bg-surface text-ink")}>
                   {!mine && <p className="type-label-sm text-ink-secondary">{m.senderName}</p>}
                   <p className="whitespace-pre-wrap break-words type-body">{m.body}</p>
-                  <p className={cn("mt-1 type-metadata", mine ? "text-ink-inverse/75" : "text-ink-secondary")}>{formatRelative(m.createdAt)}</p>
+                  <p className={cn("mt-1 type-metadata", "text-ink-secondary")}>{formatRelative(m.createdAt)}</p>
                 </div>
               </li>
             );
@@ -387,7 +387,7 @@ function ThreadView({ thread }: { thread: ConversationThread }) {
             <PaperPlaneRight weight="fill" aria-hidden />
           </Button>
         </form>
-        <p className="mt-1.5 hidden type-metadata text-ink-secondary sm:block">Enter to send · Shift + Enter for a new line · Keep payments on Cultgig.</p>
+        <p className="mt-2 hidden gap-4 type-metadata text-ink-secondary sm:flex"><span><kbd className="rounded border border-line bg-surface-low px-1 font-sans">Enter</kbd> sends</span><span><kbd className="rounded border border-line bg-surface-low px-1 font-sans">Shift</kbd> + <kbd className="rounded border border-line bg-surface-low px-1 font-sans">Enter</kbd> adds a line</span><span>Keep payments on Cultgig</span></p>
       </div>
 
       <ProposalComposer

@@ -19,7 +19,7 @@ function Row({ thread, viewerId }: { thread: ConversationThread; viewerId: strin
       <div className="min-w-0 flex-1">
         <p className="truncate type-h4 text-ink">{thread.subject}</p>
         <p className="type-caption text-ink-secondary">
-          {thread.clientName} · v{latest.version} by {latest.proposedByUserId === viewerId ? "you" : latest.proposedByName} · {formatRelative(latest.createdAt)} · {thread.proposals.length} {thread.proposals.length === 1 ? "version" : "versions"}
+          {thread.clientName}, v{latest.version} by {latest.proposedByUserId === viewerId ? "you" : latest.proposedByName}, {formatRelative(latest.createdAt)}, {thread.proposals.length} {thread.proposals.length === 1 ? "version" : "versions"}
         </p>
       </div>
       <span className="type-label tabular-nums text-ink">{formatPaise(latest.amountPaise)}</span>
@@ -65,7 +65,7 @@ export default function ArtistProposalsPage() {
           <ul className="space-y-2">
             {noOffer.map((t) => (
               <li key={t.id} className="flex items-center justify-between gap-3 rounded-lg border border-line p-3">
-                <span className="truncate type-body-sm text-ink">{t.subject} · {t.clientName}</span>
+                <span className="truncate type-body-sm text-ink">{t.subject}, {t.clientName}</span>
                 <Button asChild size="sm"><Link to={`/messages/${t.id}`}>Send offer</Link></Button>
               </li>
             ))}

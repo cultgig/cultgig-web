@@ -35,7 +35,7 @@ export default function ClientPaymentsPage() {
             <TableBody>
               {mine.map((b) => (
                 <TableRow key={b.id}>
-                  <TableCell><Link to={`/bookings/${b.id}`} className="text-brand hover:underline">{b.title}</Link><span className="block type-caption text-ink-secondary">{b.artistName} · v{b.acceptedProposalVersion}</span></TableCell>
+                  <TableCell><Link to={`/bookings/${b.id}`} className="text-brand hover:underline">{b.title}</Link><span className="block type-caption text-ink-secondary">{b.artistName}, v{b.acceptedProposalVersion}</span></TableCell>
                   <TableCell className="whitespace-nowrap">{formatDate(b.eventDate)}</TableCell>
                   <TableCell><BookingStatusBadge status={b.status} /></TableCell>
                   <TableCell><PaymentStatusBadge status={b.paymentStatus} /></TableCell>

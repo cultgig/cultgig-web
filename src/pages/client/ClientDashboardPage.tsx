@@ -34,7 +34,7 @@ export default function ClientDashboardPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title={`Hi, ${viewer.displayName.split(" ")[0]}`}
+        title="Dashboard"
         description="Your gigs, offers and bookings at a glance."
         actions={
           <>
@@ -46,12 +46,12 @@ export default function ClientDashboardPage() {
 
       {pendingOffers.length > 0 && (
         <NoticeBanner tone="warning" title={`${pendingOffers.length} ${pendingOffers.length === 1 ? "artist has" : "artists have"} sent you an offer`}>
-          <Link to={`/messages/${pendingOffers[0].id}`} className="font-semibold text-brand">Review offer from {pendingOffers[0].artistName} →</Link>
+          <Link to={`/messages/${pendingOffers[0].id}`} className="font-medium text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand">Review the offer from {pendingOffers[0].artistName}</Link>
         </NoticeBanner>
       )}
       {needsCompletion.length > 0 && (
         <NoticeBanner title="Confirm completed work">
-          {needsCompletion[0].artistName} marked “{needsCompletion[0].title}” as delivered. <Link to={`/bookings/${needsCompletion[0].id}`} className="font-semibold text-brand">Confirm completion →</Link>
+          {needsCompletion[0].artistName} marked “{needsCompletion[0].title}” as delivered. <Link to={`/bookings/${needsCompletion[0].id}`} className="font-medium text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand">Confirm completion</Link>
         </NoticeBanner>
       )}
 
@@ -82,7 +82,7 @@ export default function ClientDashboardPage() {
                     <Link to={`/client/gigs/${g.id}`} className="flex items-center gap-3 py-2.5 hover:text-brand">
                       <span className="min-w-0 flex-1">
                         <span className="block truncate type-body font-medium text-ink">{g.title}</span>
-                        <span className="type-caption text-ink-secondary">{formatDate(g.eventDate)} · {count} {count === 1 ? "applicant" : "applicants"}</span>
+                        <span className="type-caption text-ink-secondary">{formatDate(g.eventDate)}, {count} {count === 1 ? "applicant" : "applicants"}</span>
                       </span>
                       <GigStatusBadge status={g.status} />
                     </Link>

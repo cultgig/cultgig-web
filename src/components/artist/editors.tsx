@@ -192,7 +192,7 @@ export function ServiceList({
           <div className="min-w-0">
             <p className="type-h4 text-ink">{s.title}</p>
             <p className="type-caption text-ink-secondary">
-              {s.duration} · {s.priceInr === null ? "Quotation-based" : `${pricingLabels[s.pricingMode]}: ${formatInr(s.priceInr)}`}
+              {s.duration}, {s.priceInr === null ? "Quotation-based" : `${pricingLabels[s.pricingMode]}: ${formatInr(s.priceInr)}`}
             </p>
           </div>
           <div className="flex gap-1">
@@ -304,7 +304,7 @@ export function PortfolioAddDialog({ open, onOpenChange, onAdd }: { open: boolea
               <label htmlFor="pf-file" className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border border-dashed border-line-strong bg-surface-low p-8 text-center hover:bg-surface-container">
                 <ImageSquare size={28} className="text-ink-secondary" aria-hidden />
                 <span className="type-label text-ink">{processing ? "Processing…" : "Choose an image"}</span>
-                <span className="type-caption text-ink-secondary">JPG, PNG or WebP · up to 10 MB</span>
+                <span className="type-caption text-ink-secondary">JPG, PNG or WebP, up to 10 MB</span>
               </label>
             )}
           </div>

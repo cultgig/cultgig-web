@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from "react";
-import { CalendarBlank, Star } from "@phosphor-icons/react";
+import { ArrowLeft, CalendarBlank, Star } from "@phosphor-icons/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -13,20 +13,26 @@ import { formatDate, parseDateOnly, toDateOnly } from "@/utils/format";
 export function PageHeader({
   title,
   description,
-  eyebrow,
+  back,
   actions,
   className,
 }: {
   title: string;
   description?: ReactNode;
-  eyebrow?: ReactNode;
+  /** A link back to the parent list, shown above the title. */
+  back?: { to: string; label: string };
   actions?: ReactNode;
   className?: string;
 }) {
   return (
     <div className={cn("flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between", className)}>
-      <div className="min-w-0 space-y-1">
-        {eyebrow && <div className="type-label text-ink-secondary">{eyebrow}</div>}
+      <div className="min-w-0 space-y-2">
+        {back && (
+          <Link to={back.to} className="-ml-1 inline-flex items-center gap-1.5 rounded-md px-1 py-0.5 type-label text-ink-secondary transition-colors hover:text-ink">
+            <ArrowLeft size={16} aria-hidden />
+            {back.label}
+          </Link>
+        )}
         <h1 className="type-h1 text-ink-strong">{title}</h1>
         {description && <div className="max-w-2xl type-body text-ink-secondary">{description}</div>}
       </div>
@@ -37,11 +43,11 @@ export function PageHeader({
 
 export function SectionCard({ title, description, actions, children, className }: { title?: string; description?: ReactNode; actions?: ReactNode; children: ReactNode; className?: string }) {
   return (
-    <section className={cn("min-w-0 rounded-xl border border-line bg-surface p-5 shadow-xs sm:p-6", className)}>
+    <section className={cn("min-w-0 rounded-xl border border-line bg-surface p-5 sm:p-6", className)}>
       {(title || actions) && (
         <div className="mb-4 flex items-start justify-between gap-3">
           <div className="space-y-0.5">
-            {title && <h2 className="type-h3 text-ink">{title}</h2>}
+            {title && <h2 className="type-h3 text-ink-strong">{title}</h2>}
             {description && <p className="type-body-sm text-ink-secondary">{description}</p>}
           </div>
           {actions}
@@ -104,7 +110,7 @@ export function RatingStars({ value, count, size = 14 }: { value: number; count?
   return (
     <span className="inline-flex items-center gap-1" aria-label={`Rated ${value} out of 5${count ? ` from ${count} review${count === 1 ? "" : "s"}` : ""}`}>
       <Star size={size} weight="fill" className="text-brand-tertiary" aria-hidden />
-      <span className="type-label text-ink">{value.toFixed(1)}</span>
+      <span className="figure type-label text-ink">{value.toFixed(1)}</span>
       {count !== undefined && <span className="type-caption text-ink-secondary">({count})</span>}
     </span>
   );
@@ -125,7 +131,7 @@ export function RatingInput({ id, label, value, onChange }: { id: string; label:
             aria-checked={value === n}
             aria-label={`${n} star${n === 1 ? "" : "s"}`}
             onClick={() => onChange(n)}
-            className="rounded p-0.5 text-ink-muted hover:text-brand-tertiary focus-visible:outline-2"
+            className="rounded p-0.5 text-ink-muted transition-colors hover:text-brand-tertiary"
           >
             <Star size={22} weight={n <= value ? "fill" : "regular"} className={n <= value ? "text-brand-tertiary" : undefined} aria-hidden />
           </button>
@@ -190,11 +196,13 @@ export function StatTile({ label, value, hint, to }: { label: string; value: Rea
   const body = (
     <>
       <p className="type-label text-ink-secondary">{label}</p>
-      <p className="mt-1 text-2xl font-semibold tabular-nums text-ink-strong">{value}</p>
-      {hint && <p className="mt-0.5 type-caption text-ink-secondary">{hint}</p>}
+      <div>
+        <p className="figure text-[28px] font-medium leading-8 tracking-[-0.02em] text-ink-strong">{value}</p>
+        {hint && <p className="mt-1 type-caption text-ink-secondary">{hint}</p>}
+      </div>
     </>
   );
-  const cls = "block rounded-xl border border-line bg-surface p-4 shadow-xs";
+  const cls = "flex flex-col justify-between gap-2 rounded-xl border border-line bg-surface p-5";
   return to ? (
     <Link to={to} className={cn(cls, "transition-colors hover:bg-surface-low")}>
       {body}

@@ -37,16 +37,14 @@ export function EmptyState({
     <div
       role="status"
       className={cn(
-        "flex flex-col items-center justify-center rounded-xl border border-dashed border-line-strong bg-surface-low text-center",
-        compact ? "gap-2 px-4 py-8" : "gap-3 px-6 py-14",
+        "flex flex-col items-center justify-center rounded-xl border border-line bg-surface-low text-center",
+        compact ? "gap-3 px-4 py-8" : "gap-4 px-6 py-16",
         className,
       )}
     >
-      <span className="flex size-11 items-center justify-center rounded-full bg-surface text-ink-secondary shadow-xs">
-        <IconCmp size={22} aria-hidden />
-      </span>
+      <IconCmp size={28} className="text-ink-secondary" aria-hidden />
       <div className="max-w-md space-y-1">
-        <p className="type-h4 text-ink">{title}</p>
+        <p className="type-h3 text-ink-strong">{title}</p>
         {description && <p className="type-body-sm text-ink-secondary">{description}</p>}
       </div>
       {(action || secondaryAction) && (
@@ -64,7 +62,7 @@ export function ErrorState({ title = "Something went wrong", description, onRetr
     <div role="alert" className="flex flex-col items-center gap-3 rounded-xl border border-status-error-border bg-status-error-soft px-6 py-10 text-center">
       <WarningCircle size={28} className="text-status-error" aria-hidden />
       <div className="space-y-1">
-        <p className="type-h4 text-ink">{title}</p>
+        <p className="type-h3 text-ink-strong">{title}</p>
         {description && <p className="type-body-sm text-ink-secondary">{description}</p>}
       </div>
       {onRetry && (
@@ -115,10 +113,9 @@ export function NotFoundState({
 }) {
   return (
     <div className="page-container flex min-h-[55vh] flex-col items-center justify-center gap-4 py-16 text-center">
-      <p className="type-label text-brand">404</p>
-      <h1 className="type-h1 text-ink-strong">{title}</h1>
-      <p className="max-w-lg type-body text-ink-secondary">{description}</p>
-      <div className="flex flex-wrap justify-center gap-2">
+      <h1 className="type-title text-ink-strong">{title}</h1>
+      <p className="max-w-lg type-body-lg text-ink-secondary">{description}</p>
+      <div className="flex flex-wrap justify-center gap-3 pt-2">
         <Button asChild>
           <Link to={backTo}>{backLabel}</Link>
         </Button>

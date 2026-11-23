@@ -12,7 +12,7 @@ import type { ArtistProfile } from "@/types/marketplace";
 
 export function priceLabel(artist: Pick<ArtistProfile, "pricingMode" | "startingPriceInr" | "priceMaxInr">): string {
   if (artist.pricingMode === "quote_required" || artist.startingPriceInr === null) return "Quote on request";
-  if (artist.pricingMode === "range" && artist.priceMaxInr) return `${formatInr(artist.startingPriceInr)}–${formatInr(artist.priceMaxInr)}`;
+  if (artist.pricingMode === "range" && artist.priceMaxInr) return `${formatInr(artist.startingPriceInr)} to ${formatInr(artist.priceMaxInr)}`;
   if (artist.pricingMode === "fixed_package") return `${formatInr(artist.startingPriceInr)} package`;
   return `From ${formatInr(artist.startingPriceInr)}`;
 }
@@ -55,36 +55,36 @@ export function ArtistCard({ artist }: { artist: ArtistProfile }) {
   const featured = artist.portfolio.find((p) => p.featured && p.type === "image") ?? artist.portfolio.find((p) => p.type === "image");
   const cover = featured?.mediaUrl ?? artist.coverUrl;
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-xl border border-line bg-surface shadow-xs transition-shadow hover:shadow-md">
+    <article className="group relative flex flex-col overflow-hidden rounded-xl border border-line bg-surface transition-colors hover:border-line-strong has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-line-focus">
       <div className="relative aspect-[4/3] overflow-hidden bg-surface-container">
-        <SafeImage src={cover} alt={featured?.title ?? artist.coverAlt} className="size-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
-        <div className="absolute right-3 top-3">
+        <SafeImage src={cover} alt={featured?.title ?? artist.coverAlt} className="size-full object-cover transition-transform duration-enter group-hover:scale-[1.02]" />
+        <div className="absolute right-3 top-3 z-10">
           <SaveArtistButton artistId={artist.id} />
         </div>
         {artist.isSample && <DemoBadge className="absolute left-3 top-3" />}
       </div>
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        <div className="flex items-center gap-2.5">
-          <UserAvatar name={artist.displayName} src={artist.avatarUrl} className="size-8" />
+      <div className="flex flex-1 flex-col gap-3 p-5">
+        <div className="flex items-center gap-3">
+          <UserAvatar name={artist.displayName} src={artist.avatarUrl} className="size-9" />
           <div className="min-w-0">
-            <h3 className="truncate type-h4 text-ink">
+            <h3 className="truncate type-h4 text-ink-strong">
               <Link to={`/artists/${artist.slug}`} className="after:absolute after:inset-0 focus-visible:outline-none">
                 {artist.displayName}
               </Link>
             </h3>
             <p className="truncate type-caption text-ink-secondary">
-              {category?.label ?? "Creative professional"} · {artist.artistFormat === "group" ? "Group" : "Solo"}
+              {category?.label ?? "Creative professional"}, {artist.artistFormat === "group" ? "Group" : "Solo"}
             </p>
           </div>
         </div>
         <p className="line-clamp-2 type-body-sm text-ink-secondary">{artist.tagline}</p>
-        <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-2">
-          <span className="inline-flex items-center gap-1 type-caption text-ink-secondary">
-            <MapPin size={14} aria-hidden /> {artist.city} · {artist.experienceYears} yrs
-          </span>
+        <p className="inline-flex items-center gap-1.5 type-caption text-ink-secondary">
+          <MapPin size={14} className="shrink-0" aria-hidden /> {artist.city}, {artist.experienceYears} yrs experience
+        </p>
+        <div className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-line pt-3">
+          <p className="figure type-label text-ink-strong">{priceLabel(artist)}</p>
           {rating ? <RatingStars value={rating.average} count={rating.count} /> : <span className="type-caption text-ink-secondary">No reviews yet</span>}
         </div>
-        <p className="type-label text-ink">{priceLabel(artist)}</p>
       </div>
     </article>
   );

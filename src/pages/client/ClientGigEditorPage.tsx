@@ -122,7 +122,7 @@ export default function ClientGigEditorPage({ gigId }: { gigId?: string }) {
     }
     setBusy(true);
     const payload = d.budgetMode === "fixed" ? { ...d, budgetMinInr: d.budgetMaxInr } : d.budgetMode === "open_to_quotes" ? { ...d, budgetMinInr: null, budgetMaxInr: null } : d;
-    const saved = await run((b) => b.market.saveGig(payload, { gigId, publish }), { success: publish ? (isLive ? "Gig updated" : "Gig published — artists can now apply") : "Draft saved" });
+    const saved = await run((b) => b.market.saveGig(payload, { gigId, publish }), { success: publish ? (isLive ? "Gig updated" : "Gig published, artists can now apply") : "Draft saved" });
     setBusy(false);
     if (saved) navigate(`/client/gigs/${saved.id}`, { replace: true });
   };
@@ -229,7 +229,7 @@ export default function ClientGigEditorPage({ gigId }: { gigId?: string }) {
                 { label: "Date and time", value: d.eventDate ? `${formatDate(d.eventDate)}, ${formatTime24(d.startTime)}–${formatTime24(d.endTime)}` : "" },
                 { label: "Location", value: d.workingMode === "remote" ? "Remote" : [d.venueArea, d.city].filter(Boolean).join(", ") },
                 { label: "Artists needed", value: String(d.artistsNeeded) },
-                { label: "Budget", value: `${budgetLabel(d)}${d.travelCovered ? " · travel covered" : ""}` },
+                { label: "Budget", value: `${budgetLabel(d)}${d.travelCovered ? ", travel covered" : ""}` },
                 { label: "Apply by", value: formatDate(d.applicationDeadline) },
                 { label: "Deliverables", value: d.deliverables },
               ]}

@@ -220,6 +220,9 @@ export const categoryImages: Record<string, ImageAsset> = {
   mural: imageManifest.categoryMural,
   saree: imageManifest.categorySaree,
   emcee: imageManifest.categoryEmcee,
+  /* Distinct photographs for the three music categories, so the category grid never repeats one. */
+  bands: imageManifest.pageArtists,
+  djs: imageManifest.pageHowItWorks,
 };
 
 export const pageImages = {

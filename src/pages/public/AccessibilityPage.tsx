@@ -6,7 +6,7 @@ export function AccessibilityPage() {
   usePageMeta("Accessibility statement", "Cultgig's commitment to an accessible marketplace.");
   return (
     <main id="main-content" className="page-container max-w-3xl space-y-6 py-10">
-      <PageHeader title="Accessibility statement" description="We want everyone — artists and clients — to be able to use Cultgig." />
+      <PageHeader title="Accessibility statement" description="We want every artist and every client to be able to use Cultgig." />
       <section className="space-y-3 type-body text-ink-secondary">
         <h2 className="type-h3 text-ink">Our target</h2>
         <p>Cultgig aims to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA.</p>
@@ -15,7 +15,7 @@ export function AccessibilityPage() {
           <li>Semantic headings, landmarks and a “Skip to main content” link on every page.</li>
           <li>Every control works with a keyboard and shows a visible focus outline.</li>
           <li>Dialogs, menus and tabs follow WAI-ARIA patterns and keep focus where you expect.</li>
-          <li>Status is never shown by colour alone — badges always include text and an icon.</li>
+          <li>Status is never shown by colour alone: badges always include text and an icon.</li>
           <li>Text and interface colours are chosen to meet contrast requirements.</li>
           <li>Animations are reduced when your device asks for reduced motion.</li>
           <li>Form errors are announced to screen readers and explained in plain language.</li>

@@ -43,7 +43,7 @@ export function BookingRow({ booking, role }: { booking: BookingRecord; role: Ma
   return (
     <Link to={`/bookings/${booking.id}`} className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-4 transition-colors hover:bg-surface-low sm:flex-row sm:items-center">
       <div className="flex w-16 shrink-0 flex-col items-center rounded-lg bg-surface-low py-2">
-        <span className="type-label-sm uppercase text-ink-secondary">{new Date(`${booking.eventDate}T00:00`).toLocaleString("en-IN", { month: "short" })}</span>
+        <span className="type-label-sm text-ink-secondary">{new Date(`${booking.eventDate}T00:00`).toLocaleString("en-IN", { month: "short" })}</span>
         <span className="text-xl font-semibold text-ink-strong">{booking.eventDate.slice(8)}</span>
       </div>
       <div className="min-w-0 flex-1">
@@ -52,8 +52,8 @@ export function BookingRow({ booking, role }: { booking: BookingRecord; role: Ma
           {booking.isSample && <DemoBadge />}
         </div>
         <p className="type-body-sm text-ink-secondary">
-          with {other} · {booking.city}
-          {days >= 0 && booking.status !== "completed" && booking.status !== "cancelled" ? ` · ${days === 0 ? "today" : `in ${days} day${days === 1 ? "" : "s"}`}` : ""}
+          with {other}, {booking.city}
+          {days >= 0 && booking.status !== "completed" && booking.status !== "cancelled" ? `, ${days === 0 ? "today" : `in ${days} day${days === 1 ? "" : "s"}`}` : ""}
         </p>
       </div>
       <div className="flex flex-wrap items-center gap-2 sm:flex-col sm:items-end">
@@ -135,8 +135,8 @@ function Timeline({ booking }: { booking: BookingRecord }) {
               </p>
               {event && (
                 <p className="type-caption text-ink-secondary">
-                  {event.actorName} · {formatRelative(event.createdAt)}
-                  {event.note && ` · ${event.note}`}
+                  {event.actorName}, {formatRelative(event.createdAt)}
+                  {event.note && <span className="block">{event.note}</span>}
                 </p>
               )}
             </div>
@@ -165,7 +165,7 @@ function ReviewForm({ booking }: { booking: BookingRecord }) {
     if (Object.values(ratings).some((v) => v === 0)) return setError("Rate every category.");
     if (text.trim().length < 20) return setError("Write at least 20 characters.");
     setError("");
-    await run((b) => b.market.submitReview(booking.id, ratings, text), { success: "Thanks — your review is published." });
+    await run((b) => b.market.submitReview(booking.id, ratings, text), { success: "Thanks, your review is published" });
   };
   return (
     <SectionCard title={`Review ${booking.artistName}`} description="Only clients with a completed booking can leave a review. It appears on the artist's profile as a verified booking.">
@@ -199,7 +199,7 @@ export function BookingDetailPage({ bookingId }: { bookingId: string }) {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow={<Link to={role === "client" ? "/client/bookings" : "/artist/bookings"} className="hover:text-ink">← All bookings</Link>}
+        back={{ to: role === "client" ? "/client/bookings" : "/artist/bookings", label: "All bookings" }}
         title={booking.title}
         description={
           <span className="flex flex-wrap items-center gap-2">

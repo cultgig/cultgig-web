@@ -69,7 +69,7 @@ export function WorkspaceShell({ role, children }: { role: MarketplaceRole; chil
   return (
     <div className="page-container flex gap-8 pb-24 pt-6 lg:pb-12">
       <aside className="sticky top-[calc(var(--header-height)+24px)] hidden h-fit w-60 shrink-0 lg:block" aria-label={`${role === "artist" ? "Artist" : "Client"} workspace`}>
-        <p className="mb-2 px-3 type-label-sm uppercase tracking-wide text-ink-secondary">{role === "artist" ? "Artist workspace" : "Client workspace"}</p>
+        <p className="mb-2 px-3 type-label-sm text-ink-secondary">{role === "artist" ? "Artist workspace" : "Client workspace"}</p>
         <nav className="space-y-0.5">
           {items.map((item) => (
             <NavLink key={item.path} item={item} pathname={pathname} count={item.badge ? badges[item.badge] : 0} />

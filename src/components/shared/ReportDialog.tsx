@@ -29,7 +29,7 @@ export function ReportDialog({ targetType, targetId, targetLabel, trigger }: { t
       setError("Choose a reason.");
       return;
     }
-    const ok = await run((b) => b.market.report({ targetType, targetId, reason, details }).then(() => true), { success: "Thanks — our trust & safety team will review this report." });
+    const ok = await run((b) => b.market.report({ targetType, targetId, reason, details }).then(() => true), { success: "Thanks. Our trust & safety team will review this report." });
     if (ok) {
       setOpen(false);
       setReason("");
