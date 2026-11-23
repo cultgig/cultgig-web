@@ -35,10 +35,10 @@ export function DemoModeControl() {
       <PopoverTrigger asChild>
         <button
           type="button"
-          className="fixed bottom-20 left-3 z-overlay inline-flex items-center gap-1.5 rounded-full border border-line-subtle bg-brand-light px-3 py-1.5 type-label-sm text-ink shadow-md hover:bg-brand-light-hover lg:bottom-4"
+          className="fixed bottom-20 left-3 z-overlay inline-flex items-center gap-1.5 rounded-full border border-line-subtle bg-brand-light p-2 type-label-sm text-ink shadow-md hover:bg-brand-light-hover lg:bottom-4 lg:px-3 lg:py-1.5"
           aria-label="Demo mode options"
         >
-          <Flask size={14} weight="bold" aria-hidden /> Demo mode
+          <Flask size={16} weight="bold" aria-hidden /> <span className="hidden lg:inline">Demo mode</span>
         </button>
       </PopoverTrigger>
       <PopoverContent side="top" align="start" className="w-80 space-y-3">

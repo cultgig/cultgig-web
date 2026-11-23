@@ -1,4 +1,4 @@
-import { Suspense, useMemo } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DemoModeControl } from "@/components/layout/DemoModeControl";
@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ErrorBoundary, PageSkeleton } from "@/components/shared/states";
 import { RouterProvider, useRouter } from "@/lib/router";
-import { initBackend } from "@/services/backend";
+import { initBackend, type BackendInit } from "@/services/backend";
 import { MarketplaceProvider } from "@/state/MarketplaceContext";
 import { ConfigurationErrorPage } from "@/pages/shared/ConfigurationErrorPage";
 import { resolveRoute } from "./routes";
@@ -37,7 +37,15 @@ function Shell() {
 }
 
 export default function App() {
-  const init = useMemo(() => initBackend(), []);
+  const [init, setInit] = useState<BackendInit | null>(null);
+  useEffect(() => {
+    let active = true;
+    void initBackend().then((result) => active && setInit(result));
+    return () => {
+      active = false;
+    };
+  }, []);
+  if (!init) return <div className="min-h-screen bg-background" aria-busy="true" aria-label="Loading Cultgig" />;
   if (!init.ok) return <ConfigurationErrorPage reason={init.reason} />;
   return (
     <RouterProvider>

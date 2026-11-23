@@ -1,33 +1,38 @@
-import { lazy, type ReactNode } from "react";
+import { lazy, type ComponentType, type ReactNode } from "react";
+import { legalKinds, type LegalKind } from "@/pages/public/legalKinds";
 import { matchPath, Navigate } from "@/lib/router";
 import { NotFoundState } from "@/components/shared/states";
 import { RequireAuth, RequireRole } from "./guards";
 import { HomePage } from "@/pages/public/HomePage";
-import { ExplorePage } from "@/pages/public/ExplorePage";
-import { CategoriesIndexPage, CategoryDetailPage } from "@/pages/public/CategoriesPages";
-import { ArtistProfilePage } from "@/pages/public/ArtistProfilePage";
-import {
-  AboutPage,
-  FaqPage,
-  ForArtistsPage,
-  ForBusinessesPage,
-  GuideDetailPage,
-  GuidesIndexPage,
-  HowItWorksPage,
-  PricingPage,
-  TrustAndSafetyPage,
-} from "@/pages/public/MarketingPages";
-import { LegalDocumentPage, legalKinds, type LegalKind } from "@/pages/public/LegalPages";
-import { SupportPage } from "@/pages/public/SupportPage";
-import { AccessibilityPage } from "@/pages/public/AccessibilityPage";
-import {
-  AuthCallbackPage,
-  ForgotPasswordPage,
-  ResetPasswordPage,
-  SignInPage,
-  SignUpPage,
-  VerifyEmailPage,
-} from "@/pages/auth/AuthPages";
+function named<P extends object = object>(loader: () => Promise<Record<string, unknown>>, name: string) {
+  return lazy(async () => ({ default: (await loader())[name] as ComponentType<P> }));
+}
+
+// Public pages beyond the homepage are code-split too, keeping the first load small.
+const ExplorePage = named(() => import("@/pages/public/ExplorePage"), "ExplorePage");
+const CategoriesIndexPage = named(() => import("@/pages/public/CategoriesPages"), "CategoriesIndexPage");
+const CategoryDetailPage = named<{ slug: string }>(() => import("@/pages/public/CategoriesPages"), "CategoryDetailPage");
+const ArtistProfilePage = named<{ slug: string }>(() => import("@/pages/public/ArtistProfilePage"), "ArtistProfilePage");
+const marketing = () => import("@/pages/public/MarketingPages");
+const AboutPage = named(marketing, "AboutPage");
+const FaqPage = named(marketing, "FaqPage");
+const ForArtistsPage = named(marketing, "ForArtistsPage");
+const ForBusinessesPage = named(marketing, "ForBusinessesPage");
+const GuideDetailPage = named<{ slug: string }>(marketing, "GuideDetailPage");
+const GuidesIndexPage = named(marketing, "GuidesIndexPage");
+const HowItWorksPage = named(marketing, "HowItWorksPage");
+const PricingPage = named(marketing, "PricingPage");
+const TrustAndSafetyPage = named(marketing, "TrustAndSafetyPage");
+const LegalDocumentPage = named<{ kind: LegalKind }>(() => import("@/pages/public/LegalPages"), "LegalDocumentPage");
+const SupportPage = named(() => import("@/pages/public/SupportPage"), "SupportPage");
+const AccessibilityPage = named(() => import("@/pages/public/AccessibilityPage"), "AccessibilityPage");
+const auth = () => import("@/pages/auth/AuthPages");
+const AuthCallbackPage = named(auth, "AuthCallbackPage");
+const ForgotPasswordPage = named(auth, "ForgotPasswordPage");
+const ResetPasswordPage = named(auth, "ResetPasswordPage");
+const SignInPage = named(auth, "SignInPage");
+const SignUpPage = named(auth, "SignUpPage");
+const VerifyEmailPage = named(auth, "VerifyEmailPage");
 
 // Signed-in areas are code-split so public visitors don't download workspace code.
 const OnboardingChooser = lazy(() => import("@/pages/auth/OnboardingPages").then((m) => ({ default: m.OnboardingChooserPage })));

@@ -37,7 +37,7 @@ export function PageHeader({
 
 export function SectionCard({ title, description, actions, children, className }: { title?: string; description?: ReactNode; actions?: ReactNode; children: ReactNode; className?: string }) {
   return (
-    <section className={cn("rounded-xl border border-line bg-surface p-5 shadow-xs sm:p-6", className)}>
+    <section className={cn("min-w-0 rounded-xl border border-line bg-surface p-5 shadow-xs sm:p-6", className)}>
       {(title || actions) && (
         <div className="mb-4 flex items-start justify-between gap-3">
           <div className="space-y-0.5">

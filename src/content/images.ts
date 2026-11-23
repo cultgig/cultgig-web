@@ -2,7 +2,6 @@ import heroPerformance from "../assets/images/hero-performance.jpg";
 import categoryMusicians from "../assets/images/category-musicians.jpg";
 import categoryPhotographers from "../assets/images/category-photographers.jpg";
 import categoryDecorators from "../assets/images/category-decorators.jpg";
-import categoryBeautyDance from "../assets/images/category-beauty-dance.jpg";
 import pageAbout from "../assets/images/page-about.jpg";
 import pageStory from "../assets/images/page-story.jpg";
 import pageArtists from "../assets/images/page-artists.jpg";
@@ -14,10 +13,11 @@ import creatorMeera from "../assets/images/creator-meera.jpg";
 import creatorNaina from "../assets/images/creator-naina.jpg";
 import creatorKabir from "../assets/images/creator-kabir.jpg";
 
-const categoryMehendi = categoryBeautyDance;
-const categoryMural = categoryDecorators;
-const categorySaree = creatorNaina;
-const categoryEmcee = pageHowItWorks;
+import categoryMehendi from "../assets/images/category-mehendi.jpg";
+import categoryMural from "../assets/images/category-mural.jpg";
+import categorySaree from "../assets/images/category-saree.jpg";
+import categoryDanceClassical from "../assets/images/category-dance-classical.jpg";
+import heroWeddingDhol from "../assets/images/hero-wedding-dhol.jpg";
 const guideCreativeBrief = pageBusinesses;
 
 export interface ImageAsset {
@@ -31,9 +31,17 @@ export interface ImageAsset {
 }
 
 export const imageManifest = {
+  heroWeddingDhol: {
+    src: heroWeddingDhol,
+    alt: "Dhol drummers performing under marigold décor at an Indian wedding celebration",
+    source: "https://www.pexels.com/photo/people-dancing-with-drum-beats-4552397/",
+    licenceBasis: "Pexels License (free commercial use, no attribution required)",
+    acquiredAt: "2026-11-23",
+    cropIntent: "hero",
+  },
   heroPerformance: {
     src: heroPerformance,
-    alt: "Live singer and musician performing under warm stage lights in front of an audience",
+    alt: "Performer on a lit stage in front of a cheering crowd",
     source: "Cultgig repository asset",
     licenceBasis: "Owner-supplied repository asset",
     acquiredAt: "2026-08-19",
@@ -41,7 +49,7 @@ export const imageManifest = {
   },
   categoryMusicians: {
     src: categoryMusicians,
-    alt: "Acoustic guitarist and vocalist performing live with microphone",
+    alt: "Close-up of a vintage microphone under warm stage lights",
     source: "Cultgig repository asset",
     licenceBasis: "Owner-supplied repository asset",
     acquiredAt: "2026-08-19",
@@ -50,7 +58,7 @@ export const imageManifest = {
   },
   categoryPhotographers: {
     src: categoryPhotographers,
-    alt: "Event photographer capturing candid cultural celebration moments",
+    alt: "Photographer holding a camera up against a bright sky",
     source: "Cultgig repository asset",
     licenceBasis: "Owner-supplied repository asset",
     acquiredAt: "2026-08-19",
@@ -59,69 +67,69 @@ export const imageManifest = {
   },
   categoryDecorators: {
     src: categoryDecorators,
-    alt: "Event decorator arranging florals and warm ambient lighting",
+    alt: "Bride holding a bouquet of flowers in soft evening light",
     source: "Cultgig repository asset",
     licenceBasis: "Owner-supplied repository asset",
     acquiredAt: "2026-08-19",
     cropIntent: "landscape",
     category: "Decorators & florists",
   },
-  categoryBeautyDance: {
-    src: categoryBeautyDance,
-    alt: "Makeup artist and dancer preparing backstage for a live performance",
-    source: "Cultgig repository asset",
-    licenceBasis: "Owner-supplied repository asset",
-    acquiredAt: "2026-08-19",
+  categoryDanceClassical: {
+    src: categoryDanceClassical,
+    alt: "Indian classical dancer in a red and green costume performing on stage",
+    source: "https://www.pexels.com/photo/a-woman-in-green-and-red-dress-smiling-14602476/",
+    licenceBasis: "Pexels License (free commercial use, no attribution required)",
+    acquiredAt: "2026-11-23",
     cropIntent: "landscape",
     category: "Dance & choreography",
   },
   categoryMehendi: {
     src: categoryMehendi,
-    alt: "Indian mehendi artist applying intricate henna design in warm courtyard daylight",
-    source: "Generated editorial asset",
-    licenceBasis: "Project-generated editorial illustration",
-    acquiredAt: "2026-11-17",
+    alt: "Bride's hands with intricate mehendi, red bangles and gold jewellery",
+    source: "https://www.pexels.com/photo/34245192/",
+    licenceBasis: "Pexels License (free commercial use, no attribution required)",
+    acquiredAt: "2026-11-23",
     cropIntent: "landscape",
     category: "Mehendi artists",
   },
   categoryMural: {
     src: categoryMural,
-    alt: "Indian muralist painting a contemporary artwork on a textured brick wall",
-    source: "Generated editorial asset",
-    licenceBasis: "Project-generated editorial illustration",
-    acquiredAt: "2026-11-17",
+    alt: "Artist painting a large mural on an outdoor wall",
+    source: "https://www.pexels.com/photo/photo-of-woman-painting-on-wall-1340502/",
+    licenceBasis: "Pexels License (free commercial use, no attribution required)",
+    acquiredAt: "2026-11-23",
     cropIntent: "landscape",
     category: "Wall art & murals",
   },
   categorySaree: {
     src: categorySaree,
-    alt: "Wardrobe stylist carefully draping pleats on a handloom silk saree",
-    source: "Generated editorial asset",
-    licenceBasis: "Project-generated editorial illustration",
-    acquiredAt: "2026-11-17",
+    alt: "Woman wearing a green and red silk saree with a draped pallu",
+    source: "https://www.pexels.com/photo/woman-in-traditional-indian-saree-at-market-28943572/",
+    licenceBasis: "Pexels License (free commercial use, no attribution required)",
+    acquiredAt: "2026-11-23",
     cropIntent: "landscape",
     category: "Saree draping & styling",
   },
   categoryEmcee: {
-    src: categoryEmcee,
-    alt: "Event emcee and stage host speaking with a microphone at an evening gathering",
-    source: "Generated editorial asset",
-    licenceBasis: "Project-generated editorial illustration",
-    acquiredAt: "2026-11-17",
+    src: heroPerformance,
+    alt: "Performer on a lit stage in front of a cheering crowd",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
     cropIntent: "landscape",
     category: "Emcees & event hosts",
   },
   guideCreativeBrief: {
     src: guideCreativeBrief,
-    alt: "Event planner working with floral moodboards, stage notes, and fabric swatches",
-    source: "Generated editorial asset",
-    licenceBasis: "Project-generated editorial illustration",
-    acquiredAt: "2026-11-17",
+    alt: "Long banquet table set with glassware and flowers for an evening event",
+    source: "Cultgig repository asset",
+    licenceBasis: "Owner-supplied repository asset",
+    acquiredAt: "2026-08-19",
     cropIntent: "landscape",
   },
   pageAbout: {
     src: pageAbout,
-    alt: "Creative community gathered at an evening cultural showcase",
+    alt: "Confetti falling over a concert crowd",
     source: "Cultgig repository asset",
     licenceBasis: "Owner-supplied repository asset",
     acquiredAt: "2026-08-19",
@@ -129,7 +137,7 @@ export const imageManifest = {
   },
   pageStory: {
     src: pageStory,
-    alt: "Musician practicing and composing on acoustic guitar",
+    alt: "Close-up of a vintage microphone under warm stage lights",
     source: "Cultgig repository asset",
     licenceBasis: "Owner-supplied repository asset",
     acquiredAt: "2026-08-19",
@@ -137,7 +145,7 @@ export const imageManifest = {
   },
   pageArtists: {
     src: pageArtists,
-    alt: "Performer sharing live work on stage",
+    alt: "Festival crowd under colourful stage lights and confetti",
     source: "Cultgig repository asset",
     licenceBasis: "Owner-supplied repository asset",
     acquiredAt: "2026-08-19",
@@ -145,7 +153,7 @@ export const imageManifest = {
   },
   pageBusinesses: {
     src: pageBusinesses,
-    alt: "Hospitality venue styled for an evening gathering",
+    alt: "Long banquet table set with glassware and flowers for an evening event",
     source: "Cultgig repository asset",
     licenceBasis: "Owner-supplied repository asset",
     acquiredAt: "2026-08-19",
@@ -153,7 +161,7 @@ export const imageManifest = {
   },
   pageHowItWorks: {
     src: pageHowItWorks,
-    alt: "Live cultural event with lighting and performers",
+    alt: "DJ's hand on a mixing deck under purple light",
     source: "Cultgig repository asset",
     licenceBasis: "Owner-supplied repository asset",
     acquiredAt: "2026-08-19",
@@ -161,7 +169,7 @@ export const imageManifest = {
   },
   creatorRhea: {
     src: creatorRhea,
-    alt: "Illustrative artist portrait: vocalist in warm ambient lighting",
+    alt: "Portrait of a woman in soft blue light",
     source: "Cultgig repository asset",
     licenceBasis: "Owner-supplied repository asset",
     acquiredAt: "2026-08-19",
@@ -169,7 +177,7 @@ export const imageManifest = {
   },
   creatorArjun: {
     src: creatorArjun,
-    alt: "Illustrative artist portrait: creative professional in studio lighting",
+    alt: "Portrait of a smiling man",
     source: "Cultgig repository asset",
     licenceBasis: "Owner-supplied repository asset",
     acquiredAt: "2026-08-19",
@@ -177,7 +185,7 @@ export const imageManifest = {
   },
   creatorMeera: {
     src: creatorMeera,
-    alt: "Illustrative artist portrait: photographer holding a camera",
+    alt: "Portrait of a smiling woman in a red top",
     source: "Cultgig repository asset",
     licenceBasis: "Owner-supplied repository asset",
     acquiredAt: "2026-08-19",
@@ -185,7 +193,7 @@ export const imageManifest = {
   },
   creatorNaina: {
     src: creatorNaina,
-    alt: "Illustrative artist portrait: makeup and beauty stylist",
+    alt: "Portrait of a smiling woman in a denim jacket",
     source: "Cultgig repository asset",
     licenceBasis: "Owner-supplied repository asset",
     acquiredAt: "2026-08-19",
@@ -193,7 +201,7 @@ export const imageManifest = {
   },
   creatorKabir: {
     src: creatorKabir,
-    alt: "Illustrative artist portrait: event creative at a venue",
+    alt: "Portrait of a man in a grey sweater",
     source: "Cultgig repository asset",
     licenceBasis: "Owner-supplied repository asset",
     acquiredAt: "2026-08-19",
@@ -201,13 +209,13 @@ export const imageManifest = {
   },
 } satisfies Record<string, ImageAsset>;
 
-export const heroImage = imageManifest.heroPerformance;
+export const heroImage = imageManifest.heroWeddingDhol;
 
 export const categoryImages: Record<string, ImageAsset> = {
   musicians: imageManifest.categoryMusicians,
   photographers: imageManifest.categoryPhotographers,
   decorators: imageManifest.categoryDecorators,
-  beautyDance: imageManifest.categoryBeautyDance,
+  beautyDance: imageManifest.categoryDanceClassical,
   mehendi: imageManifest.categoryMehendi,
   mural: imageManifest.categoryMural,
   saree: imageManifest.categorySaree,
