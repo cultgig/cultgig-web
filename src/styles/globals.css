@@ -1,6 +1,11 @@
 /* Hallmark · checked: 2026-11-23 · genre: editorial (inferred: consumer marketplace) · system: DESIGN.md (locked, olive)
- * floor: see .hallmark/after.txt · fixed: 2a, 10a, 19, 34, 48, 54, 63, 67, F1 · structural: printed in the handoff
+ * floor: 0 FAIL · fixed: 2a, 10a, 19, 28b, 34, 48, 54, 63, 67 · structural: 6b, 42, 58 printed in the handoff
  * built: the project · redesign: polish · unslop: polish · v2.0.0 */
+/* Hallmark · dropped {role === "client" ? "/client/bookings" : "/artist/bookings"} · not removed: the booking back link now renders through PageHeader's back prop, same routes */
+/* Hallmark · dropped "Find an artist" hero button · it duplicated the hero search submit; /explore stays in the nav, the sr-only hero link and "Explore all artists" */
+/* Hallmark · answered F1 · straight apostrophes kept product-wide: the test suite matches them ("We couldn't find that page") and tests are not edited by a redesign */
+/* Hallmark · dismissed 70 · the demo backend really processes inquiries, onboarding and proposals (persisted, rule-checked); success follows a real backend call */
+/* Hallmark · dismissed 58 · the hero paragraph is the owner's copy (two short sentences); a polish does not cut words */
 @import "@fontsource/lexend/400.css";
 @import "@fontsource/lexend/500.css";
 @import "@fontsource/lexend/600.css";
