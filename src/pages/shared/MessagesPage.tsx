@@ -161,7 +161,7 @@ function ThreadView({ thread }: { thread: ConversationThread }) {
   const previousOf = (p: ProposalVersion) => thread.proposals.find((x) => x.version === p.version - 1) ?? null;
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full min-w-0 flex-col">
       {/* Header */}
       <div className="flex items-center gap-3 border-b border-line px-3 py-3 sm:px-4">
         <Button asChild variant="ghost" size="icon" className="lg:hidden">
@@ -429,10 +429,10 @@ export default function MessagesPage({ conversationId }: { conversationId?: stri
     <div className="space-y-4">
       <h1 className={cn("type-h1 text-ink-strong", active && "hidden lg:block")}>Messages</h1>
       <div className="grid h-[calc(100dvh-var(--header-height)-150px)] min-h-[520px] overflow-hidden rounded-xl border border-line bg-surface lg:h-[calc(100dvh-var(--header-height)-120px)] lg:grid-cols-[320px_1fr]">
-        <div className={cn("min-h-0 border-r border-line", active && "hidden lg:block")}>
+        <div className={cn("min-h-0 min-w-0 border-r border-line", active && "hidden lg:block")}>
           <ConversationList threads={conversations} activeId={active?.id} viewerId={viewer.id} />
         </div>
-        <div className={cn("min-h-0", !active && "hidden lg:flex lg:items-center lg:justify-center")}>
+        <div className={cn("min-h-0 min-w-0", !active && "hidden lg:flex lg:items-center lg:justify-center")}>
           {active ? (
             <ThreadView key={active.id} thread={active} />
           ) : (

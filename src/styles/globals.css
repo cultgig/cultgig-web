@@ -120,6 +120,12 @@
     text-wrap: balance;
   }
 
+  /* Grid children may shrink below their content width, so long text truncates instead of
+     pushing the page wider than the viewport on mobile. */
+  .grid > * {
+    min-width: 0;
+  }
+
   :focus-visible {
     outline: 2px solid rgb(var(--color-border-focus));
     outline-offset: 2px;

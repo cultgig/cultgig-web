@@ -296,6 +296,12 @@ export function BookingDetailPage({ bookingId }: { bookingId: string }) {
 
           <SectionCard title="Actions">
             <div className="flex flex-col gap-2">
+              {booking.status === "completion_pending" && role === "artist" && (
+                <p role="status" className="rounded-lg bg-surface-low p-3 type-body-sm text-ink-secondary">Waiting for {other} to confirm the work is complete.</p>
+              )}
+              {booking.status === "awaiting_payment" && role === "artist" && (
+                <p role="status" className="rounded-lg bg-surface-low p-3 type-body-sm text-ink-secondary">Waiting for {other} to confirm the booking.</p>
+              )}
               {isDemoMode && role === "client" && booking.status === "awaiting_payment" && (
                 <ConfirmDialog
                   trigger={<Button>Confirm without payment (demo)</Button>}

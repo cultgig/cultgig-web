@@ -2,32 +2,9 @@ import { NoticeBanner } from "@/components/shared/NoticeBanner";
 import { siteConfig } from "@/config/site";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
-export type LegalKind =
-  | "terms"
-  | "privacy"
-  | "refunds"
-  | "cancellation"
-  | "community-guidelines"
-  | "artist-agreement"
-  | "client-agreement"
-  | "grievance"
-  | "cookies"
-  | "payments-and-fees"
-  | "disputes";
+import type { LegalKind } from "./legalKinds";
 
-export const legalKinds: LegalKind[] = [
-  "terms",
-  "privacy",
-  "refunds",
-  "cancellation",
-  "community-guidelines",
-  "artist-agreement",
-  "client-agreement",
-  "grievance",
-  "cookies",
-  "payments-and-fees",
-  "disputes",
-];
+export type { LegalKind };
 
 const legalDocs: Record<
   LegalKind,

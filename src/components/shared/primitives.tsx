@@ -28,7 +28,7 @@ export function PageHeader({
       <div className="min-w-0 space-y-1">
         {eyebrow && <div className="type-label text-ink-secondary">{eyebrow}</div>}
         <h1 className="type-h1 text-ink-strong">{title}</h1>
-        {description && <p className="max-w-2xl type-body text-ink-secondary">{description}</p>}
+        {description && <div className="max-w-2xl type-body text-ink-secondary">{description}</div>}
       </div>
       {actions && <div className="flex shrink-0 flex-wrap gap-2">{actions}</div>}
     </div>
@@ -37,7 +37,7 @@ export function PageHeader({
 
 export function SectionCard({ title, description, actions, children, className }: { title?: string; description?: ReactNode; actions?: ReactNode; children: ReactNode; className?: string }) {
   return (
-    <section className={cn("rounded-xl border border-line bg-surface p-5 shadow-xs sm:p-6", className)}>
+    <section className={cn("min-w-0 rounded-xl border border-line bg-surface p-5 shadow-xs sm:p-6", className)}>
       {(title || actions) && (
         <div className="mb-4 flex items-start justify-between gap-3">
           <div className="space-y-0.5">
@@ -210,7 +210,7 @@ export function DefinitionList({ items, className }: { items: { label: string; v
       {items.map((item) => (
         <div key={item.label} className="min-w-0">
           <dt className="type-caption text-ink-secondary">{item.label}</dt>
-          <dd className="type-body text-ink break-words">{item.value || "—"}</dd>
+          <dd className="break-words type-body text-ink">{item.value || "—"}</dd>
         </div>
       ))}
     </dl>

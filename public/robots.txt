@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
+Disallow: /artist/
+Disallow: /client/
+Disallow: /messages
+Disallow: /bookings/
+Disallow: /settings
+Disallow: /notifications
+Disallow: /checkout/
+Disallow: /onboarding
 
-Sitemap: https://cultgig.com/sitemap.xml
+Sitemap: https://www.cultgig.com/sitemap.xml

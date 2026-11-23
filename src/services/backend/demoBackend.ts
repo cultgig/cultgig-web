@@ -23,6 +23,7 @@ import {
 import type {
   ArtistProfile,
   BookingRecord,
+  EventGig,
   ChatMessage,
   ConversationThread,
   MarketplaceNotification,
@@ -62,6 +63,31 @@ function slugify(text: string): string {
 function clean(text: string, max = 4000): string {
   return text.replace(/\u0000/g, "").trim().slice(0, max);
 }
+
+/**
+ * Copy only allow-listed keys from untrusted input. Prevents mass assignment of protected fields
+ * (ids, owners, status, sample flags) by a tampered request — TypeScript types don't exist at runtime.
+ */
+function pick<T extends object, K extends keyof T>(input: Partial<T>, keys: readonly K[]): Partial<Pick<T, K>> {
+  const out: Partial<Pick<T, K>> = {};
+  for (const key of keys) {
+    if (Object.prototype.hasOwnProperty.call(input, key) && input[key] !== undefined) out[key] = input[key] as T[K];
+  }
+  return out;
+}
+
+const ARTIST_EDITABLE = [
+  "displayName", "tagline", "primaryCategory", "secondaryCategories", "city", "travelCities", "travelRadiusKm", "workingMode",
+  "artistFormat", "experienceYears", "languages", "bio", "equipmentNotes", "avatarUrl", "avatarAlt", "coverUrl", "coverAlt", "published",
+] as const satisfies readonly (keyof ArtistProfile)[];
+
+const PORTFOLIO_EDITABLE = ["title", "caption", "featured"] as const;
+
+const GIG_EDITABLE = [
+  "title", "category", "eventType", "description", "eventDate", "startTime", "endTime", "city", "venueArea", "workingMode",
+  "artistsNeeded", "durationSummary", "requirements", "deliverables", "specialInstructions", "references", "equipmentAndSpaceNotes",
+  "budgetMode", "budgetMinInr", "budgetMaxInr", "travelCovered", "applicationDeadline", "experiencePreference", "locationPreference",
+] as const satisfies readonly (keyof EventGig)[];
 
 export function createDemoBackend({ store, clock = () => new Date(), idFactory = defaultId }: DemoBackendOptions): Backend {
   const listeners = new Set<() => void>();
@@ -396,7 +422,14 @@ export function createDemoBackend({ store, clock = () => new Date(), idFactory =
       mutate((db, viewer) => {
         const idx = db.settings.findIndex((s) => s.userId === viewer.id);
         const current = idx >= 0 ? db.settings[idx] : defaultSettings(viewer.id);
-        const next = { ...current, ...patch, notifications: { ...current.notifications, ...(patch.notifications ?? {}) }, userId: viewer.id };
+        const safe = pick(patch, ["profileVisibility", "showCityOnProfile"] as const);
+        if (safe.profileVisibility && !["public", "hidden"].includes(safe.profileVisibility)) throw new DomainError("invalid_input", "Unknown visibility setting.");
+        const notifications = { ...current.notifications };
+        for (const key of Object.keys(current.notifications) as (keyof typeof notifications)[]) {
+          const v = patch.notifications?.[key];
+          if (typeof v === "boolean") notifications[key] = v;
+        }
+        const next = { ...current, ...safe, notifications, userId: viewer.id };
         if (idx >= 0) db.settings[idx] = next;
         else db.settings.push(next);
       });
@@ -507,7 +540,12 @@ export function createDemoBackend({ store, clock = () => new Date(), idFactory =
       mutate((db, viewer) => {
         const profile = ownArtistProfile(db, viewer);
         if (patch.displayName !== undefined && !patch.displayName.trim()) throw new DomainError("invalid_input", "Your artist name can't be empty.");
-        Object.assign(profile, patch, { updatedAt: now() });
+        const safe = pick(patch, ARTIST_EDITABLE);
+        if (safe.bio !== undefined) safe.bio = clean(safe.bio, 2000);
+        if (safe.tagline !== undefined) safe.tagline = clean(safe.tagline, 140);
+        if (safe.displayName !== undefined) safe.displayName = clean(safe.displayName, 80);
+        if (safe.published === true && !profile.packages.length) throw new DomainError("invalid_input", "Add at least one service before publishing.");
+        Object.assign(profile, safe, { updatedAt: now() });
       });
     },
 
@@ -552,7 +590,10 @@ export function createDemoBackend({ store, clock = () => new Date(), idFactory =
         const profile = ownArtistProfile(db, viewer);
         const item = profile.portfolio.find((p) => p.id === itemId);
         if (!item) throw new DomainError("not_found", "Portfolio item not found.");
-        Object.assign(item, patch);
+        const safe = pick(patch, PORTFOLIO_EDITABLE);
+        if (safe.title !== undefined) safe.title = clean(safe.title, 120);
+        if (safe.caption !== undefined) safe.caption = clean(safe.caption, 600);
+        Object.assign(item, safe);
         profile.updatedAt = now();
       });
     },
@@ -610,7 +651,7 @@ export function createDemoBackend({ store, clock = () => new Date(), idFactory =
         }
         const client = db.clientProfiles.find((c) => c.userId === viewer.id);
         const sanitized = {
-          ...input,
+          ...(pick(input, GIG_EDITABLE) as Pick<EventGig, (typeof GIG_EDITABLE)[number]>),
           title: clean(input.title, 140),
           description: clean(input.description, 4000),
           requirements: clean(input.requirements, 2000),

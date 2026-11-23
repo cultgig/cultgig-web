@@ -20,10 +20,18 @@ import type {
  * Dates are generated relative to the moment the demo database is seeded so the demo never goes stale.
  */
 
-export const DEMO_DATA_VERSION = 3;
+/**
+ * Demo data version. Includes a fingerprint of the bundled image URLs (content-hashed by Vite) so a
+ * new deployment reseeds stale browser data instead of showing broken images.
+ */
+export const DEMO_DATA_VERSION = `4:${Object.values(imageManifest)
+  .map((i) => i.src)
+  .join("|")
+  .split("")
+  .reduce((h, ch) => (Math.imul(h, 31) + ch.charCodeAt(0)) | 0, 7)}`;
 
 export interface DemoDatabase {
-  version: number;
+  version: string;
   seededAt: string;
   users: UserAccount[];
   credentials: Record<string, { salt: string; hash: string }>;
@@ -353,12 +361,12 @@ export function createDemoSeed(now: Date = new Date()): DemoDatabase {
       experienceYears: 7,
       languages: ["Marathi", "Hindi", "English"],
       bio: "A four-member movement collective creating live fusion performances and stress-free family sangeet choreography.",
-      avatarUrl: imageManifest.categoryBeautyDance.src,
-      avatarAlt: imageManifest.categoryBeautyDance.alt,
-      coverUrl: imageManifest.categoryBeautyDance.src,
-      coverAlt: imageManifest.categoryBeautyDance.alt,
+      avatarUrl: imageManifest.categoryDanceClassical.src,
+      avatarAlt: imageManifest.categoryDanceClassical.alt,
+      coverUrl: imageManifest.categoryDanceClassical.src,
+      coverAlt: imageManifest.categoryDanceClassical.alt,
       portfolio: [
-        { id: "pf-tara-1", type: "image", title: "Backstage before a fusion set", caption: "12-minute choreographed showcase with costume cues.", mediaUrl: imageManifest.categoryBeautyDance.src, featured: true, ownershipConfirmed: true },
+        { id: "pf-tara-1", type: "image", title: "Backstage before a fusion set", caption: "12-minute choreographed showcase with costume cues.", mediaUrl: imageManifest.categoryDanceClassical.src, featured: true, ownershipConfirmed: true },
       ],
       packages: [
         pkg({ id: "pkg-tara-1", title: "20-minute contemporary fusion set (4 dancers)", category: "dance-and-choreography", pricingMode: "fixed_package", duration: "20 mins on stage", inclusions: ["4 trained dancers", "Mixed audio track", "Coordinated costumes"], exclusions: ["Stage lighting and sound"], priceInr: 38000 }),

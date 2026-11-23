@@ -73,11 +73,17 @@ export function ConfirmDialog({
             className={cn(destructive && buttonVariants({ variant: "destructive" }))}
             onClick={async (e) => {
               e.preventDefault();
+              // Close first: the action usually changes the parent (e.g. a status button disappears),
+              // and unmounting a dialog that is still open can leave Radix's focus/pointer locks behind.
+              const value = reason.trim();
               setBusy(true);
-              await onConfirm(reason.trim());
-              setBusy(false);
               setOpen(false);
               setReason("");
+              try {
+                await onConfirm(value);
+              } finally {
+                setBusy(false);
+              }
             }}
           >
             {busy ? "Working…" : confirmLabel}
