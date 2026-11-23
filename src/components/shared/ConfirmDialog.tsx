@@ -27,8 +27,12 @@ export function ConfirmDialog({
   destructive = false,
   requireReason,
   onConfirm,
+  open: controlledOpen,
+  onOpenChange,
 }: {
-  trigger: ReactNode;
+  trigger?: ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   title: string;
   description: ReactNode;
   confirmLabel: string;
@@ -36,13 +40,18 @@ export function ConfirmDialog({
   requireReason?: { label: string; placeholder?: string };
   onConfirm: (reason: string) => void | Promise<unknown>;
 }) {
-  const [open, setOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = controlledOpen ?? internalOpen;
+  const setOpen = (o: boolean) => {
+    setInternalOpen(o);
+    onOpenChange?.(o);
+  };
   const [reason, setReason] = useState("");
   const [busy, setBusy] = useState(false);
   const blocked = Boolean(requireReason) && reason.trim().length < 5;
   return (
     <AlertDialog open={open} onOpenChange={(o) => { setOpen(o); if (!o) setReason(""); }}>
-      <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
+      {trigger && <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>}
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>
