@@ -244,3 +244,28 @@ export const indianCities = [
 export function getCategoryBySlug(slug: string): CreativeCategory | undefined {
   return creativeCategories.find((c) => c.slug === slug);
 }
+
+export const getCategory = getCategoryBySlug;
+
+export function categoryLabel(slug: string): string {
+  return getCategoryBySlug(slug)?.label ?? "Creative services";
+}
+
+export const eventTypes = [
+  "Wedding",
+  "Sangeet",
+  "Mehendi",
+  "Engagement",
+  "Birthday",
+  "Corporate event",
+  "Product launch",
+  "Restaurant or café evening",
+  "Hotel or venue programming",
+  "Festival",
+  "Private party",
+  "Photo or video shoot",
+  "Interior commission",
+  "Other",
+] as const;
+
+export const commonLanguages = ["English", "Hindi", "Bengali", "Marathi", "Tamil", "Telugu", "Kannada", "Malayalam", "Gujarati", "Punjabi", "Urdu", "Odia", "Assamese"] as const;

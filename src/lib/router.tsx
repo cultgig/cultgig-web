@@ -1,4 +1,9 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+
+/**
+ * Minimal History-API router (kept from the original codebase, extended with pattern matching,
+ * redirects and a stable `query`). Vercel rewrites every path to index.html (vercel.json).
+ */
 
 interface RouterContextValue {
   pathname: string;
@@ -9,61 +14,39 @@ interface RouterContextValue {
 
 const RouterContext = createContext<RouterContextValue | null>(null);
 
+function currentLocation() {
+  return { pathname: window.location.pathname || "/", search: window.location.search || "" };
+}
+
 export function RouterProvider({ children }: { children: React.ReactNode }) {
-  const [locationState, setLocationState] = useState(() => ({
-    pathname: window.location.pathname || "/",
-    search: window.location.search || "",
-  }));
+  const [location, setLocation] = useState(currentLocation);
 
   useEffect(() => {
-    const handlePopState = () => {
-      setLocationState({
-        pathname: window.location.pathname || "/",
-        search: window.location.search || "",
-      });
-    };
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
+    const onPop = () => setLocation(currentLocation());
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
   }, []);
 
   const navigate = useCallback((to: string, options?: { replace?: boolean }) => {
     const url = new URL(to, window.location.origin);
-    const nextPath = url.pathname || "/";
-    const nextSearch = url.search || "";
-    const fullTarget = `${nextPath}${nextSearch}${url.hash}`;
-
-    if (options?.replace) {
-      window.history.replaceState(null, "", fullTarget);
-    } else {
-      window.history.pushState(null, "", fullTarget);
+    if (url.origin !== window.location.origin) {
+      window.location.assign(url.toString());
+      return;
     }
-
-    setLocationState({ pathname: nextPath, search: nextSearch });
-
+    const target = `${url.pathname}${url.search}${url.hash}`;
+    if (options?.replace) window.history.replaceState(null, "", target);
+    else window.history.pushState(null, "", target);
+    setLocation({ pathname: url.pathname, search: url.search });
     if (url.hash) {
-      requestAnimationFrame(() => {
-        const el = document.querySelector(url.hash);
-        if (el) el.scrollIntoView({ behavior: "smooth" });
-      });
+      requestAnimationFrame(() => document.querySelector(url.hash)?.scrollIntoView({ behavior: "smooth" }));
     } else {
       window.scrollTo({ top: 0, behavior: "auto" });
     }
   }, []);
 
-  const query = new URLSearchParams(locationState.search);
-
-  return (
-    <RouterContext.Provider
-      value={{
-        pathname: locationState.pathname,
-        search: locationState.search,
-        query,
-        navigate,
-      }}
-    >
-      {children}
-    </RouterContext.Provider>
-  );
+  const query = useMemo(() => new URLSearchParams(location.search), [location.search]);
+  const value = useMemo(() => ({ ...location, query, navigate }), [location, query, navigate]);
+  return <RouterContext.Provider value={value}>{children}</RouterContext.Provider>;
 }
 
 export function useRouter() {
@@ -72,35 +55,57 @@ export function useRouter() {
   return ctx;
 }
 
-export function Link({
-  to,
-  onClick,
-  children,
-  ...props
-}: { to: string; children: React.ReactNode } & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+/** Match `/messages/:id` style patterns. Returns params or null. */
+export function matchPath(pattern: string, pathname: string): Record<string, string> | null {
+  const clean = pathname.length > 1 && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+  const p = pattern.split("/");
+  const s = clean.split("/");
+  if (p.length !== s.length) return null;
+  const params: Record<string, string> = {};
+  for (let i = 0; i < p.length; i++) {
+    if (p[i].startsWith(":")) {
+      if (!s[i]) return null;
+      try {
+        params[p[i].slice(1)] = decodeURIComponent(s[i]);
+      } catch {
+        return null;
+      }
+    } else if (p[i] !== s[i]) {
+      return null;
+    }
+  }
+  return params;
+}
+
+export function Navigate({ to, replace = true }: { to: string; replace?: boolean }) {
+  const { navigate } = useRouter();
+  useEffect(() => navigate(to, { replace }), [navigate, to, replace]);
+  return null;
+}
+
+/** Only allow same-origin relative redirects (prevents open-redirect via ?next=). */
+export function safeNextPath(value: string | null, fallback: string): string {
+  if (!value || !value.startsWith("/") || value.startsWith("//") || value.startsWith("/\\")) return fallback;
+  return value;
+}
+
+export const Link = React.forwardRef<
+  HTMLAnchorElement,
+  { to: string; children: React.ReactNode } & React.AnchorHTMLAttributes<HTMLAnchorElement>
+>(function Link({ to, onClick, children, ...props }, ref) {
   const { navigate } = useRouter();
   const isExternal = /^https?:\/\//i.test(to) || to.startsWith("mailto:") || to.startsWith("tel:");
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (onClick) onClick(e);
-    if (
-      e.defaultPrevented ||
-      isExternal ||
-      props.target === "_blank" ||
-      e.metaKey ||
-      e.ctrlKey ||
-      e.shiftKey ||
-      e.altKey
-    ) {
-      return;
-    }
+    onClick?.(e);
+    if (e.defaultPrevented || isExternal || props.target === "_blank" || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     e.preventDefault();
     navigate(to);
   };
 
   return (
-    <a href={to} onClick={handleClick} {...props}>
+    <a ref={ref} href={to} onClick={handleClick} {...(isExternal ? { rel: "noopener noreferrer" } : {})} {...props}>
       {children}
     </a>
   );
-}
+});

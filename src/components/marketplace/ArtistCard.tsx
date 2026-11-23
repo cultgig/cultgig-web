@@ -1,85 +1,90 @@
-import { Bookmark, MapPin } from "lucide-react";
-import { getCategoryBySlug } from "../../data/categories";
-import { Link } from "../../lib/router";
-import { useMarketplace } from "../../state/MarketplaceContext";
-import type { SampleArtist } from "../../types/marketplace";
-import { formatArtistPrice } from "../../utils/format";
-import { SafeImage } from "../ui/SafeImage";
+import { BookmarkSimple, MapPin } from "@phosphor-icons/react";
+import { DemoBadge } from "@/components/shared/StatusBadge";
+import { RatingStars, UserAvatar } from "@/components/shared/primitives";
+import { SafeImage } from "@/components/shared/SafeImage";
+import { getCategory } from "@/data/categories";
+import { formatInr } from "@/domain/money";
+import { Link, useRouter } from "@/lib/router";
+import { cn } from "@/lib/utils";
+import { useMarketplace } from "@/state/MarketplaceContext";
+import { artistRating } from "@/state/selectors";
+import type { ArtistProfile } from "@/types/marketplace";
 
-export function ArtistCard({ artist }: { artist: SampleArtist }) {
-  const { savedArtistIds, toggleSaveArtist } = useMarketplace();
-  const isSaved = savedArtistIds.includes(artist.id);
-  const category = getCategoryBySlug(artist.primaryCategory);
-  const priceText = formatArtistPrice(
-    artist.pricingMode,
-    artist.startingPriceInr,
-    artist.priceMaxInr
-  );
+export function priceLabel(artist: Pick<ArtistProfile, "pricingMode" | "startingPriceInr" | "priceMaxInr">): string {
+  if (artist.pricingMode === "quote_required" || artist.startingPriceInr === null) return "Quote on request";
+  if (artist.pricingMode === "range" && artist.priceMaxInr) return `${formatInr(artist.startingPriceInr)}–${formatInr(artist.priceMaxInr)}`;
+  if (artist.pricingMode === "fixed_package") return `${formatInr(artist.startingPriceInr)} package`;
+  return `From ${formatInr(artist.startingPriceInr)}`;
+}
 
+export function SaveArtistButton({ artistId, className, withLabel = false }: { artistId: string; className?: string; withLabel?: boolean }) {
+  const { viewer, savedArtistIds, run } = useMarketplace();
+  const { navigate, pathname } = useRouter();
+  const saved = savedArtistIds.includes(artistId);
+  const onClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!viewer) {
+      navigate(`/sign-in?next=${encodeURIComponent(pathname)}`);
+      return;
+    }
+    await run((b) => b.market.toggleSavedArtist(artistId), { success: saved ? "Removed from saved artists" : "Saved to your shortlist" });
+  };
   return (
-    <article className="group bg-surface border border-line rounded-lg overflow-hidden flex flex-col hover:border-plum-border hover:shadow-card transition-all">
-      <div className="relative aspect-[4/3] bg-surface-muted overflow-hidden">
-        <Link to={`/artists/${artist.slug}`} className="block w-full h-full">
-          <SafeImage
-            src={artist.coverUrl}
-            alt={artist.coverAlt}
-            loading="lazy"
-            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-200"
-          />
-        </Link>
-        <button
-          type="button"
-          onClick={() => toggleSaveArtist(artist.id)}
-          aria-label={isSaved ? `Remove ${artist.displayName} from saved` : `Save ${artist.displayName}`}
-          aria-pressed={isSaved}
-          className={`absolute top-3 right-3 w-10 h-10 rounded-md flex items-center justify-center border shadow-soft ${
-            isSaved
-              ? "bg-plum text-white border-plum"
-              : "bg-surface/95 text-ink-primary border-line hover:text-plum"
-          }`}
-        >
-          <Bookmark size={16} fill={isSaved ? "currentColor" : "none"} aria-hidden="true" />
-        </button>
-      </div>
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={saved}
+      aria-label={saved ? "Remove from saved artists" : "Save artist"}
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 type-label-sm shadow-xs transition-colors",
+        saved ? "border-line-selected bg-brand-subtle text-brand" : "border-line bg-surface text-ink hover:bg-surface-low",
+        className,
+      )}
+    >
+      <BookmarkSimple size={16} weight={saved ? "fill" : "regular"} aria-hidden />
+      {withLabel && (saved ? "Saved" : "Save")}
+    </button>
+  );
+}
 
-      <div className="p-4 flex flex-col flex-1 gap-2.5">
+export function ArtistCard({ artist }: { artist: ArtistProfile }) {
+  const { reviews } = useMarketplace();
+  const category = getCategory(artist.primaryCategory);
+  const rating = artistRating(reviews, artist.id);
+  const featured = artist.portfolio.find((p) => p.featured && p.type === "image") ?? artist.portfolio.find((p) => p.type === "image");
+  const cover = featured?.mediaUrl ?? artist.coverUrl;
+  return (
+    <article className="group relative flex flex-col overflow-hidden rounded-xl border border-line bg-surface shadow-xs transition-shadow hover:shadow-md">
+      <div className="relative aspect-[4/3] overflow-hidden bg-surface-container">
+        <SafeImage src={cover} alt={featured?.title ?? artist.coverAlt} className="size-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+        <div className="absolute right-3 top-3">
+          <SaveArtistButton artistId={artist.id} />
+        </div>
+        {artist.isSample && <DemoBadge className="absolute left-3 top-3" />}
+      </div>
+      <div className="flex flex-1 flex-col gap-2 p-4">
         <div className="flex items-center gap-2.5">
-          <SafeImage
-            src={artist.avatarUrl}
-            alt={artist.avatarAlt}
-            className="w-8 h-8 rounded-full object-cover border border-line shrink-0"
-          />
+          <UserAvatar name={artist.displayName} src={artist.avatarUrl} className="size-8" />
           <div className="min-w-0">
-            <Link
-              to={`/artists/${artist.slug}`}
-              className="type-h4 text-ink-primary hover:text-plum block truncate"
-            >
-              {artist.displayName}
-            </Link>
-            <p className="type-caption text-ink-secondary truncate">
-              {category?.label ?? "Creative talent"}
+            <h3 className="truncate type-h4 text-ink">
+              <Link to={`/artists/${artist.slug}`} className="after:absolute after:inset-0 focus-visible:outline-none">
+                {artist.displayName}
+              </Link>
+            </h3>
+            <p className="truncate type-caption text-ink-secondary">
+              {category?.label ?? "Creative professional"} · {artist.artistFormat === "group" ? "Group" : "Solo"}
             </p>
           </div>
         </div>
-
-        <Link
-          to={`/artists/${artist.slug}`}
-          className="type-body text-ink-secondary hover:text-ink-primary line-clamp-2"
-        >
-          {artist.tagline}
-        </Link>
-
-        <div className="mt-auto pt-3 border-t border-line-light flex items-center justify-between gap-3">
-          <span className="type-body-sm text-ink-secondary inline-flex items-center gap-1 truncate">
-            <MapPin size={13} className="text-plum shrink-0" aria-hidden="true" />
-            <span>{artist.city}</span>
-            <span aria-hidden="true">·</span>
-            <span>{artist.artistFormat === "group" ? "Group" : "Solo"}</span>
+        <p className="line-clamp-2 type-body-sm text-ink-secondary">{artist.tagline}</p>
+        <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-2">
+          <span className="inline-flex items-center gap-1 type-caption text-ink-secondary">
+            <MapPin size={14} aria-hidden /> {artist.city} · {artist.experienceYears} yrs
           </span>
-          <span className="type-h4 text-ink-primary tabular-nums whitespace-nowrap shrink-0">
-            {priceText}
-          </span>
+          {rating ? <RatingStars value={rating.average} count={rating.count} /> : <span className="type-caption text-ink-secondary">No reviews yet</span>}
         </div>
+        <p className="type-label text-ink">{priceLabel(artist)}</p>
       </div>
     </article>
   );

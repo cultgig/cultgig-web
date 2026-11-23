@@ -1,12 +1,22 @@
-export interface FAQItemData { category: "General" | "For Artists" | "For Businesses"; question: string; answer: string; }
-export const detailedFaqList: FAQItemData[] = [
-  { category: "General", question: "What is Cultgig?", answer: "Cultgig is building a clearer, more human way for independent artists and businesses to discover each other with real context and verified portfolios." },
-  { category: "General", question: "Who is Cultgig for?", answer: "For independent artists, performers, visual creators, hospitality venues, brands, and hosts planning cultural occasions in India." },
-  { category: "For Artists", question: "How can artists join?", answer: "Join the early-access cohort through our website. We will share launch updates and priority onboarding as we prepare the initial launch." },
-  { category: "For Businesses", question: "How can businesses join?", answer: "Select 'For businesses' or 'Get early access' and share a few details so we can understand your creative requirements and keep you updated." },
-  { category: "General", question: "Can I book an artist through the website?", answer: "No. The website is currently an early-access preview and sign-up platform. The upcoming Cultgig application will provide the complete booking and messaging experience." },
-  { category: "For Businesses", question: "Can I post an event brief right now?", answer: "Not yet on the website. Businesses can join early access to receive priority access when brief submissions and direct discovery go live." },
-  { category: "General", question: "When is Cultgig launching?", answer: "We are onboarding our initial cohort of artists and event hosts across select Indian cities. Sign up to get early access." },
-];
-export const faqItems = detailedFaqList.map((item) => [item.question, item.answer]) as [string, string][];
+export interface FAQItemData {
+  category: "General" | "For Artists" | "For Businesses" | "Payments & safety";
+  question: string;
+  answer: string;
+}
 
+export const detailedFaqList: FAQItemData[] = [
+  { category: "General", question: "What is Cultgig?", answer: "Cultgig is a creative-services marketplace for India. Clients find independent artists, post gigs and agree terms in one place; artists show their work, apply to gigs and manage bookings." },
+  { category: "General", question: "Can one account hire and offer services?", answer: "Yes. A single Cultgig account can use both the client and artist workspaces. Switch between them from the account menu — you only fill in the details each side needs." },
+  { category: "General", question: "Which cities does Cultgig cover?", answer: "Artists list the city they're based in and the cities they travel to, so you can search anywhere in India. Remote services such as illustration or choreography videos work nationwide." },
+  { category: "For Businesses", question: "How do I hire an artist?", answer: "Two ways. Contact an artist directly from their profile with your event details, or post a gig and let artists apply. Either way you agree the price and scope in a versioned offer before a booking is created." },
+  { category: "For Businesses", question: "How does negotiation work?", answer: "Either side can send an offer with an amount, date, deliverables and cancellation terms. Every counter-offer becomes a new version — nothing is overwritten — and a booking is created only when someone accepts an exact version." },
+  { category: "For Businesses", question: "Can I compare applicants?", answer: "Yes. Open any gig in My gigs to shortlist applicants, compare quotes, experience, availability and scope side by side, and start a conversation with the artists you like." },
+  { category: "For Artists", question: "How do I get discovered?", answer: "Complete your profile: services with clear pricing or quotation-based pricing, at least three portfolio items, your languages, travel cities and availability. Complete profiles appear in search and category pages." },
+  { category: "For Artists", question: "Do I have to show a price?", answer: "No. You can show a starting price, a range, fixed packages, or mark a service as quotation-based. Many event services are best priced after you see the brief." },
+  { category: "For Artists", question: "How do I apply to gigs?", answer: "Open Discover gigs in your artist workspace, filter by category, city and date, and apply with your quote, scope, availability confirmation and selected portfolio work. You can apply to each gig once." },
+  { category: "Payments & safety", question: "Can I pay through Cultgig?", answer: "Not yet. Online checkout will open only after a marketplace payment provider (such as Razorpay Route or Cashfree Easy Split) approves Cultgig. Until then, bookings show that online payment isn't available, and Cultgig never marks a booking as paid without a verified payment." },
+  { category: "Payments & safety", question: "Are reviews verified?", answer: "Only the client on a completed booking can review that artist, once per booking. Anyone can report a review for moderation." },
+  { category: "Payments & safety", question: "How do I report a problem?", answer: "Use Report on a profile, gig or review, raise a dispute from a booking, block a user from a conversation, or contact support. A grievance officer is listed on the grievance redressal page." },
+];
+
+export const faqItems = detailedFaqList.map((item) => [item.question, item.answer]) as [string, string][];
