@@ -1,699 +1,322 @@
+import { useState, type FormEvent } from "react";
 import {
   ArrowRight,
-  Brush,
-  CalendarCheck,
-  Camera,
-  CheckCircle2,
-  ChevronLeft,
-  ChevronRight,
-  Disc3,
+  Buildings,
+  ChatsCircle,
+  CheckCircle,
   FileText,
-  Flower2,
-  Lamp,
-  Layers,
-  MessageSquareText,
-  Mic,
-  Music,
-  PaintBucket,
-  Palette,
-  Radio,
-  Scissors,
-  Search,
+  HandCoins,
+  MagnifyingGlass,
+  MapPin,
   ShieldCheck,
-  Sparkles,
-  UserCheck,
-} from "lucide-react";
-import { useMemo, useRef, useState } from "react";
-import { SafeImage } from "../components/shared/SafeImage";
-import { imageManifest } from "../content/images";
-import {
-  creativeCategories,
-  indianCities,
-  popularServiceShowcaseSlugs,
-  type CreativeCategory,
-} from "../data/categories";
-import { editorialGuides } from "../data/guides";
-import { sampleArtists } from "../data/sampleMarketplace";
-import { usePageMeta } from "../hooks/usePageMeta";
-import { Link, useRouter } from "../lib/router";
+  Sparkle,
+} from "@phosphor-icons/react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ArtistCard } from "@/components/marketplace/ArtistCard";
+import { CategoryIcon } from "@/components/marketplace/CategoryIcon";
+import { SafeImage } from "@/components/shared/SafeImage";
+import { EmptyState } from "@/components/shared/states";
+import { Skeleton } from "@/components/ui/skeleton";
+import { creativeCategories, indianCities, popularServiceShowcaseSlugs } from "@/data/categories";
+import { detailedFaqList } from "@/content/faq";
+import { heroImage, pageImages } from "@/content/images";
+import { usePageMeta } from "@/hooks/usePageMeta";
+import { Link, useRouter } from "@/lib/router";
+import { useMarketplace } from "@/state/MarketplaceContext";
 
-const iconMap: Record<CreativeCategory["iconName"], typeof Music> = {
-  Music,
-  Mic,
-  Disc3,
-  Sparkles,
-  Camera,
-  Flower2,
-  Palette,
-  Scissors,
-  Brush,
-  PaintBucket,
-  UserCheck,
-  ShieldCheck,
-  Lamp,
-  Radio,
-  Layers,
-};
-
-const cardSurfaceTones = [
-  "bg-brand-pressed",
-  "bg-brand-hover",
-  "bg-ink",
-  "bg-brand",
-  "bg-ink-strong",
-  "bg-brand-hover",
-  "bg-brand-pressed",
-  "bg-ink",
-];
-
-const illustrativeMoments = [
-  {
-    id: "hospitality",
-    label: "Hospitality evening",
-    title: "Intimate sunset acoustic sets for cafés and boutique venues",
-    description:
-      "Illustrative scenario: A venue shares timing, guest count, and PA availability upfront so solo musicians and bands submit accurate proposals.",
-    imageUrl: imageManifest.categoryMusicians.src,
-    imageAlt: imageManifest.categoryMusicians.alt,
-  },
-  {
-    id: "celebration",
-    label: "Family celebrations",
-    title: "Coordinated mehendi, saree draping, and photography for sangeets",
-    description:
-      "Illustrative scenario: Families compare real daylight craft portfolios and lock in arrival times and deliverables clearly.",
-    imageUrl: imageManifest.categoryMehendi.src,
-    imageAlt: imageManifest.categoryMehendi.alt,
-  },
-  {
-    id: "commissions",
-    label: "Studio & space commissions",
-    title: "Lawful, owner-commissioned wall murals and bespoke decor",
-    description:
-      "Illustrative scenario: Studios review past architectural projects, agree on concept sketches, and track scope in versioned offers.",
-    imageUrl: imageManifest.categoryMural.src,
-    imageAlt: imageManifest.categoryMural.alt,
-  },
+const steps = [
+  { icon: MagnifyingGlass, title: "Discover or post", body: "Search portfolios by craft, city and budget — or post a gig and let artists come to you." },
+  { icon: ChatsCircle, title: "Talk it through", body: "Message in one thread. Share timings, venue details and references without swapping numbers." },
+  { icon: HandCoins, title: "Agree a versioned offer", body: "Offers and counter-offers are kept as numbered versions, so both sides know exactly what was agreed." },
+  { icon: CheckCircle, title: "Manage the booking", body: "Track every booking from confirmation to completion, then leave a verified review." },
 ];
 
 export function HomePage() {
-  usePageMeta(
-    "Find the artists who make the moment",
-    "Discover independent musicians, mehendi artists, photographers, decorators, dancers, and creative professionals across India."
-  );
-
+  usePageMeta("Find the talent behind unforgettable moments", "Discover independent musicians, mehendi artists, photographers, decorators, dancers and creative professionals across India.");
   const { navigate } = useRouter();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
-  const [searchFocused, setSearchFocused] = useState(false);
-  const [activeMomentIndex, setActiveMomentIndex] = useState(0);
-  const carouselRef = useRef<HTMLDivElement>(null);
+  const { artists, loading } = useMarketplace();
+  const [query, setQuery] = useState("");
+  const [city, setCity] = useState("all");
 
-  const suggestions = useMemo(() => {
-    const q = searchQuery.trim().toLowerCase();
-    if (!q) return [];
-    const matchingCategories = creativeCategories
-      .filter((c) => c.label.toLowerCase().includes(q) || c.description.toLowerCase().includes(q))
-      .slice(0, 4)
-      .map((c) => ({
-        label: c.label,
-        hint: "Category",
-        path: `/categories/${c.slug}`,
-      }));
-
-    const matchingArtists = sampleArtists
-      .filter(
-        (a) =>
-          a.displayName.toLowerCase().includes(q) ||
-          a.tagline.toLowerCase().includes(q) ||
-          a.city.toLowerCase().includes(q)
-      )
-      .slice(0, 3)
-      .map((a) => ({
-        label: a.displayName,
-        hint: `${a.city} · Sample profile`,
-        path: `/artists/${a.slug}`,
-      }));
-
-    return [...matchingCategories, ...matchingArtists];
-  }, [searchQuery]);
-
-  const handleHeroSearch = (e: React.FormEvent) => {
+  const onSearch = (e: FormEvent) => {
     e.preventDefault();
     const params = new URLSearchParams();
-    if (searchQuery.trim()) params.set("q", searchQuery.trim());
-    if (selectedCity) params.set("city", selectedCity);
-    const qs = params.toString();
-    navigate(qs ? `/explore?${qs}` : "/explore");
+    if (query.trim()) params.set("q", query.trim());
+    if (city !== "all") params.set("city", city);
+    navigate(`/explore${params.toString() ? `?${params}` : ""}`);
   };
 
-  const scrollServices = (direction: "left" | "right") => {
-    if (!carouselRef.current) return;
-    const offset = direction === "left" ? -320 : 320;
-    carouselRef.current.scrollBy({ left: offset, behavior: "smooth" });
-  };
-
-  const topCategories = creativeCategories.slice(0, 9);
-  const popularServices = popularServiceShowcaseSlugs
-    .map((slug) => creativeCategories.find((c) => c.slug === slug))
-    .filter((c): c is CreativeCategory => Boolean(c));
-
-  const activeMoment = illustrativeMoments[activeMomentIndex];
+  const featured = artists.filter((a) => a.published).slice(0, 4);
+  const showcase = popularServiceShowcaseSlugs.map((slug) => creativeCategories.find((c) => c.slug === slug)).filter((c): c is NonNullable<typeof c> => Boolean(c));
 
   return (
-    <main id="main-content" className="bg-surface-low text-ink">
-      {/* 1. Image-Led Search Hero */}
-      <section className="relative w-full overflow-hidden bg-ink-strong">
-        <div className="max-w-[1360px] mx-auto relative min-h-[500px] lg:min-h-[540px] flex items-center">
-          <SafeImage
-            src={imageManifest.heroPerformance.src}
-            alt={imageManifest.heroPerformance.alt}
-            loading="eager"
-            className="absolute inset-0 w-full h-full object-cover object-center"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-r from-ink-strong/90 via-ink-strong/75 to-ink-strong/45"
-          />
-
-          <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
-            <div className="max-w-[680px] space-y-6">
-              <h1 className="text-[32px] sm:text-[42px] lg:text-[50px] leading-[1.15] tracking-[-0.02em] font-bold text-white">
-                Find the artists who make the moment.
-              </h1>
-              <p className="text-[16px] leading-[24px] text-white/90 max-w-[580px]">
-                Discover independent artists for celebrations, venues, brands and everything worth
-                bringing to life across India.
-              </p>
-
-              {/* Search Bar with Autocomplete */}
-              <div className="relative">
-                <form
-                  onSubmit={handleHeroSearch}
-                  role="search"
-                  aria-label="Search Cultgig artists and categories"
-                  className="bg-surface rounded-lg p-1.5 shadow-lg flex flex-col sm:flex-row items-stretch sm:items-center gap-1.5"
-                >
-                  <div className="flex-1 flex items-center gap-2.5 px-3 min-w-0">
-                    <Search size={18} className="text-ink-secondary shrink-0" aria-hidden="true" />
-                    <label htmlFor="hero-search-input" className="sr-only">
-                      Search by artist, creative category, or event type
-                    </label>
-                    <input
-                      id="hero-search-input"
-                      type="text"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      onFocus={() => setSearchFocused(true)}
-                      onBlur={() => setTimeout(() => setSearchFocused(false), 160)}
-                      placeholder="Try ‘live band’, ‘mehendi artist’ or ‘wedding dancer’"
-                      className="w-full py-2.5 text-[15px] leading-[20px] text-ink placeholder:text-ink-muted bg-transparent border-0 focus:outline-none"
-                    />
-                  </div>
-
-                  <div className="sm:border-l border-line sm:pl-2 flex items-center gap-2">
-                    <label htmlFor="hero-city-select" className="sr-only">
-                      City
-                    </label>
-                    <select
-                      id="hero-city-select"
-                      value={selectedCity}
-                      onChange={(e) => setSelectedCity(e.target.value)}
-                      className="w-full sm:w-[140px] py-2.5 px-2 text-[14px] text-ink-secondary bg-transparent border-0 focus:outline-none"
-                    >
-                      <option value="">All cities</option>
-                      {indianCities.map((city) => (
-                        <option key={city} value={city}>
-                          {city}
-                        </option>
-                      ))}
-                    </select>
-
-                    <button
-                      type="submit"
-                      className="min-h-[44px] px-6 py-2.5 rounded-md bg-brand text-white hover:bg-brand-hover font-semibold text-[15px] leading-[20px] whitespace-nowrap shrink-0"
-                    >
-                      Search
-                    </button>
-                  </div>
-                </form>
-
-                {searchFocused && suggestions.length > 0 && (
-                  <div
-                    role="listbox"
-                    aria-label="Search suggestions"
-                    className="absolute left-0 right-0 top-full mt-2 bg-surface border border-line rounded-lg shadow-lg p-2 z-30"
-                  >
-                    {suggestions.map((item) => (
-                      <Link
-                        key={item.path + item.label}
-                        to={item.path}
-                        className="flex items-center justify-between px-3 py-2.5 rounded-md hover:bg-brand-subtle text-ink"
-                      >
-                        <span className="type-body font-medium">{item.label}</span>
-                        <span className="type-caption text-ink-secondary">{item.hint}</span>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Quick Suggested Categories + Primary CTAs */}
-              <div className="flex flex-wrap items-center gap-2.5">
-                <span className="type-body-sm text-white/80 mr-1">Popular:</span>
-                {[
-                  { label: "Music & bands", slug: "music-and-bands" },
-                  { label: "Mehendi artists", slug: "mehendi-artists" },
-                  { label: "Photography", slug: "photography-and-videography" },
-                  { label: "Saree draping", slug: "saree-draping-and-styling" },
-                  { label: "Decorators", slug: "decorators-and-florists" },
-                ].map((chip) => (
-                  <Link
-                    key={chip.slug}
-                    to={`/categories/${chip.slug}`}
-                    className="inline-flex items-center gap-1.5 min-h-[36px] px-3 py-1.5 rounded-md border border-white/30 bg-white/10 text-white hover:bg-white/20 text-[13px] font-medium whitespace-nowrap"
-                  >
-                    <span>{chip.label}</span>
-                    <ArrowRight size={13} aria-hidden="true" />
-                  </Link>
-                ))}
-              </div>
-
-              <div className="pt-2 flex flex-wrap items-center gap-4">
-                <Link
-                  to="/explore"
-                  className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-white text-ink hover:bg-brand-subtle font-semibold text-[15px]"
-                >
-                  Explore artists
-                </Link>
-                <Link
-                  to="/client/gigs/new"
-                  className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-white/40 text-white hover:bg-white/10 font-semibold text-[15px]"
-                >
-                  Post a gig
-                </Link>
-                <Link
-                  to="/for-artists"
-                  className="text-[14px] font-medium text-white/90 hover:text-white underline underline-offset-4"
-                >
-                  Join as an artist
-                </Link>
-              </div>
-            </div>
-
-            {/* Verified Truth Strip */}
-            <div className="mt-10 pt-5 border-t border-white/15 flex flex-wrap items-center justify-between gap-4 text-white/80 type-body-sm">
-              <span>Artist profiles · Event briefs · Direct conversations</span>
-              <span>Illustrative sample previews active — live marketplace onboarding open</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. Browse Categories Compact Tiles */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-3">
-          {topCategories.map((cat) => {
-            const Icon = iconMap[cat.iconName];
-            return (
-              <Link
-                key={cat.slug}
-                to={`/categories/${cat.slug}`}
-                className="group bg-surface border border-line rounded-lg p-3.5 flex flex-col items-start justify-between gap-3 min-h-[104px] hover:border-brand hover:shadow-xs"
-              >
-                <Icon
-                  size={20}
-                  className="text-ink group-hover:text-brand transition-colors"
-                  aria-hidden="true"
-                />
-                <span className="text-[13px] leading-[17px] font-semibold text-ink group-hover:text-brand">
-                  {cat.shortLabel}
-                </span>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* 3. Popular Creative Services Horizontal Showcase */}
-      <section
-        className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12"
-        aria-labelledby="popular-services-heading"
-      >
-        <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
-          <div>
-            <h2
-              id="popular-services-heading"
-              className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink"
-            >
-              Popular creative services
-            </h2>
-            <p className="type-body text-ink-secondary mt-1">
-              Explore disciplines built around Indian celebrations, hospitality spaces, and creative commissions.
+    <main id="main-content">
+      {/* Hero */}
+      <section className="border-b border-line bg-surface-low">
+        <div className="page-container grid items-center gap-10 py-12 lg:grid-cols-[1.1fr_1fr] lg:py-20">
+          <div className="space-y-6">
+            <p className="inline-flex items-center gap-1.5 rounded-full bg-surface px-3 py-1 type-label-sm text-ink-secondary shadow-xs">
+              <Sparkle size={14} weight="fill" className="text-brand-ink" aria-hidden /> India's marketplace for creative services
             </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => scrollServices("left")}
-              aria-label="Scroll services left"
-              className="w-10 h-10 rounded-full border border-line bg-surface flex items-center justify-center text-ink hover:border-brand hover:text-brand"
-            >
-              <ChevronLeft size={18} aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollServices("right")}
-              aria-label="Scroll services right"
-              className="w-10 h-10 rounded-full border border-line bg-surface flex items-center justify-center text-ink hover:border-brand hover:text-brand"
-            >
-              <ChevronRight size={18} aria-hidden="true" />
-            </button>
-            <Link
-              to="/categories"
-              className="ml-2 type-label text-brand hover:text-brand-hover whitespace-nowrap"
-            >
-              All 15 categories
-            </Link>
-          </div>
-        </div>
-
-        <div
-          ref={carouselRef}
-          className="flex gap-4 overflow-x-auto no-scrollbar pb-2 snap-x snap-mandatory"
-        >
-          {popularServices.map((service, index) => (
-            <Link
-              key={service.slug}
-              to={`/categories/${service.slug}`}
-              className={`snap-start shrink-0 w-[210px] sm:w-[225px] rounded-xl p-4 flex flex-col justify-between gap-4 text-white hover:opacity-95 ${
-                cardSurfaceTones[index % cardSurfaceTones.length]
-              }`}
-            >
-              <h3 className="text-[16px] leading-[21px] font-semibold text-white min-h-[42px]">
-                {service.label}
-              </h3>
-              <div className="aspect-[4/3] rounded-lg overflow-hidden bg-black/20">
-                <SafeImage
-                  src={service.imageUrl}
-                  alt={service.imageAlt}
-                  loading="lazy"
-                  className="w-full h-full object-cover"
+            <h1 className="type-display text-ink-strong">Find the talent behind unforgettable moments.</h1>
+            <p className="max-w-xl type-body-lg text-ink-secondary">
+              Musicians, mehendi artists, photographers, decorators, dancers and hosts — compare real portfolios, agree clear terms and manage bookings in one place.
+            </p>
+            <form onSubmit={onSearch} role="search" className="flex flex-col gap-2 rounded-2xl border border-line bg-surface p-2 shadow-md sm:flex-row sm:items-center">
+              <label htmlFor="hero-search" className="sr-only">
+                What are you looking for?
+              </label>
+              <div className="relative flex-1">
+                <MagnifyingGlass size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-secondary" aria-hidden />
+                <Input
+                  id="hero-search"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Try ‘sufi band’, ‘bridal mehendi’ or ‘wedding photographer’"
+                  className="h-12 border-0 pl-10 shadow-none focus-visible:ring-0"
                 />
               </div>
-            </Link>
-          ))}
+              <div className="flex gap-2">
+                <Select value={city} onValueChange={setCity}>
+                  <SelectTrigger aria-label="City" className="h-12 w-full border-0 bg-surface-low shadow-none sm:w-40">
+                    <MapPin size={16} aria-hidden className="text-ink-secondary" />
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All cities</SelectItem>
+                    {indianCities.map((c) => (
+                      <SelectItem key={c} value={c}>
+                        {c}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Button type="submit" size="lg" className="h-12 shrink-0">
+                  Search
+                </Button>
+              </div>
+            </form>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="type-caption text-ink-secondary">Popular:</span>
+              {showcase.slice(0, 5).map((c) => (
+                <Link key={c.slug} to={`/categories/${c.slug}`} className="rounded-full border border-line bg-surface px-3 py-1 type-label-sm text-ink hover:bg-surface-container">
+                  {c.shortLabel}
+                </Link>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-3 pt-2">
+              <Button asChild size="lg">
+                <Link to="/explore">Find an artist</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link to="/sign-up?role=artist">Join as an artist</Link>
+              </Button>
+            </div>
+          </div>
+          <div className="relative hidden lg:block">
+            <SafeImage src={heroImage.src} alt={heroImage.alt} loading="eager" fetchPriority="high" className="aspect-[4/5] w-full rounded-2xl object-cover shadow-lg" />
+            <div className="absolute -bottom-5 -left-6 max-w-[240px] rounded-xl border border-line bg-surface p-4 shadow-md">
+              <p className="type-label text-ink">Proposal v3 accepted</p>
+              <p className="type-caption text-ink-secondary">Every offer and counter-offer is kept on record.</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* 4. Make It Happen With Artists — 4 Pillars */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 border-t border-line">
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-10">
-          <h2 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink">
-            Make it all happen with independent artists
-          </h2>
-          <Link
-            to="/sign-up"
-            className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-ink text-white hover:bg-brand font-semibold text-[14px]"
-          >
-            Join Cultgig
+      {/* Categories */}
+      <section className="page-container py-14" aria-labelledby="categories-heading">
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <div>
+            <h2 id="categories-heading" className="type-h1 text-ink-strong">
+              Browse by craft
+            </h2>
+            <p className="type-body text-ink-secondary">15 creative disciplines, from stage to studio.</p>
+          </div>
+          <Link to="/categories" className="hidden items-center gap-1 type-label text-brand hover:text-brand-hover sm:inline-flex">
+            All categories <ArrowRight aria-hidden />
           </Link>
         </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="space-y-3">
-            <Search size={24} className="text-brand" aria-hidden="true" />
-            <h3 className="type-h3 text-ink">Compare real craft</h3>
-            <p className="type-body text-ink-secondary">
-              Explore category-specific portfolios, recordings, and starting packages instead of forwarded phone numbers.
-            </p>
-          </div>
-          <div className="space-y-3">
-            <FileText size={24} className="text-brand" aria-hidden="true" />
-            <h3 className="type-h3 text-ink">Share a clear brief</h3>
-            <p className="type-body text-ink-secondary">
-              Include timing, city, venue setup, and budget approach upfront so every reply is relevant.
-            </p>
-          </div>
-          <div className="space-y-3">
-            <MessageSquareText size={24} className="text-brand" aria-hidden="true" />
-            <h3 className="type-h3 text-ink">Versioned negotiation</h3>
-            <p className="type-body text-ink-secondary">
-              Agree on scope, travel, and deliverables inside structured counter-offers with full version history.
-            </p>
-          </div>
-          <div className="space-y-3">
-            <CalendarCheck size={24} className="text-brand" aria-hidden="true" />
-            <h3 className="type-h3 text-ink">Transparent booking terms</h3>
-            <p className="type-body text-ink-secondary">
-              Documented cancellation notes, privacy-safe venue sharing, and a clear booking lifecycle.
-            </p>
-          </div>
-        </div>
+        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          {creativeCategories.slice(0, 10).map((c) => (
+            <li key={c.slug}>
+              <Link to={`/categories/${c.slug}`} className="flex h-full flex-col gap-3 rounded-xl border border-line bg-surface p-4 transition-colors hover:border-line-strong hover:bg-surface-low">
+                <span className="flex size-10 items-center justify-center rounded-lg bg-brand-subtle text-brand">
+                  <CategoryIcon slug={c.slug} size={22} />
+                </span>
+                <span className="type-label text-ink">{c.label}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <Link to="/categories" className="mt-4 inline-flex items-center gap-1 type-label text-brand sm:hidden">
+          All categories <ArrowRight aria-hidden />
+        </Link>
       </section>
 
-      {/* 5. Feature Promotion for Businesses & Event Hosts */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="rounded-xl bg-brand-pressed text-white p-8 sm:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-7 space-y-5">
-            <p className="type-label text-brand-subtle">For businesses, venues & celebration hosts</p>
-            <h2 className="text-[26px] sm:text-[34px] leading-[1.2] font-bold text-white">
-              Post one structured brief and compare artists who fit your room
-            </h2>
-            <ul className="space-y-2.5 text-[15px] leading-[22px] text-white/90">
-              <li className="flex items-start gap-2.5">
-                <CheckCircle2 size={18} className="text-brand-subtle shrink-0 mt-0.5" aria-hidden="true" />
-                <span>Specify event date, duration, PA or staging notes, and INR budget range</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <CheckCircle2 size={18} className="text-brand-subtle shrink-0 mt-0.5" aria-hidden="true" />
-                <span>Invite shortlisted artists directly or receive structured applications</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <CheckCircle2 size={18} className="text-brand-subtle shrink-0 mt-0.5" aria-hidden="true" />
-                <span>Keep exact venue addresses private until a proposal progresses</span>
-              </li>
-            </ul>
-            <div className="pt-2 flex flex-wrap gap-3">
-              <Link
-                to="/client/gigs/new"
-                className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-white text-brand-pressed hover:bg-brand-subtle font-semibold text-[15px]"
-              >
-                Post a gig
-              </Link>
-              <Link
-                to="/explore"
-                className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-white/35 text-white hover:bg-white/10 font-semibold text-[15px]"
-              >
-                Explore artists
-              </Link>
-            </div>
-          </div>
-
-          <div className="lg:col-span-5">
-            <div className="bg-surface text-ink rounded-lg p-5 shadow-lg space-y-4">
-              <div className="flex items-center justify-between gap-2 text-ink-secondary type-caption">
-                <span>Illustrative event brief</span>
-                <span>Bandra West · Mumbai</span>
-              </div>
-              <h3 className="type-h3 text-ink">
-                Saturday sunset acoustic set for 60-seat terrace dinner
-              </h3>
-              <p className="type-body-sm text-ink-secondary">
-                7:00 PM – 9:00 PM · In-house PA & mixer provided · Range ₹15,000 – ₹22,000
-              </p>
-              <div className="pt-3 border-t border-line flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
-                  <SafeImage
-                    src={imageManifest.creatorRhea.src}
-                    alt={imageManifest.creatorRhea.alt}
-                    className="w-9 h-9 rounded-full object-cover"
-                  />
-                  <div>
-                    <p className="type-label text-ink">Rhea Kapoor (Sample)</p>
-                    <p className="type-caption text-ink-secondary">Proposal v2 · ₹20,500</p>
+      {/* Popular services */}
+      <section className="bg-surface-low py-14" aria-labelledby="services-heading">
+        <div className="page-container">
+          <h2 id="services-heading" className="mb-6 type-h1 text-ink-strong">
+            Popular creative services
+          </h2>
+          <ul className="no-scrollbar -mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-4">
+            {showcase.slice(0, 8).map((c) => (
+              <li key={c.slug} className="w-[240px] shrink-0 snap-start sm:w-auto">
+                <Link to={`/categories/${c.slug}`} className="group block overflow-hidden rounded-xl border border-line bg-surface">
+                  <SafeImage src={c.imageUrl} alt={c.imageAlt} className="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+                  <div className="p-4">
+                    <p className="type-h4 text-ink">{c.label}</p>
+                    <p className="mt-1 line-clamp-2 type-body-sm text-ink-secondary">{c.description}</p>
                   </div>
-                </div>
-                <Link
-                  to="/messages/sample-thread-1"
-                  className="type-label text-brand hover:text-brand-hover"
-                >
-                  Inspect offer
                 </Link>
-              </div>
-            </div>
-          </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* 6. Feature Promotion for Independent Artists */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="rounded-xl bg-brand-subtle border border-line-strong p-8 sm:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-7 space-y-4">
-            <p className="type-label text-brand">For independent artists & collectives</p>
-            <h2 className="text-[26px] sm:text-[34px] leading-[1.2] font-bold text-ink">
-              Present your portfolio, set clear pricing modes, and negotiate respectfully
-            </h2>
-            <p className="type-body-lg text-ink-secondary max-w-[560px]">
-              Whether you charge starting rates, fixed packages, or custom quotes, Cultgig puts your
-              original craft, availability, and travel terms first.
-            </p>
-            <div className="pt-2 flex flex-wrap gap-3">
-              <Link
-                to="/for-artists"
-                className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-brand text-white hover:bg-brand-hover font-semibold text-[15px]"
-              >
-                Create artist profile
-              </Link>
-              <Link
-                to="/artist/opportunities"
-                className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong bg-surface text-ink hover:border-brand hover:text-brand font-semibold text-[15px]"
-              >
-                Browse sample briefs
-              </Link>
-            </div>
-          </div>
-
-          <div className="lg:col-span-5 grid grid-cols-2 gap-3">
-            <div className="rounded-lg overflow-hidden aspect-[4/3] bg-surface border border-line">
-              <SafeImage
-                src={imageManifest.categoryMehendi.src}
-                alt={imageManifest.categoryMehendi.alt}
-                loading="lazy"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="rounded-lg overflow-hidden aspect-[4/3] bg-surface border border-line">
-              <SafeImage
-                src={imageManifest.categorySaree.src}
-                alt={imageManifest.categorySaree.alt}
-                loading="lazy"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. Illustrative Creative Moments Showcase */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+      {/* Featured artists */}
+      <section className="page-container py-14" aria-labelledby="featured-heading">
+        <div className="mb-6 flex items-end justify-between gap-4">
           <div>
-            <p className="type-label text-brand mb-1">Illustrative creative moments</p>
-            <h2 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink">
-              How creative bookings come together across India
+            <h2 id="featured-heading" className="type-h1 text-ink-strong">
+              Featured artists
             </h2>
+            <p className="type-body text-ink-secondary">Complete profiles with services, portfolios and availability.</p>
           </div>
-
-          <div className="flex flex-wrap gap-2" role="tablist" aria-label="Illustrative creative moments">
-            {illustrativeMoments.map((moment, idx) => (
-              <button
-                key={moment.id}
-                type="button"
-                role="tab"
-                aria-selected={activeMomentIndex === idx}
-                onClick={() => setActiveMomentIndex(idx)}
-                className={`min-h-[40px] px-4 py-2 rounded-md text-[13px] font-semibold border whitespace-nowrap ${
-                  activeMomentIndex === idx
-                    ? "bg-brand text-white border-brand"
-                    : "bg-surface text-ink-secondary border-line hover:border-brand hover:text-brand"
-                }`}
-              >
-                {moment.label}
-              </button>
+          <Link to="/explore" className="hidden items-center gap-1 type-label text-brand hover:text-brand-hover sm:inline-flex">
+            Explore all <ArrowRight aria-hidden />
+          </Link>
+        </div>
+        {loading ? (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <Skeleton key={i} className="h-80 rounded-xl" />
             ))}
           </div>
-        </div>
-
-        <div className="relative rounded-xl overflow-hidden aspect-[16/9] max-h-[460px] w-full bg-ink-strong">
-          <SafeImage
-            src={activeMoment.imageUrl}
-            alt={activeMoment.imageAlt}
-            loading="lazy"
-            className="w-full h-full object-cover"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-t from-ink-strong/90 via-ink-strong/35 to-transparent"
-          />
-          <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 text-white max-w-[720px] space-y-2">
-            <h3 className="text-[20px] sm:text-[26px] leading-[1.25] font-bold text-white">
-              {activeMoment.title}
-            </h3>
-            <p className="type-body text-white/90">{activeMoment.description}</p>
+        ) : featured.length ? (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {featured.map((a) => (
+              <ArtistCard key={a.id} artist={a} />
+            ))}
           </div>
-        </div>
+        ) : (
+          <EmptyState title="Artist profiles are on their way" description="We're onboarding our first artists. Join as an artist to be among the first profiles clients see." action={{ label: "Join as an artist", to: "/sign-up?role=artist" }} />
+        )}
       </section>
 
-      {/* 8. Editorial Guides */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-line">
-        <div className="flex items-end justify-between gap-4 mb-8">
-          <div>
-            <h2 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink">
-              Guides to help you plan & book
-            </h2>
-            <p className="type-body text-ink-secondary mt-1">
-              Practical checklists for hosts, event planners, and independent artists.
-            </p>
-          </div>
-          <Link to="/guides" className="type-label text-brand hover:text-brand-hover whitespace-nowrap">
-            See all guides
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {editorialGuides.slice(0, 3).map((guide) => (
-            <Link
-              key={guide.slug}
-              to={`/guides/${guide.slug}`}
-              className="group bg-surface border border-line rounded-lg overflow-hidden flex flex-col hover:border-line-strong hover:shadow-sm"
-            >
-              <div className="aspect-[16/10] bg-surface-container overflow-hidden">
-                <SafeImage
-                  src={guide.imageUrl}
-                  alt={guide.imageAlt}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-200"
-                />
-              </div>
-              <div className="p-5 space-y-2 flex-1 flex flex-col">
-                <p className="type-caption text-ink-secondary">
-                  {guide.categoryLabel}
-                  <span aria-hidden="true"> · </span>
-                  {guide.readTime}
-                </p>
-                <h3 className="type-h3 text-ink group-hover:text-brand">{guide.title}</h3>
-                <p className="type-body-sm text-ink-secondary line-clamp-2">{guide.summary}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* 9. Closing CTA */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 pb-16">
-        <div className="rounded-xl bg-brand-pressed text-white px-6 py-12 sm:px-12 sm:py-14 text-center space-y-5">
-          <h2 className="text-[28px] sm:text-[36px] leading-[1.2] font-bold text-white max-w-[680px] mx-auto">
-            Creative talent & event briefs, thoughtfully matched.
+      {/* How it works */}
+      <section className="border-y border-line bg-surface-low py-14" aria-labelledby="how-heading">
+        <div className="page-container">
+          <h2 id="how-heading" className="type-h1 text-ink-strong">
+            How Cultgig works
           </h2>
-          <p className="type-body-lg text-white/85 max-w-[540px] mx-auto">
-            Explore illustrative sample profiles, post a structured gig brief, or join Cultgig early
-            access as an artist or event host.
-          </p>
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              to="/explore"
-              className="inline-flex items-center justify-center min-h-[44px] px-6 py-2.5 rounded-md bg-white text-brand-pressed hover:bg-brand-subtle font-semibold text-[15px]"
-            >
-              Explore artists
-            </Link>
-            <Link
-              to="/client/gigs/new"
-              className="inline-flex items-center justify-center min-h-[44px] px-6 py-2.5 rounded-md border border-white/40 text-white hover:bg-white/10 font-semibold text-[15px]"
-            >
-              Post a gig
-            </Link>
+          <p className="mb-8 type-body text-ink-secondary">From first message to completed booking, without forwarded numbers or lost terms.</p>
+          <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((s, i) => (
+              <li key={s.title} className="rounded-xl border border-line bg-surface p-5">
+                <div className="mb-3 flex items-center gap-3">
+                  <span className="flex size-9 items-center justify-center rounded-full bg-brand text-ink-inverse type-label">{i + 1}</span>
+                  <s.icon size={22} className="text-ink-secondary" aria-hidden />
+                </div>
+                <h3 className="type-h4 text-ink">{s.title}</h3>
+                <p className="mt-1 type-body-sm text-ink-secondary">{s.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Two audiences */}
+      <section className="page-container grid gap-6 py-14 lg:grid-cols-2">
+        <article className="flex flex-col gap-4 rounded-2xl border border-line bg-surface p-7">
+          <span className="flex size-11 items-center justify-center rounded-xl bg-surface-container text-ink">
+            <Buildings size={24} aria-hidden />
+          </span>
+          <h2 className="type-h2 text-ink-strong">For clients, venues and event planners</h2>
+          <ul className="space-y-2.5 type-body text-ink-secondary">
+            {["Compare portfolios, prices and availability side by side", "Post a gig once and receive structured applications", "Keep every offer and counter-offer on record", "Shortlist, message and book in one workspace"].map((t) => (
+              <li key={t} className="flex gap-2">
+                <CheckCircle size={18} className="mt-0.5 shrink-0 text-brand" aria-hidden /> {t}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-auto flex flex-wrap gap-2 pt-2">
+            <Button asChild>
+              <Link to="/client/gigs/new">Post a gig</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link to="/for-businesses">For businesses</Link>
+            </Button>
           </div>
+        </article>
+        <article className="flex flex-col gap-4 rounded-2xl border border-line-subtle bg-brand-light-subtle p-7">
+          <span className="flex size-11 items-center justify-center rounded-xl bg-brand-light text-ink">
+            <Sparkle size={24} aria-hidden />
+          </span>
+          <h2 className="type-h2 text-ink-strong">For artists and creative teams</h2>
+          <ul className="space-y-2.5 type-body text-ink-secondary">
+            {["A professional profile with services, packages and media", "Gigs matched to your craft and city", "Quote your way: fixed, range or quotation-based", "Track proposals, bookings and earnings"].map((t) => (
+              <li key={t} className="flex gap-2">
+                <CheckCircle size={18} className="mt-0.5 shrink-0 text-brand" aria-hidden /> {t}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-auto flex flex-wrap gap-2 pt-2">
+            <Button asChild>
+              <Link to="/sign-up?role=artist">Join as an artist</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link to="/for-artists">Learn more</Link>
+            </Button>
+          </div>
+        </article>
+      </section>
+
+      {/* Business banner */}
+      <section className="page-container pb-14">
+        <div className="grid items-center gap-8 overflow-hidden rounded-2xl bg-ink-strong text-ink-inverse lg:grid-cols-2">
+          <div className="space-y-4 p-8 lg:p-12">
+            <h2 className="type-h1">Programming a venue or planning a launch?</h2>
+            <p className="type-body-lg text-ink-inverse/80">
+              Restaurants, hotels, studios and brands use Cultgig to book recurring live music, décor and hosts — with clear scope, dates and cancellation terms for every booking.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Button asChild size="lg" className="bg-brand-light text-ink hover:bg-brand-light-hover">
+                <Link to="/for-businesses">See how businesses hire</Link>
+              </Button>
+            </div>
+          </div>
+          <SafeImage src={pageImages.forBusinessesHero.src} alt={pageImages.forBusinessesHero.alt} className="hidden h-full min-h-[320px] w-full object-cover lg:block" />
+        </div>
+      </section>
+
+      {/* Trust */}
+      <section className="border-t border-line bg-surface-low py-14">
+        <div className="page-container grid gap-8 lg:grid-cols-[1fr_1.4fr]">
+          <div className="space-y-3">
+            <ShieldCheck size={32} className="text-brand" aria-hidden />
+            <h2 className="type-h1 text-ink-strong">Questions, answered</h2>
+            <p className="type-body text-ink-secondary">
+              Straight answers about hiring, negotiation and payments. Read the <Link to="/safety" className="text-brand underline-offset-4 hover:underline">trust & safety</Link> page for how we handle reports and disputes.
+            </p>
+            <Button asChild variant="outline">
+              <Link to="/faq">
+                <FileText aria-hidden /> All FAQs
+              </Link>
+            </Button>
+          </div>
+          <Accordion type="single" collapsible className="rounded-xl border border-line bg-surface px-5">
+            {detailedFaqList.slice(0, 5).map((f) => (
+              <AccordionItem key={f.question} value={f.question}>
+                <AccordionTrigger className="text-left type-h4 text-ink">{f.question}</AccordionTrigger>
+                <AccordionContent className="type-body text-ink-secondary">{f.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
     </main>

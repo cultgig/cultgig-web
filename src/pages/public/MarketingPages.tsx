@@ -1,13 +1,13 @@
-import { ArrowLeft, CheckCircle2, ChevronDown, ShieldCheck } from "lucide-react";
+import { ArrowLeft, CheckCircle as CheckCircle2, CaretDown as ChevronDown, ShieldCheck } from "@phosphor-icons/react";
 import { useState } from "react";
-import { NoticeBanner } from "../components/shared/NoticeBanner";
-import { SafeImage } from "../components/shared/SafeImage";
-import { aboutContent } from "../content/about";
-import { detailedFaqList } from "../content/faq";
-import { pageImages } from "../content/images";
-import { editorialGuides } from "../data/guides";
-import { usePageMeta } from "../hooks/usePageMeta";
-import { Link } from "../lib/router";
+import { NoticeBanner } from "@/components/shared/NoticeBanner";
+import { SafeImage } from "@/components/shared/SafeImage";
+import { aboutContent } from "@/content/about";
+import { detailedFaqList } from "@/content/faq";
+import { pageImages } from "@/content/images";
+import { editorialGuides } from "@/data/guides";
+import { usePageMeta } from "@/hooks/usePageMeta";
+import { Link } from "@/lib/router";
 
 export function HowItWorksPage() {
   usePageMeta(
@@ -102,7 +102,7 @@ export function ForArtistsPage() {
               Join as an artist
             </Link>
             <Link
-              to="/artist/opportunities"
+              to="/artist/gigs"
               className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong text-ink hover:border-brand type-button"
             >
               Browse sample briefs

@@ -1,379 +1,383 @@
-import {
-  ArrowLeft,
-  Bookmark,
-  Calendar,
-  CheckCircle2,
-  Flag,
-  MapPin,
-  MessageSquare,
-  ShieldAlert,
-} from "lucide-react";
 import { useState } from "react";
-import { Button } from "../components/shared/LegacyButton";
-import { NoticeBanner } from "../components/shared/NoticeBanner";
-import { SafeImage } from "../components/shared/SafeImage";
-import { getCategoryBySlug } from "../data/categories";
-import { usePageMeta } from "../hooks/usePageMeta";
-import { Link, useRouter } from "../lib/router";
-import { useAuth } from "../state/AuthContext";
-import { useMarketplace } from "../state/MarketplaceContext";
-import { formatArtistPrice, formatInr } from "../utils/format";
+import {
+  CalendarCheck,
+  ChatCircleText,
+  CheckCircle,
+  Flag,
+  GlobeHemisphereEast,
+  MapPin,
+  MinusCircle,
+  MusicNotes,
+  PencilSimple,
+  Translate,
+  UsersThree,
+  VideoCamera,
+} from "@phosphor-icons/react";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ArtistCard, priceLabel, SaveArtistButton } from "@/components/marketplace/ArtistCard";
+import { CategoryIcon } from "@/components/marketplace/CategoryIcon";
+import { InquiryDialog } from "@/components/marketplace/InquiryDialog";
+import { DemoBadge } from "@/components/shared/StatusBadge";
+import { RatingStars, UserAvatar } from "@/components/shared/primitives";
+import { ReportDialog } from "@/components/shared/ReportDialog";
+import { SafeImage } from "@/components/shared/SafeImage";
+import { EmptyState, NotFoundState, PageSkeleton } from "@/components/shared/states";
+import { categoryLabel } from "@/data/categories";
+import { formatInr } from "@/domain/money";
+import { usePageMeta } from "@/hooks/usePageMeta";
+import { Link } from "@/lib/router";
+import { useMarketplace } from "@/state/MarketplaceContext";
+import { artistRating, averageRatings } from "@/state/selectors";
+import type { PortfolioItem } from "@/types/marketplace";
+import { formatDate, parseDateOnly, toDateOnly } from "@/utils/format";
+
+const workingModeLabel = { on_site: "On-site", remote: "Remote", both: "On-site and remote" } as const;
+
+function PortfolioTile({ item, onOpen }: { item: PortfolioItem; onOpen: () => void }) {
+  return (
+    <button type="button" onClick={onOpen} className="group relative overflow-hidden rounded-xl border border-line bg-surface-container text-left focus-visible:outline-2">
+      {item.type === "image" ? (
+        <SafeImage src={item.mediaUrl} alt={item.title} className="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+      ) : (
+        <div className="flex aspect-[4/3] w-full flex-col items-center justify-center gap-2 text-ink-secondary">
+          {item.type === "audio" ? <MusicNotes size={32} aria-hidden /> : <VideoCamera size={32} aria-hidden />}
+          <span className="type-label-sm">{item.type === "audio" ? "Audio sample" : "Video sample"}</span>
+        </div>
+      )}
+      <div className="p-3">
+        <p className="truncate type-label text-ink">{item.title}</p>
+        {item.caption && <p className="line-clamp-1 type-caption text-ink-secondary">{item.caption}</p>}
+      </div>
+    </button>
+  );
+}
 
 export function ArtistProfilePage({ slug }: { slug: string }) {
-  const { navigate } = useRouter();
-  const { user } = useAuth();
-  const {
-    artists,
-    savedArtistIds,
-    toggleSaveArtist,
-    gigs,
-    startInquiryConversation,
-    createSupportTicket,
-  } = useMarketplace();
-
+  const { artists, reviews, viewer, loading } = useMarketplace();
   const artist = artists.find((a) => a.slug === slug);
-  const category = artist ? getCategoryBySlug(artist.primaryCategory) : undefined;
+  usePageMeta(artist ? `${artist.displayName} — ${categoryLabel(artist.primaryCategory)}` : "Artist not found", artist?.tagline);
+  const [lightbox, setLightbox] = useState<PortfolioItem | null>(null);
 
-  usePageMeta(
-    artist ? `${artist.displayName}` : "Artist profile not found",
-    artist?.tagline || "Creative artist profile on Cultgig."
-  );
-
-  const [inquiryOpen, setInquiryOpen] = useState(false);
-  const [selectedGigId, setSelectedGigId] = useState("");
-  const [inquiryMessage, setInquiryMessage] = useState("");
-  const [reportOpen, setReportOpen] = useState(false);
-  const [reportReason, setReportReason] = useState("");
-  const [reportSent, setReportSent] = useState(false);
-
+  if (loading) return <PageSkeleton rows={1} />;
   if (!artist) {
-    return (
-      <main id="main-content" className="max-w-[960px] mx-auto px-4 sm:px-6 py-16 text-center space-y-4">
-        <h1 className="type-h1 text-ink">Artist profile not found</h1>
-        <p className="type-body text-ink-secondary">
-          Return to Explore to browse illustrative sample profiles across 15 creative disciplines.
-        </p>
-        <Link
-          to="/explore"
-          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-brand text-white type-button"
-        >
-          Browse artists
-        </Link>
-      </main>
-    );
+    return <NotFoundState title="This artist profile isn't available" description="The artist may have hidden their profile or changed its address. Explore other artists in the same category." backTo="/explore" backLabel="Explore artists" />;
   }
 
-  const isSaved = savedArtistIds.includes(artist.id);
-  const myOpenGigs = gigs.filter((g) => g.status === "open");
+  const isOwner = viewer?.id === artist.ownerUserId;
+  const artistReviews = reviews.filter((r) => r.artistProfileId === artist.id && r.status === "published");
+  const rating = artistRating(reviews, artist.id);
+  const breakdown = averageRatings(artistReviews);
+  const similar = artists.filter((a) => a.id !== artist.id && a.published && (a.primaryCategory === artist.primaryCategory || a.city === artist.city)).slice(0, 3);
+  const unavailable = artist.unavailableDates.map(parseDateOnly);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-  const handleStartInquiry = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!user) {
-      navigate(`/sign-in?next=/artists/${artist.slug}`);
-      return;
-    }
-    if (!inquiryMessage.trim()) return;
-    const chosenGig = myOpenGigs.find((g) => g.id === selectedGigId);
-    const thread = startInquiryConversation({
-      artist,
-      clientId: user.id,
-      clientName: user.displayName,
-      gigId: chosenGig?.id,
-      gigTitle: chosenGig?.title || `Direct inquiry for ${artist.displayName}`,
-      initialMessage: inquiryMessage.trim(),
-    });
-    setInquiryOpen(false);
-    navigate(`/messages/${thread.id}`);
-  };
-
-  const handleReportSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!reportReason.trim()) return;
-    createSupportTicket({
-      issueType: "artist_safety",
-      name: user?.displayName || "Guest visitor",
-      email: user?.email || "unauthenticated@local.preview",
-      message: `Profile report for ${artist.slug}: ${reportReason.trim()}`,
-    });
-    setReportSent(true);
-  };
+  const ctas = (
+    <div className="flex flex-col gap-2">
+      {isOwner ? (
+        <Button asChild size="lg">
+          <Link to="/artist/profile">
+            <PencilSimple aria-hidden /> Edit your profile
+          </Link>
+        </Button>
+      ) : (
+        <>
+          <InquiryDialog artist={artist} mode="quote" trigger={<Button size="lg">Request a quote</Button>} />
+          <InquiryDialog
+            artist={artist}
+            trigger={
+              <Button size="lg" variant="outline">
+                <ChatCircleText aria-hidden /> Contact artist
+              </Button>
+            }
+          />
+        </>
+      )}
+    </div>
+  );
 
   return (
-    <main id="main-content" className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
-      <Link
-        to="/explore"
-        className="inline-flex items-center gap-1.5 type-label text-ink-secondary hover:text-brand"
-      >
-        <ArrowLeft size={15} aria-hidden="true" />
-        Back to Explore
-      </Link>
-
-      <NoticeBanner tone="info" title="Sample profile — illustrative preview">
-        This profile is an illustrative sample showing how portfolios, starting packages,
-        availability, and inquiry workflows appear on Cultgig. Reviews remain disabled until real
-        verifiable bookings are completed.
-      </NoticeBanner>
-
-      {/* Profile Header */}
-      <section className="bg-surface border border-line rounded-xl overflow-hidden">
-        <div className="aspect-[16/5] min-h-[180px] bg-surface-container overflow-hidden">
-          <SafeImage
-            src={artist.coverUrl}
-            alt={artist.coverAlt}
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        <div className="p-6 sm:p-8 flex flex-col lg:flex-row lg:items-start justify-between gap-6">
-          <div className="flex flex-col sm:flex-row items-start gap-5">
-            <SafeImage
-              src={artist.avatarUrl}
-              alt={artist.avatarAlt}
-              className="w-20 h-20 rounded-full object-cover border-2 border-surface shadow-sm shrink-0"
-            />
-            <div className="space-y-2">
-              <div className="flex flex-wrap items-center gap-2 text-ink-secondary type-caption">
-                <span className="text-brand font-semibold">{category?.label}</span>
-                <span aria-hidden="true">·</span>
-                <span>{artist.verificationLabel}</span>
+    <main id="main-content" className="pb-24 lg:pb-14">
+      <div className="relative h-44 bg-surface-container sm:h-64">
+        <SafeImage src={artist.coverUrl} alt={artist.coverAlt} loading="eager" className="size-full object-cover" />
+      </div>
+      <div className="page-container">
+        <div className="-mt-12 flex flex-col gap-4 sm:-mt-14 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex items-end gap-4">
+            <UserAvatar name={artist.displayName} src={artist.avatarUrl} className="size-24 border-4 border-surface shadow-md sm:size-28" />
+            <div className="pb-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <h1 className="type-h1 text-ink-strong">{artist.displayName}</h1>
+                {artist.isSample && <DemoBadge />}
+                {!artist.published && <span className="rounded-full bg-status-warning-soft px-2 py-0.5 type-label-sm text-status-warning">Draft — only you can see this</span>}
               </div>
-              <h1 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink">
-                {artist.displayName}
-              </h1>
-              <p className="type-body-lg text-ink-secondary max-w-[660px]">{artist.tagline}</p>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 type-body-sm text-ink-secondary pt-1">
-                <span className="inline-flex items-center gap-1.5">
-                  <MapPin size={14} className="text-brand" aria-hidden="true" />
-                  Based in {artist.city} · Travels up to {artist.travelRadiusKm} km (
-                  {artist.travelCities.join(", ")})
-                </span>
-                <span>Languages: {artist.languages.join(", ")}</span>
-              </div>
+              <p className="type-body text-ink-secondary">{artist.tagline}</p>
             </div>
           </div>
-
-          <div className="flex flex-wrap lg:flex-col items-stretch gap-2.5 shrink-0 lg:min-w-[230px]">
-            <div className="bg-brand-subtle border border-line-strong rounded-md p-3.5 text-left">
-              <p className="type-caption text-brand font-medium">Pricing guide</p>
-              <p className="text-[20px] leading-[26px] font-bold text-ink tabular-nums">
-                {formatArtistPrice(
-                  artist.pricingMode,
-                  artist.startingPriceInr,
-                  artist.priceMaxInr
-                )}
-              </p>
-            </div>
-            <Button
-              variant="primary"
-              onClick={() => {
-                if (!user) {
-                  navigate(`/sign-in?next=/artists/${artist.slug}`);
-                  return;
+          <div className="flex gap-2 pb-1">
+            <SaveArtistButton artistId={artist.id} withLabel />
+            {!isOwner && (
+              <ReportDialog
+                targetType="artist_profile"
+                targetId={artist.id}
+                targetLabel="this profile"
+                trigger={
+                  <Button variant="ghost" size="sm" aria-label="Report profile">
+                    <Flag aria-hidden /> <span className="hidden sm:inline">Report</span>
+                  </Button>
                 }
-                setInquiryOpen((prev) => !prev);
-              }}
-            >
-              <MessageSquare size={16} aria-hidden="true" />
-              Send inquiry / Invite to gig
-            </Button>
-            <Button variant="outline" onClick={() => toggleSaveArtist(artist.id)}>
-              <Bookmark size={16} fill={isSaved ? "currentColor" : "none"} aria-hidden="true" />
-              {isSaved ? "Saved to shortlist" : "Save artist"}
-            </Button>
+              />
+            )}
           </div>
         </div>
-      </section>
 
-      {/* Inline Inquiry / Invite Panel */}
-      {inquiryOpen && (
-        <section
-          aria-label="Send inquiry to artist"
-          className="bg-surface border border-line-strong rounded-lg p-6 space-y-4"
-        >
-          <h2 className="type-h2 text-ink">Start a conversation with {artist.displayName}</h2>
-          <form onSubmit={handleStartInquiry} className="space-y-4">
-            <div>
-              <label htmlFor="invite-gig" className="block type-label text-ink mb-1.5">
-                Link an open gig brief (optional)
-              </label>
-              <select
-                id="invite-gig"
-                value={selectedGigId}
-                onChange={(e) => setSelectedGigId(e.target.value)}
-                className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
-              >
-                <option value="">General inquiry (no specific gig selected)</option>
-                {myOpenGigs.map((g) => (
-                  <option key={g.id} value={g.id}>
-                    {g.title} ({g.city})
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label htmlFor="inquiry-msg" className="block type-label text-ink mb-1.5">
-                Event details, date, venue tone & question *
-              </label>
-              <textarea
-                id="inquiry-msg"
-                required
-                rows={4}
-                value={inquiryMessage}
-                onChange={(e) => setInquiryMessage(e.target.value)}
-                placeholder="Share your event date, city, audience size, and technical setup so the artist can reply with an accurate proposal."
-                className="w-full px-3 py-2.5 rounded-md border border-line bg-surface-low text-[14px] leading-[21px]"
-              />
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Button type="submit">Start conversation thread</Button>
-              <Button variant="ghost" onClick={() => setInquiryOpen(false)}>
-                Cancel
-              </Button>
-            </div>
-          </form>
-        </section>
-      )}
+        <Breadcrumb className="mt-6">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link to="/explore">Explore</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link to={`/categories/${artist.primaryCategory}`}>{categoryLabel(artist.primaryCategory)}</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{artist.displayName}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
 
-      {/* Two-Column Body */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <div className="lg:col-span-8 space-y-8">
-          {/* About */}
-          <section className="bg-surface border border-line rounded-lg p-6 space-y-3">
-            <h2 className="type-h2 text-ink">About the craft</h2>
-            <p className="type-body text-ink-secondary">{artist.bio}</p>
-            <p className="type-body-sm text-ink-secondary inline-flex items-center gap-1.5 pt-1">
-              <Calendar size={14} className="text-brand" aria-hidden="true" />
-              {artist.availabilitySummary}
-            </p>
-          </section>
+        <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_340px]">
+          <div className="min-w-0 space-y-8">
+            <ul className="flex flex-wrap gap-x-5 gap-y-2 type-body-sm text-ink-secondary">
+              <li className="flex items-center gap-1.5">
+                <CategoryIcon slug={artist.primaryCategory} size={16} /> {categoryLabel(artist.primaryCategory)}
+              </li>
+              <li className="flex items-center gap-1.5">
+                <MapPin size={16} aria-hidden /> {artist.city}
+              </li>
+              <li className="flex items-center gap-1.5">
+                <UsersThree size={16} aria-hidden /> {artist.artistFormat === "group" ? "Group" : "Solo"} · {artist.experienceYears} years
+              </li>
+              <li className="flex items-center gap-1.5">
+                <Translate size={16} aria-hidden /> {artist.languages.join(", ") || "Languages not listed"}
+              </li>
+              {rating && (
+                <li>
+                  <RatingStars value={rating.average} count={rating.count} />
+                </li>
+              )}
+            </ul>
 
-          {/* Portfolio */}
-          <section className="space-y-4">
-            <h2 className="type-h2 text-ink">Portfolio work</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {artist.portfolio.map((item) => (
-                <article
-                  key={item.id}
-                  className="bg-surface border border-line rounded-lg overflow-hidden"
-                >
-                  <div className="aspect-[4/3] bg-surface-container">
-                    <SafeImage
-                      src={item.mediaUrl}
-                      alt={item.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-4 space-y-1">
-                    <h3 className="type-h4 text-ink">{item.title}</h3>
-                    <p className="type-body-sm text-ink-secondary">{item.caption}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
+            <Tabs defaultValue="overview">
+              <TabsList className="w-full justify-start overflow-x-auto">
+                <TabsTrigger value="overview">Overview</TabsTrigger>
+                <TabsTrigger value="portfolio">Portfolio ({artist.portfolio.length})</TabsTrigger>
+                <TabsTrigger value="services">Services ({artist.packages.length})</TabsTrigger>
+                <TabsTrigger value="reviews">Reviews ({artistReviews.length})</TabsTrigger>
+              </TabsList>
 
-          {/* Packages */}
-          <section className="space-y-4">
-            <h2 className="type-h2 text-ink">Service packages & starting scope</h2>
-            <div className="space-y-4">
-              {artist.packages.map((pkg) => (
-                <article
-                  key={pkg.id}
-                  className="bg-surface border border-line rounded-lg p-5 space-y-3"
-                >
-                  <div className="flex flex-wrap items-start justify-between gap-3">
-                    <div>
-                      <h3 className="type-h3 text-ink">{pkg.title}</h3>
-                      <p className="type-body-sm text-ink-secondary">Duration: {pkg.duration}</p>
+              <TabsContent value="overview" className="space-y-6 pt-4">
+                <section className="space-y-2">
+                  <h2 className="type-h3 text-ink">About</h2>
+                  <p className="whitespace-pre-line type-body text-ink-secondary">{artist.bio || "This artist hasn't written a bio yet."}</p>
+                </section>
+                {artist.secondaryCategories.length > 0 && (
+                  <section className="space-y-2">
+                    <h2 className="type-h4 text-ink">Also offers</h2>
+                    <div className="flex flex-wrap gap-2">
+                      {artist.secondaryCategories.map((c) => (
+                        <Link key={c} to={`/categories/${c}`} className="rounded-full bg-surface-low px-3 py-1 type-label-sm text-ink hover:bg-surface-container">
+                          {categoryLabel(c)}
+                        </Link>
+                      ))}
                     </div>
-                    <p className="type-h3 text-brand tabular-nums">
-                      {pkg.priceInr ? formatInr(pkg.priceInr) : "Custom quote"}
+                  </section>
+                )}
+                <section className="grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-xl border border-line p-4">
+                    <h2 className="mb-2 flex items-center gap-1.5 type-h4 text-ink">
+                      <GlobeHemisphereEast size={18} aria-hidden /> Travel
+                    </h2>
+                    <p className="type-body-sm text-ink-secondary">
+                      {workingModeLabel[artist.workingMode]}. Travels up to {artist.travelRadiusKm} km from {artist.city}
+                      {artist.travelCities.length ? `, including ${artist.travelCities.join(", ")}` : ""}.
                     </p>
                   </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-line">
-                    <div>
-                      <p className="type-label text-ink mb-1.5">Included</p>
-                      <ul className="space-y-1">
-                        {pkg.inclusions.map((inc) => (
-                          <li key={inc} className="type-body-sm text-ink-secondary flex items-start gap-1.5">
-                            <CheckCircle2 size={14} className="text-status-success shrink-0 mt-0.5" aria-hidden="true" />
-                            <span>{inc}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <p className="type-label text-ink mb-1.5">Not included / host arranges</p>
-                      <ul className="space-y-1">
-                        {pkg.exclusions.map((exc) => (
-                          <li key={exc} className="type-body-sm text-ink-secondary">
-                            · {exc}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                  <div className="rounded-xl border border-line p-4">
+                    <h2 className="mb-2 type-h4 text-ink">Equipment</h2>
+                    <p className="type-body-sm text-ink-secondary">{artist.equipmentNotes || "Discuss equipment needs in your inquiry."}</p>
                   </div>
-                </article>
+                </section>
+                {artist.portfolio.length > 0 && (
+                  <section className="space-y-3">
+                    <h2 className="type-h3 text-ink">Featured work</h2>
+                    <div className="grid gap-3 sm:grid-cols-3">
+                      {artist.portfolio.slice(0, 3).map((p) => (
+                        <PortfolioTile key={p.id} item={p} onOpen={() => setLightbox(p)} />
+                      ))}
+                    </div>
+                  </section>
+                )}
+              </TabsContent>
+
+              <TabsContent value="portfolio" className="pt-4">
+                {artist.portfolio.length ? (
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {artist.portfolio.map((p) => (
+                      <PortfolioTile key={p.id} item={p} onOpen={() => setLightbox(p)} />
+                    ))}
+                  </div>
+                ) : (
+                  <EmptyState compact title="No portfolio items yet" description="Ask the artist for recent work in your inquiry." />
+                )}
+              </TabsContent>
+
+              <TabsContent value="services" className="space-y-3 pt-4">
+                {artist.packages.length ? (
+                  artist.packages.map((pkg) => (
+                    <article key={pkg.id} className="rounded-xl border border-line bg-surface p-5">
+                      <div className="flex flex-wrap items-start justify-between gap-3">
+                        <div>
+                          <h3 className="type-h4 text-ink">{pkg.title}</h3>
+                          <p className="type-caption text-ink-secondary">
+                            {pkg.duration} · {workingModeLabel[pkg.format]}
+                          </p>
+                        </div>
+                        <p className="type-h4 text-ink">{pkg.priceInr === null ? "Quote on request" : formatInr(pkg.priceInr)}</p>
+                      </div>
+                      {pkg.description && <p className="mt-2 type-body-sm text-ink-secondary">{pkg.description}</p>}
+                      <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                        <ul className="space-y-1">
+                          {pkg.inclusions.map((i) => (
+                            <li key={i} className="flex gap-2 type-body-sm text-ink">
+                              <CheckCircle size={16} className="mt-0.5 shrink-0 text-status-success" aria-hidden /> {i}
+                            </li>
+                          ))}
+                        </ul>
+                        <ul className="space-y-1">
+                          {pkg.exclusions.map((i) => (
+                            <li key={i} className="flex gap-2 type-body-sm text-ink-secondary">
+                              <MinusCircle size={16} className="mt-0.5 shrink-0" aria-hidden /> <span><span className="sr-only">Not included: </span>{i}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      {!isOwner && (
+                        <InquiryDialog artist={artist} mode="quote" trigger={<Button variant="outline" size="sm" className="mt-4">Request this service</Button>} />
+                      )}
+                    </article>
+                  ))
+                ) : (
+                  <EmptyState compact title="No services listed yet" description="You can still describe what you need in an inquiry." />
+                )}
+              </TabsContent>
+
+              <TabsContent value="reviews" className="space-y-4 pt-4">
+                {breakdown && (
+                  <div className="grid gap-2 rounded-xl border border-line bg-surface-low p-4 sm:grid-cols-5">
+                    {(["overall", "professionalism", "communication", "quality", "punctuality"] as const).map((k) => (
+                      <div key={k}>
+                        <p className="type-caption capitalize text-ink-secondary">{k}</p>
+                        <p className="type-h4 text-ink">{breakdown[k].toFixed(1)}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {artistReviews.length ? (
+                  artistReviews.map((r) => (
+                    <article key={r.id} className="rounded-xl border border-line p-4">
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2">
+                          <RatingStars value={r.ratings.overall} />
+                          <span className="type-label text-ink">{r.reviewerName}</span>
+                          <span className="inline-flex items-center gap-1 type-caption text-status-success">
+                            <CalendarCheck size={14} aria-hidden /> Verified booking
+                          </span>
+                          {r.isSample && <DemoBadge />}
+                        </div>
+                        <ReportDialog targetType="review" targetId={r.id} targetLabel="this review" trigger={<Button variant="ghost" size="sm">Report</Button>} />
+                      </div>
+                      <p className="mt-2 type-body text-ink-secondary">{r.text}</p>
+                      <p className="mt-1 type-caption text-ink-secondary">{formatDate(r.createdAt)}</p>
+                    </article>
+                  ))
+                ) : (
+                  <EmptyState compact title="No reviews yet" description="Reviews come only from clients with a completed booking, so new artists start with none." />
+                )}
+              </TabsContent>
+            </Tabs>
+          </div>
+
+          <aside className="space-y-4">
+            <div className="space-y-4 rounded-xl border border-line bg-surface p-5 shadow-sm lg:sticky lg:top-[calc(var(--header-height)+16px)]">
+              <div>
+                <p className="type-caption text-ink-secondary">Pricing</p>
+                <p className="type-h2 text-ink-strong">{priceLabel(artist)}</p>
+                <p className="type-caption text-ink-secondary">Final price is agreed in a versioned offer before booking.</p>
+              </div>
+              <div className="hidden lg:block">{ctas}</div>
+              <div className="border-t border-line pt-4">
+                <p className="mb-2 type-label text-ink">Availability</p>
+                <Calendar
+                  mode="multiple"
+                  selected={[]}
+                  disabled={(d) => d < today || unavailable.some((u) => toDateOnly(u) === toDateOnly(d))}
+                  className="rounded-lg border border-line p-2"
+                  aria-label="Availability calendar. Unavailable dates are disabled."
+                />
+                <p className="mt-2 type-caption text-ink-secondary">Greyed-out dates are unavailable. Confirm your date in the inquiry.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        {similar.length > 0 && (
+          <section className="mt-14 space-y-4">
+            <h2 className="type-h2 text-ink">Similar artists</h2>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {similar.map((a) => (
+                <ArtistCard key={a.id} artist={a} />
               ))}
             </div>
           </section>
-        </div>
-
-        {/* Right Sidebar: Reviews Policy & Report */}
-        <aside className="lg:col-span-4 space-y-5">
-          <section className="bg-surface border border-line rounded-lg p-5 space-y-3">
-            <h2 className="type-h3 text-ink">Verified booking reviews</h2>
-            <p className="type-body-sm text-ink-secondary">
-              No reviews displayed yet. Cultgig only publishes reviews linked to completed,
-              verifiable bookings—never unverified star counts.
-            </p>
-          </section>
-
-          <section className="bg-surface border border-line rounded-lg p-5 space-y-3">
-            <div className="flex items-center gap-2 text-ink">
-              <ShieldAlert size={17} className="text-brand" aria-hidden="true" />
-              <h2 className="type-h4">Safety & profile reporting</h2>
-            </div>
-            <p className="type-body-sm text-ink-secondary">
-              Artists confirm ownership of uploaded portfolio work. Report inaccurate or unlawful listings.
-            </p>
-            {!reportOpen ? (
-              <button
-                type="button"
-                onClick={() => setReportOpen(true)}
-                className="inline-flex items-center gap-1.5 type-label text-ink-secondary hover:text-status-error"
-              >
-                <Flag size={14} aria-hidden="true" />
-                Report this profile
-              </button>
-            ) : reportSent ? (
-              <p className="type-body-sm text-status-success font-medium">
-                Report logged locally for review. Thank you for helping keep Cultgig safe.
-              </p>
-            ) : (
-              <form onSubmit={handleReportSubmit} className="space-y-2.5">
-                <textarea
-                  required
-                  rows={3}
-                  value={reportReason}
-                  onChange={(e) => setReportReason(e.target.value)}
-                  placeholder="Describe the concern (e.g., copyright, misleading claims, safety)"
-                  className="w-full p-2.5 rounded-md border border-line text-[13px]"
-                />
-                <div className="flex gap-2">
-                  <Button type="submit" size="sm">
-                    Submit report
-                  </Button>
-                  <Button size="sm" variant="ghost" onClick={() => setReportOpen(false)}>
-                    Cancel
-                  </Button>
-                </div>
-              </form>
-            )}
-          </section>
-        </aside>
+        )}
       </div>
+
+      {/* Mobile sticky actions */}
+      <div className="pb-safe fixed inset-x-0 bottom-0 z-header border-t border-line bg-surface p-3 lg:hidden">{ctas}</div>
+
+      <Dialog open={Boolean(lightbox)} onOpenChange={(o) => !o && setLightbox(null)}>
+        <DialogContent className="sm:max-w-3xl">
+          {lightbox && (
+            <>
+              <DialogHeader>
+                <DialogTitle>{lightbox.title}</DialogTitle>
+                <DialogDescription>{lightbox.caption}</DialogDescription>
+              </DialogHeader>
+              {lightbox.type === "image" ? (
+                <SafeImage src={lightbox.mediaUrl} alt={lightbox.title} className="max-h-[70vh] w-full rounded-lg object-contain" />
+              ) : lightbox.type === "audio" ? (
+                <audio controls src={lightbox.mediaUrl} className="w-full">
+                  Your browser can't play this audio sample.
+                </audio>
+              ) : (
+                <video controls src={lightbox.mediaUrl} className="max-h-[70vh] w-full rounded-lg">
+                  Your browser can't play this video sample.
+                </video>
+              )}
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </main>
   );
 }
