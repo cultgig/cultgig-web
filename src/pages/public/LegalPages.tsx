@@ -9,7 +9,25 @@ export type LegalKind =
   | "cancellation"
   | "community-guidelines"
   | "artist-agreement"
-  | "client-agreement";
+  | "client-agreement"
+  | "grievance"
+  | "cookies"
+  | "payments-and-fees"
+  | "disputes";
+
+export const legalKinds: LegalKind[] = [
+  "terms",
+  "privacy",
+  "refunds",
+  "cancellation",
+  "community-guidelines",
+  "artist-agreement",
+  "client-agreement",
+  "grievance",
+  "cookies",
+  "payments-and-fees",
+  "disputes",
+];
 
 const legalDocs: Record<
   LegalKind,
@@ -144,6 +162,109 @@ const legalDocs: Record<
         heading: "1. Accurate briefs & safe venue access",
         body: [
           "Clients must provide accurate event timing, technical setup disclosures, and safe working conditions matching the agreed proposal.",
+        ],
+      },
+    ],
+  },
+  grievance: {
+    title: "Grievance Redressal",
+    summary: "How to raise a complaint with Cultgig and how it will be handled, as required for e-commerce entities operating in India.",
+    sections: [
+      {
+        heading: "1. Grievance Officer",
+        body: [
+          `Name: ${siteConfig.grievanceOfficerName}. Email: ${siteConfig.grievanceOfficerEmail || "to be published before launch"}. Address: ${siteConfig.registeredAddress}.`,
+          "These details are published in line with the Consumer Protection (E-Commerce) Rules, 2020 and the Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021. They must be confirmed by the owner before commercial launch.",
+        ],
+      },
+      {
+        heading: "2. How to raise a grievance",
+        body: [
+          "Use the Support page and choose the issue type, or email the Grievance Officer with your account email, the booking or conversation reference, a description of the issue and any supporting screenshots.",
+          "For a problem with a specific booking, you can also raise a dispute from the booking page; this records a support ticket linked to that booking.",
+        ],
+      },
+      {
+        heading: "3. Timelines",
+        body: [
+          "We acknowledge grievances within 48 hours of receipt and aim to resolve them within one month. Requests to remove unlawful content are handled within the timelines set by applicable law.",
+          "If you are not satisfied with the outcome, you may approach the consumer forum or other authority with jurisdiction.",
+        ],
+      },
+    ],
+  },
+  cookies: {
+    title: "Cookie & Local Storage Policy",
+    summary: "What Cultgig stores in your browser and why.",
+    sections: [
+      {
+        heading: "1. Essential storage only",
+        body: [
+          "Cultgig uses essential browser storage to keep you signed in, remember your active workspace and, in demo mode, hold the demo marketplace data on your device. We do not use advertising cookies.",
+        ],
+      },
+      {
+        heading: "2. Demo mode",
+        body: [
+          "When the site runs in demo mode, all accounts, messages and bookings you create are stored only in your browser's local storage. Clearing site data or using “Reset data” removes them. Nothing is sent to a server.",
+        ],
+      },
+      {
+        heading: "3. Analytics",
+        body: [
+          "If privacy-respecting analytics are enabled in future, this page will be updated and, where required, your consent requested before any non-essential storage is used.",
+        ],
+      },
+    ],
+  },
+  "payments-and-fees": {
+    title: "Payments & Fees",
+    summary: "How payments will work on Cultgig, and why online checkout is not live yet.",
+    sections: [
+      {
+        heading: "1. Current status",
+        body: [
+          "Online payment is not available yet. Cultgig will enable checkout only after a marketplace payment provider that supports human creative services and split settlements (for example Razorpay Route or Cashfree Easy Split) approves the account in writing.",
+          "Until then, bookings show “Online payment not available yet” and Cultgig never marks a booking as paid.",
+        ],
+      },
+      {
+        heading: "2. How payments will work",
+        body: [
+          "The amount charged will always be the amount in the accepted proposal version, computed by Cultgig's servers in Indian rupees. A booking is confirmed only after the payment provider's signed webhook verifies the payment — never on the basis of a browser redirect.",
+          "Artist payouts will be settled through the provider's split-settlement feature after the booking is completed, net of any platform fee disclosed before you accept an offer.",
+        ],
+      },
+      {
+        heading: "3. Platform fees",
+        body: ["No platform fee is charged during the preview. Any future fee will be shown clearly before an offer is accepted and will never be applied retroactively to accepted offers."],
+      },
+      {
+        heading: "4. Paying outside Cultgig",
+        body: ["Paying outside the platform removes booking records, dispute support and refund protection. Report anyone who pressures you to pay off-platform."],
+      },
+    ],
+  },
+  disputes: {
+    title: "Dispute Resolution",
+    summary: "What happens when a booking goes wrong.",
+    sections: [
+      {
+        heading: "1. Raise a dispute",
+        body: [
+          "Either participant can raise a dispute from a booking that is in progress or awaiting completion confirmation. Add a short reason; this creates a support ticket linked to the booking and pauses further status changes.",
+        ],
+      },
+      {
+        heading: "2. Review",
+        body: [
+          "Cultgig reviews the conversation history, the accepted proposal version and any evidence both sides provide. Because every offer is versioned and append-only, the agreed scope and price are always on record.",
+        ],
+      },
+      {
+        heading: "3. Outcome",
+        body: [
+          "A dispute is resolved as completed or cancelled by Cultgig support. Refunds, where applicable and once payments are live, follow the Refund and Cancellation policies and the cancellation terms in the accepted proposal.",
         ],
       },
     ],

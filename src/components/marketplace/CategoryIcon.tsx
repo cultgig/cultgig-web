@@ -1,5 +1,5 @@
 import {
-  Brush,
+  PaintBrush as Brush,
   Camera,
   Disc,
   Flower,
