@@ -1,7 +1,7 @@
 import { AlertTriangle, CheckCircle2, Clock, Mail, ShieldAlert } from "lucide-react";
 import { useState } from "react";
-import { Button } from "../components/ui/Button";
-import { NoticeBanner } from "../components/ui/NoticeBanner";
+import { Button } from "../components/shared/LegacyButton";
+import { NoticeBanner } from "../components/shared/NoticeBanner";
 import { siteConfig } from "../config/site";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { Link } from "../lib/router";

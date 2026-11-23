@@ -2,8 +2,8 @@ import { Bookmark, Calendar, FilePlus2, MessageSquare, Plus, Trash2 } from "luci
 import { useState } from "react";
 import { ArtistCard } from "../components/marketplace/ArtistCard";
 import { GigCard } from "../components/marketplace/GigCard";
-import { Button } from "../components/ui/Button";
-import { NoticeBanner } from "../components/ui/NoticeBanner";
+import { Button } from "../components/shared/LegacyButton";
+import { NoticeBanner } from "../components/shared/NoticeBanner";
 import { creativeCategories, indianCities } from "../data/categories";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { Link, useRouter } from "../lib/router";

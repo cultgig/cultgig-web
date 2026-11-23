@@ -9,9 +9,9 @@ import {
   ShieldAlert,
 } from "lucide-react";
 import { useState } from "react";
-import { Button } from "../components/ui/Button";
-import { NoticeBanner } from "../components/ui/NoticeBanner";
-import { SafeImage } from "../components/ui/SafeImage";
+import { Button } from "../components/shared/LegacyButton";
+import { NoticeBanner } from "../components/shared/NoticeBanner";
+import { SafeImage } from "../components/shared/SafeImage";
 import { getCategoryBySlug } from "../data/categories";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { Link, useRouter } from "../lib/router";

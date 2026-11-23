@@ -1,8 +1,8 @@
 import { ArrowLeft } from "lucide-react";
 import { ArtistCard } from "../components/marketplace/ArtistCard";
 import { GigCard } from "../components/marketplace/GigCard";
-import { NoticeBanner } from "../components/ui/NoticeBanner";
-import { SafeImage } from "../components/ui/SafeImage";
+import { NoticeBanner } from "../components/shared/NoticeBanner";
+import { SafeImage } from "../components/shared/SafeImage";
 import { creativeCategories, getCategoryBySlug } from "../data/categories";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { Link } from "../lib/router";

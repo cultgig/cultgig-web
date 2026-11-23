@@ -3,7 +3,7 @@ import { Check, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { saveLead } from "../../lib/appwriteSubmissions";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
-import { Button, IconButton } from "../ui/Button";
+import { Button, IconButton } from "../shared/LegacyButton";
 
 type LeadRole = "artist" | "business";
 

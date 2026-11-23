@@ -1,178 +1,108 @@
+@import "@fontsource/lexend/400.css";
+@import "@fontsource/lexend/500.css";
+@import "@fontsource/lexend/600.css";
+@import "@fontsource/lexend/700.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: light;
-
-  /* Brand */
-  --color-brand-primary: #5B6F00;
-  --color-brand-primary-hover: #435300;
-  --color-brand-primary-pressed: #354200;
-  --color-brand-primary-subtle: #F0F2E5;
-  --color-brand-light: #B2C248;
-  --color-brand-light-hover: #A5B43D;
-  --color-brand-light-subtle: #F5F6E9;
-  --color-brand-ink: #788C15;
-  --color-brand-tertiary: #E0C976;
-
-  /* Surfaces */
-  --color-page: #FFFFFF;
-  --color-surface: #FFFFFF;
-  --color-surface-low: #F7F7F2;
-  --color-surface-container: #EAEBE5;
-  --color-surface-container-high: #D5D5D2;
-  --color-surface-disabled: #F7F7F2;
-  --color-dark-surface: #0E0F0C;
-
-  /* Text */
-  --color-text-primary: #292929;
-  --color-text-strong: #0E0F0C;
-  --color-text-secondary: #72726E;
-  --color-text-muted: #ACADA8;
-  --color-text-inverse: #FCFCF8;
-  --color-text-on-primary: #FFFFFF;
-  --color-text-on-light-accent: #292929;
-
-  /* Icons */
-  --color-icon-primary: #292929;
-  --color-icon-secondary: #72726E;
-  --color-icon-muted: #ACADA8;
-  --color-icon-inverse: #FCFCF8;
-
-  /* Borders */
-  --color-border: rgba(0, 0, 0, 0.10);
-  --color-border-light: rgba(0, 0, 0, 0.06);
-  --color-border-subtle: rgba(71, 67, 42, 0.20);
-  --color-border-strong: #D5D5D2;
-  --color-border-control: rgba(41, 41, 41, 0.18);
-  --color-border-focus: #788C15;
-  --color-border-selected: #5B6F00;
-  --color-hairline-dark: rgba(255, 255, 255, 0.12);
-
-  /* Overlays */
-  --color-overlay-warm: rgba(98, 90, 34, 0.06);
-  --color-overlay-black-04: rgba(0, 0, 0, 0.04);
-  --color-overlay-black-08: rgba(0, 0, 0, 0.08);
-  --color-overlay-black-20: rgba(0, 0, 0, 0.20);
-  --color-overlay-black-40: rgba(0, 0, 0, 0.40);
-  --color-overlay-white-70: rgba(255, 255, 255, 0.70);
-
-  /* Shadows */
-  --shadow-none: none;
-  --shadow-xs: 0 1px 2px rgba(14, 15, 12, 0.06);
-  --shadow-sm: 0 2px 8px rgba(14, 15, 12, 0.06);
-  --shadow-md: 0 8px 24px rgba(14, 15, 12, 0.08);
-  --shadow-lg: 0 16px 40px rgba(14, 15, 12, 0.10);
-  --shadow-brand: 0 4px 14px rgba(91, 111, 0, 0.14);
-
-  /* Status */
-  --color-success: #356B3D;
-  --color-success-soft: #EDF5EC;
-  --color-success-border: #C9DEC8;
-  --color-warning: #805B12;
-  --color-warning-soft: #FBF4E4;
-  --color-warning-border: #E9D7A8;
-  --color-error: #A33A32;
-  --color-error-soft: #FBEFED;
-  --color-error-border: #EBC8C4;
-  --color-info: #365F78;
-  --color-info-soft: #EDF4F7;
-  --color-info-border: #C9DCE5;
-
-  /* Decorative brand art gradient */
-  --gradient-brand-art: linear-gradient(115deg, #FEBE29 0%, #FF91E0 34%, #CEBEF8 68%, #D2E4F8 100%);
-
-  /* RGB channels for Tailwind opacity modifiers */
-  --rgb-brand-primary: 91 111 0;
-  --rgb-brand-primary-hover: 67 83 0;
-  --rgb-brand-primary-pressed: 53 66 0;
-  --rgb-brand-primary-subtle: 240 242 229;
-  --rgb-brand-light: 178 194 72;
-  --rgb-brand-light-hover: 165 180 61;
-  --rgb-brand-light-subtle: 245 246 233;
-  --rgb-brand-ink: 120 140 21;
-  --rgb-brand-tertiary: 224 201 118;
-  --rgb-page: 255 255 255;
-  --rgb-surface: 255 255 255;
-  --rgb-surface-low: 247 247 242;
-  --rgb-surface-container: 234 235 229;
-  --rgb-border-strong: 213 213 210;
-  --rgb-text-primary: 41 41 41;
-  --rgb-text-strong: 14 15 12;
-  --rgb-text-secondary: 114 114 110;
-  --rgb-text-muted: 172 173 168;
-  --rgb-text-inverse: 252 252 248;
-  --rgb-success: 53 107 61;
-  --rgb-success-soft: 237 245 236;
-  --rgb-warning: 128 91 18;
-  --rgb-warning-soft: 251 244 228;
-  --rgb-error: 163 58 50;
-  --rgb-error-soft: 251 239 237;
-  --rgb-info: 54 95 120;
-  --rgb-info-soft: 237 244 247;
-
-  --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
+/*
+ * Cultgig design tokens (light theme first).
+ * shadcn/ui tokens are HSL channel triplets so Tailwind can apply alpha.
+ *   plum #6A2E62 = 309 39% 30%   hover #54234E = 307 41% 23%   deep #421A3D = 307 44% 18%
+ *   canvas #FCFAFB  soft #F8F3F7  border #DFC9DA  ink #20151E  ink-2 #5C4E58  muted #84747F
+ *   warm accent #B88E52
+ */
 @layer base {
+  :root {
+    --background: 330 25% 98%;
+    --foreground: 309 18% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 309 18% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 309 18% 10%;
+    --primary: 309 39% 30%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 315 30% 96%;
+    --secondary-foreground: 307 44% 18%;
+    --muted: 320 17% 95%;
+    --muted-foreground: 316 8% 34%;
+    --accent: 315 30% 96%;
+    --accent-foreground: 307 44% 18%;
+    --destructive: 354 61% 43%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 320 15% 88%;
+    --input: 316 17% 82%;
+    --ring: 309 39% 30%;
+    --radius: 0.75rem;
+
+    --warm: 36 41% 52%;
+    --header-height: 64px;
+  }
+
+  * {
+    @apply border-border;
+  }
+
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 72px;
-    font-family: var(--font-sans);
-    color: var(--color-text-primary);
-    background-color: var(--color-page);
+    scroll-padding-top: calc(var(--header-height) + 12px);
   }
 
   body {
-    margin: 0;
-    font-family: var(--font-sans);
-    color: var(--color-text-primary);
-    background-color: var(--color-page);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    @apply bg-background text-foreground antialiased;
+    font-family: "Lexend", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
     overflow-x: hidden;
   }
 
-  h1, h2, h3, .font-display {
-    font-family: var(--font-display);
+  h1, h2, h3, h4, h5, h6 {
     text-wrap: balance;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-border-focus);
+    outline: 2px solid hsl(var(--ring));
     outline-offset: 2px;
+  }
+
+  ::selection {
+    background: #EEDFEA;
+    color: #421A3D;
   }
 }
 
-.tabular-nums {
-  font-variant-numeric: tabular-nums;
+@layer components {
+  /* Typography scale (Lexend 400-700, sentence case) */
+  .type-display { font-size: clamp(30px, 4.2vw, 48px); font-weight: 700; line-height: 1.08; letter-spacing: -0.02em; }
+  .type-h1 { font-size: clamp(24px, 2.6vw, 30px); font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }
+  .type-h2 { font-size: 20px; font-weight: 700; line-height: 26px; letter-spacing: -0.005em; }
+  .type-h3 { font-size: 17px; font-weight: 600; line-height: 22px; }
+  .type-h4 { font-size: 15px; font-weight: 600; line-height: 20px; }
+  .type-body-lg { font-size: 16px; font-weight: 400; line-height: 24px; }
+  .type-body { font-size: 14px; font-weight: 400; line-height: 21px; }
+  .type-body-sm { font-size: 13px; font-weight: 400; line-height: 19px; }
+  .type-label { font-size: 13px; font-weight: 600; line-height: 18px; letter-spacing: 0.01em; }
+  .type-label-sm { font-size: 11.5px; font-weight: 600; line-height: 16px; letter-spacing: 0.01em; }
+  .type-caption { font-size: 12px; font-weight: 400; line-height: 16px; }
+  .type-metadata { font-size: 11px; font-weight: 500; line-height: 14px; }
+  .type-button { font-size: 15px; font-weight: 600; line-height: 20px; }
+
+  .page-container { @apply mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8; }
 }
 
-.hero-ambient-wash {
-  background: radial-gradient(
-    ellipse 62% 48% at 50% 42%,
-    rgba(240, 242, 229, 0.95) 0%,
-    rgba(240, 242, 229, 0.45) 48%,
-    rgba(255, 255, 255, 0) 78%
-  );
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
 }
 
-.final-cta-glow {
-  background: radial-gradient(
-    ellipse 55% 60% at 50% 48%,
-    rgba(178, 194, 72, 0.16) 0%,
-    rgba(91, 111, 0, 0.08) 45%,
-    rgba(14, 15, 12, 0) 75%
-  );
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

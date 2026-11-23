@@ -4,7 +4,7 @@ import { Link } from "../../lib/router";
 import { useMarketplace } from "../../state/MarketplaceContext";
 import type { SampleArtist } from "../../types/marketplace";
 import { formatArtistPrice } from "../../utils/format";
-import { SafeImage } from "../ui/SafeImage";
+import { SafeImage } from "../shared/SafeImage";
 
 export function ArtistCard({ artist }: { artist: SampleArtist }) {
   const { savedArtistIds, toggleSaveArtist } = useMarketplace();

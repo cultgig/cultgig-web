@@ -1,7 +1,7 @@
 import { CheckCircle2, Mail, ShieldCheck } from "lucide-react";
 import { useState } from "react";
-import { Button } from "../components/ui/Button";
-import { NoticeBanner } from "../components/ui/NoticeBanner";
+import { Button } from "../components/shared/LegacyButton";
+import { NoticeBanner } from "../components/shared/NoticeBanner";
 import { creativeCategories, indianCities } from "../data/categories";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { saveLead } from "../lib/appwriteSubmissions";

@@ -1,101 +1,98 @@
 import type { Config } from 'tailwindcss';
+import animate from 'tailwindcss-animate';
+
+/**
+ * Cultgig design tokens.
+ * Brand colours are authored once as CSS variables in src/styles/globals.css and
+ * exposed here two ways:
+ *  - brand scales (plum, ink, line, canvas, surface, semantic, ochre) used by product UI
+ *  - shadcn/ui semantic tokens (primary, muted, border, ...) used by src/components/ui
+ */
+const v = (name: string) => `hsl(var(--${name}) / <alpha-value>)`;
 
 export default {
+  darkMode: ['class'],
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
+    container: {
+      center: true,
+      padding: { DEFAULT: '1rem', sm: '1.5rem', lg: '2rem' },
+      screens: { '2xl': '1280px' },
+    },
     extend: {
       colors: {
-        brand: {
-          DEFAULT: 'rgb(var(--rgb-brand-primary) / <alpha-value>)',
-          hover: 'rgb(var(--rgb-brand-primary-hover) / <alpha-value>)',
-          pressed: 'rgb(var(--rgb-brand-primary-pressed) / <alpha-value>)',
-          subtle: 'rgb(var(--rgb-brand-primary-subtle) / <alpha-value>)',
-          light: 'rgb(var(--rgb-brand-light) / <alpha-value>)',
-          'light-hover': 'rgb(var(--rgb-brand-light-hover) / <alpha-value>)',
-          'light-subtle': 'rgb(var(--rgb-brand-light-subtle) / <alpha-value>)',
-          ink: 'rgb(var(--rgb-brand-ink) / <alpha-value>)',
-          tertiary: 'rgb(var(--rgb-brand-tertiary) / <alpha-value>)',
-        },
-        obsidian: {
-          DEFAULT: 'rgb(var(--rgb-text-strong) / <alpha-value>)',
-          card: 'rgb(var(--rgb-text-primary) / <alpha-value>)',
-          elevated: 'rgb(var(--rgb-text-strong) / <alpha-value>)',
-          row: 'rgb(var(--rgb-text-primary) / <alpha-value>)',
-        },
-        accent: {
-          DEFAULT: 'rgb(var(--rgb-brand-primary) / <alpha-value>)',
-          hover: 'rgb(var(--rgb-brand-primary-hover) / <alpha-value>)',
-          active: 'rgb(var(--rgb-brand-primary-pressed) / <alpha-value>)',
-          soft: 'rgb(var(--rgb-brand-primary-subtle) / <alpha-value>)',
-          border: 'var(--color-border-subtle)',
-        },
+        // shadcn/ui semantic tokens
+        border: v('border'),
+        input: v('input'),
+        ring: v('ring'),
+        background: v('background'),
+        foreground: v('foreground'),
+        primary: { DEFAULT: v('primary'), foreground: v('primary-foreground') },
+        secondary: { DEFAULT: v('secondary'), foreground: v('secondary-foreground') },
+        destructive: { DEFAULT: v('destructive'), foreground: v('destructive-foreground') },
+        muted: { DEFAULT: v('muted'), foreground: v('muted-foreground') },
+        accent: { DEFAULT: v('accent'), foreground: v('accent-foreground') },
+        popover: { DEFAULT: v('popover'), foreground: v('popover-foreground') },
+        card: { DEFAULT: v('card'), foreground: v('card-foreground') },
+
+        // Cultgig brand scales
         plum: {
-          DEFAULT: 'rgb(var(--rgb-brand-primary) / <alpha-value>)',
-          hover: 'rgb(var(--rgb-brand-primary-hover) / <alpha-value>)',
-          active: 'rgb(var(--rgb-brand-primary-pressed) / <alpha-value>)',
-          soft: 'rgb(var(--rgb-brand-primary-subtle) / <alpha-value>)',
-          tint: 'rgb(var(--rgb-brand-light) / <alpha-value>)',
-          border: 'rgb(var(--rgb-border-strong) / <alpha-value>)',
+          DEFAULT: '#6A2E62',
+          primary: '#6A2E62',
+          hover: '#54234E',
+          active: '#421A3D',
+          deep: '#421A3D',
+          soft: '#F8F3F7',
+          tint: '#EEDFEA',
+          border: '#DFC9DA',
         },
-        canvas: 'rgb(var(--rgb-page) / <alpha-value>)',
-        page: 'rgb(var(--rgb-page) / <alpha-value>)',
-        surface: {
-          DEFAULT: 'rgb(var(--rgb-surface) / <alpha-value>)',
-          secondary: 'rgb(var(--rgb-surface-low) / <alpha-value>)',
-          raised: 'rgb(var(--rgb-surface-low) / <alpha-value>)',
-          muted: 'rgb(var(--rgb-surface-container) / <alpha-value>)',
-          low: 'rgb(var(--rgb-surface-low) / <alpha-value>)',
-          container: 'rgb(var(--rgb-surface-container) / <alpha-value>)',
-          high: 'rgb(var(--rgb-border-strong) / <alpha-value>)',
-        },
-        ink: {
-          DEFAULT: 'rgb(var(--rgb-text-primary) / <alpha-value>)',
-          primary: 'rgb(var(--rgb-text-primary) / <alpha-value>)',
-          strong: 'rgb(var(--rgb-text-strong) / <alpha-value>)',
-          secondary: 'rgb(var(--rgb-text-secondary) / <alpha-value>)',
-          muted: 'rgb(var(--rgb-text-muted) / <alpha-value>)',
-          inverse: 'rgb(var(--rgb-text-inverse) / <alpha-value>)',
-          dark: 'rgb(var(--rgb-text-strong) / <alpha-value>)',
-        },
-        hairline: {
-          DEFAULT: 'var(--color-border)',
-          dark: 'var(--color-hairline-dark)',
-        },
-        line: {
-          DEFAULT: 'var(--color-border)',
-          light: 'var(--color-border-light)',
-          strong: 'rgb(var(--rgb-border-strong) / <alpha-value>)',
-        },
-        ochre: 'rgb(var(--rgb-brand-tertiary) / <alpha-value>)',
+        canvas: '#FCFAFB',
+        surface: { DEFAULT: '#FFFFFF', raised: '#FBF9FA', muted: '#F4EFF2' },
+        ink: { primary: '#20151E', secondary: '#5C4E58', muted: '#84747F', dark: '#181016' },
+        line: { light: '#F0E8EE', DEFAULT: '#E5DCE2', strong: '#CBBEC8' },
         semantic: {
-          success: 'rgb(var(--rgb-success) / <alpha-value>)',
-          'success-bg': 'rgb(var(--rgb-success-soft) / <alpha-value>)',
-          warning: 'rgb(var(--rgb-warning) / <alpha-value>)',
-          'warning-bg': 'rgb(var(--rgb-warning-soft) / <alpha-value>)',
-          error: 'rgb(var(--rgb-error) / <alpha-value>)',
-          'error-bg': 'rgb(var(--rgb-error-soft) / <alpha-value>)',
-          info: 'rgb(var(--rgb-info) / <alpha-value>)',
-          'info-bg': 'rgb(var(--rgb-info-soft) / <alpha-value>)',
+          success: '#2B7A58',
+          'success-bg': '#EEF7F2',
+          warning: '#A8681E',
+          'warning-bg': '#FDF6EC',
+          error: '#B02A37',
+          'error-bg': '#FDF2F3',
+          info: '#26689A',
+          'info-bg': '#EDF5FB',
         },
+        ochre: { DEFAULT: '#B88E52', bg: '#FAF5ED' },
       },
       fontFamily: {
-        display: ['"Bricolage Grotesque"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        sans: ['"Poppins"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        sans: ['"Lexend"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
+        heading: ['"Lexend"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       borderRadius: {
-        card: '18px',
-        panel: '14px',
+        sm: 'calc(var(--radius) - 4px)',
+        md: 'calc(var(--radius) - 2px)',
+        lg: 'var(--radius)',
+        xl: 'calc(var(--radius) + 4px)',
+        '2xl': 'calc(var(--radius) + 8px)',
       },
       boxShadow: {
-        xs: 'var(--shadow-xs)',
-        sm: 'var(--shadow-sm)',
-        soft: 'var(--shadow-sm)',
-        pill: 'var(--shadow-md)',
-        card: 'var(--shadow-sm)',
-        elevated: 'var(--shadow-lg)',
-        brand: 'var(--shadow-brand)',
+        soft: '0 2px 10px rgba(32, 21, 30, 0.04)',
+        card: '0 6px 20px rgba(32, 21, 30, 0.06)',
+        elevated: '0 14px 36px rgba(32, 21, 30, 0.10)',
+      },
+      zIndex: {
+        header: '40',
+        overlay: '50',
+        modal: '50',
+        toast: '100',
+      },
+      keyframes: {
+        'accordion-down': { from: { height: '0' }, to: { height: 'var(--radix-accordion-content-height)' } },
+        'accordion-up': { from: { height: 'var(--radix-accordion-content-height)' }, to: { height: '0' } },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
   },
-  plugins: [],
+  plugins: [animate],
 } satisfies Config;

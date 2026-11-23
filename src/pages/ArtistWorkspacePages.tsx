@@ -1,9 +1,9 @@
 import { ArrowLeft, Calendar, CheckCircle2, Trash2, Upload } from "lucide-react";
 import { useState } from "react";
 import { GigCard } from "../components/marketplace/GigCard";
-import { Button } from "../components/ui/Button";
-import { NoticeBanner } from "../components/ui/NoticeBanner";
-import { SafeImage } from "../components/ui/SafeImage";
+import { Button } from "../components/shared/LegacyButton";
+import { NoticeBanner } from "../components/shared/NoticeBanner";
+import { SafeImage } from "../components/shared/SafeImage";
 import { creativeCategories, indianCities } from "../data/categories";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { uploadFile } from "../lib/appwriteStorage";

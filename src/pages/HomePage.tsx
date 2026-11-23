@@ -24,7 +24,7 @@ import {
   UserCheck,
 } from "lucide-react";
 import { useMemo, useRef, useState } from "react";
-import { SafeImage } from "../components/ui/SafeImage";
+import { SafeImage } from "../components/shared/SafeImage";
 import { imageManifest } from "../content/images";
 import {
   creativeCategories,

@@ -1,7 +1,7 @@
 import { ArrowLeft, CheckCircle2, FileCheck2, Send } from "lucide-react";
 import { useState } from "react";
-import { Button } from "../components/ui/Button";
-import { NoticeBanner } from "../components/ui/NoticeBanner";
+import { Button } from "../components/shared/LegacyButton";
+import { NoticeBanner } from "../components/shared/NoticeBanner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { Link, useRouter } from "../lib/router";
 import { useAuth } from "../state/AuthContext";

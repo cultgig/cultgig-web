@@ -1,7 +1,7 @@
 import { ArrowLeft, CheckCircle2, ChevronDown, ShieldCheck } from "lucide-react";
 import { useState } from "react";
-import { NoticeBanner } from "../components/ui/NoticeBanner";
-import { SafeImage } from "../components/ui/SafeImage";
+import { NoticeBanner } from "../components/shared/NoticeBanner";
+import { SafeImage } from "../components/shared/SafeImage";
 import { aboutContent } from "../content/about";
 import { detailedFaqList } from "../content/faq";
 import { pageImages } from "../content/images";
