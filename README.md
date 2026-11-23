@@ -182,7 +182,7 @@ person may see. Replacing the demo backend with Appwrite doesn't require touchin
 
 - **Colour:** the warm olive system in [`DESIGN.md`](DESIGN.md). Every colour is a CSS variable in
   `src/styles/globals.css`, and Tailwind and shadcn read those variables. Don't hard-code hex values.
-- **Type:** Lexend (400–700), bundled locally via `@fontsource/lexend`.
+- **Type:** Bricolage Grotesque (primary: headings, wordmark, large figures) and Poppins (secondary: body, labels, buttons, forms), both bundled locally via `@fontsource-variable/bricolage-grotesque` and `@fontsource/poppins`. Change them in one place: the `--font-display` and `--font-sans` tokens in `src/styles/globals.css`.
 - **Components:** shadcn/ui in `src/components/ui` (add more with `npx shadcn@latest add <name>`).
   Icons come from Phosphor only.
 - **States:** every list has an empty state, every page has a loading skeleton, unknown or

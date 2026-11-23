@@ -197,7 +197,7 @@ export function StatTile({ label, value, hint, to }: { label: string; value: Rea
     <>
       <p className="type-label text-ink-secondary">{label}</p>
       <div>
-        <p className="figure text-[28px] font-medium leading-8 tracking-[-0.02em] text-ink-strong">{value}</p>
+        <p className="figure font-display text-[30px] font-semibold leading-8 tracking-[-0.03em] text-ink-strong">{value}</p>
         {hint && <p className="mt-1 type-caption text-ink-secondary">{hint}</p>}
       </div>
     </>

@@ -333,7 +333,7 @@ function OfferVersionCard() {
       </div>
       <p className="mt-3 type-h4 text-ink-strong">Saturday sunset acoustic set</p>
       <p className="type-body-sm text-ink-secondary">Rhea Kapoor, acoustic vocalist</p>
-      <p className="figure mt-4 text-[28px] font-medium leading-none tracking-[-0.02em] text-ink-strong">₹23,500</p>
+      <p className="figure mt-4 font-display text-[32px] font-semibold leading-none tracking-[-0.03em] text-ink-strong">₹23,500</p>
       <div className="mt-4 flex items-center gap-2 border-t border-line pt-3 type-caption text-ink-secondary">
         <span className="figure line-through decoration-ink-muted">v1 ₹25,000</span>
         <span className="figure line-through decoration-ink-muted">v2 ₹22,000</span>

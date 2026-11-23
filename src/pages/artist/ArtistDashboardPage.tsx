@@ -109,7 +109,7 @@ export default function ArtistDashboardPage() {
             )}
           </SectionCard>
           <SectionCard title="Earnings" actions={<Link to="/artist/earnings" className="type-label text-brand">Details</Link>}>
-            <p className="text-2xl font-semibold tabular-nums text-ink-strong">{formatPaise(0)}</p>
+            <p className="figure font-display text-[30px] font-semibold leading-8 tracking-[-0.03em] text-ink-strong">{formatPaise(0)}</p>
             <p className="type-body-sm text-ink-secondary">Paid out through Cultgig. Online payments aren't live yet.</p>
             {completedValue > 0 && <p className="mt-1 type-caption text-ink-secondary">{formatPaise(completedValue)} in completed booking value (not paid through Cultgig).</p>}
           </SectionCard>

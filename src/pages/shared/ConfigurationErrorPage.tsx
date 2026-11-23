@@ -7,7 +7,7 @@ export function ConfigurationErrorPage({ reason }: { reason: string }) {
   return (
     <main className="flex min-h-screen items-center justify-center bg-surface-low p-6">
       <div className="max-w-lg space-y-3 rounded-2xl border border-line bg-surface p-8 shadow-sm">
-        <p className="text-[22px] font-semibold tracking-[-0.03em] text-ink-strong">
+        <p className="font-display text-[24px] font-semibold tracking-[-0.04em] text-ink-strong">
           cultgig<span className="text-brand">.</span>
         </p>
         <h1 className="type-h2 text-ink-strong">Cultgig is temporarily unavailable</h1>
