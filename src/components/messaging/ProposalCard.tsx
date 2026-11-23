@@ -26,7 +26,7 @@ export function ProposalCard({ proposal, viewerId, actions, compact = false, pre
           <p className="type-caption text-ink-secondary">
             From {mine ? "you" : `${proposal.proposedByName} (${proposal.proposedByRole})`}, {formatRelative(proposal.createdAt)}
           </p>
-          <p className={cn("figure mt-1 font-medium tracking-[-0.02em] text-ink-strong", compact ? "text-lg" : "text-[28px] leading-8")}>
+          <p className={cn("figure mt-1 font-display font-semibold tracking-[-0.03em] text-ink-strong", compact ? "text-xl" : "text-[30px] leading-8")}>
             {formatPaise(proposal.amountPaise)}
             {previous && delta !== 0 && (
               <span className={cn("ml-2 type-caption font-medium", delta < 0 ? "text-status-success" : "text-status-warning")}>

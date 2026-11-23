@@ -1,6 +1,6 @@
 # Cultgig — Colour Design System
 
-> **Scope:** colour only. Typography (Lexend 400–700), spacing, layout and motion are defined in code
+> **Scope:** colour only. Typography (Bricolage Grotesque for headings, Poppins for body and interface), spacing, layout and motion are defined in code
 > (`src/styles/globals.css`, `tailwind.config.ts`). This palette follows the warm olive direction
 > supplied by the product owner on 2026-11-23 (reference: granola.ai colour audit) and supersedes the
 > earlier plum palette.

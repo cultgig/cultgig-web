@@ -7,7 +7,7 @@ Legend: ✅ done and tested · 🧪 done in demo mode (needs the Appwrite backen
 
 | Area | Status | Notes |
 |---|---|---|
-| Design system (DESIGN.md olive palette, Lexend, shadcn/ui, Phosphor) | ✅ | Single-source CSS tokens. No Lucide icons remain |
+| Design system (DESIGN.md olive palette, Bricolage Grotesque + Poppins, shadcn/ui, Phosphor) | ✅ | Single-source CSS tokens. No Lucide icons remain |
 | Public marketplace (home, explore, categories, profiles) | ✅ | URL-synced search, 8 filters, 5 sorts, no-result states |
 | Marketing, FAQ, guides, support, accessibility | ✅ | Copy updated to match real behaviour |
 | Legal & compliance pages (11) | ✅ draft | Every page carries "Draft — requires legal review" |

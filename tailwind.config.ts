@@ -91,6 +91,7 @@ export default {
       },
       fontFamily: {
         sans: ['var(--font-sans)'],
+        display: ['var(--font-display)'],
       },
       borderRadius: {
         sm: 'calc(var(--radius) - 4px)',

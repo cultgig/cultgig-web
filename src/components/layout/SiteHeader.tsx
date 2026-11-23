@@ -21,7 +21,7 @@ import type { MarketplaceRole } from "@/types/marketplace";
 
 export function Wordmark({ className }: { className?: string }) {
   return (
-    <Link to="/" aria-label="Cultgig home" className={cn("text-[22px] font-semibold leading-7 tracking-[-0.03em] text-ink-strong", className)}>
+    <Link to="/" aria-label="Cultgig home" className={cn("font-display text-[24px] font-semibold leading-7 tracking-[-0.04em] text-ink-strong", className)}>
       cultgig<span className="text-brand">.</span>
     </Link>
   );

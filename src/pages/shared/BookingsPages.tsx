@@ -44,7 +44,7 @@ export function BookingRow({ booking, role }: { booking: BookingRecord; role: Ma
     <Link to={`/bookings/${booking.id}`} className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-4 transition-colors hover:bg-surface-low sm:flex-row sm:items-center">
       <div className="flex w-16 shrink-0 flex-col items-center rounded-lg bg-surface-low py-2">
         <span className="type-label-sm text-ink-secondary">{new Date(`${booking.eventDate}T00:00`).toLocaleString("en-IN", { month: "short" })}</span>
-        <span className="text-xl font-semibold text-ink-strong">{booking.eventDate.slice(8)}</span>
+        <span className="figure font-display text-xl font-semibold text-ink-strong">{booking.eventDate.slice(8)}</span>
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-2">

@@ -6,9 +6,12 @@
 /* Hallmark · answered F1 · straight apostrophes kept product-wide: the test suite matches them ("We couldn't find that page") and tests are not edited by a redesign */
 /* Hallmark · dismissed 70 · the demo backend really processes inquiries, onboarding and proposals (persisted, rule-checked); success follows a real backend call */
 /* Hallmark · dismissed 58 · the hero paragraph is the owner's copy (two short sentences); a polish does not cut words */
-@import "@fontsource/lexend/400.css";
-@import "@fontsource/lexend/500.css";
-@import "@fontsource/lexend/600.css";
+/* Primary: Bricolage Grotesque (variable, weight + optical size axes). Secondary: Poppins.
+   Both are bundled locally, so the strict font-src 'self' policy holds and no third party sees visitors. */
+@import "@fontsource-variable/bricolage-grotesque/opsz.css";
+@import "@fontsource/poppins/400.css";
+@import "@fontsource/poppins/500.css";
+@import "@fontsource/poppins/600.css";
 
 @tailwind base;
 @tailwind components;
@@ -80,7 +83,8 @@
     --color-info: 54 95 120;      --color-info-soft: 237 244 247;    --color-info-border: 201 220 229;
 
     /* Type */
-    --font-sans: "Lexend", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-display: "Bricolage Grotesque Variable", "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-sans: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
     /* Motion: one curve, three durations */
     --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -132,6 +136,8 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
     text-wrap: balance;
     overflow-wrap: break-word;
     min-width: 0;
@@ -159,14 +165,17 @@
 }
 
 @layer components {
-  /* Typography scale. Lexend at three weights: 400 body, 500 headings and labels, 600 for rare
-     emphasis. Hierarchy comes from size and colour, not weight. Sentence case, no tracked caps. */
-  .type-display { font-size: clamp(36px, 4.4vw, 56px); font-weight: 500; line-height: 1.04; letter-spacing: -0.03em; }
-  .type-title { font-size: clamp(30px, 3.6vw, 44px); font-weight: 500; line-height: 1.1; letter-spacing: -0.025em; }
-  .type-h1 {font-size: clamp(26px, 2.8vw, 34px); font-weight: 500; line-height: 1.16; letter-spacing: -0.02em; }
-  .type-h2 { font-size: 21px; font-weight: 500; line-height: 28px; letter-spacing: -0.01em; }
-  .type-h3 { font-size: 17px; font-weight: 500; line-height: 24px; }
-  .type-h4 { font-size: 15px; font-weight: 500; line-height: 20px; }
+  /* Typography scale.
+     Headings, the wordmark and large figures: Bricolage Grotesque at one weight (600).
+     Everything else (body, labels, buttons, inputs, captions): Poppins at 400, 500, and 600 for rare emphasis.
+     Hierarchy comes from size and colour. Sentence case, no tracked caps. */
+  .font-display { font-family: var(--font-display); font-optical-sizing: auto; }
+  .type-display { font-family: var(--font-display); font-size: clamp(38px, 4.8vw, 60px); font-weight: 600; line-height: 1.04; letter-spacing: -0.03em; }
+  .type-title { font-family: var(--font-display); font-size: clamp(32px, 3.8vw, 46px); font-weight: 600; line-height: 1.08; letter-spacing: -0.025em; }
+  .type-h1 { font-family: var(--font-display); font-size: clamp(28px, 3vw, 36px); font-weight: 600; line-height: 1.12; letter-spacing: -0.025em; }
+  .type-h2 { font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height: 28px; letter-spacing: -0.02em; }
+  .type-h3 { font-family: var(--font-display); font-size: 18px; font-weight: 600; line-height: 24px; letter-spacing: -0.01em; }
+  .type-h4 { font-family: var(--font-display); font-size: 16px; font-weight: 600; line-height: 22px; letter-spacing: -0.005em; }
   .type-body-lg { font-size: 17px; font-weight: 400; line-height: 28px; }
   .type-body { font-size: 14px; font-weight: 400; line-height: 22px; }
   .type-body-sm { font-size: 13px; font-weight: 400; line-height: 20px; }
