@@ -197,13 +197,14 @@ export function createDemoBackend({ store, clock = () => new Date(), idFactory =
     }
 
     const myGigIds = new Set(db.gigs.filter((g) => g.clientId === viewer.id).map((g) => g.id));
+    const appliedGigIds = new Set(db.applications.filter((a) => a.artistUserId === viewer.id).map((a) => a.gigId));
     return {
       viewer,
       settings: db.settings.find((s) => s.userId === viewer.id) ?? defaultSettings(viewer.id),
       artists,
       myArtistProfile,
       myClientProfile: db.clientProfiles.find((c) => c.userId === viewer.id) ?? null,
-      gigs: db.gigs.filter((g) => g.status === "open" || g.clientId === viewer.id),
+      gigs: db.gigs.filter((g) => g.status === "open" || g.clientId === viewer.id || appliedGigIds.has(g.id)),
       applications: db.applications.filter((a) => a.artistUserId === viewer.id || myGigIds.has(a.gigId)),
       conversations: db.conversations
         .filter((c) => c.clientUserId === viewer.id || c.artistUserId === viewer.id)
