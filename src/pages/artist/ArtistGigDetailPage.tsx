@@ -67,11 +67,11 @@ export default function ArtistGigDetailPage({ gigId }: { gigId: string }) {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow={<Link to="/artist/gigs" className="hover:text-ink">← Discover gigs</Link>}
+        back={{ to: "/artist/gigs", label: "Discover gigs" }}
         title={gig.title}
         description={
           <span className="flex flex-wrap items-center gap-2">
-            <GigStatusBadge status={gig.status} /> <span>{categoryLabel(gig.category)} · {gig.eventType}</span> {gig.isSample && <DemoBadge />}
+            <GigStatusBadge status={gig.status} /> <span>{categoryLabel(gig.category)}, {gig.eventType}</span> {gig.isSample && <DemoBadge />}
           </span>
         }
         actions={<ReportDialog targetType="gig" targetId={gig.id} targetLabel="this gig" trigger={<Button variant="ghost" size="sm">Report</Button>} />}
@@ -104,7 +104,7 @@ export default function ArtistGigDetailPage({ gigId }: { gigId: string }) {
                 { label: "Location", value: <span className="inline-flex items-center gap-1"><MapPin size={14} aria-hidden /> {gig.workingMode === "remote" ? "Remote" : `${gig.venueArea ? `${gig.venueArea}, ` : ""}${gig.city}`}</span> },
                 { label: "Duration", value: gig.durationSummary },
                 { label: "Artists needed", value: <span className="inline-flex items-center gap-1"><UsersThree size={14} aria-hidden /> {gig.artistsNeeded}</span> },
-                { label: "Travel", value: gig.travelCovered ? "Covered by client" : "Not covered — include in your quote" },
+                { label: "Travel", value: gig.travelCovered ? "Covered by client" : "Not covered, include it in your quote" },
                 { label: "Requirements", value: gig.requirements },
                 { label: "Deliverables", value: gig.deliverables },
                 { label: "Equipment & space", value: gig.equipmentAndSpaceNotes },
@@ -119,7 +119,7 @@ export default function ArtistGigDetailPage({ gigId }: { gigId: string }) {
           <SectionCard>
             <p className="type-caption text-ink-secondary">Budget</p>
             <p className="type-h2 text-ink-strong">{budgetLabel(gig)}</p>
-            <p className={`mt-1 type-body-sm ${deadline.urgent ? "font-semibold text-status-warning" : "text-ink-secondary"}`}>{deadline.text} · {formatDate(gig.applicationDeadline)}</p>
+            <p className={`mt-1 type-body-sm ${deadline.urgent ? "font-semibold text-status-warning" : "text-ink-secondary"}`}>{deadline.text}, {formatDate(gig.applicationDeadline)}</p>
             <div className="mt-4">
               {existing ? (
                 <div className="space-y-2">
@@ -140,7 +140,7 @@ export default function ArtistGigDetailPage({ gigId }: { gigId: string }) {
           </SectionCard>
           <SectionCard title="Posted by">
             <p className="type-label text-ink">{gig.clientDisplayName}</p>
-            <p className="type-caption text-ink-secondary">{clientTypeLabel[gig.clientType]} · posted {formatDate(gig.createdAt)}</p>
+            <p className="type-caption text-ink-secondary">{clientTypeLabel[gig.clientType]}, posted {formatDate(gig.createdAt)}</p>
             <p className="mt-2 type-caption text-ink-secondary">Contact details are shared in Messages once the client opens a conversation.</p>
           </SectionCard>
         </aside>
@@ -188,7 +188,7 @@ export default function ArtistGigDetailPage({ gigId }: { gigId: string }) {
             <div className="sm:col-span-2">
               <label className="flex items-start gap-2 type-body-sm text-ink">
                 <Checkbox checked={form.available} onCheckedChange={(v) => setForm({ ...form, available: v === true })} className="mt-0.5" />
-                I'm available on {formatDate(gig.eventDate)}, {formatTime24(gig.startTime)}–{formatTime24(gig.endTime)}.
+                I'm available on {formatDate(gig.eventDate)}, {formatTime24(gig.startTime)} to {formatTime24(gig.endTime)}.
               </label>
               {errors.available && <p role="alert" className="mt-1 type-caption text-status-error">{errors.available}</p>}
             </div>

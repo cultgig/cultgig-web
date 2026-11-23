@@ -43,7 +43,7 @@ export function CheckoutPage({ bookingId }: { bookingId: string }) {
       <section className="space-y-3 rounded-xl border border-line bg-surface p-5">
         <h2 className="type-h3 text-ink">{booking.title}</h2>
         <p className="type-body-sm text-ink-secondary">
-          {booking.artistName} · {formatDate(booking.eventDate)} · {booking.city}
+          {booking.artistName}, {formatDate(booking.eventDate)}, {booking.city}
         </p>
         <div className="space-y-2 border-t border-line pt-3 type-body-sm">
           <div className="flex justify-between"><span className="text-ink-secondary">Proposal v{booking.acceptedProposalVersion}</span><span className="tabular-nums">{formatPaise(booking.grossAmountPaise)}</span></div>

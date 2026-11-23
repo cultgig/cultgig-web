@@ -56,7 +56,7 @@ export default function ClientGigsPage() {
       ) : mine.length ? (
         <EmptyState compact icon={Briefcase} title={`No ${tab === "all" ? "" : GIG_STATUS_LABELS[tab as GigStatus].toLowerCase()} gigs`} action={{ label: "Show all gigs", onClick: () => setTab("all") }} />
       ) : (
-        <EmptyState icon={Briefcase} title="You haven't posted a gig yet" description="Describe your event once — date, city, budget and what you need — and artists will apply with quotes." action={{ label: "Post your first gig", to: "/client/gigs/new" }} secondaryAction={{ label: "Or contact an artist directly", to: "/explore" }} />
+        <EmptyState icon={Briefcase} title="You haven't posted a gig yet" description="Describe your event once (date, city, budget and what you need) and artists will apply with quotes." action={{ label: "Post your first gig", to: "/client/gigs/new" }} secondaryAction={{ label: "Or contact an artist directly", to: "/explore" }} />
       )}
     </div>
   );

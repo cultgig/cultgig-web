@@ -54,14 +54,14 @@ export const editorialGuides: EditorialGuide[] = [
       {
         heading: "Lead with raw, unedited samples of live work",
         body: [
-          "Hosts booking live performers, mehendi artists, or photographers want to see what you actually deliver in real event lighting—not only heavily filtered studio reels.",
+          "Hosts booking live performers, mehendi artists, or photographers want to see what you actually deliver in real event lighting, not only heavily filtered studio reels.",
           "Include two or three clear audio/video clips or high-resolution photos with short context captions: event type, setting, and your exact role.",
         ],
       },
       {
         heading: "Define clear starting packages and exclusions",
         body: [
-          "Listing a starting price or package structure—such as a 90-minute acoustic set or bridal mehendi for both hands and arms—helps hosts benchmark fit immediately. Always spell out what is excluded (e.g., outstation travel, PA rental, extra hours).",
+          "Listing a starting price or package structure (such as a 90-minute acoustic set or bridal mehendi for both hands and arms) helps hosts benchmark fit immediately. Always spell out what is excluded (e.g., outstation travel, PA rental, extra hours).",
         ],
       },
     ],
@@ -78,7 +78,7 @@ export const editorialGuides: EditorialGuide[] = [
       {
         heading: "Every change becomes a clear new version",
         body: [
-          "In creative bookings, scope often evolves—an extra hour of photography, an added sangeet rehearsal, or outstation travel. Instead of burying updates inside dozens of chat messages, versioned proposals keep one shared summary of price, timing, and inclusions.",
+          "In creative bookings, scope often evolves: an extra hour of photography, an added sangeet rehearsal, or outstation travel. Instead of burying updates inside dozens of chat messages, versioned proposals keep one shared summary of price, timing, and inclusions.",
         ],
       },
       {

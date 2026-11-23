@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight } from "@phosphor-icons/react";
+import { ArrowLeft } from "@phosphor-icons/react";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { ArtistCard } from "@/components/marketplace/ArtistCard";
@@ -19,14 +19,14 @@ export function CategoriesIndexPage() {
   const countFor = (slug: string) => artists.filter((a) => a.published && (a.primaryCategory === slug || a.secondaryCategories.includes(slug as never))).length;
 
   return (
-    <main id="main-content" className="page-container space-y-12 py-10 lg:py-14">
-      <div className="max-w-2xl space-y-2">
-        <h1 className="type-h1 text-ink-strong">Creative categories</h1>
+    <main id="main-content" className="page-container space-y-14 py-12 lg:py-16">
+      <div className="max-w-2xl space-y-4">
+        <h1 className="type-title text-ink-strong">Creative categories</h1>
         <p className="type-body-lg text-ink-secondary">The creative professions behind Indian weddings, venues, brand launches and private commissions.</p>
       </div>
       {groups.map((group) => (
         <section key={group} className="space-y-4" aria-labelledby={`g-${group}`}>
-          <h2 id={`g-${group}`} className="border-b border-line pb-3 type-h2 text-ink">
+          <h2 id={`g-${group}`} className="border-b border-line pb-3 type-h2 text-ink-strong">
             {group}
           </h2>
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -36,12 +36,14 @@ export function CategoriesIndexPage() {
                 const n = countFor(c.slug);
                 return (
                   <li key={c.slug}>
-                    <Link to={`/categories/${c.slug}`} className="group flex h-full flex-col overflow-hidden rounded-xl border border-line bg-surface hover:shadow-sm">
-                      <SafeImage src={c.imageUrl} alt={c.imageAlt} className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+                    <Link to={`/categories/${c.slug}`} className="group flex h-full flex-col overflow-hidden rounded-xl border border-line bg-surface transition-colors hover:border-line-strong">
+                      <div className="overflow-hidden">
+                        <SafeImage src={c.imageUrl} alt={c.imageAlt} className="aspect-[16/10] w-full object-cover transition-transform duration-enter group-hover:scale-[1.02]" />
+                      </div>
                       <div className="flex flex-1 flex-col gap-2 p-5">
                         <div className="flex items-center gap-2">
-                          <CategoryIcon slug={c.slug} size={18} className="text-brand" />
-                          <h3 className="type-h4 text-ink">{c.label}</h3>
+                          <CategoryIcon slug={c.slug} size={18} className="text-ink-secondary" />
+                          <h3 className="type-h4 text-ink-strong">{c.label}</h3>
                         </div>
                         <p className="type-body-sm text-ink-secondary">{c.description}</p>
                         <p className="mt-auto pt-2 type-caption text-ink-secondary">{n ? `${n} ${n === 1 ? "artist" : "artists"}` : "Artists joining soon"}</p>
@@ -97,19 +99,19 @@ export function CategoryDetailPage({ slug }: { slug: string }) {
             </div>
             {openGigs > 0 && <p className="type-body-sm text-ink-secondary">{openGigs} open {openGigs === 1 ? "gig" : "gigs"} in this category right now.</p>}
           </div>
-          <SafeImage src={category.imageUrl} alt={category.imageAlt} loading="eager" className="hidden aspect-[16/10] w-full rounded-2xl object-cover shadow-md lg:block" />
+          <SafeImage src={category.imageUrl} alt={category.imageAlt} loading="eager" className="hidden aspect-[16/10] w-full rounded-2xl object-cover lg:block" />
         </div>
       </section>
 
       <section className="page-container space-y-5 py-10">
         {category.complianceNote && <NoticeBanner tone="warning" title="Before you book">{category.complianceNote}</NoticeBanner>}
         <div className="flex items-end justify-between">
-          <h2 className="type-h2 text-ink">
+          <h2 className="type-h2 text-ink-strong">
             {inCategory.length} {inCategory.length === 1 ? "artist" : "artists"}
           </h2>
           {inCategory.length > 0 && (
-            <Link to={`/explore?category=${category.slug}`} className="inline-flex items-center gap-1 type-label text-brand hover:text-brand-hover">
-              Filter and sort <ArrowRight aria-hidden />
+            <Link to={`/explore?category=${category.slug}`} className="type-label text-brand underline decoration-brand/30 underline-offset-4 transition-colors hover:text-brand-hover hover:decoration-brand">
+              Filter and sort
             </Link>
           )}
         </div>

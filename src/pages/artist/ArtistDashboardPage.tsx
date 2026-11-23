@@ -32,7 +32,7 @@ export default function ArtistDashboardPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title={`Hi, ${viewer.displayName.split(" ")[0]}`}
+        title="Dashboard"
         description="Here's what needs your attention."
         actions={
           myArtistProfile && (
@@ -45,7 +45,7 @@ export default function ArtistDashboardPage() {
 
       {needsResponse.length > 0 && (
         <NoticeBanner tone="warning" title={`${needsResponse.length} ${needsResponse.length === 1 ? "offer needs" : "offers need"} your response`}>
-          <Link to={`/messages/${needsResponse[0].id}`} className="font-semibold text-brand">Review the latest offer →</Link>
+          <Link to={`/messages/${needsResponse[0].id}`} className="font-medium text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand">Review the latest offer</Link>
         </NoticeBanner>
       )}
 

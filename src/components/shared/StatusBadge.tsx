@@ -111,8 +111,8 @@ export function ProposalStatusBadge({ status }: { status: ProposalStatus }) {
 export function DemoBadge({ className }: { className?: string }) {
   return (
     <span
-      title="Demo data — illustrative, not a real person or transaction"
-      className={cn("inline-flex items-center rounded-full bg-brand-light-subtle px-2 py-0.5 type-metadata text-ink-secondary ring-1 ring-inset ring-line-subtle", className)}
+      title="Demo data: illustrative, not a real person or transaction"
+      className={cn("inline-flex items-center rounded-md bg-surface/90 px-1.5 py-0.5 type-metadata text-ink-secondary ring-1 ring-inset ring-line", className)}
     >
       Demo
     </span>

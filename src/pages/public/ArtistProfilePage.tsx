@@ -59,7 +59,7 @@ function PortfolioTile({ item, onOpen }: { item: PortfolioItem; onOpen: () => vo
 export function ArtistProfilePage({ slug }: { slug: string }) {
   const { artists, reviews, viewer, loading } = useMarketplace();
   const artist = artists.find((a) => a.slug === slug);
-  usePageMeta(artist ? `${artist.displayName} — ${categoryLabel(artist.primaryCategory)}` : "Artist not found", artist?.tagline);
+  usePageMeta(artist ? `${artist.displayName}, ${categoryLabel(artist.primaryCategory)}` : "Artist not found", artist?.tagline);
   const [lightbox, setLightbox] = useState<PortfolioItem | null>(null);
 
   if (loading) return <PageSkeleton rows={1} />;
@@ -102,40 +102,8 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
 
   return (
     <main id="main-content" className="pb-24 lg:pb-14">
-      <div className="relative h-44 bg-surface-container sm:h-64">
-        <SafeImage src={artist.coverUrl} alt={artist.coverAlt} loading="eager" className="size-full object-cover" />
-      </div>
       <div className="page-container">
-        <div className="-mt-12 flex flex-col gap-4 sm:-mt-14 sm:flex-row sm:items-end sm:justify-between">
-          <div className="flex items-end gap-4">
-            <UserAvatar name={artist.displayName} src={artist.avatarUrl} className="size-24 border-4 border-surface shadow-md sm:size-28" />
-            <div className="pb-1">
-              <div className="flex flex-wrap items-center gap-2">
-                <h1 className="type-h1 text-ink-strong">{artist.displayName}</h1>
-                {artist.isSample && <DemoBadge />}
-                {!artist.published && <span className="rounded-full bg-status-warning-soft px-2 py-0.5 type-label-sm text-status-warning">Draft — only you can see this</span>}
-              </div>
-              <p className="type-body text-ink-secondary">{artist.tagline}</p>
-            </div>
-          </div>
-          <div className="flex gap-2 pb-1">
-            <SaveArtistButton artistId={artist.id} withLabel />
-            {!isOwner && (
-              <ReportDialog
-                targetType="artist_profile"
-                targetId={artist.id}
-                targetLabel="this profile"
-                trigger={
-                  <Button variant="ghost" size="sm" aria-label="Report profile">
-                    <Flag aria-hidden /> <span className="hidden sm:inline">Report</span>
-                  </Button>
-                }
-              />
-            )}
-          </div>
-        </div>
-
-        <Breadcrumb className="mt-6">
+        <Breadcrumb className="py-4">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
@@ -155,7 +123,37 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_340px]">
+        <div className="relative h-44 overflow-hidden rounded-2xl bg-surface-container sm:h-72">
+          <SafeImage src={artist.coverUrl} alt={artist.coverAlt} loading="eager" className="size-full object-cover" />
+        </div>
+        <div className="flex items-start justify-between gap-4">
+          <UserAvatar name={artist.displayName} src={artist.avatarUrl} className="-mt-12 ml-4 size-24 border-4 border-surface shadow-md sm:-mt-14 sm:ml-6 sm:size-28" />
+          <div className="flex gap-2 pt-4">
+            <SaveArtistButton artistId={artist.id} withLabel />
+            {!isOwner && (
+              <ReportDialog
+                targetType="artist_profile"
+                targetId={artist.id}
+                targetLabel="this profile"
+                trigger={
+                  <Button variant="ghost" size="sm" aria-label="Report profile">
+                    <Flag aria-hidden /> <span className="hidden sm:inline">Report</span>
+                  </Button>
+                }
+              />
+            )}
+          </div>
+        </div>
+        <div className="mt-4 space-y-2">
+          <div className="flex flex-wrap items-center gap-3">
+            <h1 className="type-title text-ink-strong">{artist.displayName}</h1>
+            {artist.isSample && <DemoBadge />}
+            {!artist.published && <span className="rounded-md bg-status-warning-soft px-2 py-0.5 type-label-sm text-status-warning">Draft, only you can see this</span>}
+          </div>
+          <p className="max-w-2xl type-body-lg text-ink-secondary">{artist.tagline}</p>
+        </div>
+
+        <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-12">
           <div className="min-w-0 space-y-8">
             <ul className="flex flex-wrap gap-x-5 gap-y-2 type-body-sm text-ink-secondary">
               <li className="flex items-center gap-1.5">
@@ -165,7 +163,7 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
                 <MapPin size={16} aria-hidden /> {artist.city}
               </li>
               <li className="flex items-center gap-1.5">
-                <UsersThree size={16} aria-hidden /> {artist.artistFormat === "group" ? "Group" : "Solo"} · {artist.experienceYears} years
+                <UsersThree size={16} aria-hidden /> {artist.artistFormat === "group" ? "Group" : "Solo"}, {artist.experienceYears} years
               </li>
               <li className="flex items-center gap-1.5">
                 <Translate size={16} aria-hidden /> {artist.languages.join(", ") || "Languages not listed"}
@@ -249,7 +247,7 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
                         <div>
                           <h3 className="type-h4 text-ink">{pkg.title}</h3>
                           <p className="type-caption text-ink-secondary">
-                            {pkg.duration} · {workingModeLabel[pkg.format]}
+                            {pkg.duration}, {workingModeLabel[pkg.format]}
                           </p>
                         </div>
                         <p className="type-h4 text-ink">{pkg.priceInr === null ? "Quote on request" : formatInr(pkg.priceInr)}</p>
@@ -370,7 +368,7 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
                   Your browser can't play this audio sample.
                 </audio>
               ) : (
-                <video controls src={lightbox.mediaUrl} className="max-h-[70vh] w-full rounded-lg">
+                <video controls preload="metadata" poster={artist.coverUrl} src={lightbox.mediaUrl} className="max-h-[70vh] w-full rounded-lg">
                   Your browser can't play this video sample.
                 </video>
               )}

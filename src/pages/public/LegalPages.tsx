@@ -253,7 +253,8 @@ export function LegalDocumentPage({ kind }: { kind: LegalKind }) {
   usePageMeta(doc.title, doc.summary);
 
   return (
-    <main id="main-content" className="max-w-[860px] mx-auto px-4 sm:px-6 py-10 lg:py-14 space-y-8">
+    <main id="main-content" className="page-container py-12 lg:py-16">
+      <div className="mx-auto max-w-3xl space-y-10">
       <NoticeBanner tone="warning" title="Draft — requires legal review">
         This document is a structured pre-launch draft. Final legal wording, jurisdiction,
         configured entity name ({siteConfig.legalEntityName}), principal address (
@@ -261,27 +262,24 @@ export function LegalDocumentPage({ kind }: { kind: LegalKind }) {
         counsel prior to commercial launch.
       </NoticeBanner>
 
-      <header className="space-y-2 border-b border-line pb-6">
-        <p className="type-caption text-brand font-semibold">
-          Cultgig Legal · Updated {siteConfig.policiesLastUpdated}
-        </p>
-        <h1 className="text-[28px] sm:text-[36px] leading-[1.2] font-bold text-ink">
-          {doc.title}
-        </h1>
+      <header className="space-y-4 border-b border-line pb-8">
+        <h1 className="type-title text-ink-strong">{doc.title}</h1>
         <p className="type-body-lg text-ink-secondary">{doc.summary}</p>
+        <p className="type-caption text-ink-secondary">Cultgig Legal, updated {siteConfig.policiesLastUpdated}</p>
       </header>
 
-      <div className="space-y-6">
+      <div className="space-y-8">
         {doc.sections.map((section) => (
-          <section key={section.heading} className="space-y-2.5">
-            <h2 className="type-h2 text-ink">{section.heading}</h2>
+          <section key={section.heading} className="space-y-3">
+            <h2 className="type-h2 text-ink-strong">{section.heading}</h2>
             {section.body.map((para) => (
-              <p key={para} className="type-body text-ink-secondary">
+              <p key={para} className="max-w-[68ch] text-[15px] leading-7 text-ink">
                 {para}
               </p>
             ))}
           </section>
         ))}
+      </div>
       </div>
     </main>
   );

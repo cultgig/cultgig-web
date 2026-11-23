@@ -118,7 +118,7 @@ export function InquiryDialog({ artist, trigger, mode = "contact" }: { artist: A
             <Field id="inq-venue" label="Venue or area">
               <Input id="inq-venue" value={form.venue} onChange={(e) => set("venue", e.target.value)} placeholder="Exact address can come later" />
             </Field>
-            <Field id="inq-budget" label="Estimated budget (₹)" hint="Optional — helps the artist quote." error={errors.estimatedBudgetInr} className="sm:col-span-2">
+            <Field id="inq-budget" label="Estimated budget (₹)" hint="Optional, helps the artist quote" error={errors.estimatedBudgetInr} className="sm:col-span-2">
               <Input
                 id="inq-budget"
                 type="number"

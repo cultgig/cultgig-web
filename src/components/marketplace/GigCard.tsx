@@ -10,7 +10,7 @@ import type { ReactNode } from "react";
 export function budgetLabel(gig: Pick<EventGig, "budgetMode" | "budgetMinInr" | "budgetMaxInr">): string {
   if (gig.budgetMode === "open_to_quotes") return "Open to quotes";
   if (gig.budgetMode === "fixed" && gig.budgetMaxInr) return `${formatInr(gig.budgetMaxInr)} fixed`;
-  if (gig.budgetMinInr && gig.budgetMaxInr) return `${formatInr(gig.budgetMinInr)}–${formatInr(gig.budgetMaxInr)}`;
+  if (gig.budgetMinInr && gig.budgetMaxInr) return `${formatInr(gig.budgetMinInr)} to ${formatInr(gig.budgetMaxInr)}`;
   return "Budget to be discussed";
 }
 
@@ -27,39 +27,39 @@ export function GigCard({ gig, to, footer, showStatus = false }: { gig: EventGig
   const category = getCategory(gig.category);
   const deadline = deadlineLabel(gig.applicationDeadline);
   return (
-    <article className="relative flex flex-col gap-3 rounded-xl border border-line bg-surface p-5 shadow-xs transition-shadow hover:shadow-md">
+    <article className="relative flex flex-col gap-4 rounded-xl border border-line bg-surface p-5 transition-colors hover:border-line-strong has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-line-focus">
       <div className="flex flex-wrap items-center gap-2">
-        <span className="rounded-full bg-surface-low px-2.5 py-0.5 type-label-sm text-ink-secondary">{category?.label ?? gig.category}</span>
+        <span className="rounded-md bg-surface-low px-2 py-0.5 type-label-sm text-ink-secondary">{category?.label ?? gig.category}</span>
         {showStatus && <GigStatusBadge status={gig.status} />}
         {gig.isSample && <DemoBadge />}
-        <span className={`ml-auto type-caption ${deadline.urgent ? "font-semibold text-status-warning" : "text-ink-secondary"}`}>{deadline.text}</span>
+        <span className={`ml-auto type-caption ${deadline.urgent ? "font-medium text-status-warning" : "text-ink-secondary"}`}>{deadline.text}</span>
       </div>
       <div>
-        <h3 className="type-h4 text-ink">
+        <h3 className="type-h3 text-ink-strong">
           <Link to={to} className="after:absolute after:inset-0 focus-visible:outline-none">
             {gig.title}
           </Link>
         </h3>
-        <p className="mt-0.5 type-caption text-ink-secondary">
-          {gig.eventType} · posted by {gig.clientDisplayName}
+        <p className="mt-1 type-caption text-ink-secondary">
+          {gig.eventType}, posted by {gig.clientDisplayName}
         </p>
       </div>
-      <ul className="grid grid-cols-1 gap-x-4 gap-y-1.5 type-body-sm text-ink-secondary sm:grid-cols-2">
-        <li className="flex items-center gap-1.5">
-          <CalendarBlank size={15} aria-hidden /> {formatDate(gig.eventDate)}
+      <ul className="grid grid-cols-1 gap-x-4 gap-y-2 type-body-sm text-ink-secondary sm:grid-cols-2">
+        <li className="flex items-center gap-2">
+          <CalendarBlank size={16} aria-hidden className="shrink-0" /> {formatDate(gig.eventDate)}
         </li>
-        <li className="flex items-center gap-1.5">
-          <Clock size={15} aria-hidden /> {formatTime24(gig.startTime)}–{formatTime24(gig.endTime)}
+        <li className="flex items-center gap-2">
+          <Clock size={16} aria-hidden className="shrink-0" /> {formatTime24(gig.startTime)} to {formatTime24(gig.endTime)}
         </li>
-        <li className="flex items-center gap-1.5">
-          <MapPin size={15} aria-hidden /> {gig.workingMode === "remote" ? "Remote" : gig.city}
+        <li className="flex items-center gap-2">
+          <MapPin size={16} aria-hidden className="shrink-0" /> {gig.workingMode === "remote" ? "Remote" : gig.city}
         </li>
-        <li className="flex items-center gap-1.5">
-          <UsersThree size={15} aria-hidden /> {gig.artistsNeeded} {gig.artistsNeeded === 1 ? "artist" : "artists"} needed
+        <li className="flex items-center gap-2">
+          <UsersThree size={16} aria-hidden className="shrink-0" /> {gig.artistsNeeded} {gig.artistsNeeded === 1 ? "artist" : "artists"} needed
         </li>
       </ul>
       <div className="flex items-center justify-between gap-3 border-t border-line pt-3">
-        <span className="type-label text-ink">{budgetLabel(gig)}</span>
+        <span className="figure type-label text-ink-strong">{budgetLabel(gig)}</span>
         {gig.travelCovered && <span className="type-caption text-ink-secondary">Travel covered</span>}
       </div>
       {footer && <div className="relative z-10">{footer}</div>}

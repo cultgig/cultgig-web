@@ -57,9 +57,9 @@ export default function ClientGigDetailPage({ gigId }: { gigId: string }) {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow={<Link to="/client/gigs" className="hover:text-ink">← My gigs</Link>}
+        back={{ to: "/client/gigs", label: "My gigs" }}
         title={gig.title}
-        description={<span className="flex flex-wrap items-center gap-2"><GigStatusBadge status={gig.status} /> {categoryLabel(gig.category)} · {formatDate(gig.eventDate)} · {gig.workingMode === "remote" ? "Remote" : gig.city}</span>}
+        description={<span className="flex flex-wrap items-center gap-2"><GigStatusBadge status={gig.status} /> {categoryLabel(gig.category)}, {formatDate(gig.eventDate)}, {gig.workingMode === "remote" ? "Remote" : gig.city}</span>}
         actions={
           <>
             <Button asChild variant="outline"><Link to={`/client/gigs/${gig.id}/edit`}><PencilSimple aria-hidden /> Edit</Link></Button>
@@ -119,7 +119,7 @@ export default function ClientGigDetailPage({ gigId }: { gigId: string }) {
                           <ApplicationStatusBadge status={a.status} />
                         </div>
                         <p className="type-caption text-ink-secondary">
-                          {artist ? `${categoryLabel(artist.primaryCategory)} · ${artist.experienceYears} yrs · ${artist.city}` : ""} · applied {formatRelative(a.createdAt)}
+                          {artist ? `${categoryLabel(artist.primaryCategory)}, ${artist.experienceYears} yrs, ${artist.city}` : ""}, applied {formatRelative(a.createdAt)}
                         </p>
                         {rating && <RatingStars value={rating.average} count={rating.count} />}
                         <p className="mt-2 type-body-sm text-ink-secondary">{a.message}</p>

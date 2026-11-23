@@ -46,7 +46,7 @@ export default function ArtistApplicationsPage() {
                   <div className="min-w-0">
                     <Link to={`/artist/gigs/${a.gigId}`} className="type-h4 text-ink hover:text-brand">{gig?.title ?? "Gig no longer available"}</Link>
                     <p className="type-caption text-ink-secondary">
-                      {gig ? `${gig.clientDisplayName} · ${formatDate(gig.eventDate)} · ${gig.city}` : "The client removed this gig."} · applied {formatRelative(a.createdAt)}
+                      {gig ? `${gig.clientDisplayName}, ${formatDate(gig.eventDate)}, ${gig.city}` : "The client removed this gig."}, applied {formatRelative(a.createdAt)}
                     </p>
                   </div>
                   <ApplicationStatusBadge status={a.status} />
