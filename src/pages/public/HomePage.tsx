@@ -117,7 +117,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="relative hidden lg:block">
-            <SafeImage src={heroImage.src} alt={heroImage.alt} loading="eager" fetchPriority="high" className="aspect-[4/5] w-full rounded-2xl object-cover shadow-lg" />
+            <SafeImage src={heroImage.src} alt={heroImage.alt} loading="eager" {...{ fetchpriority: "high" }} className="aspect-[4/5] w-full rounded-2xl object-cover shadow-lg" />
             <div className="absolute -bottom-5 -left-6 max-w-[240px] rounded-xl border border-line bg-surface p-4 shadow-md">
               <p className="type-label text-ink">Proposal v3 accepted</p>
               <p className="type-caption text-ink-secondary">Every offer and counter-offer is kept on record.</p>
