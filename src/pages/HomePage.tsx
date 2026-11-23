@@ -58,12 +58,12 @@ const iconMap: Record<CreativeCategory["iconName"], typeof Music> = {
 const cardSurfaceTones = [
   "bg-brand-pressed",
   "bg-brand-hover",
-  "bg-ink-primary",
+  "bg-ink",
   "bg-brand",
-  "bg-obsidian",
+  "bg-ink-strong",
   "bg-brand-hover",
   "bg-brand-pressed",
-  "bg-ink-primary",
+  "bg-ink",
 ];
 
 const illustrativeMoments = [
@@ -161,9 +161,9 @@ export function HomePage() {
   const activeMoment = illustrativeMoments[activeMomentIndex];
 
   return (
-    <main id="main-content" className="bg-canvas text-ink-primary">
+    <main id="main-content" className="bg-surface-low text-ink">
       {/* 1. Image-Led Search Hero */}
-      <section className="relative w-full overflow-hidden bg-ink-dark">
+      <section className="relative w-full overflow-hidden bg-ink-strong">
         <div className="max-w-[1360px] mx-auto relative min-h-[500px] lg:min-h-[540px] flex items-center">
           <SafeImage
             src={imageManifest.heroPerformance.src}
@@ -173,7 +173,7 @@ export function HomePage() {
           />
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-r from-obsidian/90 via-obsidian/75 to-obsidian/45"
+            className="absolute inset-0 bg-gradient-to-r from-ink-strong/90 via-ink-strong/75 to-ink-strong/45"
           />
 
           <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
@@ -192,7 +192,7 @@ export function HomePage() {
                   onSubmit={handleHeroSearch}
                   role="search"
                   aria-label="Search Cultgig artists and categories"
-                  className="bg-surface rounded-lg p-1.5 shadow-elevated flex flex-col sm:flex-row items-stretch sm:items-center gap-1.5"
+                  className="bg-surface rounded-lg p-1.5 shadow-lg flex flex-col sm:flex-row items-stretch sm:items-center gap-1.5"
                 >
                   <div className="flex-1 flex items-center gap-2.5 px-3 min-w-0">
                     <Search size={18} className="text-ink-secondary shrink-0" aria-hidden="true" />
@@ -207,7 +207,7 @@ export function HomePage() {
                       onFocus={() => setSearchFocused(true)}
                       onBlur={() => setTimeout(() => setSearchFocused(false), 160)}
                       placeholder="Try ‘live band’, ‘mehendi artist’ or ‘wedding dancer’"
-                      className="w-full py-2.5 text-[15px] leading-[20px] text-ink-primary placeholder:text-ink-muted bg-transparent border-0 focus:outline-none"
+                      className="w-full py-2.5 text-[15px] leading-[20px] text-ink placeholder:text-ink-muted bg-transparent border-0 focus:outline-none"
                     />
                   </div>
 
@@ -231,7 +231,7 @@ export function HomePage() {
 
                     <button
                       type="submit"
-                      className="min-h-[44px] px-6 py-2.5 rounded-md bg-plum text-white hover:bg-plum-hover font-semibold text-[15px] leading-[20px] whitespace-nowrap shrink-0"
+                      className="min-h-[44px] px-6 py-2.5 rounded-md bg-brand text-white hover:bg-brand-hover font-semibold text-[15px] leading-[20px] whitespace-nowrap shrink-0"
                     >
                       Search
                     </button>
@@ -242,13 +242,13 @@ export function HomePage() {
                   <div
                     role="listbox"
                     aria-label="Search suggestions"
-                    className="absolute left-0 right-0 top-full mt-2 bg-surface border border-line rounded-lg shadow-elevated p-2 z-30"
+                    className="absolute left-0 right-0 top-full mt-2 bg-surface border border-line rounded-lg shadow-lg p-2 z-30"
                   >
                     {suggestions.map((item) => (
                       <Link
                         key={item.path + item.label}
                         to={item.path}
-                        className="flex items-center justify-between px-3 py-2.5 rounded-md hover:bg-plum-soft text-ink-primary"
+                        className="flex items-center justify-between px-3 py-2.5 rounded-md hover:bg-brand-subtle text-ink"
                       >
                         <span className="type-body font-medium">{item.label}</span>
                         <span className="type-caption text-ink-secondary">{item.hint}</span>
@@ -282,7 +282,7 @@ export function HomePage() {
               <div className="pt-2 flex flex-wrap items-center gap-4">
                 <Link
                   to="/explore"
-                  className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-white text-ink-primary hover:bg-plum-soft font-semibold text-[15px]"
+                  className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-white text-ink hover:bg-brand-subtle font-semibold text-[15px]"
                 >
                   Explore artists
                 </Link>
@@ -319,14 +319,14 @@ export function HomePage() {
               <Link
                 key={cat.slug}
                 to={`/categories/${cat.slug}`}
-                className="group bg-surface border border-line rounded-lg p-3.5 flex flex-col items-start justify-between gap-3 min-h-[104px] hover:border-plum hover:shadow-soft"
+                className="group bg-surface border border-line rounded-lg p-3.5 flex flex-col items-start justify-between gap-3 min-h-[104px] hover:border-brand hover:shadow-xs"
               >
                 <Icon
                   size={20}
-                  className="text-ink-primary group-hover:text-plum transition-colors"
+                  className="text-ink group-hover:text-brand transition-colors"
                   aria-hidden="true"
                 />
-                <span className="text-[13px] leading-[17px] font-semibold text-ink-primary group-hover:text-plum">
+                <span className="text-[13px] leading-[17px] font-semibold text-ink group-hover:text-brand">
                   {cat.shortLabel}
                 </span>
               </Link>
@@ -344,7 +344,7 @@ export function HomePage() {
           <div>
             <h2
               id="popular-services-heading"
-              className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink-primary"
+              className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink"
             >
               Popular creative services
             </h2>
@@ -357,7 +357,7 @@ export function HomePage() {
               type="button"
               onClick={() => scrollServices("left")}
               aria-label="Scroll services left"
-              className="w-10 h-10 rounded-full border border-line bg-surface flex items-center justify-center text-ink-primary hover:border-plum hover:text-plum"
+              className="w-10 h-10 rounded-full border border-line bg-surface flex items-center justify-center text-ink hover:border-brand hover:text-brand"
             >
               <ChevronLeft size={18} aria-hidden="true" />
             </button>
@@ -365,13 +365,13 @@ export function HomePage() {
               type="button"
               onClick={() => scrollServices("right")}
               aria-label="Scroll services right"
-              className="w-10 h-10 rounded-full border border-line bg-surface flex items-center justify-center text-ink-primary hover:border-plum hover:text-plum"
+              className="w-10 h-10 rounded-full border border-line bg-surface flex items-center justify-center text-ink hover:border-brand hover:text-brand"
             >
               <ChevronRight size={18} aria-hidden="true" />
             </button>
             <Link
               to="/categories"
-              className="ml-2 type-label text-plum hover:text-plum-hover whitespace-nowrap"
+              className="ml-2 type-label text-brand hover:text-brand-hover whitespace-nowrap"
             >
               All 15 categories
             </Link>
@@ -407,14 +407,14 @@ export function HomePage() {
       </section>
 
       {/* 4. Make It Happen With Artists — 4 Pillars */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 border-t border-line-light">
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 border-t border-line">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-10">
-          <h2 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink-primary">
+          <h2 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink">
             Make it all happen with independent artists
           </h2>
           <Link
             to="/sign-up"
-            className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-ink-primary text-white hover:bg-plum font-semibold text-[14px]"
+            className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-ink text-white hover:bg-brand font-semibold text-[14px]"
           >
             Join Cultgig
           </Link>
@@ -422,29 +422,29 @@ export function HomePage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="space-y-3">
-            <Search size={24} className="text-plum" aria-hidden="true" />
-            <h3 className="type-h3 text-ink-primary">Compare real craft</h3>
+            <Search size={24} className="text-brand" aria-hidden="true" />
+            <h3 className="type-h3 text-ink">Compare real craft</h3>
             <p className="type-body text-ink-secondary">
               Explore category-specific portfolios, recordings, and starting packages instead of forwarded phone numbers.
             </p>
           </div>
           <div className="space-y-3">
-            <FileText size={24} className="text-plum" aria-hidden="true" />
-            <h3 className="type-h3 text-ink-primary">Share a clear brief</h3>
+            <FileText size={24} className="text-brand" aria-hidden="true" />
+            <h3 className="type-h3 text-ink">Share a clear brief</h3>
             <p className="type-body text-ink-secondary">
               Include timing, city, venue setup, and budget approach upfront so every reply is relevant.
             </p>
           </div>
           <div className="space-y-3">
-            <MessageSquareText size={24} className="text-plum" aria-hidden="true" />
-            <h3 className="type-h3 text-ink-primary">Versioned negotiation</h3>
+            <MessageSquareText size={24} className="text-brand" aria-hidden="true" />
+            <h3 className="type-h3 text-ink">Versioned negotiation</h3>
             <p className="type-body text-ink-secondary">
               Agree on scope, travel, and deliverables inside structured counter-offers with full version history.
             </p>
           </div>
           <div className="space-y-3">
-            <CalendarCheck size={24} className="text-plum" aria-hidden="true" />
-            <h3 className="type-h3 text-ink-primary">Transparent booking terms</h3>
+            <CalendarCheck size={24} className="text-brand" aria-hidden="true" />
+            <h3 className="type-h3 text-ink">Transparent booking terms</h3>
             <p className="type-body text-ink-secondary">
               Documented cancellation notes, privacy-safe venue sharing, and a clear booking lifecycle.
             </p>
@@ -454,30 +454,30 @@ export function HomePage() {
 
       {/* 5. Feature Promotion for Businesses & Event Hosts */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="rounded-xl bg-plum-active text-white p-8 sm:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="rounded-xl bg-brand-pressed text-white p-8 sm:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-5">
-            <p className="type-label text-plum-tint">For businesses, venues & celebration hosts</p>
+            <p className="type-label text-brand-subtle">For businesses, venues & celebration hosts</p>
             <h2 className="text-[26px] sm:text-[34px] leading-[1.2] font-bold text-white">
               Post one structured brief and compare artists who fit your room
             </h2>
             <ul className="space-y-2.5 text-[15px] leading-[22px] text-white/90">
               <li className="flex items-start gap-2.5">
-                <CheckCircle2 size={18} className="text-plum-tint shrink-0 mt-0.5" aria-hidden="true" />
+                <CheckCircle2 size={18} className="text-brand-subtle shrink-0 mt-0.5" aria-hidden="true" />
                 <span>Specify event date, duration, PA or staging notes, and INR budget range</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <CheckCircle2 size={18} className="text-plum-tint shrink-0 mt-0.5" aria-hidden="true" />
+                <CheckCircle2 size={18} className="text-brand-subtle shrink-0 mt-0.5" aria-hidden="true" />
                 <span>Invite shortlisted artists directly or receive structured applications</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <CheckCircle2 size={18} className="text-plum-tint shrink-0 mt-0.5" aria-hidden="true" />
+                <CheckCircle2 size={18} className="text-brand-subtle shrink-0 mt-0.5" aria-hidden="true" />
                 <span>Keep exact venue addresses private until a proposal progresses</span>
               </li>
             </ul>
             <div className="pt-2 flex flex-wrap gap-3">
               <Link
                 to="/client/gigs/new"
-                className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-white text-plum-active hover:bg-plum-soft font-semibold text-[15px]"
+                className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-white text-brand-pressed hover:bg-brand-subtle font-semibold text-[15px]"
               >
                 Post a gig
               </Link>
@@ -491,18 +491,18 @@ export function HomePage() {
           </div>
 
           <div className="lg:col-span-5">
-            <div className="bg-surface text-ink-primary rounded-lg p-5 shadow-elevated space-y-4">
+            <div className="bg-surface text-ink rounded-lg p-5 shadow-lg space-y-4">
               <div className="flex items-center justify-between gap-2 text-ink-secondary type-caption">
                 <span>Illustrative event brief</span>
                 <span>Bandra West · Mumbai</span>
               </div>
-              <h3 className="type-h3 text-ink-primary">
+              <h3 className="type-h3 text-ink">
                 Saturday sunset acoustic set for 60-seat terrace dinner
               </h3>
               <p className="type-body-sm text-ink-secondary">
                 7:00 PM – 9:00 PM · In-house PA & mixer provided · Range ₹15,000 – ₹22,000
               </p>
-              <div className="pt-3 border-t border-line-light flex items-center justify-between">
+              <div className="pt-3 border-t border-line flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
                   <SafeImage
                     src={imageManifest.creatorRhea.src}
@@ -510,13 +510,13 @@ export function HomePage() {
                     className="w-9 h-9 rounded-full object-cover"
                   />
                   <div>
-                    <p className="type-label text-ink-primary">Rhea Kapoor (Sample)</p>
+                    <p className="type-label text-ink">Rhea Kapoor (Sample)</p>
                     <p className="type-caption text-ink-secondary">Proposal v2 · ₹20,500</p>
                   </div>
                 </div>
                 <Link
                   to="/messages/sample-thread-1"
-                  className="type-label text-plum hover:text-plum-hover"
+                  className="type-label text-brand hover:text-brand-hover"
                 >
                   Inspect offer
                 </Link>
@@ -528,10 +528,10 @@ export function HomePage() {
 
       {/* 6. Feature Promotion for Independent Artists */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="rounded-xl bg-plum-soft border border-plum-border p-8 sm:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="rounded-xl bg-brand-subtle border border-line-strong p-8 sm:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-4">
-            <p className="type-label text-plum">For independent artists & collectives</p>
-            <h2 className="text-[26px] sm:text-[34px] leading-[1.2] font-bold text-ink-primary">
+            <p className="type-label text-brand">For independent artists & collectives</p>
+            <h2 className="text-[26px] sm:text-[34px] leading-[1.2] font-bold text-ink">
               Present your portfolio, set clear pricing modes, and negotiate respectfully
             </h2>
             <p className="type-body-lg text-ink-secondary max-w-[560px]">
@@ -541,13 +541,13 @@ export function HomePage() {
             <div className="pt-2 flex flex-wrap gap-3">
               <Link
                 to="/for-artists"
-                className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-plum text-white hover:bg-plum-hover font-semibold text-[15px]"
+                className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-brand text-white hover:bg-brand-hover font-semibold text-[15px]"
               >
                 Create artist profile
               </Link>
               <Link
                 to="/artist/opportunities"
-                className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong bg-surface text-ink-primary hover:border-plum hover:text-plum font-semibold text-[15px]"
+                className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong bg-surface text-ink hover:border-brand hover:text-brand font-semibold text-[15px]"
               >
                 Browse sample briefs
               </Link>
@@ -579,8 +579,8 @@ export function HomePage() {
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
           <div>
-            <p className="type-label text-plum mb-1">Illustrative creative moments</p>
-            <h2 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink-primary">
+            <p className="type-label text-brand mb-1">Illustrative creative moments</p>
+            <h2 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink">
               How creative bookings come together across India
             </h2>
           </div>
@@ -595,8 +595,8 @@ export function HomePage() {
                 onClick={() => setActiveMomentIndex(idx)}
                 className={`min-h-[40px] px-4 py-2 rounded-md text-[13px] font-semibold border whitespace-nowrap ${
                   activeMomentIndex === idx
-                    ? "bg-plum text-white border-plum"
-                    : "bg-surface text-ink-secondary border-line hover:border-plum hover:text-plum"
+                    ? "bg-brand text-white border-brand"
+                    : "bg-surface text-ink-secondary border-line hover:border-brand hover:text-brand"
                 }`}
               >
                 {moment.label}
@@ -605,7 +605,7 @@ export function HomePage() {
           </div>
         </div>
 
-        <div className="relative rounded-xl overflow-hidden aspect-[16/9] max-h-[460px] w-full bg-ink-dark">
+        <div className="relative rounded-xl overflow-hidden aspect-[16/9] max-h-[460px] w-full bg-ink-strong">
           <SafeImage
             src={activeMoment.imageUrl}
             alt={activeMoment.imageAlt}
@@ -614,7 +614,7 @@ export function HomePage() {
           />
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-obsidian/35 to-transparent"
+            className="absolute inset-0 bg-gradient-to-t from-ink-strong/90 via-ink-strong/35 to-transparent"
           />
           <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 text-white max-w-[720px] space-y-2">
             <h3 className="text-[20px] sm:text-[26px] leading-[1.25] font-bold text-white">
@@ -626,17 +626,17 @@ export function HomePage() {
       </section>
 
       {/* 8. Editorial Guides */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-line-light">
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-line">
         <div className="flex items-end justify-between gap-4 mb-8">
           <div>
-            <h2 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink-primary">
+            <h2 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink">
               Guides to help you plan & book
             </h2>
             <p className="type-body text-ink-secondary mt-1">
               Practical checklists for hosts, event planners, and independent artists.
             </p>
           </div>
-          <Link to="/guides" className="type-label text-plum hover:text-plum-hover whitespace-nowrap">
+          <Link to="/guides" className="type-label text-brand hover:text-brand-hover whitespace-nowrap">
             See all guides
           </Link>
         </div>
@@ -646,9 +646,9 @@ export function HomePage() {
             <Link
               key={guide.slug}
               to={`/guides/${guide.slug}`}
-              className="group bg-surface border border-line rounded-lg overflow-hidden flex flex-col hover:border-plum-border hover:shadow-card"
+              className="group bg-surface border border-line rounded-lg overflow-hidden flex flex-col hover:border-line-strong hover:shadow-sm"
             >
-              <div className="aspect-[16/10] bg-surface-muted overflow-hidden">
+              <div className="aspect-[16/10] bg-surface-container overflow-hidden">
                 <SafeImage
                   src={guide.imageUrl}
                   alt={guide.imageAlt}
@@ -662,7 +662,7 @@ export function HomePage() {
                   <span aria-hidden="true"> · </span>
                   {guide.readTime}
                 </p>
-                <h3 className="type-h3 text-ink-primary group-hover:text-plum">{guide.title}</h3>
+                <h3 className="type-h3 text-ink group-hover:text-brand">{guide.title}</h3>
                 <p className="type-body-sm text-ink-secondary line-clamp-2">{guide.summary}</p>
               </div>
             </Link>
@@ -672,7 +672,7 @@ export function HomePage() {
 
       {/* 9. Closing CTA */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 pb-16">
-        <div className="rounded-xl bg-plum-active text-white px-6 py-12 sm:px-12 sm:py-14 text-center space-y-5">
+        <div className="rounded-xl bg-brand-pressed text-white px-6 py-12 sm:px-12 sm:py-14 text-center space-y-5">
           <h2 className="text-[28px] sm:text-[36px] leading-[1.2] font-bold text-white max-w-[680px] mx-auto">
             Creative talent & event briefs, thoughtfully matched.
           </h2>
@@ -683,7 +683,7 @@ export function HomePage() {
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
             <Link
               to="/explore"
-              className="inline-flex items-center justify-center min-h-[44px] px-6 py-2.5 rounded-md bg-white text-plum-active hover:bg-plum-soft font-semibold text-[15px]"
+              className="inline-flex items-center justify-center min-h-[44px] px-6 py-2.5 rounded-md bg-white text-brand-pressed hover:bg-brand-subtle font-semibold text-[15px]"
             >
               Explore artists
             </Link>

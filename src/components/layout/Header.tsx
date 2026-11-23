@@ -39,7 +39,7 @@ export function Header() {
         <Link
           to="/"
           aria-label="Cultgig home"
-          className="text-[22px] leading-[28px] font-bold tracking-[-0.03em] text-plum whitespace-nowrap shrink-0"
+          className="text-[22px] leading-[28px] font-bold tracking-[-0.03em] text-brand whitespace-nowrap shrink-0"
         >
           cultgig<span className="text-brand-ink">.</span>
         </Link>
@@ -52,7 +52,7 @@ export function Header() {
               onClick={() => setCategoriesOpen((prev) => !prev)}
               aria-expanded={categoriesOpen}
               aria-haspopup="true"
-              className="inline-flex items-center gap-1.5 py-2 text-[14px] leading-[20px] font-medium text-ink-secondary hover:text-plum whitespace-nowrap shrink-0"
+              className="inline-flex items-center gap-1.5 py-2 text-[14px] leading-[20px] font-medium text-ink-secondary hover:text-brand whitespace-nowrap shrink-0"
             >
               <span>Categories</span>
               <ChevronDown
@@ -66,27 +66,27 @@ export function Header() {
               <div
                 role="region"
                 aria-label="Creative categories menu"
-                className="absolute left-0 top-full mt-2 w-[620px] bg-surface border border-line rounded-lg shadow-elevated p-5 grid grid-cols-3 gap-x-5 gap-y-2.5 z-50"
+                className="absolute left-0 top-full mt-2 w-[620px] bg-surface border border-line rounded-lg shadow-lg p-5 grid grid-cols-3 gap-x-5 gap-y-2.5 z-50"
               >
                 {creativeCategories.map((cat) => (
                   <Link
                     key={cat.slug}
                     to={`/categories/${cat.slug}`}
-                    className="text-[13px] leading-[18px] font-medium text-ink-secondary hover:text-plum py-1 truncate"
+                    className="text-[13px] leading-[18px] font-medium text-ink-secondary hover:text-brand py-1 truncate"
                   >
                     {cat.label}
                   </Link>
                 ))}
-                <div className="col-span-3 pt-3 mt-1 border-t border-line-light flex items-center justify-between">
+                <div className="col-span-3 pt-3 mt-1 border-t border-line flex items-center justify-between">
                   <Link
                     to="/categories"
-                    className="type-label text-plum hover:text-plum-hover"
+                    className="type-label text-brand hover:text-brand-hover"
                   >
                     Browse all 15 creative categories
                   </Link>
                   <Link
                     to="/explore"
-                    className="type-body-sm text-ink-secondary hover:text-plum"
+                    className="type-body-sm text-ink-secondary hover:text-brand"
                   >
                     Open artist search
                   </Link>
@@ -102,8 +102,8 @@ export function Header() {
                 key={item.path}
                 to={item.path}
                 aria-current={isActive ? "page" : undefined}
-                className={`py-2 text-[14px] leading-[20px] font-medium whitespace-nowrap shrink-0 hover:text-plum ${
-                  isActive ? "text-plum underline underline-offset-8 decoration-2" : "text-ink-secondary"
+                className={`py-2 text-[14px] leading-[20px] font-medium whitespace-nowrap shrink-0 hover:text-brand ${
+                  isActive ? "text-brand underline underline-offset-8 decoration-2" : "text-ink-secondary"
                 }`}
               >
                 {item.label}
@@ -119,11 +119,11 @@ export function Header() {
               <Link
                 to="/notifications"
                 aria-label={`Notifications (${unreadCount} unread)`}
-                className="relative w-10 h-10 rounded-md border border-line flex items-center justify-center text-ink-secondary hover:text-plum hover:border-plum"
+                className="relative w-10 h-10 rounded-md border border-line flex items-center justify-center text-ink-secondary hover:text-brand hover:border-brand"
               >
                 <Bell size={17} aria-hidden="true" />
                 {unreadCount > 0 && (
-                  <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-plum text-white text-[10.5px] leading-[18px] font-semibold text-center tabular-nums">
+                  <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-brand text-white text-[10.5px] leading-[18px] font-semibold text-center tabular-nums">
                     {unreadCount}
                   </span>
                 )}
@@ -134,7 +134,7 @@ export function Header() {
                   type="button"
                   onClick={() => setAccountMenuOpen((prev) => !prev)}
                   aria-expanded={accountMenuOpen}
-                  className="inline-flex items-center gap-2 min-h-[40px] px-3.5 py-2 rounded-md border border-line bg-surface hover:border-plum text-[13px] font-semibold text-ink-primary whitespace-nowrap shrink-0"
+                  className="inline-flex items-center gap-2 min-h-[40px] px-3.5 py-2 rounded-md border border-line bg-surface hover:border-brand text-[13px] font-semibold text-ink whitespace-nowrap shrink-0"
                 >
                   <span className="max-w-[130px] truncate">{user.displayName}</span>
                   <span className="text-ink-secondary font-normal">
@@ -144,22 +144,22 @@ export function Header() {
                 </button>
 
                 {accountMenuOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-60 bg-surface border border-line rounded-lg shadow-elevated p-2 z-50 flex flex-col gap-1">
+                  <div className="absolute right-0 top-full mt-2 w-60 bg-surface border border-line rounded-lg shadow-lg p-2 z-50 flex flex-col gap-1">
                     <Link
                       to={user.activeMode === "artist" ? "/artist/dashboard" : "/client/dashboard"}
-                      className="px-3 py-2 rounded-sm type-label text-ink-primary hover:bg-plum-soft hover:text-plum"
+                      className="px-3 py-2 rounded-sm type-label text-ink hover:bg-brand-subtle hover:text-brand"
                     >
                       {user.activeMode === "artist" ? "Artist dashboard" : "Client dashboard"}
                     </Link>
                     <Link
                       to="/client/gigs/new"
-                      className="px-3 py-2 rounded-sm type-body-sm text-ink-secondary hover:bg-plum-soft hover:text-plum"
+                      className="px-3 py-2 rounded-sm type-body-sm text-ink-secondary hover:bg-brand-subtle hover:text-brand"
                     >
                       Post a gig
                     </Link>
                     <Link
                       to="/artist/opportunities"
-                      className="px-3 py-2 rounded-sm type-body-sm text-ink-secondary hover:bg-plum-soft hover:text-plum"
+                      className="px-3 py-2 rounded-sm type-body-sm text-ink-secondary hover:bg-brand-subtle hover:text-brand"
                     >
                       Browse open gigs
                     </Link>
@@ -171,11 +171,11 @@ export function Header() {
                         setAccountMenuOpen(false);
                         navigate(next === "artist" ? "/artist/dashboard" : "/client/dashboard");
                       }}
-                      className="text-left px-3 py-2 rounded-sm type-body-sm text-plum hover:bg-plum-soft font-medium"
+                      className="text-left px-3 py-2 rounded-sm type-body-sm text-brand hover:bg-brand-subtle font-medium"
                     >
                       Switch to {user.activeMode === "artist" ? "Client view" : "Artist view"}
                     </button>
-                    <div className="my-1 border-t border-line-light" />
+                    <div className="my-1 border-t border-line" />
                     <button
                       type="button"
                       onClick={() => {
@@ -183,7 +183,7 @@ export function Header() {
                         setAccountMenuOpen(false);
                         navigate("/");
                       }}
-                      className="text-left px-3 py-2 rounded-sm type-body-sm text-semantic-error hover:bg-semantic-error-bg"
+                      className="text-left px-3 py-2 rounded-sm type-body-sm text-status-error hover:bg-status-error-soft"
                     >
                       Sign out
                     </button>
@@ -195,13 +195,13 @@ export function Header() {
             <div className="hidden lg:flex items-center gap-4">
               <Link
                 to="/sign-in"
-                className="text-[14px] leading-[20px] font-medium text-ink-secondary hover:text-plum whitespace-nowrap shrink-0"
+                className="text-[14px] leading-[20px] font-medium text-ink-secondary hover:text-brand whitespace-nowrap shrink-0"
               >
                 Sign in
               </Link>
               <Link
                 to="/sign-up"
-                className="inline-flex items-center justify-center min-h-[40px] px-4 py-2 rounded-md bg-plum text-white hover:bg-plum-hover text-[14px] leading-[20px] font-semibold whitespace-nowrap shrink-0"
+                className="inline-flex items-center justify-center min-h-[40px] px-4 py-2 rounded-md bg-brand text-white hover:bg-brand-hover text-[14px] leading-[20px] font-semibold whitespace-nowrap shrink-0"
               >
                 Join Cultgig
               </Link>
@@ -214,7 +214,7 @@ export function Header() {
             onClick={() => setMobileMenuOpen((prev) => !prev)}
             aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileMenuOpen}
-            className="lg:hidden w-11 h-11 inline-flex items-center justify-center rounded-md border border-line text-ink-primary hover:text-plum"
+            className="lg:hidden w-11 h-11 inline-flex items-center justify-center rounded-md border border-line text-ink hover:text-brand"
           >
             {mobileMenuOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
           </button>
@@ -235,26 +235,26 @@ export function Header() {
               <Link
                 key={item.path}
                 to={item.path}
-                className="px-3 py-2.5 rounded-md type-body-lg font-medium text-ink-primary hover:bg-plum-soft hover:text-plum"
+                className="px-3 py-2.5 rounded-md type-body-lg font-medium text-ink hover:bg-brand-subtle hover:text-brand"
               >
                 {item.label}
               </Link>
             ))}
             <Link
               to="/categories"
-              className="px-3 py-2.5 rounded-md type-body-lg font-medium text-ink-primary hover:bg-plum-soft hover:text-plum"
+              className="px-3 py-2.5 rounded-md type-body-lg font-medium text-ink hover:bg-brand-subtle hover:text-brand"
             >
               All 15 creative categories
             </Link>
             <Link
               to="/pricing"
-              className="px-3 py-2.5 rounded-md type-body-lg font-medium text-ink-primary hover:bg-plum-soft hover:text-plum"
+              className="px-3 py-2.5 rounded-md type-body-lg font-medium text-ink hover:bg-brand-subtle hover:text-brand"
             >
               Pricing
             </Link>
             <Link
               to="/guides"
-              className="px-3 py-2.5 rounded-md type-body-lg font-medium text-ink-primary hover:bg-plum-soft hover:text-plum"
+              className="px-3 py-2.5 rounded-md type-body-lg font-medium text-ink hover:bg-brand-subtle hover:text-brand"
             >
               Planning guides
             </Link>
@@ -265,7 +265,7 @@ export function Header() {
               <>
                 <Link
                   to={user.activeMode === "artist" ? "/artist/dashboard" : "/client/dashboard"}
-                  className="w-full min-h-[44px] inline-flex items-center justify-center rounded-md bg-plum text-white type-button"
+                  className="w-full min-h-[44px] inline-flex items-center justify-center rounded-md bg-brand text-white type-button"
                 >
                   Open {user.activeMode === "artist" ? "Artist" : "Client"} dashboard
                 </Link>
@@ -276,7 +276,7 @@ export function Header() {
                     setMobileMenuOpen(false);
                     navigate("/");
                   }}
-                  className="w-full min-h-[44px] rounded-md border border-line text-semantic-error type-label"
+                  className="w-full min-h-[44px] rounded-md border border-line text-status-error type-label"
                 >
                   Sign out
                 </button>
@@ -285,13 +285,13 @@ export function Header() {
               <>
                 <Link
                   to="/sign-up"
-                  className="w-full min-h-[44px] inline-flex items-center justify-center rounded-md bg-plum text-white type-button"
+                  className="w-full min-h-[44px] inline-flex items-center justify-center rounded-md bg-brand text-white type-button"
                 >
                   Join Cultgig
                 </Link>
                 <Link
                   to="/sign-in"
-                  className="w-full min-h-[44px] inline-flex items-center justify-center rounded-md border border-line-strong text-ink-primary type-button"
+                  className="w-full min-h-[44px] inline-flex items-center justify-center rounded-md border border-line-strong text-ink type-button"
                 >
                   Sign in
                 </Link>

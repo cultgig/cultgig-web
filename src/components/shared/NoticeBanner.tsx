@@ -18,17 +18,17 @@ export function NoticeBanner({
       role="status"
       className={`rounded-md border p-4 flex items-start gap-3 ${
         isWarning
-          ? "bg-semantic-warning-bg border-[color:var(--color-warning-border)] text-ink-primary"
-          : "bg-plum-soft border-[color:var(--color-border-subtle)] text-ink-primary"
+          ? "bg-status-warning-soft border-[color:var(--color-warning-border)] text-ink"
+          : "bg-brand-subtle border-[color:var(--color-border-subtle)] text-ink"
       } ${className}`}
     >
       {isWarning ? (
-        <AlertCircle size={18} className="text-semantic-warning shrink-0 mt-0.5" aria-hidden="true" />
+        <AlertCircle size={18} className="text-status-warning shrink-0 mt-0.5" aria-hidden="true" />
       ) : (
-        <Info size={18} className="text-plum shrink-0 mt-0.5" aria-hidden="true" />
+        <Info size={18} className="text-brand shrink-0 mt-0.5" aria-hidden="true" />
       )}
       <div className="space-y-1">
-        <p className="type-label text-ink-primary">{title}</p>
+        <p className="type-label text-ink">{title}</p>
         {children && <div className="type-body-sm text-ink-secondary">{children}</div>}
       </div>
     </div>

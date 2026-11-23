@@ -24,8 +24,8 @@ export function CategoriesIndexPage() {
   return (
     <main id="main-content" className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 space-y-12">
       <div className="max-w-[740px] space-y-3">
-        <p className="type-label text-plum">Creative taxonomy</p>
-        <h1 className="text-[28px] sm:text-[36px] leading-[1.2] font-bold text-ink-primary">
+        <p className="type-label text-brand">Creative taxonomy</p>
+        <h1 className="text-[28px] sm:text-[36px] leading-[1.2] font-bold text-ink">
           All 15 creative categories on Cultgig
         </h1>
         <p className="type-body-lg text-ink-secondary">
@@ -38,15 +38,15 @@ export function CategoriesIndexPage() {
         const items = creativeCategories.filter((c) => c.parentGroup === group);
         return (
           <section key={group} className="space-y-5">
-            <h2 className="type-h2 text-ink-primary border-b border-line pb-3">{group}</h2>
+            <h2 className="type-h2 text-ink border-b border-line pb-3">{group}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {items.map((cat) => (
                 <Link
                   key={cat.slug}
                   to={`/categories/${cat.slug}`}
-                  className="group bg-surface border border-line rounded-lg overflow-hidden flex flex-col hover:border-plum-border hover:shadow-card"
+                  className="group bg-surface border border-line rounded-lg overflow-hidden flex flex-col hover:border-line-strong hover:shadow-sm"
                 >
-                  <div className="aspect-[16/10] bg-surface-muted overflow-hidden">
+                  <div className="aspect-[16/10] bg-surface-container overflow-hidden">
                     <SafeImage
                       src={cat.imageUrl}
                       alt={cat.imageAlt}
@@ -55,7 +55,7 @@ export function CategoriesIndexPage() {
                     />
                   </div>
                   <div className="p-5 space-y-2 flex-1">
-                    <h3 className="type-h3 text-ink-primary group-hover:text-plum">{cat.label}</h3>
+                    <h3 className="type-h3 text-ink group-hover:text-brand">{cat.label}</h3>
                     <p className="type-body-sm text-ink-secondary">{cat.description}</p>
                     {cat.complianceNote && (
                       <p className="type-caption text-ink-secondary pt-1">{cat.complianceNote}</p>
@@ -91,7 +91,7 @@ export function CategoryDetailPage({ slug }: { slug: string }) {
 
   return (
     <main id="main-content" className="pb-16">
-      <section className="relative bg-ink-dark text-white overflow-hidden">
+      <section className="relative bg-ink-strong text-white overflow-hidden">
         <SafeImage
           src={category.imageUrl}
           alt={category.imageAlt}
@@ -99,12 +99,12 @@ export function CategoryDetailPage({ slug }: { slug: string }) {
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-obsidian/95 via-obsidian/80 to-obsidian/50"
+          className="absolute inset-0 bg-gradient-to-r from-ink-strong/95 via-ink-strong/80 to-ink-strong/50"
         />
         <div className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-4">
           <Link
             to="/categories"
-            className="inline-flex items-center gap-1.5 type-label text-plum-tint hover:text-white"
+            className="inline-flex items-center gap-1.5 type-label text-brand-subtle hover:text-white"
           >
             <ArrowLeft size={15} aria-hidden="true" />
             All creative categories
@@ -115,12 +115,12 @@ export function CategoryDetailPage({ slug }: { slug: string }) {
           </h1>
           <p className="type-body-lg text-white/90 max-w-[620px]">{category.description}</p>
           {category.complianceNote && (
-            <p className="type-body-sm text-plum-tint">{category.complianceNote}</p>
+            <p className="type-body-sm text-brand-subtle">{category.complianceNote}</p>
           )}
           <div className="pt-2 flex flex-wrap gap-3">
             <Link
               to={`/explore?category=${category.slug}`}
-              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-white text-ink-primary hover:bg-plum-soft font-semibold text-[15px]"
+              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-white text-ink hover:bg-brand-subtle font-semibold text-[15px]"
             >
               Filter in Explore
             </Link>
@@ -141,7 +141,7 @@ export function CategoryDetailPage({ slug }: { slug: string }) {
         </NoticeBanner>
 
         <section className="space-y-5">
-          <h2 className="type-h2 text-ink-primary">Sample artists in {category.label}</h2>
+          <h2 className="type-h2 text-ink">Sample artists in {category.label}</h2>
           {matchingArtists.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {matchingArtists.map((artist) => (
@@ -156,7 +156,7 @@ export function CategoryDetailPage({ slug }: { slug: string }) {
               </p>
               <Link
                 to="/for-artists"
-                className="inline-flex items-center justify-center min-h-[40px] px-4 py-2 rounded-md bg-plum text-white hover:bg-plum-hover type-label"
+                className="inline-flex items-center justify-center min-h-[40px] px-4 py-2 rounded-md bg-brand text-white hover:bg-brand-hover type-label"
               >
                 Join as an artist
               </Link>
@@ -165,7 +165,7 @@ export function CategoryDetailPage({ slug }: { slug: string }) {
         </section>
 
         <section className="space-y-5">
-          <h2 className="type-h2 text-ink-primary">Open sample briefs in {category.label}</h2>
+          <h2 className="type-h2 text-ink">Open sample briefs in {category.label}</h2>
           {matchingGigs.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {matchingGigs.map((gig) => (
@@ -180,7 +180,7 @@ export function CategoryDetailPage({ slug }: { slug: string }) {
               </p>
               <Link
                 to={`/client/gigs/new?category=${category.slug}`}
-                className="inline-flex items-center justify-center min-h-[40px] px-4 py-2 rounded-md border border-line-strong text-ink-primary hover:border-plum hover:text-plum type-label"
+                className="inline-flex items-center justify-center min-h-[40px] px-4 py-2 rounded-md border border-line-strong text-ink hover:border-brand hover:text-brand type-label"
               >
                 Post a gig brief
               </Link>

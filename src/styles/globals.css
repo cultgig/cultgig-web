@@ -8,41 +8,99 @@
 @tailwind utilities;
 
 /*
- * Cultgig design tokens (light theme first).
- * shadcn/ui tokens are HSL channel triplets so Tailwind can apply alpha.
- *   plum #6A2E62 = 309 39% 30%   hover #54234E = 307 41% 23%   deep #421A3D = 307 44% 18%
- *   canvas #FCFAFB  soft #F8F3F7  border #DFC9DA  ink #20151E  ink-2 #5C4E58  muted #84747F
- *   warm accent #B88E52
+ * Cultgig colour tokens — the single source of truth for every colour in the product.
+ * Specification: DESIGN.md (warm, low-noise light interface; olive is an accent, not a surface).
+ *
+ * Colours that need Tailwind alpha modifiers are stored as RGB channel triplets and consumed as
+ * rgb(var(--token) / <alpha>). Never hard-code hex values in components; add a named token here.
  */
 @layer base {
   :root {
-    --background: 330 25% 98%;
-    --foreground: 309 18% 10%;
-    --card: 0 0% 100%;
-    --card-foreground: 309 18% 10%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 309 18% 10%;
-    --primary: 309 39% 30%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 315 30% 96%;
-    --secondary-foreground: 307 44% 18%;
-    --muted: 320 17% 95%;
-    --muted-foreground: 316 8% 34%;
-    --accent: 315 30% 96%;
-    --accent-foreground: 307 44% 18%;
-    --destructive: 354 61% 43%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 320 15% 88%;
-    --input: 316 17% 82%;
-    --ring: 309 39% 30%;
+    color-scheme: light;
+
+    /* Brand */
+    --color-brand-primary: 91 111 0;          /* #5B6F00 primary action / selected */
+    --color-brand-primary-hover: 67 83 0;     /* #435300 */
+    --color-brand-primary-pressed: 53 66 0;   /* #354200 */
+    --color-brand-primary-subtle: 240 242 229;/* #F0F2E5 selected row, soft tag */
+    --color-brand-light: 178 194 72;          /* #B2C248 highlight — dark text only */
+    --color-brand-light-hover: 165 180 61;    /* #A5B43D */
+    --color-brand-light-subtle: 245 246 233;  /* #F5F6E9 */
+    --color-brand-ink: 120 140 21;            /* #788C15 large text / focus / non-text accents */
+    --color-brand-tertiary: 224 201 118;      /* #E0C976 small decorative emphasis */
+
+    /* Surfaces (four-step neutral scale) */
+    --color-page: 255 255 255;                /* #FFFFFF */
+    --color-surface: 255 255 255;             /* #FFFFFF */
+    --color-surface-low: 247 247 242;         /* #F7F7F2 warm bands, raised low surface */
+    --color-surface-container: 234 235 229;   /* #EAEBE5 panels, inset areas */
+    --color-surface-container-high: 213 213 210; /* #D5D5D2 hover/pressed fill — never a page bg */
+
+    /* Text & icons */
+    --color-text-primary: 41 41 41;           /* #292929 */
+    --color-text-strong: 14 15 12;            /* #0E0F0C */
+    --color-text-secondary: 114 114 110;      /* #72726E readable secondary copy */
+    --color-text-muted: 172 173 168;          /* #ACADA8 disabled / non-essential metadata only */
+    --color-text-inverse: 252 252 248;        /* #FCFCF8 */
+    --color-text-on-primary: 255 255 255;     /* #FFFFFF */
+
+    /* Borders (low-opacity hairlines preferred) */
+    --color-border: rgba(0, 0, 0, 0.10);
+    --color-border-subtle: rgba(71, 67, 42, 0.20);
+    --color-border-strong: 213 213 210;       /* #D5D5D2 */
+    --color-border-control: rgba(41, 41, 41, 0.18);
+    --color-border-focus: 120 140 21;         /* #788C15 */
+    --color-border-selected: 91 111 0;        /* #5B6F00 */
+
+    /* Overlays */
+    --color-overlay-warm: rgba(98, 90, 34, 0.06);
+    --color-overlay-black-04: rgba(0, 0, 0, 0.04);
+    --color-overlay-black-08: rgba(0, 0, 0, 0.08);
+    --color-overlay-black-20: rgba(0, 0, 0, 0.20);
+    --color-overlay-black-40: rgba(0, 0, 0, 0.40);
+    --color-overlay-white-70: rgba(255, 255, 255, 0.70);
+
+    /* Shadows — neutral, diffuse, low-opacity */
+    --shadow-xs: 0 1px 2px rgba(14, 15, 12, 0.06);
+    --shadow-sm: 0 2px 8px rgba(14, 15, 12, 0.06);
+    --shadow-md: 0 8px 24px rgba(14, 15, 12, 0.08);
+    --shadow-lg: 0 16px 40px rgba(14, 15, 12, 0.10);
+    --shadow-brand: 0 4px 14px rgba(91, 111, 0, 0.14);
+
+    /* Status — functional only, always paired with a label or icon */
+    --color-success: 53 107 61;   --color-success-soft: 237 245 236; --color-success-border: 201 222 200;
+    --color-warning: 128 91 18;   --color-warning-soft: 251 244 228; --color-warning-border: 233 215 168;
+    --color-error: 163 58 50;     --color-error-soft: 251 239 237;   --color-error-border: 235 200 196;
+    --color-info: 54 95 120;      --color-info-soft: 237 244 247;    --color-info-border: 201 220 229;
+
+    /* Decorative artwork only — never controls or essential text */
+    --gradient-brand-art: linear-gradient(115deg, #FEBE29 0%, #FF91E0 34%, #CEBEF8 68%, #D2E4F8 100%);
+
+    /* shadcn/ui semantic aliases (components in src/components/ui read these) */
+    --background: var(--color-page);
+    --foreground: var(--color-text-primary);
+    --card: var(--color-surface);
+    --card-foreground: var(--color-text-primary);
+    --popover: var(--color-surface);
+    --popover-foreground: var(--color-text-primary);
+    --primary: var(--color-brand-primary);
+    --primary-foreground: var(--color-text-on-primary);
+    --secondary: var(--color-surface-low);
+    --secondary-foreground: var(--color-text-primary);
+    --muted: var(--color-surface-low);
+    --muted-foreground: var(--color-text-secondary);
+    --accent: var(--color-surface-low);
+    --accent-foreground: var(--color-text-primary);
+    --destructive: var(--color-error);
+    --destructive-foreground: var(--color-text-on-primary);
+    --ring: var(--color-border-focus);
     --radius: 0.75rem;
 
-    --warm: 36 41% 52%;
     --header-height: 64px;
   }
 
   * {
-    @apply border-border;
+    border-color: var(--color-border);
   }
 
   html {
@@ -63,18 +121,18 @@
   }
 
   :focus-visible {
-    outline: 2px solid hsl(var(--ring));
+    outline: 2px solid rgb(var(--color-border-focus));
     outline-offset: 2px;
   }
 
   ::selection {
-    background: #EEDFEA;
-    color: #421A3D;
+    background: rgb(var(--color-brand-primary-subtle));
+    color: rgb(var(--color-text-strong));
   }
 }
 
 @layer components {
-  /* Typography scale (Lexend 400-700, sentence case) */
+  /* Typography scale (Lexend 400–700, sentence case) */
   .type-display { font-size: clamp(30px, 4.2vw, 48px); font-weight: 700; line-height: 1.08; letter-spacing: -0.02em; }
   .type-h1 { font-size: clamp(24px, 2.6vw, 30px); font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }
   .type-h2 { font-size: 20px; font-weight: 700; line-height: 26px; letter-spacing: -0.005em; }
@@ -96,6 +154,7 @@
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+  .bg-brand-art { background-image: var(--gradient-brand-art); }
 }
 
 @media (prefers-reduced-motion: reduce) {

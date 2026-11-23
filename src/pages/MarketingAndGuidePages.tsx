@@ -19,8 +19,8 @@ export function HowItWorksPage() {
     <main id="main-content" className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 space-y-12">
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div className="lg:col-span-6 space-y-4">
-          <p className="type-label text-plum">How Cultgig works</p>
-          <h1 className="text-[30px] sm:text-[38px] leading-[1.15] font-bold text-ink-primary">
+          <p className="type-label text-brand">How Cultgig works</p>
+          <h1 className="text-[30px] sm:text-[38px] leading-[1.15] font-bold text-ink">
             From a clear brief to a versioned offer—without forwarded-number chaos.
           </h1>
           <p className="type-body-lg text-ink-secondary">
@@ -30,19 +30,19 @@ export function HowItWorksPage() {
           <div className="flex flex-wrap gap-3 pt-2">
             <Link
               to="/explore"
-              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-plum text-white hover:bg-plum-hover type-button"
+              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-brand text-white hover:bg-brand-hover type-button"
             >
               Explore sample artists
             </Link>
             <Link
               to="/client/gigs/new"
-              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong text-ink-primary hover:border-plum type-button"
+              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong text-ink hover:border-brand type-button"
             >
               Post a gig brief
             </Link>
           </div>
         </div>
-        <div className="lg:col-span-6 aspect-[16/10] rounded-xl overflow-hidden bg-surface-muted border border-line">
+        <div className="lg:col-span-6 aspect-[16/10] rounded-xl overflow-hidden bg-surface-container border border-line">
           <SafeImage
             src={pageImages.howItWorksHero.src}
             alt={pageImages.howItWorksHero.alt}
@@ -53,7 +53,7 @@ export function HowItWorksPage() {
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <article className="bg-surface border border-line rounded-xl p-6 sm:p-8 space-y-4">
-          <h2 className="type-h2 text-ink-primary">For event hosts, venues & brands</h2>
+          <h2 className="type-h2 text-ink">For event hosts, venues & brands</h2>
           <ol className="space-y-3 type-body text-ink-secondary list-decimal list-inside">
             <li>Search 15 creative disciplines by city, pricing mode, and format, or post one brief.</li>
             <li>Compare artist portfolios, inclusions, exclusions, and travel notes side-by-side.</li>
@@ -63,7 +63,7 @@ export function HowItWorksPage() {
         </article>
 
         <article className="bg-surface border border-line rounded-xl p-6 sm:p-8 space-y-4">
-          <h2 className="type-h2 text-ink-primary">For independent artists & collectives</h2>
+          <h2 className="type-h2 text-ink">For independent artists & collectives</h2>
           <ol className="space-y-3 type-body text-ink-secondary list-decimal list-inside">
             <li>Build an original craft profile with starting rates, packages, or custom quotes.</li>
             <li>Browse structured event briefs with date, city, venue setup, and budget clarity.</li>
@@ -86,8 +86,8 @@ export function ForArtistsPage() {
     <main id="main-content" className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 space-y-12">
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div className="lg:col-span-6 space-y-4">
-          <p className="type-label text-plum">For artists & creative professionals</p>
-          <h1 className="text-[30px] sm:text-[38px] leading-[1.15] font-bold text-ink-primary">
+          <p className="type-label text-brand">For artists & creative professionals</p>
+          <h1 className="text-[30px] sm:text-[38px] leading-[1.15] font-bold text-ink">
             Your work deserves better than a cold DM asking &ldquo;What&apos;s your rate?&rdquo;
           </h1>
           <p className="type-body-lg text-ink-secondary">
@@ -97,19 +97,19 @@ export function ForArtistsPage() {
           <div className="flex flex-wrap gap-3 pt-2">
             <Link
               to="/sign-up?role=artist"
-              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-plum text-white hover:bg-plum-hover type-button"
+              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-brand text-white hover:bg-brand-hover type-button"
             >
               Join as an artist
             </Link>
             <Link
               to="/artist/opportunities"
-              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong text-ink-primary hover:border-plum type-button"
+              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong text-ink hover:border-brand type-button"
             >
               Browse sample briefs
             </Link>
           </div>
         </div>
-        <div className="lg:col-span-6 aspect-[16/10] rounded-xl overflow-hidden bg-surface-muted border border-line">
+        <div className="lg:col-span-6 aspect-[16/10] rounded-xl overflow-hidden bg-surface-container border border-line">
           <SafeImage
             src={pageImages.forArtistsHero.src}
             alt={pageImages.forArtistsHero.alt}
@@ -134,7 +134,7 @@ export function ForArtistsPage() {
           },
         ].map((item) => (
           <div key={item.title} className="bg-surface border border-line rounded-lg p-6 space-y-2">
-            <h2 className="type-h3 text-ink-primary">{item.title}</h2>
+            <h2 className="type-h3 text-ink">{item.title}</h2>
             <p className="type-body text-ink-secondary">{item.copy}</p>
           </div>
         ))}
@@ -153,8 +153,8 @@ export function ForBusinessesPage() {
     <main id="main-content" className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 space-y-12">
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div className="lg:col-span-6 space-y-4">
-          <p className="type-label text-plum">For venues, brands & celebration hosts</p>
-          <h1 className="text-[30px] sm:text-[38px] leading-[1.15] font-bold text-ink-primary">
+          <p className="type-label text-brand">For venues, brands & celebration hosts</p>
+          <h1 className="text-[30px] sm:text-[38px] leading-[1.15] font-bold text-ink">
             Find creative talent that fits the room—with zero guesswork.
           </h1>
           <p className="type-body-lg text-ink-secondary">
@@ -164,19 +164,19 @@ export function ForBusinessesPage() {
           <div className="flex flex-wrap gap-3 pt-2">
             <Link
               to="/client/gigs/new"
-              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-plum text-white hover:bg-plum-hover type-button"
+              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-brand text-white hover:bg-brand-hover type-button"
             >
               Post a gig brief
             </Link>
             <Link
               to="/explore"
-              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong text-ink-primary hover:border-plum type-button"
+              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong text-ink hover:border-brand type-button"
             >
               Explore artists
             </Link>
           </div>
         </div>
-        <div className="lg:col-span-6 aspect-[16/10] rounded-xl overflow-hidden bg-surface-muted border border-line">
+        <div className="lg:col-span-6 aspect-[16/10] rounded-xl overflow-hidden bg-surface-container border border-line">
           <SafeImage
             src={pageImages.forBusinessesHero.src}
             alt={pageImages.forBusinessesHero.alt}
@@ -198,8 +198,8 @@ export function AboutPage() {
     <main id="main-content" className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 space-y-12">
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div className="lg:col-span-6 space-y-4">
-          <p className="type-label text-plum">{aboutContent.vision.eyebrow}</p>
-          <h1 className="text-[30px] sm:text-[36px] leading-[1.2] font-bold text-ink-primary">
+          <p className="type-label text-brand">{aboutContent.vision.eyebrow}</p>
+          <h1 className="text-[30px] sm:text-[36px] leading-[1.2] font-bold text-ink">
             {aboutContent.vision.heading}
           </h1>
           {aboutContent.vision.paragraphs.map((p) => (
@@ -208,7 +208,7 @@ export function AboutPage() {
             </p>
           ))}
         </div>
-        <div className="lg:col-span-6 aspect-[16/10] rounded-xl overflow-hidden bg-surface-muted border border-line">
+        <div className="lg:col-span-6 aspect-[16/10] rounded-xl overflow-hidden bg-surface-container border border-line">
           <SafeImage
             src={pageImages.aboutHero.src}
             alt={pageImages.aboutHero.alt}
@@ -218,8 +218,8 @@ export function AboutPage() {
       </section>
 
       <section className="bg-surface border border-line rounded-xl p-6 sm:p-8 space-y-3">
-        <p className="type-label text-plum">{aboutContent.team.eyebrow}</p>
-        <h2 className="type-h2 text-ink-primary">{aboutContent.team.heading}</h2>
+        <p className="type-label text-brand">{aboutContent.team.eyebrow}</p>
+        <h2 className="type-h2 text-ink">{aboutContent.team.heading}</h2>
         <p className="type-body text-ink-secondary">{aboutContent.team.empty}</p>
       </section>
     </main>
@@ -235,8 +235,8 @@ export function PricingPage() {
   return (
     <main id="main-content" className="max-w-[1040px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 space-y-8">
       <div className="max-w-[700px] space-y-3">
-        <p className="type-label text-plum">Pricing & platform structure</p>
-        <h1 className="text-[30px] sm:text-[36px] leading-[1.2] font-bold text-ink-primary">
+        <p className="type-label text-brand">Pricing & platform structure</p>
+        <h1 className="text-[30px] sm:text-[36px] leading-[1.2] font-bold text-ink">
           Transparent pricing architecture
         </h1>
         <p className="type-body-lg text-ink-secondary">
@@ -253,29 +253,29 @@ export function PricingPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <article className="bg-surface border border-line rounded-xl p-6 space-y-4">
           <div>
-            <p className="type-caption text-plum font-semibold">Artists & creative collectives</p>
-            <h2 className="type-h2 text-ink-primary mt-1">Artist account</h2>
+            <p className="type-caption text-brand font-semibold">Artists & creative collectives</p>
+            <h2 className="type-h2 text-ink mt-1">Artist account</h2>
             <p className="type-h3 text-ink-secondary mt-2">
               Commercial terms under finalisation (No charge in preview)
             </p>
           </div>
           <ul className="space-y-2 type-body-sm text-ink-secondary">
             <li className="flex items-start gap-2">
-              <CheckCircle2 size={16} className="text-plum shrink-0 mt-0.5" aria-hidden="true" />
+              <CheckCircle2 size={16} className="text-brand shrink-0 mt-0.5" aria-hidden="true" />
               <span>Create a structured craft profile with portfolio work and starting packages</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle2 size={16} className="text-plum shrink-0 mt-0.5" aria-hidden="true" />
+              <CheckCircle2 size={16} className="text-brand shrink-0 mt-0.5" aria-hidden="true" />
               <span>Browse event briefs and submit versioned proposals</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle2 size={16} className="text-plum shrink-0 mt-0.5" aria-hidden="true" />
+              <CheckCircle2 size={16} className="text-brand shrink-0 mt-0.5" aria-hidden="true" />
               <span>Any future platform or payment processing fees will be disclosed before proposal acceptance</span>
             </li>
           </ul>
           <Link
             to="/sign-up?role=artist"
-            className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-plum text-white hover:bg-plum-hover type-button"
+            className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-brand text-white hover:bg-brand-hover type-button"
           >
             Create artist profile
           </Link>
@@ -283,29 +283,29 @@ export function PricingPage() {
 
         <article className="bg-surface border border-line rounded-xl p-6 space-y-4">
           <div>
-            <p className="type-caption text-plum font-semibold">Clients, venues & event hosts</p>
-            <h2 className="type-h2 text-ink-primary mt-1">Client / Host account</h2>
+            <p className="type-caption text-brand font-semibold">Clients, venues & event hosts</p>
+            <h2 className="type-h2 text-ink mt-1">Client / Host account</h2>
             <p className="type-h3 text-ink-secondary mt-2">
               Commercial terms under finalisation (No charge in preview)
             </p>
           </div>
           <ul className="space-y-2 type-body-sm text-ink-secondary">
             <li className="flex items-start gap-2">
-              <CheckCircle2 size={16} className="text-plum shrink-0 mt-0.5" aria-hidden="true" />
+              <CheckCircle2 size={16} className="text-brand shrink-0 mt-0.5" aria-hidden="true" />
               <span>Post structured event briefs and save shortlisted artists</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle2 size={16} className="text-plum shrink-0 mt-0.5" aria-hidden="true" />
+              <CheckCircle2 size={16} className="text-brand shrink-0 mt-0.5" aria-hidden="true" />
               <span>Negotiate scope, timing, travel, and deliverables in versioned offers</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle2 size={16} className="text-plum shrink-0 mt-0.5" aria-hidden="true" />
+              <CheckCircle2 size={16} className="text-brand shrink-0 mt-0.5" aria-hidden="true" />
               <span>Online booking checkout activates only after payment-provider approval</span>
             </li>
           </ul>
           <Link
             to="/client/gigs/new"
-            className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong text-ink-primary hover:border-plum type-button"
+            className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong text-ink hover:border-brand type-button"
           >
             Post a gig brief
           </Link>
@@ -320,8 +320,8 @@ export function GuidesIndexPage() {
   return (
     <main id="main-content" className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 space-y-8">
       <div className="max-w-[680px] space-y-2">
-        <p className="type-label text-plum">Editorial guides</p>
-        <h1 className="text-[30px] sm:text-[36px] leading-[1.2] font-bold text-ink-primary">
+        <p className="type-label text-brand">Editorial guides</p>
+        <h1 className="text-[30px] sm:text-[36px] leading-[1.2] font-bold text-ink">
           Planning & booking guides
         </h1>
         <p className="type-body-lg text-ink-secondary">
@@ -334,9 +334,9 @@ export function GuidesIndexPage() {
           <Link
             key={guide.slug}
             to={`/guides/${guide.slug}`}
-            className="group bg-surface border border-line rounded-xl overflow-hidden flex flex-col hover:border-plum-border hover:shadow-card"
+            className="group bg-surface border border-line rounded-xl overflow-hidden flex flex-col hover:border-line-strong hover:shadow-sm"
           >
-            <div className="aspect-[16/9] bg-surface-muted overflow-hidden">
+            <div className="aspect-[16/9] bg-surface-container overflow-hidden">
               <SafeImage
                 src={guide.imageUrl}
                 alt={guide.imageAlt}
@@ -347,7 +347,7 @@ export function GuidesIndexPage() {
               <p className="type-caption text-ink-secondary">
                 {guide.categoryLabel} · {guide.readTime}
               </p>
-              <h2 className="type-h2 text-ink-primary group-hover:text-plum">{guide.title}</h2>
+              <h2 className="type-h2 text-ink group-hover:text-brand">{guide.title}</h2>
               <p className="type-body text-ink-secondary">{guide.summary}</p>
             </div>
           </Link>
@@ -365,26 +365,26 @@ export function GuideDetailPage({ slug }: { slug: string }) {
 
   return (
     <main id="main-content" className="max-w-[820px] mx-auto px-4 sm:px-6 py-10 lg:py-14 space-y-8">
-      <Link to="/guides" className="inline-flex items-center gap-1.5 type-label text-ink-secondary hover:text-plum">
+      <Link to="/guides" className="inline-flex items-center gap-1.5 type-label text-ink-secondary hover:text-brand">
         <ArrowLeft size={15} aria-hidden="true" />
         All guides
       </Link>
       <div className="space-y-3">
-        <p className="type-caption text-plum font-semibold">
+        <p className="type-caption text-brand font-semibold">
           {guide.categoryLabel} · {guide.readTime}
         </p>
-        <h1 className="text-[28px] sm:text-[36px] leading-[1.2] font-bold text-ink-primary">
+        <h1 className="text-[28px] sm:text-[36px] leading-[1.2] font-bold text-ink">
           {guide.title}
         </h1>
         <p className="type-body-lg text-ink-secondary">{guide.summary}</p>
       </div>
-      <div className="aspect-[16/9] rounded-xl overflow-hidden bg-surface-muted border border-line">
+      <div className="aspect-[16/9] rounded-xl overflow-hidden bg-surface-container border border-line">
         <SafeImage src={guide.imageUrl} alt={guide.imageAlt} className="w-full h-full object-cover" />
       </div>
       <div className="space-y-6">
         {guide.sections.map((sec) => (
           <section key={sec.heading} className="space-y-2.5">
-            <h2 className="type-h2 text-ink-primary">{sec.heading}</h2>
+            <h2 className="type-h2 text-ink">{sec.heading}</h2>
             {sec.body.map((p) => (
               <p key={p} className="type-body-lg text-ink-secondary">
                 {p}
@@ -408,8 +408,8 @@ export function FaqPage() {
   return (
     <main id="main-content" className="max-w-[880px] mx-auto px-4 sm:px-6 py-10 lg:py-14 space-y-8">
       <div className="space-y-2">
-        <p className="type-label text-plum">Frequently asked questions</p>
-        <h1 className="text-[30px] sm:text-[36px] leading-[1.2] font-bold text-ink-primary">
+        <p className="type-label text-brand">Frequently asked questions</p>
+        <h1 className="text-[30px] sm:text-[36px] leading-[1.2] font-bold text-ink">
           Straight answers about Cultgig
         </h1>
       </div>
@@ -423,11 +423,11 @@ export function FaqPage() {
                 type="button"
                 aria-expanded={isOpen}
                 onClick={() => setOpenIndex(isOpen ? null : idx)}
-                className="w-full px-5 py-4 flex items-center justify-between gap-4 text-left hover:bg-plum-soft/40"
+                className="w-full px-5 py-4 flex items-center justify-between gap-4 text-left hover:bg-brand-subtle/40"
               >
                 <div>
-                  <span className="block type-caption text-plum font-semibold">{item.category}</span>
-                  <span className="type-h4 text-ink-primary">{item.question}</span>
+                  <span className="block type-caption text-brand font-semibold">{item.category}</span>
+                  <span className="type-h4 text-ink">{item.question}</span>
                 </div>
                 <ChevronDown
                   size={18}
@@ -438,7 +438,7 @@ export function FaqPage() {
                 />
               </button>
               {isOpen && (
-                <div className="px-5 pb-4 pt-1 type-body text-ink-secondary border-t border-line-light">
+                <div className="px-5 pb-4 pt-1 type-body text-ink-secondary border-t border-line">
                   {item.answer}
                 </div>
               )}
@@ -459,8 +459,8 @@ export function TrustAndSafetyPage() {
   return (
     <main id="main-content" className="max-w-[960px] mx-auto px-4 sm:px-6 py-10 lg:py-14 space-y-8">
       <div className="space-y-3">
-        <p className="type-label text-plum">Trust & safety</p>
-        <h1 className="text-[30px] sm:text-[36px] leading-[1.2] font-bold text-ink-primary">
+        <p className="type-label text-brand">Trust & safety</p>
+        <h1 className="text-[30px] sm:text-[36px] leading-[1.2] font-bold text-ink">
           Practical safeguards for artists and hosts
         </h1>
         <p className="type-body-lg text-ink-secondary">
@@ -489,8 +489,8 @@ export function TrustAndSafetyPage() {
           },
         ].map((card) => (
           <div key={card.title} className="bg-surface border border-line rounded-lg p-6 space-y-2">
-            <ShieldCheck size={20} className="text-plum" aria-hidden="true" />
-            <h2 className="type-h3 text-ink-primary">{card.title}</h2>
+            <ShieldCheck size={20} className="text-brand" aria-hidden="true" />
+            <h2 className="type-h3 text-ink">{card.title}</h2>
             <p className="type-body text-ink-secondary">{card.copy}</p>
           </div>
         ))}

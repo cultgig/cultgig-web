@@ -17,13 +17,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   pink: 'bg-brand text-white hover:bg-brand-hover active:bg-brand-pressed border border-transparent shadow-xs',
-  dark: 'bg-obsidian text-ink-inverse hover:bg-ink-primary active:bg-black border border-transparent',
+  dark: 'bg-ink-strong text-ink-inverse hover:bg-ink active:bg-black border border-transparent',
   'outline-light':
-    'bg-surface text-ink-primary border border-[color:var(--color-border-control)] hover:border-ink-strong hover:bg-surface-low',
+    'bg-surface text-ink border border-[color:var(--color-border-control)] hover:border-ink-strong hover:bg-surface-low',
   'outline-dark':
     'bg-transparent text-ink-inverse border border-white/25 hover:border-white/55 hover:bg-white/[0.06]',
   'ghost-dark':
-    'bg-transparent text-ink-primary hover:text-brand border border-transparent',
+    'bg-transparent text-ink hover:text-brand border border-transparent',
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

@@ -49,13 +49,13 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
   if (!artist) {
     return (
       <main id="main-content" className="max-w-[960px] mx-auto px-4 sm:px-6 py-16 text-center space-y-4">
-        <h1 className="type-h1 text-ink-primary">Artist profile not found</h1>
+        <h1 className="type-h1 text-ink">Artist profile not found</h1>
         <p className="type-body text-ink-secondary">
           Return to Explore to browse illustrative sample profiles across 15 creative disciplines.
         </p>
         <Link
           to="/explore"
-          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-plum text-white type-button"
+          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-brand text-white type-button"
         >
           Browse artists
         </Link>
@@ -102,7 +102,7 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
     <main id="main-content" className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
       <Link
         to="/explore"
-        className="inline-flex items-center gap-1.5 type-label text-ink-secondary hover:text-plum"
+        className="inline-flex items-center gap-1.5 type-label text-ink-secondary hover:text-brand"
       >
         <ArrowLeft size={15} aria-hidden="true" />
         Back to Explore
@@ -116,7 +116,7 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
 
       {/* Profile Header */}
       <section className="bg-surface border border-line rounded-xl overflow-hidden">
-        <div className="aspect-[16/5] min-h-[180px] bg-surface-muted overflow-hidden">
+        <div className="aspect-[16/5] min-h-[180px] bg-surface-container overflow-hidden">
           <SafeImage
             src={artist.coverUrl}
             alt={artist.coverAlt}
@@ -129,21 +129,21 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
             <SafeImage
               src={artist.avatarUrl}
               alt={artist.avatarAlt}
-              className="w-20 h-20 rounded-full object-cover border-2 border-surface shadow-card shrink-0"
+              className="w-20 h-20 rounded-full object-cover border-2 border-surface shadow-sm shrink-0"
             />
             <div className="space-y-2">
               <div className="flex flex-wrap items-center gap-2 text-ink-secondary type-caption">
-                <span className="text-plum font-semibold">{category?.label}</span>
+                <span className="text-brand font-semibold">{category?.label}</span>
                 <span aria-hidden="true">·</span>
                 <span>{artist.verificationLabel}</span>
               </div>
-              <h1 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink-primary">
+              <h1 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink">
                 {artist.displayName}
               </h1>
               <p className="type-body-lg text-ink-secondary max-w-[660px]">{artist.tagline}</p>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1 type-body-sm text-ink-secondary pt-1">
                 <span className="inline-flex items-center gap-1.5">
-                  <MapPin size={14} className="text-plum" aria-hidden="true" />
+                  <MapPin size={14} className="text-brand" aria-hidden="true" />
                   Based in {artist.city} · Travels up to {artist.travelRadiusKm} km (
                   {artist.travelCities.join(", ")})
                 </span>
@@ -153,9 +153,9 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
           </div>
 
           <div className="flex flex-wrap lg:flex-col items-stretch gap-2.5 shrink-0 lg:min-w-[230px]">
-            <div className="bg-plum-soft border border-plum-border rounded-md p-3.5 text-left">
-              <p className="type-caption text-plum font-medium">Pricing guide</p>
-              <p className="text-[20px] leading-[26px] font-bold text-ink-primary tabular-nums">
+            <div className="bg-brand-subtle border border-line-strong rounded-md p-3.5 text-left">
+              <p className="type-caption text-brand font-medium">Pricing guide</p>
+              <p className="text-[20px] leading-[26px] font-bold text-ink tabular-nums">
                 {formatArtistPrice(
                   artist.pricingMode,
                   artist.startingPriceInr,
@@ -188,19 +188,19 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
       {inquiryOpen && (
         <section
           aria-label="Send inquiry to artist"
-          className="bg-surface border border-plum-border rounded-lg p-6 space-y-4"
+          className="bg-surface border border-line-strong rounded-lg p-6 space-y-4"
         >
-          <h2 className="type-h2 text-ink-primary">Start a conversation with {artist.displayName}</h2>
+          <h2 className="type-h2 text-ink">Start a conversation with {artist.displayName}</h2>
           <form onSubmit={handleStartInquiry} className="space-y-4">
             <div>
-              <label htmlFor="invite-gig" className="block type-label text-ink-primary mb-1.5">
+              <label htmlFor="invite-gig" className="block type-label text-ink mb-1.5">
                 Link an open gig brief (optional)
               </label>
               <select
                 id="invite-gig"
                 value={selectedGigId}
                 onChange={(e) => setSelectedGigId(e.target.value)}
-                className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+                className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
               >
                 <option value="">General inquiry (no specific gig selected)</option>
                 {myOpenGigs.map((g) => (
@@ -211,7 +211,7 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
               </select>
             </div>
             <div>
-              <label htmlFor="inquiry-msg" className="block type-label text-ink-primary mb-1.5">
+              <label htmlFor="inquiry-msg" className="block type-label text-ink mb-1.5">
                 Event details, date, venue tone & question *
               </label>
               <textarea
@@ -221,7 +221,7 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
                 value={inquiryMessage}
                 onChange={(e) => setInquiryMessage(e.target.value)}
                 placeholder="Share your event date, city, audience size, and technical setup so the artist can reply with an accurate proposal."
-                className="w-full px-3 py-2.5 rounded-md border border-line bg-canvas text-[14px] leading-[21px]"
+                className="w-full px-3 py-2.5 rounded-md border border-line bg-surface-low text-[14px] leading-[21px]"
               />
             </div>
             <div className="flex flex-wrap gap-3">
@@ -239,24 +239,24 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
         <div className="lg:col-span-8 space-y-8">
           {/* About */}
           <section className="bg-surface border border-line rounded-lg p-6 space-y-3">
-            <h2 className="type-h2 text-ink-primary">About the craft</h2>
+            <h2 className="type-h2 text-ink">About the craft</h2>
             <p className="type-body text-ink-secondary">{artist.bio}</p>
             <p className="type-body-sm text-ink-secondary inline-flex items-center gap-1.5 pt-1">
-              <Calendar size={14} className="text-plum" aria-hidden="true" />
+              <Calendar size={14} className="text-brand" aria-hidden="true" />
               {artist.availabilitySummary}
             </p>
           </section>
 
           {/* Portfolio */}
           <section className="space-y-4">
-            <h2 className="type-h2 text-ink-primary">Portfolio work</h2>
+            <h2 className="type-h2 text-ink">Portfolio work</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {artist.portfolio.map((item) => (
                 <article
                   key={item.id}
                   className="bg-surface border border-line rounded-lg overflow-hidden"
                 >
-                  <div className="aspect-[4/3] bg-surface-muted">
+                  <div className="aspect-[4/3] bg-surface-container">
                     <SafeImage
                       src={item.mediaUrl}
                       alt={item.title}
@@ -264,7 +264,7 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
                     />
                   </div>
                   <div className="p-4 space-y-1">
-                    <h3 className="type-h4 text-ink-primary">{item.title}</h3>
+                    <h3 className="type-h4 text-ink">{item.title}</h3>
                     <p className="type-body-sm text-ink-secondary">{item.caption}</p>
                   </div>
                 </article>
@@ -274,7 +274,7 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
 
           {/* Packages */}
           <section className="space-y-4">
-            <h2 className="type-h2 text-ink-primary">Service packages & starting scope</h2>
+            <h2 className="type-h2 text-ink">Service packages & starting scope</h2>
             <div className="space-y-4">
               {artist.packages.map((pkg) => (
                 <article
@@ -283,28 +283,28 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
                 >
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
-                      <h3 className="type-h3 text-ink-primary">{pkg.title}</h3>
+                      <h3 className="type-h3 text-ink">{pkg.title}</h3>
                       <p className="type-body-sm text-ink-secondary">Duration: {pkg.duration}</p>
                     </div>
-                    <p className="type-h3 text-plum tabular-nums">
+                    <p className="type-h3 text-brand tabular-nums">
                       {pkg.priceInr ? formatInr(pkg.priceInr) : "Custom quote"}
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-line-light">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-line">
                     <div>
-                      <p className="type-label text-ink-primary mb-1.5">Included</p>
+                      <p className="type-label text-ink mb-1.5">Included</p>
                       <ul className="space-y-1">
                         {pkg.inclusions.map((inc) => (
                           <li key={inc} className="type-body-sm text-ink-secondary flex items-start gap-1.5">
-                            <CheckCircle2 size={14} className="text-semantic-success shrink-0 mt-0.5" aria-hidden="true" />
+                            <CheckCircle2 size={14} className="text-status-success shrink-0 mt-0.5" aria-hidden="true" />
                             <span>{inc}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
                     <div>
-                      <p className="type-label text-ink-primary mb-1.5">Not included / host arranges</p>
+                      <p className="type-label text-ink mb-1.5">Not included / host arranges</p>
                       <ul className="space-y-1">
                         {pkg.exclusions.map((exc) => (
                           <li key={exc} className="type-body-sm text-ink-secondary">
@@ -323,7 +323,7 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
         {/* Right Sidebar: Reviews Policy & Report */}
         <aside className="lg:col-span-4 space-y-5">
           <section className="bg-surface border border-line rounded-lg p-5 space-y-3">
-            <h2 className="type-h3 text-ink-primary">Verified booking reviews</h2>
+            <h2 className="type-h3 text-ink">Verified booking reviews</h2>
             <p className="type-body-sm text-ink-secondary">
               No reviews displayed yet. Cultgig only publishes reviews linked to completed,
               verifiable bookings—never unverified star counts.
@@ -331,8 +331,8 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
           </section>
 
           <section className="bg-surface border border-line rounded-lg p-5 space-y-3">
-            <div className="flex items-center gap-2 text-ink-primary">
-              <ShieldAlert size={17} className="text-plum" aria-hidden="true" />
+            <div className="flex items-center gap-2 text-ink">
+              <ShieldAlert size={17} className="text-brand" aria-hidden="true" />
               <h2 className="type-h4">Safety & profile reporting</h2>
             </div>
             <p className="type-body-sm text-ink-secondary">
@@ -342,13 +342,13 @@ export function ArtistProfilePage({ slug }: { slug: string }) {
               <button
                 type="button"
                 onClick={() => setReportOpen(true)}
-                className="inline-flex items-center gap-1.5 type-label text-ink-secondary hover:text-semantic-error"
+                className="inline-flex items-center gap-1.5 type-label text-ink-secondary hover:text-status-error"
               >
                 <Flag size={14} aria-hidden="true" />
                 Report this profile
               </button>
             ) : reportSent ? (
-              <p className="type-body-sm text-semantic-success font-medium">
+              <p className="type-body-sm text-status-success font-medium">
                 Report logged locally for review. Thank you for helping keep Cultgig safe.
               </p>
             ) : (

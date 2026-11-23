@@ -344,10 +344,10 @@ export default function App() {
       <AuthProviderRoot>
         <OnboardingProvider>
           <MarketplaceProvider>
-            <div className="min-h-screen flex flex-col bg-canvas text-ink-primary font-sans">
+            <div className="min-h-screen flex flex-col bg-surface-low text-ink font-sans">
               <a
                 href="#main-content"
-                className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 z-50 bg-plum text-white px-4 py-2 rounded-md font-semibold shadow-card"
+                className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 z-50 bg-brand text-white px-4 py-2 rounded-md font-semibold shadow-sm"
               >
                 Skip to main content
               </a>

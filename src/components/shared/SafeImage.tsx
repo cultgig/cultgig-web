@@ -19,11 +19,11 @@ export function SafeImage({
   if (failed || !src) {
     return (
       <div
-        className={`flex flex-col items-center justify-center gap-2 bg-plum-soft text-ink-secondary p-4 text-center ${className}`}
+        className={`flex flex-col items-center justify-center gap-2 bg-brand-subtle text-ink-secondary p-4 text-center ${className}`}
         role="img"
         aria-label={alt || fallbackLabel || "Image preview"}
       >
-        <ImageIcon size={24} className="text-plum" aria-hidden="true" />
+        <ImageIcon size={24} className="text-brand" aria-hidden="true" />
         <span className="type-caption text-ink-secondary">
           {fallbackLabel || alt}
         </span>

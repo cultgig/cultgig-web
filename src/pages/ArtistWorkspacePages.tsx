@@ -31,8 +31,8 @@ function ArtistShell({ title, children }: { title: string; children: React.React
   return (
     <main id="main-content" className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
       <div className="border-b border-line pb-4">
-        <p className="type-caption text-plum font-semibold">Artist workspace (Prototype mode)</p>
-        <h1 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink-primary">
+        <p className="type-caption text-brand font-semibold">Artist workspace (Prototype mode)</p>
+        <h1 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink">
           {title}
         </h1>
       </div>
@@ -46,8 +46,8 @@ function ArtistShell({ title, children }: { title: string; children: React.React
               to={item.path}
               className={`min-h-[38px] px-3.5 py-2 rounded-md text-[13px] font-semibold border whitespace-nowrap ${
                 active
-                  ? "bg-plum text-white border-plum"
-                  : "bg-surface text-ink-secondary border-line hover:border-plum hover:text-plum"
+                  ? "bg-brand text-white border-brand"
+                  : "bg-surface text-ink-secondary border-line hover:border-brand hover:text-brand"
               }`}
             >
               {item.label}
@@ -76,36 +76,36 @@ export function ArtistDashboardPage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-surface border border-line rounded-lg p-5">
           <p className="type-caption text-ink-secondary">Open sample briefs</p>
-          <p className="text-[24px] font-bold text-ink-primary tabular-nums mt-1">{openGigs.length}</p>
+          <p className="text-[24px] font-bold text-ink tabular-nums mt-1">{openGigs.length}</p>
         </div>
         <div className="bg-surface border border-line rounded-lg p-5">
           <p className="type-caption text-ink-secondary">Submitted applications</p>
-          <p className="text-[24px] font-bold text-ink-primary tabular-nums mt-1">
+          <p className="text-[24px] font-bold text-ink tabular-nums mt-1">
             {applications.length}
           </p>
         </div>
         <div className="bg-surface border border-line rounded-lg p-5">
           <p className="type-caption text-ink-secondary">Portfolio items</p>
-          <p className="text-[24px] font-bold text-ink-primary tabular-nums mt-1">
+          <p className="text-[24px] font-bold text-ink tabular-nums mt-1">
             {artistProfile.portfolio.length}
           </p>
         </div>
         <div className="bg-surface border border-line rounded-lg p-5">
           <p className="type-caption text-ink-secondary">Bookings</p>
-          <p className="text-[24px] font-bold text-ink-primary tabular-nums mt-1">{bookings.length}</p>
+          <p className="text-[24px] font-bold text-ink tabular-nums mt-1">{bookings.length}</p>
         </div>
       </div>
 
       <div className="flex flex-wrap gap-3">
         <Link
           to="/artist/opportunities"
-          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-plum text-white type-button"
+          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-brand text-white type-button"
         >
           Browse open event briefs
         </Link>
         <Link
           to="/artist/portfolio"
-          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong text-ink-primary hover:border-plum type-button"
+          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong text-ink hover:border-brand type-button"
         >
           Manage portfolio work
         </Link>
@@ -130,7 +130,7 @@ export function ArtistProfileEditPage() {
     <ArtistShell title="Edit artist profile">
       <form onSubmit={handleSave} className="bg-surface border border-line rounded-xl p-6 max-w-[740px] space-y-4">
         <div>
-          <label htmlFor="art-name" className="block type-label text-ink-primary mb-1.5">
+          <label htmlFor="art-name" className="block type-label text-ink mb-1.5">
             Artist or collective name *
           </label>
           <input
@@ -139,12 +139,12 @@ export function ArtistProfileEditPage() {
             type="text"
             value={form.displayName}
             onChange={(e) => setForm({ ...form, displayName: e.target.value })}
-            className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px]"
+            className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px]"
           />
         </div>
 
         <div>
-          <label htmlFor="art-tagline" className="block type-label text-ink-primary mb-1.5">
+          <label htmlFor="art-tagline" className="block type-label text-ink mb-1.5">
             One-line craft summary *
           </label>
           <input
@@ -153,20 +153,20 @@ export function ArtistProfileEditPage() {
             type="text"
             value={form.tagline}
             onChange={(e) => setForm({ ...form, tagline: e.target.value })}
-            className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px]"
+            className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px]"
           />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label htmlFor="art-cat" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="art-cat" className="block type-label text-ink mb-1.5">
               Primary category
             </label>
             <select
               id="art-cat"
               value={form.primaryCategory}
               onChange={(e) => setForm({ ...form, primaryCategory: e.target.value as CategorySlug })}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
             >
               {creativeCategories.map((c) => (
                 <option key={c.slug} value={c.slug}>
@@ -176,14 +176,14 @@ export function ArtistProfileEditPage() {
             </select>
           </div>
           <div>
-            <label htmlFor="art-city" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="art-city" className="block type-label text-ink mb-1.5">
               Base city
             </label>
             <select
               id="art-city"
               value={form.city}
               onChange={(e) => setForm({ ...form, city: e.target.value })}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
             >
               {indianCities.map((c) => (
                 <option key={c} value={c}>
@@ -193,7 +193,7 @@ export function ArtistProfileEditPage() {
             </select>
           </div>
           <div>
-            <label htmlFor="art-price" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="art-price" className="block type-label text-ink mb-1.5">
               Starting price (₹ INR)
             </label>
             <input
@@ -208,13 +208,13 @@ export function ArtistProfileEditPage() {
                 })
               }
               placeholder="Leave blank for Quote required"
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px] tabular-nums"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px] tabular-nums"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="art-bio" className="block type-label text-ink-primary mb-1.5">
+          <label htmlFor="art-bio" className="block type-label text-ink mb-1.5">
             Bio & performance setup notes
           </label>
           <textarea
@@ -222,12 +222,12 @@ export function ArtistProfileEditPage() {
             rows={4}
             value={form.bio}
             onChange={(e) => setForm({ ...form, bio: e.target.value })}
-            className="w-full p-3 rounded-md border border-line bg-canvas text-[14px]"
+            className="w-full p-3 rounded-md border border-line bg-surface-low text-[14px]"
           />
         </div>
 
         {saved && (
-          <p className="type-body-sm text-semantic-success font-medium inline-flex items-center gap-1.5">
+          <p className="type-body-sm text-status-success font-medium inline-flex items-center gap-1.5">
             <CheckCircle2 size={16} aria-hidden="true" />
             Artist profile draft saved locally.
           </p>
@@ -286,10 +286,10 @@ export function ArtistPortfolioPage() {
       </NoticeBanner>
 
       <div className="bg-surface border border-line rounded-xl p-6 max-w-[680px] space-y-4">
-        <h2 className="type-h3 text-ink-primary">Add original work</h2>
+        <h2 className="type-h3 text-ink">Add original work</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="pf-title" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="pf-title" className="block type-label text-ink mb-1.5">
               Work title
             </label>
             <input
@@ -298,11 +298,11 @@ export function ArtistPortfolioPage() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g., Acoustic set at Jaipur courtyard"
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
             />
           </div>
           <div>
-            <label htmlFor="pf-caption" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="pf-caption" className="block type-label text-ink mb-1.5">
               Context caption
             </label>
             <input
@@ -311,7 +311,7 @@ export function ArtistPortfolioPage() {
               value={caption}
               onChange={(e) => setCaption(e.target.value)}
               placeholder="Setting, duration, or your exact role"
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
             />
           </div>
         </div>
@@ -321,7 +321,7 @@ export function ArtistPortfolioPage() {
             type="checkbox"
             checked={ownershipConfirmed}
             onChange={(e) => setOwnershipConfirmed(e.target.checked)}
-            className="mt-1 w-4 h-4 accent-plum"
+            className="mt-1 w-4 h-4 accent-brand"
           />
           <span className="type-body-sm text-ink-secondary">
             I confirm this image or video is my original work (or I hold written client permission)
@@ -330,7 +330,7 @@ export function ArtistPortfolioPage() {
         </label>
 
         <div>
-          <label className="inline-flex items-center gap-2 min-h-[44px] px-5 py-2.5 rounded-md bg-plum text-white hover:bg-plum-hover type-label cursor-pointer">
+          <label className="inline-flex items-center gap-2 min-h-[44px] px-5 py-2.5 rounded-md bg-brand text-white hover:bg-brand-hover type-label cursor-pointer">
             <Upload size={16} aria-hidden="true" />
             <span>{busy ? "Validating..." : "Select image or video (max 10 MB)"}</span>
             <input
@@ -343,7 +343,7 @@ export function ArtistPortfolioPage() {
         </div>
 
         {error && (
-          <p role="alert" className="type-body-sm text-semantic-error">
+          <p role="alert" className="type-body-sm text-status-error">
             {error}
           </p>
         )}
@@ -353,19 +353,19 @@ export function ArtistPortfolioPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {artistProfile.portfolio.map((item) => (
             <article key={item.id} className="bg-surface border border-line rounded-lg overflow-hidden">
-              <div className="aspect-[4/3] bg-surface-muted">
+              <div className="aspect-[4/3] bg-surface-container">
                 <SafeImage src={item.mediaUrl} alt={item.title} className="w-full h-full object-cover" />
               </div>
               <div className="p-4 flex items-start justify-between gap-2">
                 <div>
-                  <h3 className="type-h4 text-ink-primary">{item.title}</h3>
+                  <h3 className="type-h4 text-ink">{item.title}</h3>
                   <p className="type-body-sm text-ink-secondary">{item.caption}</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => removePortfolioItem(item.id)}
                   aria-label={`Remove ${item.title}`}
-                  className="p-2 text-ink-secondary hover:text-semantic-error"
+                  className="p-2 text-ink-secondary hover:text-status-error"
                 >
                   <Trash2 size={16} aria-hidden="true" />
                 </button>
@@ -419,7 +419,7 @@ export function ArtistOpportunityDetailPage({ gigId }: { gigId: string }) {
   if (!gig) {
     return (
       <ArtistShell title="Brief not found">
-        <Link to="/artist/opportunities" className="type-label text-plum">
+        <Link to="/artist/opportunities" className="type-label text-brand">
           Back to open briefs
         </Link>
       </ArtistShell>
@@ -450,7 +450,7 @@ export function ArtistOpportunityDetailPage({ gigId }: { gigId: string }) {
     <ArtistShell title={gig.title}>
       <Link
         to="/artist/opportunities"
-        className="inline-flex items-center gap-1.5 type-label text-ink-secondary hover:text-plum"
+        className="inline-flex items-center gap-1.5 type-label text-ink-secondary hover:text-brand"
       >
         <ArrowLeft size={15} aria-hidden="true" />
         Back to open briefs
@@ -461,9 +461,9 @@ export function ArtistOpportunityDetailPage({ gigId }: { gigId: string }) {
           <p className="type-caption text-ink-secondary">
             Posted by {gig.clientDisplayName} · {gig.city} · {formatReadableDate(gig.eventDate)}
           </p>
-          <h2 className="type-h2 text-ink-primary">Event brief</h2>
+          <h2 className="type-h2 text-ink">Event brief</h2>
           <p className="type-body text-ink-secondary">{gig.deliverables}</p>
-          <div className="space-y-2 pt-2 border-t border-line-light type-body-sm text-ink-secondary">
+          <div className="space-y-2 pt-2 border-t border-line type-body-sm text-ink-secondary">
             <p>
               <strong>Timing:</strong> {gig.startTime} – {gig.endTime} ({gig.durationSummary})
             </p>
@@ -480,21 +480,21 @@ export function ArtistOpportunityDetailPage({ gigId }: { gigId: string }) {
         </section>
 
         <section className="lg:col-span-6 bg-surface border border-line rounded-xl p-6 space-y-4">
-          <h2 className="type-h2 text-ink-primary">Submit structured proposal</h2>
+          <h2 className="type-h2 text-ink">Submit structured proposal</h2>
           {submitted ? (
-            <div className="space-y-3 bg-semantic-success-bg border border-semantic-success/30 rounded-lg p-5">
-              <p className="type-h4 text-semantic-success">Proposal recorded in prototype mode</p>
+            <div className="space-y-3 bg-status-success-soft border border-status-success/30 rounded-lg p-5">
+              <p className="type-h4 text-status-success">Proposal recorded in prototype mode</p>
               <p className="type-body-sm text-ink-secondary">
                 Your quote and scope terms have been saved locally in your Applications list.
               </p>
-              <Link to="/artist/applications" className="type-label text-plum underline">
+              <Link to="/artist/applications" className="type-label text-brand underline">
                 View my applications
               </Link>
             </div>
           ) : (
             <form onSubmit={handleApply} className="space-y-4">
               <div>
-                <label htmlFor="app-quote" className="block type-label text-ink-primary mb-1.5">
+                <label htmlFor="app-quote" className="block type-label text-ink mb-1.5">
                   Quoted amount (₹ INR) *
                 </label>
                 <input
@@ -504,11 +504,11 @@ export function ArtistOpportunityDetailPage({ gigId }: { gigId: string }) {
                   min={500}
                   value={quotedAmountInr}
                   onChange={(e) => setQuotedAmountInr(e.target.value)}
-                  className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px] tabular-nums"
+                  className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px] tabular-nums"
                 />
               </div>
               <div>
-                <label htmlFor="app-scope" className="block type-label text-ink-primary mb-1.5">
+                <label htmlFor="app-scope" className="block type-label text-ink mb-1.5">
                   Scope covered *
                 </label>
                 <input
@@ -518,11 +518,11 @@ export function ArtistOpportunityDetailPage({ gigId }: { gigId: string }) {
                   value={scopeSummary}
                   onChange={(e) => setScopeSummary(e.target.value)}
                   placeholder="e.g., 2 x 45 min acoustic sets + 45-min early soundcheck"
-                  className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+                  className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
                 />
               </div>
               <div>
-                <label htmlFor="app-msg" className="block type-label text-ink-primary mb-1.5">
+                <label htmlFor="app-msg" className="block type-label text-ink mb-1.5">
                   Why your craft fits this event *
                 </label>
                 <textarea
@@ -531,7 +531,7 @@ export function ArtistOpportunityDetailPage({ gigId }: { gigId: string }) {
                   rows={3}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full p-3 rounded-md border border-line bg-canvas text-[14px]"
+                  className="w-full p-3 rounded-md border border-line bg-surface-low text-[14px]"
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -544,7 +544,7 @@ export function ArtistOpportunityDetailPage({ gigId }: { gigId: string }) {
                     type="text"
                     value={travelNotes}
                     onChange={(e) => setTravelNotes(e.target.value)}
-                    className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-canvas text-[13px]"
+                    className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-surface-low text-[13px]"
                   />
                 </div>
                 <div>
@@ -556,7 +556,7 @@ export function ArtistOpportunityDetailPage({ gigId }: { gigId: string }) {
                     type="date"
                     value={validUntil}
                     onChange={(e) => setValidUntil(e.target.value)}
-                    className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-canvas text-[13px]"
+                    className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-surface-low text-[13px]"
                   />
                 </div>
               </div>
@@ -569,7 +569,7 @@ export function ArtistOpportunityDetailPage({ gigId }: { gigId: string }) {
                   type="text"
                   value={cancellationNote}
                   onChange={(e) => setCancellationNote(e.target.value)}
-                  className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-canvas text-[13px]"
+                  className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-surface-low text-[13px]"
                 />
               </div>
               <label className="inline-flex items-center gap-2 text-[13px] text-ink-secondary cursor-pointer">
@@ -577,7 +577,7 @@ export function ArtistOpportunityDetailPage({ gigId }: { gigId: string }) {
                   type="checkbox"
                   checked={availabilityConfirmed}
                   onChange={(e) => setAvailabilityConfirmed(e.target.checked)}
-                  className="w-4 h-4 accent-plum"
+                  className="w-4 h-4 accent-brand"
                 />
                 <span>I confirm availability for {formatReadableDate(gig.eventDate)}</span>
               </label>
@@ -601,8 +601,8 @@ export function ArtistApplicationsPage() {
         {applications.map((app) => (
           <div key={app.id} className="bg-surface border border-line rounded-lg p-5 space-y-2">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <p className="type-h4 text-ink-primary">{app.scopeSummary}</p>
-              <span className="type-h4 text-plum tabular-nums">
+              <p className="type-h4 text-ink">{app.scopeSummary}</p>
+              <span className="type-h4 text-brand tabular-nums">
                 ₹{app.quotedAmountInr.toLocaleString("en-IN")} · {app.status}
               </span>
             </div>
@@ -628,7 +628,7 @@ export function ArtistProposalsPage() {
               className="bg-surface border border-line rounded-lg p-5 flex flex-wrap items-center justify-between gap-4"
             >
               <div className="space-y-1">
-                <h2 className="type-h3 text-ink-primary">{thread.gigTitle}</h2>
+                <h2 className="type-h3 text-ink">{thread.gigTitle}</h2>
                 <p className="type-body-sm text-ink-secondary">
                   Client: {thread.clientName} ·{" "}
                   {latest
@@ -640,7 +640,7 @@ export function ArtistProposalsPage() {
               </div>
               <Link
                 to={`/messages/${thread.id}`}
-                className="min-h-[40px] px-4 py-2 rounded-md bg-plum text-white type-label"
+                className="min-h-[40px] px-4 py-2 rounded-md bg-brand text-white type-label"
               >
                 Open negotiation
               </Link>
@@ -667,11 +667,11 @@ export function ArtistBookingsPage() {
               <p className="type-caption text-ink-secondary">
                 {b.city} · {formatReadableDate(b.eventDate)} · Status: <strong>{b.status}</strong>
               </p>
-              <h2 className="type-h3 text-ink-primary">{b.gigTitle}</h2>
+              <h2 className="type-h3 text-ink">{b.gigTitle}</h2>
             </div>
             <Link
               to={`/artist/bookings/${b.id}`}
-              className="min-h-[40px] px-4 py-2 rounded-md border border-line-strong type-label text-ink-primary hover:border-plum"
+              className="min-h-[40px] px-4 py-2 rounded-md border border-line-strong type-label text-ink hover:border-brand"
             >
               Inspect booking
             </Link>
@@ -699,7 +699,7 @@ export function ArtistAvailabilityPage() {
             aria-label="Add available date"
             value={customDate}
             onChange={(e) => setCustomDate(e.target.value)}
-            className="min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+            className="min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
           />
           <Button onClick={() => toggleAvailabilityDate(customDate)}>Toggle date</Button>
         </div>
@@ -708,16 +708,16 @@ export function ArtistAvailabilityPage() {
           {artistProfile.availabilitySlots.map((slot) => (
             <div
               key={slot}
-              className="flex items-center justify-between p-3 rounded-md border border-line bg-canvas"
+              className="flex items-center justify-between p-3 rounded-md border border-line bg-surface-low"
             >
               <span className="type-body font-medium inline-flex items-center gap-2">
-                <Calendar size={15} className="text-plum" aria-hidden="true" />
+                <Calendar size={15} className="text-brand" aria-hidden="true" />
                 {formatReadableDate(slot)}
               </span>
               <button
                 type="button"
                 onClick={() => toggleAvailabilityDate(slot)}
-                className="type-caption text-semantic-error hover:underline"
+                className="type-caption text-status-error hover:underline"
               >
                 Remove
               </button>

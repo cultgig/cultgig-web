@@ -26,7 +26,7 @@ export function GigCard({
       : "Budget on inquiry";
 
   return (
-    <article className="bg-surface border border-line rounded-lg p-5 flex flex-col gap-3 hover:border-plum-border hover:shadow-soft transition-all">
+    <article className="bg-surface border border-line rounded-lg p-5 flex flex-col gap-3 hover:border-line-strong hover:shadow-xs transition-all">
       <div className="flex flex-wrap items-center justify-between gap-2 text-ink-secondary type-caption">
         <span>
           {category?.label ?? gig.category}
@@ -35,7 +35,7 @@ export function GigCard({
           {gig.isSample && (
             <>
               <span aria-hidden="true"> · </span>
-              <span className="text-plum font-medium">Sample brief</span>
+              <span className="text-brand font-medium">Sample brief</span>
             </>
           )}
         </span>
@@ -44,7 +44,7 @@ export function GigCard({
         </span>
       </div>
 
-      <Link to={target} className="type-h3 text-ink-primary hover:text-plum">
+      <Link to={target} className="type-h3 text-ink hover:text-brand">
         {gig.title}
       </Link>
 
@@ -52,27 +52,27 @@ export function GigCard({
 
       <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 type-body-sm text-ink-secondary">
         <span className="inline-flex items-center gap-1.5">
-          <MapPin size={14} className="text-plum" aria-hidden="true" />
+          <MapPin size={14} className="text-brand" aria-hidden="true" />
           {gig.city} ({gig.workingMode === "remote" ? "Remote" : "On-site"})
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <Calendar size={14} className="text-plum" aria-hidden="true" />
+          <Calendar size={14} className="text-brand" aria-hidden="true" />
           {formatReadableDate(gig.eventDate)}
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <Clock size={14} className="text-plum" aria-hidden="true" />
+          <Clock size={14} className="text-brand" aria-hidden="true" />
           {gig.durationSummary}
         </span>
       </div>
 
-      <div className="pt-3 mt-auto border-t border-line-light flex flex-wrap items-center justify-between gap-3">
+      <div className="pt-3 mt-auto border-t border-line flex flex-wrap items-center justify-between gap-3">
         <div>
           <p className="type-caption text-ink-secondary">Budget approach</p>
-          <p className="type-h4 text-ink-primary tabular-nums">{budgetLabel}</p>
+          <p className="type-h4 text-ink tabular-nums">{budgetLabel}</p>
         </div>
         <Link
           to={target}
-          className="inline-flex items-center justify-center min-h-[40px] px-4 py-2 rounded-md border border-line-strong text-ink-primary hover:border-plum hover:text-plum type-label whitespace-nowrap"
+          className="inline-flex items-center justify-center min-h-[40px] px-4 py-2 rounded-md border border-line-strong text-ink hover:border-brand hover:text-brand type-label whitespace-nowrap"
         >
           {actionLabel}
         </Link>

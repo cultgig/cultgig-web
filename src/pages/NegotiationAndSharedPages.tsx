@@ -14,7 +14,7 @@ export function MessagesInboxPage() {
 
   return (
     <main id="main-content" className="max-w-[960px] mx-auto px-4 sm:px-6 py-10 space-y-6">
-      <h1 className="text-[26px] font-bold text-ink-primary">Messages & offer threads</h1>
+      <h1 className="text-[26px] font-bold text-ink">Messages & offer threads</h1>
       <div className="space-y-3">
         {conversations.map((thread) => {
           const latestProposal = thread.proposals[thread.proposals.length - 1];
@@ -23,12 +23,12 @@ export function MessagesInboxPage() {
             <Link
               key={thread.id}
               to={`/messages/${thread.id}`}
-              className="block bg-surface border border-line rounded-lg p-5 hover:border-plum space-y-1.5"
+              className="block bg-surface border border-line rounded-lg p-5 hover:border-brand space-y-1.5"
             >
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <h2 className="type-h3 text-ink-primary">{thread.gigTitle}</h2>
+                <h2 className="type-h3 text-ink">{thread.gigTitle}</h2>
                 {latestProposal && (
-                  <span className="type-label text-plum tabular-nums">
+                  <span className="type-label text-brand tabular-nums">
                     Proposal v{latestProposal.version} · {formatPaiseToInr(latestProposal.amountPaise)} (
                     {latestProposal.status})
                   </span>
@@ -80,7 +80,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
     return (
       <main id="main-content" className="max-w-[820px] mx-auto px-4 py-14 space-y-3">
         <h1 className="type-h1">Conversation not found</h1>
-        <Link to="/client/messages" className="type-label text-plum">
+        <Link to="/client/messages" className="type-label text-brand">
           Back to messages
         </Link>
       </main>
@@ -135,22 +135,22 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
     <main id="main-content" className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
       <Link
         to={activeRole === "artist" ? "/artist/proposals" : "/client/messages"}
-        className="inline-flex items-center gap-1.5 type-label text-ink-secondary hover:text-plum"
+        className="inline-flex items-center gap-1.5 type-label text-ink-secondary hover:text-brand"
       >
         <ArrowLeft size={15} aria-hidden="true" />
         Back to threads
       </Link>
 
       <div className="space-y-1">
-        <p className="type-caption text-plum font-semibold">
+        <p className="type-caption text-brand font-semibold">
           Versioned negotiation thread · Acting as {activeRole === "artist" ? "Artist" : "Client"}
         </p>
-        <h1 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink-primary">
+        <h1 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink">
           {thread.gigTitle}
         </h1>
         <p className="type-body-sm text-ink-secondary">
           {thread.clientName} ↔{" "}
-          <Link to={`/artists/${thread.artistSlug}`} className="text-plum hover:underline">
+          <Link to={`/artists/${thread.artistSlug}`} className="text-brand hover:underline">
             {thread.artistName}
           </Link>{" "}
           · {thread.city}
@@ -166,7 +166,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left: Chat Log */}
         <section className="lg:col-span-7 bg-surface border border-line rounded-xl p-5 space-y-4">
-          <h2 className="type-h3 text-ink-primary border-b border-line-light pb-3">
+          <h2 className="type-h3 text-ink border-b border-line pb-3">
             Conversation log
           </h2>
           <div className="space-y-3 max-h-[420px] overflow-y-auto pr-1">
@@ -175,12 +175,12 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
                 key={msg.id}
                 className={`p-3.5 rounded-lg border ${
                   msg.senderRole === "system"
-                    ? "bg-plum-soft border-plum-border text-ink-primary"
-                    : "bg-canvas border-line text-ink-primary"
+                    ? "bg-brand-subtle border-line-strong text-ink"
+                    : "bg-surface-low border-line text-ink"
                 }`}
               >
                 <div className="flex items-center justify-between gap-2 mb-1">
-                  <span className="type-label text-ink-primary">{msg.senderName}</span>
+                  <span className="type-label text-ink">{msg.senderName}</span>
                   <span className="type-caption text-ink-secondary">
                     {formatReadableDate(msg.createdAt)}
                   </span>
@@ -190,7 +190,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
             ))}
           </div>
 
-          <form onSubmit={handleSend} className="pt-2 border-t border-line-light flex gap-2">
+          <form onSubmit={handleSend} className="pt-2 border-t border-line flex gap-2">
             <label htmlFor="thread-msg" className="sr-only">
               Write a message
             </label>
@@ -200,7 +200,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
               value={messageText}
               onChange={(e) => setMessageText(e.target.value)}
               placeholder="Ask about setlist, soundcheck, travel, or timing..."
-              className="flex-1 min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+              className="flex-1 min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
             />
             <Button type="submit">
               <Send size={15} aria-hidden="true" />
@@ -212,7 +212,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
         {/* Right: Versioned Offer History */}
         <section className="lg:col-span-5 space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="type-h3 text-ink-primary">Offer versions ({thread.proposals.length})</h2>
+            <h2 className="type-h3 text-ink">Offer versions ({thread.proposals.length})</h2>
             <Button size="sm" variant="secondary" onClick={() => setCounterOpen((v) => !v)}>
               {counterOpen ? "Close counter-offer" : "Send counter-offer"}
             </Button>
@@ -221,9 +221,9 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
           {counterOpen && (
             <form
               onSubmit={handleCounter}
-              className="bg-surface border border-plum-border rounded-xl p-5 space-y-3"
+              className="bg-surface border border-line-strong rounded-xl p-5 space-y-3"
             >
-              <h3 className="type-h4 text-ink-primary">
+              <h3 className="type-h4 text-ink">
                 Create Proposal v{thread.proposals.length + 1}
               </h3>
               <div className="grid grid-cols-2 gap-3">
@@ -238,7 +238,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
                     min={500}
                     value={amountInr}
                     onChange={(e) => setAmountInr(e.target.value)}
-                    className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-canvas text-[14px] tabular-nums"
+                    className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-surface-low text-[14px] tabular-nums"
                   />
                 </div>
                 <div>
@@ -250,7 +250,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
                     type="date"
                     value={eventDate}
                     onChange={(e) => setEventDate(e.target.value)}
-                    className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-canvas text-[13px]"
+                    className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-surface-low text-[13px]"
                   />
                 </div>
               </div>
@@ -263,7 +263,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
                   type="text"
                   value={duration}
                   onChange={(e) => setDuration(e.target.value)}
-                  className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-canvas text-[13px]"
+                  className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-surface-low text-[13px]"
                 />
               </div>
               <div>
@@ -275,7 +275,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
                   type="text"
                   value={inclusionsText}
                   onChange={(e) => setInclusionsText(e.target.value)}
-                  className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-canvas text-[13px]"
+                  className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-surface-low text-[13px]"
                 />
               </div>
               <div>
@@ -287,7 +287,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
                   type="text"
                   value={exclusionsText}
                   onChange={(e) => setExclusionsText(e.target.value)}
-                  className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-canvas text-[13px]"
+                  className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-surface-low text-[13px]"
                 />
               </div>
               <div>
@@ -299,7 +299,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
                   type="text"
                   value={cancellationTerms}
                   onChange={(e) => setCancellationTerms(e.target.value)}
-                  className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-canvas text-[13px]"
+                  className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-surface-low text-[13px]"
                 />
               </div>
               <Button type="submit" size="sm" className="w-full">
@@ -313,12 +313,12 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
               <article
                 key={prop.id}
                 className={`bg-surface border rounded-xl p-5 space-y-3 ${
-                  prop.status === "pending" ? "border-plum" : "border-line"
+                  prop.status === "pending" ? "border-brand" : "border-line"
                 }`}
               >
                 <div className="flex items-center justify-between gap-2">
-                  <span className="inline-flex items-center gap-1.5 type-label text-ink-primary">
-                    <FileCheck2 size={15} className="text-plum" aria-hidden="true" />
+                  <span className="inline-flex items-center gap-1.5 type-label text-ink">
+                    <FileCheck2 size={15} className="text-brand" aria-hidden="true" />
                     Proposal v{prop.version} · {prop.proposedByName}
                   </span>
                   <span className="type-caption font-semibold capitalize text-ink-secondary">
@@ -326,7 +326,7 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
                   </span>
                 </div>
 
-                <p className="text-[20px] font-bold text-ink-primary tabular-nums">
+                <p className="text-[20px] font-bold text-ink tabular-nums">
                   {formatPaiseToInr(prop.amountPaise)}
                 </p>
 
@@ -350,10 +350,10 @@ export function ConversationThreadPage({ conversationId }: { conversationId: str
                 </div>
 
                 {prop.status === "pending" && (
-                  <div className="pt-2 border-t border-line-light">
+                  <div className="pt-2 border-t border-line">
                     {acceptConfirmId === prop.id ? (
                       <div className="space-y-2">
-                        <p className="type-caption text-ink-primary">
+                        <p className="type-caption text-ink">
                           Confirm accepting Proposal v{prop.version} for{" "}
                           {formatPaiseToInr(prop.amountPaise)}?
                         </p>
@@ -393,24 +393,24 @@ export function NotificationsPage() {
 
   return (
     <main id="main-content" className="max-w-[780px] mx-auto px-4 sm:px-6 py-10 space-y-5">
-      <h1 className="type-h1 text-ink-primary">Notifications</h1>
+      <h1 className="type-h1 text-ink">Notifications</h1>
       <div className="space-y-3">
         {notifications.map((n) => (
           <div
             key={n.id}
             className={`bg-surface border rounded-lg p-4 flex flex-wrap items-center justify-between gap-3 ${
-              n.read ? "border-line" : "border-plum-border bg-plum-soft/40"
+              n.read ? "border-line" : "border-line-strong bg-brand-subtle/40"
             }`}
           >
             <div>
-              <p className="type-h4 text-ink-primary">{n.title}</p>
+              <p className="type-h4 text-ink">{n.title}</p>
               <p className="type-body-sm text-ink-secondary">{n.detail}</p>
             </div>
             <div className="flex items-center gap-3">
               <Link
                 to={n.path}
                 onClick={() => markNotificationRead(n.id)}
-                className="type-label text-plum hover:underline"
+                className="type-label text-brand hover:underline"
               >
                 Open
               </Link>
@@ -418,7 +418,7 @@ export function NotificationsPage() {
                 <button
                   type="button"
                   onClick={() => markNotificationRead(n.id)}
-                  className="type-caption text-ink-secondary hover:text-ink-primary"
+                  className="type-caption text-ink-secondary hover:text-ink"
                 >
                   Mark read
                 </button>

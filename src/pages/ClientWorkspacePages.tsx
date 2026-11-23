@@ -29,14 +29,14 @@ function ClientShell({ title, children }: { title: string; children: React.React
     <main id="main-content" className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-line pb-4">
         <div>
-          <p className="type-caption text-plum font-semibold">Client workspace (Prototype mode)</p>
-          <h1 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink-primary">
+          <p className="type-caption text-brand font-semibold">Client workspace (Prototype mode)</p>
+          <h1 className="text-[24px] sm:text-[28px] leading-[1.2] font-bold text-ink">
             {title}
           </h1>
         </div>
         <Link
           to="/client/gigs/new"
-          className="inline-flex items-center gap-2 min-h-[44px] px-4 py-2 rounded-md bg-plum text-white hover:bg-plum-hover type-label"
+          className="inline-flex items-center gap-2 min-h-[44px] px-4 py-2 rounded-md bg-brand text-white hover:bg-brand-hover type-label"
         >
           <Plus size={16} aria-hidden="true" />
           Post a gig
@@ -52,8 +52,8 @@ function ClientShell({ title, children }: { title: string; children: React.React
               to={item.path}
               className={`min-h-[38px] px-3.5 py-2 rounded-md text-[13px] font-semibold border whitespace-nowrap ${
                 active
-                  ? "bg-plum text-white border-plum"
-                  : "bg-surface text-ink-secondary border-line hover:border-plum hover:text-plum"
+                  ? "bg-brand text-white border-brand"
+                  : "bg-surface text-ink-secondary border-line hover:border-brand hover:text-brand"
               }`}
             >
               {item.label}
@@ -82,23 +82,23 @@ export function ClientDashboardPage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-surface border border-line rounded-lg p-5">
           <p className="type-caption text-ink-secondary">Active / draft briefs</p>
-          <p className="text-[24px] font-bold text-ink-primary tabular-nums mt-1">{gigs.length}</p>
+          <p className="text-[24px] font-bold text-ink tabular-nums mt-1">{gigs.length}</p>
         </div>
         <div className="bg-surface border border-line rounded-lg p-5">
           <p className="type-caption text-ink-secondary">Saved artists</p>
-          <p className="text-[24px] font-bold text-ink-primary tabular-nums mt-1">
+          <p className="text-[24px] font-bold text-ink tabular-nums mt-1">
             {savedArtistIds.length}
           </p>
         </div>
         <div className="bg-surface border border-line rounded-lg p-5">
           <p className="type-caption text-ink-secondary">Active threads</p>
-          <p className="text-[24px] font-bold text-ink-primary tabular-nums mt-1">
+          <p className="text-[24px] font-bold text-ink tabular-nums mt-1">
             {conversations.length}
           </p>
         </div>
         <div className="bg-surface border border-line rounded-lg p-5">
           <p className="type-caption text-ink-secondary">Bookings</p>
-          <p className="text-[24px] font-bold text-ink-primary tabular-nums mt-1">
+          <p className="text-[24px] font-bold text-ink tabular-nums mt-1">
             {bookings.length}
           </p>
         </div>
@@ -107,19 +107,19 @@ export function ClientDashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <section className="bg-surface border border-line rounded-lg p-6 space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="type-h3 text-ink-primary">Quick actions</h2>
+            <h2 className="type-h3 text-ink">Quick actions</h2>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link
               to="/client/gigs/new"
-              className="inline-flex items-center gap-2 min-h-[44px] px-4 py-2 rounded-md bg-plum text-white type-label"
+              className="inline-flex items-center gap-2 min-h-[44px] px-4 py-2 rounded-md bg-brand text-white type-label"
             >
               <FilePlus2 size={16} aria-hidden="true" />
               Create structured gig brief
             </Link>
             <Link
               to="/explore"
-              className="inline-flex items-center gap-2 min-h-[44px] px-4 py-2 rounded-md border border-line-strong text-ink-primary hover:border-plum type-label"
+              className="inline-flex items-center gap-2 min-h-[44px] px-4 py-2 rounded-md border border-line-strong text-ink hover:border-brand type-label"
             >
               Browse artists
             </Link>
@@ -127,17 +127,17 @@ export function ClientDashboardPage() {
         </section>
 
         <section className="bg-surface border border-line rounded-lg p-6 space-y-3">
-          <h2 className="type-h3 text-ink-primary">Latest negotiation thread</h2>
+          <h2 className="type-h3 text-ink">Latest negotiation thread</h2>
           {conversations[0] ? (
             <div className="space-y-2">
-              <p className="type-h4 text-ink-primary">{conversations[0].gigTitle}</p>
+              <p className="type-h4 text-ink">{conversations[0].gigTitle}</p>
               <p className="type-body-sm text-ink-secondary">
                 With {conversations[0].artistName} · {conversations[0].proposals.length} offer
                 version(s)
               </p>
               <Link
                 to={`/messages/${conversations[0].id}`}
-                className="inline-flex items-center gap-1.5 type-label text-plum hover:underline"
+                className="inline-flex items-center gap-1.5 type-label text-brand hover:underline"
               >
                 <MessageSquare size={15} aria-hidden="true" />
                 Open proposal & chat thread
@@ -264,14 +264,14 @@ export function ClientNewGigPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="gig-cat" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="gig-cat" className="block type-label text-ink mb-1.5">
               Creative category *
             </label>
             <select
               id="gig-cat"
               value={category}
               onChange={(e) => setCategory(e.target.value as CategorySlug)}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
             >
               {creativeCategories.map((c) => (
                 <option key={c.slug} value={c.slug}>
@@ -281,7 +281,7 @@ export function ClientNewGigPage() {
             </select>
           </div>
           <div>
-            <label htmlFor="gig-event-type" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="gig-event-type" className="block type-label text-ink mb-1.5">
               Event type *
             </label>
             <input
@@ -290,13 +290,13 @@ export function ClientNewGigPage() {
               value={eventType}
               onChange={(e) => setEventType(e.target.value)}
               placeholder="e.g., Sangeet evening, Café sundowner, Brand launch"
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px]"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="gig-title" className="block type-label text-ink-primary mb-1.5">
+          <label htmlFor="gig-title" className="block type-label text-ink mb-1.5">
             Brief title *
           </label>
           <input
@@ -305,13 +305,13 @@ export function ClientNewGigPage() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="e.g., Acoustic duo for Saturday terrace dinner (60 guests)"
-            className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px]"
+            className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px]"
           />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label htmlFor="gig-date" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="gig-date" className="block type-label text-ink mb-1.5">
               Event date
             </label>
             <input
@@ -319,11 +319,11 @@ export function ClientNewGigPage() {
               type="date"
               value={eventDate}
               onChange={(e) => setEventDate(e.target.value)}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
             />
           </div>
           <div>
-            <label htmlFor="gig-start" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="gig-start" className="block type-label text-ink mb-1.5">
               Start time
             </label>
             <input
@@ -331,11 +331,11 @@ export function ClientNewGigPage() {
               type="time"
               value={startTime}
               onChange={(e) => setStartTime(e.target.value)}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
             />
           </div>
           <div>
-            <label htmlFor="gig-end" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="gig-end" className="block type-label text-ink mb-1.5">
               End time
             </label>
             <input
@@ -343,21 +343,21 @@ export function ClientNewGigPage() {
               type="time"
               value={endTime}
               onChange={(e) => setEndTime(e.target.value)}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
             />
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label htmlFor="gig-city" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="gig-city" className="block type-label text-ink mb-1.5">
               City
             </label>
             <select
               id="gig-city"
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
             >
               {indianCities.map((c) => (
                 <option key={c} value={c}>
@@ -367,7 +367,7 @@ export function ClientNewGigPage() {
             </select>
           </div>
           <div>
-            <label htmlFor="gig-area" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="gig-area" className="block type-label text-ink mb-1.5">
               Neighbourhood / venue type *
             </label>
             <input
@@ -376,18 +376,18 @@ export function ClientNewGigPage() {
               value={venueArea}
               onChange={(e) => setVenueArea(e.target.value)}
               placeholder="e.g., Indiranagar courtyard"
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px]"
             />
           </div>
           <div>
-            <label htmlFor="gig-mode" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="gig-mode" className="block type-label text-ink mb-1.5">
               Format
             </label>
             <select
               id="gig-mode"
               value={workingMode}
               onChange={(e) => setWorkingMode(e.target.value as "on_site" | "remote")}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
             >
               <option value="on_site">On-site</option>
               <option value="remote">Remote / online</option>
@@ -397,7 +397,7 @@ export function ClientNewGigPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="gig-duration" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="gig-duration" className="block type-label text-ink mb-1.5">
               Performance / session duration
             </label>
             <input
@@ -405,11 +405,11 @@ export function ClientNewGigPage() {
               type="text"
               value={durationSummary}
               onChange={(e) => setDurationSummary(e.target.value)}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px]"
             />
           </div>
           <div>
-            <label htmlFor="gig-count" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="gig-count" className="block type-label text-ink mb-1.5">
               Number of artists needed
             </label>
             <input
@@ -419,13 +419,13 @@ export function ClientNewGigPage() {
               max={20}
               value={artistsNeeded}
               onChange={(e) => setArtistsNeeded(Number(e.target.value))}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px] tabular-nums"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px] tabular-nums"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="gig-deliverables" className="block type-label text-ink-primary mb-1.5">
+          <label htmlFor="gig-deliverables" className="block type-label text-ink mb-1.5">
             Deliverables & creative style *
           </label>
           <textarea
@@ -434,12 +434,12 @@ export function ClientNewGigPage() {
             value={deliverables}
             onChange={(e) => setDeliverables(e.target.value)}
             placeholder="Describe style, repertoire, language preferences, or exact outputs expected."
-            className="w-full p-3 rounded-md border border-line bg-canvas text-[14px]"
+            className="w-full p-3 rounded-md border border-line bg-surface-low text-[14px]"
           />
         </div>
 
         <div>
-          <label htmlFor="gig-equip" className="block type-label text-ink-primary mb-1.5">
+          <label htmlFor="gig-equip" className="block type-label text-ink mb-1.5">
             Equipment, space & access notes
           </label>
           <textarea
@@ -448,12 +448,12 @@ export function ClientNewGigPage() {
             value={equipmentAndSpaceNotes}
             onChange={(e) => setEquipmentAndSpaceNotes(e.target.value)}
             placeholder="Mention sound/PA availability, green room, daylight window, or wall condition."
-            className="w-full p-3 rounded-md border border-line bg-canvas text-[14px]"
+            className="w-full p-3 rounded-md border border-line bg-surface-low text-[14px]"
           />
         </div>
 
-        <div className="space-y-3 pt-2 border-t border-line-light">
-          <span className="block type-label text-ink-primary">
+        <div className="space-y-3 pt-2 border-t border-line">
+          <span className="block type-label text-ink">
             Budget approach (INR — negotiation supported via proposals)
           </span>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -468,7 +468,7 @@ export function ClientNewGigPage() {
                 onClick={() => setBudgetMode(b.id as GigBudgetMode)}
                 className={`min-h-[42px] px-3 py-2 rounded-md border text-[13px] font-semibold ${
                   budgetMode === b.id
-                    ? "bg-plum text-white border-plum"
+                    ? "bg-brand text-white border-brand"
                     : "bg-surface text-ink-secondary border-line"
                 }`}
               >
@@ -489,7 +489,7 @@ export function ClientNewGigPage() {
                   min={500}
                   value={budgetMinInr}
                   onChange={(e) => setBudgetMinInr(e.target.value)}
-                  className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px] tabular-nums"
+                  className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px] tabular-nums"
                 />
               </div>
               {budgetMode === "range" && (
@@ -503,7 +503,7 @@ export function ClientNewGigPage() {
                     min={500}
                     value={budgetMaxInr}
                     onChange={(e) => setBudgetMaxInr(e.target.value)}
-                    className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px] tabular-nums"
+                    className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px] tabular-nums"
                   />
                 </div>
               )}
@@ -516,7 +516,7 @@ export function ClientNewGigPage() {
                 type="checkbox"
                 checked={travelCovered}
                 onChange={(e) => setTravelCovered(e.target.checked)}
-                className="w-4 h-4 accent-plum"
+                className="w-4 h-4 accent-brand"
               />
               <span>Outstation travel / accommodation covered separately</span>
             </label>
@@ -529,13 +529,13 @@ export function ClientNewGigPage() {
                 type="date"
                 value={applicationDeadline}
                 onChange={(e) => setApplicationDeadline(e.target.value)}
-                className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-canvas text-[13px]"
+                className="w-full min-h-[40px] px-3 py-1.5 rounded-md border border-line bg-surface-low text-[13px]"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="contact-vis" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="contact-vis" className="block type-label text-ink mb-1.5">
               Contact & venue privacy
             </label>
             <select
@@ -546,7 +546,7 @@ export function ClientNewGigPage() {
                   e.target.value as "after_proposal" | "platform_messages_only"
                 )
               }
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
             >
               <option value="after_proposal">Share venue specifics only after proposal shortlist</option>
               <option value="platform_messages_only">Keep communication inside Cultgig messages</option>
@@ -559,11 +559,11 @@ export function ClientNewGigPage() {
             type="checkbox"
             checked={termsAck}
             onChange={(e) => setTermsAck(e.target.checked)}
-            className="mt-1 w-4 h-4 accent-plum"
+            className="mt-1 w-4 h-4 accent-brand"
           />
           <span className="type-body-sm text-ink-secondary">
             I confirm this is a lawful creative brief and agree to Cultgig&apos;s draft{" "}
-            <Link to="/legal/client-agreement" className="text-plum underline">
+            <Link to="/legal/client-agreement" className="text-brand underline">
               Client Agreement
             </Link>
             .
@@ -571,7 +571,7 @@ export function ClientNewGigPage() {
         </label>
 
         {error && (
-          <p role="alert" className="type-body-sm text-semantic-error">
+          <p role="alert" className="type-body-sm text-status-error">
             {error}
           </p>
         )}
@@ -597,7 +597,7 @@ export function ClientGigDetailPage({ gigId }: { gigId: string }) {
     return (
       <ClientShell title="Gig not found">
         <p className="type-body text-ink-secondary">This brief could not be found.</p>
-        <Link to="/client/gigs" className="type-label text-plum">
+        <Link to="/client/gigs" className="type-label text-brand">
           Back to your briefs
         </Link>
       </ClientShell>
@@ -612,7 +612,7 @@ export function ClientGigDetailPage({ gigId }: { gigId: string }) {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="type-body-sm text-ink-secondary">
             {gig.city} · {formatReadableDate(gig.eventDate)} · Status:{" "}
-            <strong className="capitalize text-ink-primary">{gig.status}</strong>
+            <strong className="capitalize text-ink">{gig.status}</strong>
           </span>
           <div className="flex flex-wrap gap-2">
             {(["open", "paused", "filled", "closed"] as const).map((status) => (
@@ -640,7 +640,7 @@ export function ClientGigDetailPage({ gigId }: { gigId: string }) {
             )}
           </div>
         </div>
-        <p className="type-body text-ink-primary">{gig.deliverables}</p>
+        <p className="type-body text-ink">{gig.deliverables}</p>
         {gig.equipmentAndSpaceNotes && (
           <p className="type-body-sm text-ink-secondary">
             <strong>Equipment & space:</strong> {gig.equipmentAndSpaceNotes}
@@ -649,12 +649,12 @@ export function ClientGigDetailPage({ gigId }: { gigId: string }) {
       </div>
 
       <section className="space-y-4">
-        <h2 className="type-h2 text-ink-primary">Applications ({gigApps.length})</h2>
+        <h2 className="type-h2 text-ink">Applications ({gigApps.length})</h2>
         {gigApps.length === 0 ? (
           <div className="bg-surface border border-line rounded-lg p-6">
             <p className="type-body text-ink-secondary">
               No artist proposals submitted yet. You can also{" "}
-              <Link to="/explore" className="text-plum font-semibold underline">
+              <Link to="/explore" className="text-brand font-semibold underline">
                 invite artists from Explore
               </Link>
               .
@@ -665,10 +665,10 @@ export function ClientGigDetailPage({ gigId }: { gigId: string }) {
             {gigApps.map((app) => (
               <article key={app.id} className="bg-surface border border-line rounded-lg p-5 space-y-2">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <Link to={`/artists/${app.artistSlug}`} className="type-h3 text-plum hover:underline">
+                  <Link to={`/artists/${app.artistSlug}`} className="type-h3 text-brand hover:underline">
                     {app.artistName}
                   </Link>
-                  <span className="type-h3 text-ink-primary tabular-nums">
+                  <span className="type-h3 text-ink tabular-nums">
                     ₹{app.quotedAmountInr.toLocaleString("en-IN")}
                   </span>
                 </div>
@@ -679,7 +679,7 @@ export function ClientGigDetailPage({ gigId }: { gigId: string }) {
                 <div className="pt-2">
                   <Link
                     to="/messages/sample-thread-1"
-                    className="type-label text-plum hover:underline"
+                    className="type-label text-brand hover:underline"
                   >
                     Open negotiation thread →
                   </Link>
@@ -702,9 +702,9 @@ export function ClientSavedArtistsPage() {
     <ClientShell title="Saved artists">
       {saved.length === 0 ? (
         <div className="bg-surface border border-line rounded-lg p-8 text-center space-y-3">
-          <Bookmark size={24} className="mx-auto text-plum" aria-hidden="true" />
+          <Bookmark size={24} className="mx-auto text-brand" aria-hidden="true" />
           <p className="type-body text-ink-secondary">You have not saved any sample artists yet.</p>
-          <Link to="/explore" className="type-label text-plum underline">
+          <Link to="/explore" className="type-label text-brand underline">
             Explore artists
           </Link>
         </div>
@@ -728,13 +728,13 @@ export function ClientApplicationsPage() {
         {applications.map((app) => (
           <div key={app.id} className="bg-surface border border-line rounded-lg p-5 space-y-2">
             <div className="flex items-center justify-between">
-              <Link to={`/artists/${app.artistSlug}`} className="type-h3 text-plum hover:underline">
+              <Link to={`/artists/${app.artistSlug}`} className="type-h3 text-brand hover:underline">
                 {app.artistName}
               </Link>
               <span className="type-h4 tabular-nums">₹{app.quotedAmountInr.toLocaleString("en-IN")}</span>
             </div>
             <p className="type-body-sm text-ink-secondary">{app.message}</p>
-            <Link to={`/client/gigs/${app.gigId}`} className="type-label text-plum">
+            <Link to={`/client/gigs/${app.gigId}`} className="type-label text-brand">
               View brief →
             </Link>
           </div>
@@ -755,20 +755,20 @@ export function ClientBookingsPage() {
             <div className="space-y-1">
               <p className="type-caption text-ink-secondary">
                 {b.city} · {formatReadableDate(b.eventDate)} · Status:{" "}
-                <strong className="text-plum">{b.status}</strong>
+                <strong className="text-brand">{b.status}</strong>
               </p>
-              <h2 className="type-h3 text-ink-primary">{b.gigTitle}</h2>
+              <h2 className="type-h3 text-ink">{b.gigTitle}</h2>
               <p className="type-body-sm text-ink-secondary">
                 Artist: {b.artistName} · Proposal v{b.acceptedProposalVersion}
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <span className="type-h3 text-ink-primary tabular-nums">
+              <span className="type-h3 text-ink tabular-nums">
                 {formatPaiseToInr(b.grossAmountPaise)}
               </span>
               <Link
                 to={`/client/bookings/${b.id}`}
-                className="min-h-[40px] px-4 py-2 rounded-md border border-line-strong type-label text-ink-primary hover:border-plum"
+                className="min-h-[40px] px-4 py-2 rounded-md border border-line-strong type-label text-ink hover:border-brand"
               >
                 Manage booking
               </Link>
@@ -789,7 +789,7 @@ export function BookingDetailPage({ bookingId }: { bookingId: string }) {
     return (
       <main id="main-content" className="max-w-[820px] mx-auto px-4 py-14 space-y-3">
         <h1 className="type-h1">Booking not found</h1>
-        <Link to="/client/bookings" className="type-label text-plum">
+        <Link to="/client/bookings" className="type-label text-brand">
           Back to bookings
         </Link>
       </main>
@@ -799,10 +799,10 @@ export function BookingDetailPage({ bookingId }: { bookingId: string }) {
   return (
     <main id="main-content" className="max-w-[900px] mx-auto px-4 sm:px-6 py-10 space-y-6">
       <div className="space-y-1">
-        <p className="type-label text-plum">Booking reference: {booking.id}</p>
-        <h1 className="text-[26px] font-bold text-ink-primary">{booking.gigTitle}</h1>
+        <p className="type-label text-brand">Booking reference: {booking.id}</p>
+        <h1 className="text-[26px] font-bold text-ink">{booking.gigTitle}</h1>
         <p className="type-body-sm text-ink-secondary">
-          Current lifecycle stage: <strong className="text-ink-primary">{booking.status}</strong>
+          Current lifecycle stage: <strong className="text-ink">{booking.status}</strong>
         </p>
       </div>
 
@@ -812,23 +812,23 @@ export function BookingDetailPage({ bookingId }: { bookingId: string }) {
       </NoticeBanner>
 
       <div className="bg-surface border border-line rounded-xl p-6 space-y-4">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-4 border-b border-line-light">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-4 border-b border-line">
           <div>
             <p className="type-caption text-ink-secondary">Event date & city</p>
-            <p className="type-h4 text-ink-primary inline-flex items-center gap-1.5 mt-0.5">
-              <Calendar size={14} className="text-plum" aria-hidden="true" />
+            <p className="type-h4 text-ink inline-flex items-center gap-1.5 mt-0.5">
+              <Calendar size={14} className="text-brand" aria-hidden="true" />
               {formatReadableDate(booking.eventDate)} · {booking.city}
             </p>
           </div>
           <div>
             <p className="type-caption text-ink-secondary">Artist</p>
-            <Link to={`/artists/${booking.artistSlug}`} className="type-h4 text-plum hover:underline">
+            <Link to={`/artists/${booking.artistSlug}`} className="type-h4 text-brand hover:underline">
               {booking.artistName}
             </Link>
           </div>
           <div>
             <p className="type-caption text-ink-secondary">Agreed offer (Proposal v{booking.acceptedProposalVersion})</p>
-            <p className="text-[20px] font-bold text-ink-primary tabular-nums">
+            <p className="text-[20px] font-bold text-ink tabular-nums">
               {formatPaiseToInr(booking.grossAmountPaise)}
             </p>
           </div>
@@ -839,13 +839,13 @@ export function BookingDetailPage({ bookingId }: { bookingId: string }) {
         <div className="flex flex-wrap gap-3 pt-2">
           <Link
             to={`/messages/${booking.conversationId}`}
-            className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-md border border-line-strong text-ink-primary hover:border-plum type-label"
+            className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-md border border-line-strong text-ink hover:border-brand type-label"
           >
             View negotiation & offer log
           </Link>
           <Link
             to={`/checkout/${booking.id}`}
-            className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-md bg-plum text-white hover:bg-plum-hover type-label"
+            className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-md bg-brand text-white hover:bg-brand-hover type-label"
           >
             Checkout & payment status
           </Link>
@@ -885,7 +885,7 @@ export function ClientSettingsPage({ section }: { section: "profile" | "billing"
           className="bg-surface border border-line rounded-lg p-6 max-w-[560px] space-y-4"
         >
           <div>
-            <label htmlFor="client-name" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="client-name" className="block type-label text-ink mb-1.5">
               Host or organisation display name
             </label>
             <input
@@ -893,18 +893,18 @@ export function ClientSettingsPage({ section }: { section: "profile" | "billing"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px]"
             />
           </div>
           <div>
-            <label htmlFor="client-city" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="client-city" className="block type-label text-ink mb-1.5">
               Default city
             </label>
             <select
               id="client-city"
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
             >
               {indianCities.map((c) => (
                 <option key={c} value={c}>
@@ -914,7 +914,7 @@ export function ClientSettingsPage({ section }: { section: "profile" | "billing"
             </select>
           </div>
           {saved && (
-            <p className="type-body-sm text-semantic-success font-medium">
+            <p className="type-body-sm text-status-success font-medium">
               Settings updated locally.
             </p>
           )}

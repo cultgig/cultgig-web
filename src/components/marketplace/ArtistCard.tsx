@@ -17,8 +17,8 @@ export function ArtistCard({ artist }: { artist: SampleArtist }) {
   );
 
   return (
-    <article className="group bg-surface border border-line rounded-lg overflow-hidden flex flex-col hover:border-plum-border hover:shadow-card transition-all">
-      <div className="relative aspect-[4/3] bg-surface-muted overflow-hidden">
+    <article className="group bg-surface border border-line rounded-lg overflow-hidden flex flex-col hover:border-line-strong hover:shadow-sm transition-all">
+      <div className="relative aspect-[4/3] bg-surface-container overflow-hidden">
         <Link to={`/artists/${artist.slug}`} className="block w-full h-full">
           <SafeImage
             src={artist.coverUrl}
@@ -32,10 +32,10 @@ export function ArtistCard({ artist }: { artist: SampleArtist }) {
           onClick={() => toggleSaveArtist(artist.id)}
           aria-label={isSaved ? `Remove ${artist.displayName} from saved` : `Save ${artist.displayName}`}
           aria-pressed={isSaved}
-          className={`absolute top-3 right-3 w-10 h-10 rounded-md flex items-center justify-center border shadow-soft ${
+          className={`absolute top-3 right-3 w-10 h-10 rounded-md flex items-center justify-center border shadow-xs ${
             isSaved
-              ? "bg-plum text-white border-plum"
-              : "bg-surface/95 text-ink-primary border-line hover:text-plum"
+              ? "bg-brand text-white border-brand"
+              : "bg-surface/95 text-ink border-line hover:text-brand"
           }`}
         >
           <Bookmark size={16} fill={isSaved ? "currentColor" : "none"} aria-hidden="true" />
@@ -52,7 +52,7 @@ export function ArtistCard({ artist }: { artist: SampleArtist }) {
           <div className="min-w-0">
             <Link
               to={`/artists/${artist.slug}`}
-              className="type-h4 text-ink-primary hover:text-plum block truncate"
+              className="type-h4 text-ink hover:text-brand block truncate"
             >
               {artist.displayName}
             </Link>
@@ -64,19 +64,19 @@ export function ArtistCard({ artist }: { artist: SampleArtist }) {
 
         <Link
           to={`/artists/${artist.slug}`}
-          className="type-body text-ink-secondary hover:text-ink-primary line-clamp-2"
+          className="type-body text-ink-secondary hover:text-ink line-clamp-2"
         >
           {artist.tagline}
         </Link>
 
-        <div className="mt-auto pt-3 border-t border-line-light flex items-center justify-between gap-3">
+        <div className="mt-auto pt-3 border-t border-line flex items-center justify-between gap-3">
           <span className="type-body-sm text-ink-secondary inline-flex items-center gap-1 truncate">
-            <MapPin size={13} className="text-plum shrink-0" aria-hidden="true" />
+            <MapPin size={13} className="text-brand shrink-0" aria-hidden="true" />
             <span>{artist.city}</span>
             <span aria-hidden="true">·</span>
             <span>{artist.artistFormat === "group" ? "Group" : "Solo"}</span>
           </span>
-          <span className="type-h4 text-ink-primary tabular-nums whitespace-nowrap shrink-0">
+          <span className="type-h4 text-ink tabular-nums whitespace-nowrap shrink-0">
             {priceText}
           </span>
         </div>

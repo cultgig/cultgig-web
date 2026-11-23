@@ -50,8 +50,8 @@ export function ContactAndSupportPage({ ticketId }: { ticketId?: string }) {
   return (
     <main id="main-content" className="max-w-[1040px] mx-auto px-4 sm:px-6 py-10 lg:py-14 space-y-8">
       <div className="space-y-2 max-w-[700px]">
-        <p className="type-label text-plum">Contact & customer support</p>
-        <h1 className="text-[30px] sm:text-[36px] leading-[1.2] font-bold text-ink-primary">
+        <p className="type-label text-brand">Contact & customer support</p>
+        <h1 className="text-[30px] sm:text-[36px] leading-[1.2] font-bold text-ink">
           How to reach Cultgig
         </h1>
         <p className="type-body-lg text-ink-secondary">
@@ -69,10 +69,10 @@ export function ContactAndSupportPage({ ticketId }: { ticketId?: string }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <section className="lg:col-span-7 bg-surface border border-line rounded-xl p-6 space-y-4">
-          <h2 className="type-h2 text-ink-primary">Raise a support request</h2>
+          <h2 className="type-h2 text-ink">Raise a support request</h2>
           {createdId ? (
-            <div className="bg-plum-soft border border-plum-border rounded-lg p-5 space-y-2">
-              <p className="type-h4 text-plum inline-flex items-center gap-2">
+            <div className="bg-brand-subtle border border-line-strong rounded-lg p-5 space-y-2">
+              <p className="type-h4 text-brand inline-flex items-center gap-2">
                 <CheckCircle2 size={18} aria-hidden="true" />
                 Request recorded (Reference: {createdId})
               </p>
@@ -93,7 +93,7 @@ export function ContactAndSupportPage({ ticketId }: { ticketId?: string }) {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="sup-name" className="block type-label text-ink-primary mb-1.5">
+                  <label htmlFor="sup-name" className="block type-label text-ink mb-1.5">
                     Your name *
                   </label>
                   <input
@@ -102,11 +102,11 @@ export function ContactAndSupportPage({ ticketId }: { ticketId?: string }) {
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+                    className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
                   />
                 </div>
                 <div>
-                  <label htmlFor="sup-email" className="block type-label text-ink-primary mb-1.5">
+                  <label htmlFor="sup-email" className="block type-label text-ink mb-1.5">
                     Email address *
                   </label>
                   <input
@@ -115,21 +115,21 @@ export function ContactAndSupportPage({ ticketId }: { ticketId?: string }) {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+                    className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="sup-type" className="block type-label text-ink-primary mb-1.5">
+                  <label htmlFor="sup-type" className="block type-label text-ink mb-1.5">
                     Issue type
                   </label>
                   <select
                     id="sup-type"
                     value={issueType}
                     onChange={(e) => setIssueType(e.target.value as typeof issueType)}
-                    className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+                    className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
                   >
                     <option value="account_help">Account & onboarding help</option>
                     <option value="booking_issue">Booking or proposal dispute</option>
@@ -139,7 +139,7 @@ export function ContactAndSupportPage({ ticketId }: { ticketId?: string }) {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="sup-ref" className="block type-label text-ink-primary mb-1.5">
+                  <label htmlFor="sup-ref" className="block type-label text-ink mb-1.5">
                     Booking reference ID (optional)
                   </label>
                   <input
@@ -148,13 +148,13 @@ export function ContactAndSupportPage({ ticketId }: { ticketId?: string }) {
                     value={bookingReference}
                     onChange={(e) => setBookingReference(e.target.value)}
                     placeholder="e.g., sample-booking-1"
-                    className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+                    className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="sup-msg" className="block type-label text-ink-primary mb-1.5">
+                <label htmlFor="sup-msg" className="block type-label text-ink mb-1.5">
                   Details *
                 </label>
                 <textarea
@@ -163,12 +163,12 @@ export function ContactAndSupportPage({ ticketId }: { ticketId?: string }) {
                   rows={4}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full p-3 rounded-md border border-line bg-canvas text-[14px]"
+                  className="w-full p-3 rounded-md border border-line bg-surface-low text-[14px]"
                 />
               </div>
 
               {error && (
-                <p role="alert" className="type-body-sm text-semantic-error">
+                <p role="alert" className="type-body-sm text-status-error">
                   {error}
                 </p>
               )}
@@ -180,27 +180,27 @@ export function ContactAndSupportPage({ ticketId }: { ticketId?: string }) {
 
         <aside className="lg:col-span-5 space-y-4">
           <div className="bg-surface border border-line rounded-xl p-6 space-y-3">
-            <h2 className="type-h3 text-ink-primary">Operator & grievance details</h2>
+            <h2 className="type-h3 text-ink">Operator & grievance details</h2>
             <dl className="space-y-2 type-body-sm">
               <div>
                 <dt className="text-ink-secondary">Legal entity</dt>
-                <dd className="text-ink-primary font-medium">{siteConfig.legalEntityName}</dd>
+                <dd className="text-ink font-medium">{siteConfig.legalEntityName}</dd>
               </div>
               <div>
                 <dt className="text-ink-secondary">Entity form</dt>
-                <dd className="text-ink-primary">{siteConfig.entityType}</dd>
+                <dd className="text-ink">{siteConfig.entityType}</dd>
               </div>
               <div>
                 <dt className="text-ink-secondary">Principal address</dt>
-                <dd className="text-ink-primary">{siteConfig.registeredAddress}</dd>
+                <dd className="text-ink">{siteConfig.registeredAddress}</dd>
               </div>
               <div>
                 <dt className="text-ink-secondary">Support email</dt>
-                <dd className="text-ink-primary">
+                <dd className="text-ink">
                   {siteConfig.supportEmail ? (
                     <a
                       href={`mailto:${siteConfig.supportEmail}`}
-                      className="text-plum hover:underline inline-flex items-center gap-1"
+                      className="text-brand hover:underline inline-flex items-center gap-1"
                     >
                       <Mail size={14} aria-hidden="true" />
                       {siteConfig.supportEmail}
@@ -212,7 +212,7 @@ export function ContactAndSupportPage({ ticketId }: { ticketId?: string }) {
               </div>
               <div>
                 <dt className="text-ink-secondary">Grievance officer</dt>
-                <dd className="text-ink-primary">
+                <dd className="text-ink">
                   {siteConfig.grievanceOfficerName}
                   {siteConfig.grievanceOfficerEmail ? ` · ${siteConfig.grievanceOfficerEmail}` : ""}
                 </dd>
@@ -387,10 +387,10 @@ export function LegalDocumentPage({ kind }: { kind: LegalKind }) {
       </NoticeBanner>
 
       <header className="space-y-2 border-b border-line pb-6">
-        <p className="type-caption text-plum font-semibold">
+        <p className="type-caption text-brand font-semibold">
           Cultgig Legal · Updated {siteConfig.policiesLastUpdated}
         </p>
-        <h1 className="text-[28px] sm:text-[36px] leading-[1.2] font-bold text-ink-primary">
+        <h1 className="text-[28px] sm:text-[36px] leading-[1.2] font-bold text-ink">
           {doc.title}
         </h1>
         <p className="type-body-lg text-ink-secondary">{doc.summary}</p>
@@ -399,7 +399,7 @@ export function LegalDocumentPage({ kind }: { kind: LegalKind }) {
       <div className="space-y-6">
         {doc.sections.map((section) => (
           <section key={section.heading} className="space-y-2.5">
-            <h2 className="type-h2 text-ink-primary">{section.heading}</h2>
+            <h2 className="type-h2 text-ink">{section.heading}</h2>
             {section.body.map((para) => (
               <p key={para} className="type-body text-ink-secondary">
                 {para}
@@ -421,7 +421,7 @@ export function CheckoutPage({ bookingId }: { bookingId: string }) {
     return (
       <main id="main-content" className="max-w-[780px] mx-auto px-4 py-14 space-y-4">
         <h1 className="type-h1">Booking not found</h1>
-        <Link to="/client/bookings" className="type-label text-plum">
+        <Link to="/client/bookings" className="type-label text-brand">
           Back to bookings
         </Link>
       </main>
@@ -431,8 +431,8 @@ export function CheckoutPage({ bookingId }: { bookingId: string }) {
   return (
     <main id="main-content" className="max-w-[840px] mx-auto px-4 sm:px-6 py-10 lg:py-14 space-y-6">
       <div className="space-y-1">
-        <p className="type-caption text-plum font-semibold">Booking reference: {booking.id}</p>
-        <h1 className="text-[28px] font-bold text-ink-primary">
+        <p className="type-caption text-brand font-semibold">Booking reference: {booking.id}</p>
+        <h1 className="text-[28px] font-bold text-ink">
           Booking confirmation & payment readiness
         </h1>
       </div>
@@ -446,13 +446,13 @@ export function CheckoutPage({ bookingId }: { bookingId: string }) {
       </NoticeBanner>
 
       <section className="bg-surface border border-line rounded-xl p-6 space-y-4">
-        <h2 className="type-h2 text-ink-primary">What this booking pays for</h2>
+        <h2 className="type-h2 text-ink">What this booking pays for</h2>
         <p className="type-body text-ink-secondary">
           You are reviewing payment for the specific artist service and deliverables agreed in{" "}
           <strong>Proposal v{booking.acceptedProposalVersion}</strong> (not a vague membership):
         </p>
 
-        <div className="bg-canvas border border-line rounded-lg p-4 space-y-2 type-body-sm">
+        <div className="bg-surface-low border border-line rounded-lg p-4 space-y-2 type-body-sm">
           <p>
             <strong>Event & service:</strong> {booking.gigTitle}
           </p>
@@ -471,21 +471,21 @@ export function CheckoutPage({ bookingId }: { bookingId: string }) {
         <div className="border-t border-line pt-4 space-y-2 type-body tabular-nums">
           <div className="flex justify-between">
             <span className="text-ink-secondary">Agreed artist service amount</span>
-            <span className="font-semibold text-ink-primary">
+            <span className="font-semibold text-ink">
               {formatPaiseToInr(booking.grossAmountPaise)}
             </span>
           </div>
           <div className="flex justify-between">
             <span className="text-ink-secondary">Platform fee (preview)</span>
-            <span className="text-ink-primary">
+            <span className="text-ink">
               {booking.platformFeePaise === 0
                 ? "₹0 (Launch commercial terms pending)"
                 : formatPaiseToInr(booking.platformFeePaise)}
             </span>
           </div>
-          <div className="flex justify-between pt-2 border-t border-line-light type-h3">
+          <div className="flex justify-between pt-2 border-t border-line type-h3">
             <span>Total payable (once gateway live)</span>
-            <span className="text-plum">{formatPaiseToInr(booking.grossAmountPaise)}</span>
+            <span className="text-brand">{formatPaiseToInr(booking.grossAmountPaise)}</span>
           </div>
         </div>
 
@@ -493,7 +493,7 @@ export function CheckoutPage({ bookingId }: { bookingId: string }) {
           <Button disabled>Pay online (Awaiting Razorpay Route / Cashfree approval)</Button>
           <Link
             to={`/client/bookings/${booking.id}`}
-            className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-md border border-line-strong text-ink-primary type-label"
+            className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-md border border-line-strong text-ink type-label"
           >
             Back to booking details
           </Link>
@@ -511,19 +511,19 @@ export function PaymentStatusPage({ status }: { status: "success" | "failed" | "
       title: "Payment confirmation verified",
       copy: "In live production, bookings only confirm after server-side webhook signature verification—never solely from a browser redirect.",
       Icon: CheckCircle2,
-      tone: "text-semantic-success",
+      tone: "text-status-success",
     },
     failed: {
       title: "Payment did not complete",
       copy: "No funds were captured, or the provider returned a failure status. You can retry once approved checkout is active.",
       Icon: AlertTriangle,
-      tone: "text-semantic-error",
+      tone: "text-status-error",
     },
     pending: {
       title: "Payment verification pending",
       copy: "Waiting for asynchronous webhook confirmation from the payment gateway.",
       Icon: Clock,
-      tone: "text-semantic-warning",
+      tone: "text-status-warning",
     },
   }[status];
 
@@ -532,18 +532,18 @@ export function PaymentStatusPage({ status }: { status: "success" | "failed" | "
   return (
     <main id="main-content" className="max-w-[640px] mx-auto px-4 py-14 space-y-5 text-center">
       <Icon size={40} className={`mx-auto ${config.tone}`} aria-hidden="true" />
-      <h1 className="type-h1 text-ink-primary">{config.title}</h1>
+      <h1 className="type-h1 text-ink">{config.title}</h1>
       <p className="type-body text-ink-secondary">{config.copy}</p>
       <div className="flex justify-center gap-3 pt-2">
         <Link
           to="/client/bookings"
-          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-plum text-white type-button"
+          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-brand text-white type-button"
         >
           View bookings
         </Link>
         <Link
           to="/support"
-          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong text-ink-primary type-button"
+          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong text-ink type-button"
         >
           Contact support
         </Link>
@@ -556,21 +556,21 @@ export function NotFoundPage() {
   usePageMeta("Page not found", "The requested Cultgig page could not be found.");
   return (
     <main id="main-content" className="max-w-[640px] mx-auto px-4 py-20 text-center space-y-4">
-      <ShieldAlert size={36} className="mx-auto text-plum" aria-hidden="true" />
-      <h1 className="type-h1 text-ink-primary">This page could not be found</h1>
+      <ShieldAlert size={36} className="mx-auto text-brand" aria-hidden="true" />
+      <h1 className="type-h1 text-ink">This page could not be found</h1>
       <p className="type-body text-ink-secondary">
         Check the web address or explore creative categories and artist profiles on Cultgig.
       </p>
       <div className="flex justify-center gap-3 pt-2">
         <Link
           to="/"
-          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-plum text-white type-button"
+          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-brand text-white type-button"
         >
           Return home
         </Link>
         <Link
           to="/explore"
-          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong text-ink-primary type-button"
+          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md border border-line-strong text-ink type-button"
         >
           Explore artists
         </Link>

@@ -6,7 +6,7 @@ export function DevRoleSwitcher() {
 
   return (
     <aside
-      className="fixed bottom-3 right-3 z-50 bg-surface border border-line rounded-lg shadow-card p-2.5 flex items-center gap-2 text-[12px]"
+      className="fixed bottom-3 right-3 z-50 bg-surface border border-line rounded-lg shadow-sm p-2.5 flex items-center gap-2 text-[12px]"
       aria-label="Development mode workspace switcher"
     >
       <span className="text-ink-muted font-semibold">DEV</span>
@@ -21,7 +21,7 @@ export function DevRoleSwitcher() {
                 activeMode: "client",
               })
             }
-            className="px-2.5 py-1 rounded border border-line hover:border-plum"
+            className="px-2.5 py-1 rounded border border-line hover:border-brand"
           >
             Client
           </button>
@@ -34,7 +34,7 @@ export function DevRoleSwitcher() {
                 activeMode: "artist",
               })
             }
-            className="px-2.5 py-1 rounded border border-line hover:border-plum"
+            className="px-2.5 py-1 rounded border border-line hover:border-brand"
           >
             Artist
           </button>
@@ -46,14 +46,14 @@ export function DevRoleSwitcher() {
             onClick={() =>
               switchWorkspaceMode(user.activeMode === "artist" ? "client" : "artist")
             }
-            className="px-2.5 py-1 rounded bg-plum-soft text-plum font-medium"
+            className="px-2.5 py-1 rounded bg-brand-subtle text-brand font-medium"
           >
             Mode: {user.activeMode}
           </button>
           <button
             type="button"
             onClick={() => logout()}
-            className="px-2 py-1 rounded text-ink-secondary hover:text-semantic-error"
+            className="px-2 py-1 rounded text-ink-secondary hover:text-status-error"
           >
             Out
           </button>

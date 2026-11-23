@@ -92,7 +92,7 @@ export function SignInPage() {
   return (
     <main id="main-content" className="max-w-[540px] mx-auto px-4 sm:px-6 py-12 space-y-6">
       <div className="space-y-2">
-        <h1 className="text-[28px] leading-[1.2] font-bold text-ink-primary">Sign in to Cultgig</h1>
+        <h1 className="text-[28px] leading-[1.2] font-bold text-ink">Sign in to Cultgig</h1>
         <p className="type-body text-ink-secondary">
           One account supports both event host (client) and artist workspaces—switch anytime.
         </p>
@@ -106,15 +106,15 @@ export function SignInPage() {
 
       <div className="bg-surface border border-line rounded-xl p-6 space-y-5">
         <div>
-          <span className="block type-label text-ink-primary mb-2">Open workspace as</span>
+          <span className="block type-label text-ink mb-2">Open workspace as</span>
           <div className="grid grid-cols-2 gap-2.5">
             <button
               type="button"
               onClick={() => setMode("client")}
               className={`min-h-[44px] rounded-md border text-[14px] font-semibold ${
                 mode === "client"
-                  ? "bg-plum text-white border-plum"
-                  : "bg-surface text-ink-secondary border-line hover:border-plum"
+                  ? "bg-brand text-white border-brand"
+                  : "bg-surface text-ink-secondary border-line hover:border-brand"
               }`}
             >
               Client / Event Host
@@ -124,8 +124,8 @@ export function SignInPage() {
               onClick={() => setMode("artist")}
               className={`min-h-[44px] rounded-md border text-[14px] font-semibold ${
                 mode === "artist"
-                  ? "bg-plum text-white border-plum"
-                  : "bg-surface text-ink-secondary border-line hover:border-plum"
+                  ? "bg-brand text-white border-brand"
+                  : "bg-surface text-ink-secondary border-line hover:border-brand"
               }`}
             >
               Artist / Creative Pro
@@ -136,7 +136,7 @@ export function SignInPage() {
         {step === "email" ? (
           <form onSubmit={handleSendOtp} className="space-y-4">
             <div>
-              <label htmlFor="signin-name" className="block type-label text-ink-primary mb-1.5">
+              <label htmlFor="signin-name" className="block type-label text-ink mb-1.5">
                 Display name
               </label>
               <input
@@ -145,12 +145,12 @@ export function SignInPage() {
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
                 placeholder="Your name or venue name"
-                className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px]"
+                className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px]"
               />
             </div>
 
             <div>
-              <label htmlFor="signin-email" className="block type-label text-ink-primary mb-1.5">
+              <label htmlFor="signin-email" className="block type-label text-ink mb-1.5">
                 Email address *
               </label>
               <input
@@ -160,12 +160,12 @@ export function SignInPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px]"
+                className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px]"
               />
             </div>
 
             {error && (
-              <p role="alert" className="type-body-sm text-semantic-error">
+              <p role="alert" className="type-body-sm text-status-error">
                 {error}
               </p>
             )}
@@ -189,7 +189,7 @@ export function SignInPage() {
               {otpLocal && " (In DEV prototype mode, enter 123456.)"}
             </p>
             <div>
-              <label htmlFor="signin-otp" className="block type-label text-ink-primary mb-1.5">
+              <label htmlFor="signin-otp" className="block type-label text-ink mb-1.5">
                 Verification code *
               </label>
               <input
@@ -200,11 +200,11 @@ export function SignInPage() {
                 value={otpCode}
                 onChange={(e) => setOtpCode(e.target.value)}
                 placeholder="123456"
-                className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px] tracking-widest tabular-nums"
+                className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px] tracking-widest tabular-nums"
               />
             </div>
             {error && (
-              <p role="alert" className="type-body-sm text-semantic-error">
+              <p role="alert" className="type-body-sm text-status-error">
                 {error}
               </p>
             )}
@@ -219,11 +219,11 @@ export function SignInPage() {
           </form>
         )}
 
-        <div className="pt-4 border-t border-line-light flex flex-wrap items-center justify-between gap-2 type-body-sm">
-          <Link to="/forgot-password" className="text-ink-secondary hover:text-plum">
+        <div className="pt-4 border-t border-line flex flex-wrap items-center justify-between gap-2 type-body-sm">
+          <Link to="/forgot-password" className="text-ink-secondary hover:text-brand">
             Trouble signing in?
           </Link>
-          <Link to="/sign-up" className="font-semibold text-plum hover:text-plum-hover">
+          <Link to="/sign-up" className="font-semibold text-brand hover:text-brand-hover">
             Create an account
           </Link>
         </div>
@@ -289,7 +289,7 @@ export function SignUpPage() {
   return (
     <main id="main-content" className="max-w-[600px] mx-auto px-4 sm:px-6 py-12 space-y-6">
       <div className="space-y-2">
-        <h1 className="text-[28px] leading-[1.2] font-bold text-ink-primary">Join Cultgig</h1>
+        <h1 className="text-[28px] leading-[1.2] font-bold text-ink">Join Cultgig</h1>
         <p className="type-body text-ink-secondary">
           Create your account to browse, post structured gig briefs, or set up your artist portfolio.
         </p>
@@ -297,7 +297,7 @@ export function SignUpPage() {
 
       <form onSubmit={handleSubmit} className="bg-surface border border-line rounded-xl p-6 space-y-4">
         <div>
-          <span className="block type-label text-ink-primary mb-2">How will you use Cultgig?</span>
+          <span className="block type-label text-ink mb-2">How will you use Cultgig?</span>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {[
               { id: "client", label: "Hire artists / Host" },
@@ -310,8 +310,8 @@ export function SignUpPage() {
                 onClick={() => setRoleChoice(opt.id as "client" | "artist" | "both")}
                 className={`min-h-[44px] px-3 py-2 rounded-md border text-[13px] font-semibold ${
                   roleChoice === opt.id
-                    ? "bg-plum text-white border-plum"
-                    : "bg-surface text-ink-secondary border-line hover:border-plum"
+                    ? "bg-brand text-white border-brand"
+                    : "bg-surface text-ink-secondary border-line hover:border-brand"
                 }`}
               >
                 {opt.label}
@@ -321,7 +321,7 @@ export function SignUpPage() {
         </div>
 
         <div>
-          <label htmlFor="signup-name" className="block type-label text-ink-primary mb-1.5">
+          <label htmlFor="signup-name" className="block type-label text-ink mb-1.5">
             Full name or studio/venue name *
           </label>
           <input
@@ -330,13 +330,13 @@ export function SignUpPage() {
             required
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px]"
+            className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px]"
           />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="signup-email" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="signup-email" className="block type-label text-ink mb-1.5">
               Email address *
             </label>
             <input
@@ -345,18 +345,18 @@ export function SignUpPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[15px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[15px]"
             />
           </div>
           <div>
-            <label htmlFor="signup-city" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="signup-city" className="block type-label text-ink mb-1.5">
               Primary city
             </label>
             <select
               id="signup-city"
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
             >
               {indianCities.map((c) => (
                 <option key={c} value={c}>
@@ -369,14 +369,14 @@ export function SignUpPage() {
 
         {roleChoice !== "client" && (
           <div>
-            <label htmlFor="signup-category" className="block type-label text-ink-primary mb-1.5">
+            <label htmlFor="signup-category" className="block type-label text-ink mb-1.5">
               Primary creative discipline
             </label>
             <select
               id="signup-category"
               value={category}
               onChange={(e) => setCategory(e.target.value as typeof category)}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px]"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px]"
             >
               {creativeCategories.map((c) => (
                 <option key={c.slug} value={c.slug}>
@@ -392,15 +392,15 @@ export function SignUpPage() {
             type="checkbox"
             checked={consentChecked}
             onChange={(e) => setConsentChecked(e.target.checked)}
-            className="mt-1 w-4 h-4 accent-plum"
+            className="mt-1 w-4 h-4 accent-brand"
           />
           <span className="type-body-sm text-ink-secondary">
             I acknowledge the{" "}
-            <Link to="/legal/terms" className="text-plum underline">
+            <Link to="/legal/terms" className="text-brand underline">
               Terms & Conditions
             </Link>{" "}
             and{" "}
-            <Link to="/legal/privacy" className="text-plum underline">
+            <Link to="/legal/privacy" className="text-brand underline">
               Privacy Policy
             </Link>{" "}
             (pre-launch draft).
@@ -408,7 +408,7 @@ export function SignUpPage() {
         </label>
 
         {error && (
-          <p role="alert" className="type-body-sm text-semantic-error">
+          <p role="alert" className="type-body-sm text-status-error">
             {error}
           </p>
         )}
@@ -419,7 +419,7 @@ export function SignUpPage() {
 
         <p className="type-body-sm text-ink-secondary text-center">
           Already have an account?{" "}
-          <Link to="/sign-in" className="text-plum font-semibold hover:underline">
+          <Link to="/sign-in" className="text-brand font-semibold hover:underline">
             Sign in
           </Link>
         </p>
@@ -433,11 +433,11 @@ export function VerifyEmailPage() {
   const { user } = useAuth();
   return (
     <main id="main-content" className="max-w-[540px] mx-auto px-4 sm:px-6 py-14 space-y-5">
-      <h1 className="type-h1 text-ink-primary">Email verification</h1>
+      <h1 className="type-h1 text-ink">Email verification</h1>
       <div className="bg-surface border border-line rounded-xl p-6 space-y-4">
         <div className="flex items-center gap-3">
-          <ShieldCheck size={22} className="text-plum" aria-hidden="true" />
-          <p className="type-h4 text-ink-primary">
+          <ShieldCheck size={22} className="text-brand" aria-hidden="true" />
+          <p className="type-h4 text-ink">
             {user?.emailVerified ? "Email verified via session" : "Verification pending or prototype session"}
           </p>
         </div>
@@ -447,7 +447,7 @@ export function VerifyEmailPage() {
         </p>
         <Link
           to="/sign-in"
-          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-plum text-white type-button"
+          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-brand text-white type-button"
         >
           Go to Sign in
         </Link>
@@ -463,7 +463,7 @@ export function PasswordRecoveryPage({ mode }: { mode: "forgot" | "reset" }) {
   );
   return (
     <main id="main-content" className="max-w-[540px] mx-auto px-4 sm:px-6 py-14 space-y-5">
-      <h1 className="type-h1 text-ink-primary">
+      <h1 className="type-h1 text-ink">
         {mode === "forgot" ? "Passwordless sign-in recovery" : "Reset account access"}
       </h1>
       <div className="bg-surface border border-line rounded-xl p-6 space-y-4">
@@ -473,7 +473,7 @@ export function PasswordRecoveryPage({ mode }: { mode: "forgot" | "reset" }) {
         </p>
         <Link
           to="/sign-in"
-          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-plum text-white type-button"
+          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-brand text-white type-button"
         >
           Return to Sign in
         </Link>
@@ -491,13 +491,13 @@ export function OnboardingPage() {
   if (!user) {
     return (
       <main id="main-content" className="max-w-[540px] mx-auto px-4 sm:px-6 py-14 space-y-4">
-        <h1 className="type-h1 text-ink-primary">Complete sign-in first</h1>
+        <h1 className="type-h1 text-ink">Complete sign-in first</h1>
         <p className="type-body text-ink-secondary">
           Please sign in or create an account to save your workspace onboarding preferences.
         </p>
         <Link
           to="/sign-in?next=/onboarding"
-          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-plum text-white type-button"
+          className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-brand text-white type-button"
         >
           Sign in
         </Link>
@@ -507,13 +507,13 @@ export function OnboardingPage() {
 
   return (
     <main id="main-content" className="max-w-[680px] mx-auto px-4 sm:px-6 py-12 space-y-6">
-      <h1 className="type-h1 text-ink-primary">Welcome to Cultgig, {user.displayName}</h1>
+      <h1 className="type-h1 text-ink">Welcome to Cultgig, {user.displayName}</h1>
       <p className="type-body text-ink-secondary">
         Your account supports both client and artist workflows. Choose where you want to start right now:
       </p>
 
       {saved && (
-        <div className="bg-semantic-success-bg border border-semantic-success/30 rounded-md p-4 flex items-center gap-2 text-semantic-success type-label">
+        <div className="bg-status-success-soft border border-status-success/30 rounded-md p-4 flex items-center gap-2 text-status-success type-label">
           <CheckCircle2 size={18} aria-hidden="true" />
           <span>Workspace preference updated.</span>
         </div>
@@ -521,7 +521,7 @@ export function OnboardingPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="bg-surface border border-line rounded-lg p-6 space-y-4">
-          <h2 className="type-h3 text-ink-primary">Client / Event Host</h2>
+          <h2 className="type-h3 text-ink">Client / Event Host</h2>
           <p className="type-body-sm text-ink-secondary">
             Post a structured gig brief, save shortlisted artists, review proposals, and negotiate terms.
           </p>
@@ -537,7 +537,7 @@ export function OnboardingPage() {
         </div>
 
         <div className="bg-surface border border-line rounded-lg p-6 space-y-4">
-          <h2 className="type-h3 text-ink-primary">Artist / Creative Pro</h2>
+          <h2 className="type-h3 text-ink">Artist / Creative Pro</h2>
           <p className="type-body-sm text-ink-secondary">
             Edit your bio, upload portfolio proof with ownership consent, set availability, and apply to briefs.
           </p>

@@ -5,15 +5,15 @@ export type ButtonSize = "sm" | "md" | "lg";
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-plum text-white hover:bg-plum-hover active:bg-plum-active border border-transparent shadow-soft",
+    "bg-brand text-white hover:bg-brand-hover active:bg-brand-pressed border border-transparent shadow-xs",
   secondary:
-    "bg-plum-soft text-plum hover:bg-plum-tint hover:text-ink-primary border border-[color:var(--color-border-subtle)]",
+    "bg-brand-subtle text-brand hover:bg-brand-subtle hover:text-ink border border-[color:var(--color-border-subtle)]",
   outline:
-    "bg-surface text-ink-primary border border-line-strong hover:border-plum hover:text-plum",
+    "bg-surface text-ink border border-line-strong hover:border-brand hover:text-brand",
   "outline-light":
     "bg-transparent text-ink-inverse border border-white/40 hover:bg-white/10",
   ghost:
-    "bg-transparent text-ink-secondary hover:bg-surface-muted hover:text-ink-primary border border-transparent",
+    "bg-transparent text-ink-secondary hover:bg-surface-container hover:text-ink border border-transparent",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -59,7 +59,7 @@ export function IconButton({
     <button
       type={type}
       aria-label={label}
-      className={`inline-flex items-center justify-center w-11 h-11 rounded-md border border-line bg-surface text-ink-primary hover:border-plum hover:text-plum ${className}`}
+      className={`inline-flex items-center justify-center w-11 h-11 rounded-md border border-line bg-surface text-ink hover:border-brand hover:text-brand ${className}`}
       {...props}
     >
       {children}

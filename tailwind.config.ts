@@ -2,16 +2,13 @@ import type { Config } from 'tailwindcss';
 import animate from 'tailwindcss-animate';
 
 /**
- * Cultgig design tokens.
- * Brand colours are authored once as CSS variables in src/styles/globals.css and
- * exposed here two ways:
- *  - brand scales (plum, ink, line, canvas, surface, semantic, ochre) used by product UI
- *  - shadcn/ui semantic tokens (primary, muted, border, ...) used by src/components/ui
+ * Tailwind reads every colour from the CSS variables in src/styles/globals.css (see DESIGN.md).
+ * No hex values live here. Channel-triplet variables support alpha modifiers (e.g. bg-brand/10).
  */
-const v = (name: string) => `hsl(var(--${name}) / <alpha-value>)`;
+const c = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
+const raw = (name: string) => `var(--${name})`;
 
 export default {
-  darkMode: ['class'],
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
     container: {
@@ -21,46 +18,76 @@ export default {
     },
     extend: {
       colors: {
-        // shadcn/ui semantic tokens
-        border: v('border'),
-        input: v('input'),
-        ring: v('ring'),
-        background: v('background'),
-        foreground: v('foreground'),
-        primary: { DEFAULT: v('primary'), foreground: v('primary-foreground') },
-        secondary: { DEFAULT: v('secondary'), foreground: v('secondary-foreground') },
-        destructive: { DEFAULT: v('destructive'), foreground: v('destructive-foreground') },
-        muted: { DEFAULT: v('muted'), foreground: v('muted-foreground') },
-        accent: { DEFAULT: v('accent'), foreground: v('accent-foreground') },
-        popover: { DEFAULT: v('popover'), foreground: v('popover-foreground') },
-        card: { DEFAULT: v('card'), foreground: v('card-foreground') },
+        /* shadcn/ui semantic tokens (aliases of the brand tokens) */
+        border: raw('color-border'),
+        input: raw('color-border-control'),
+        ring: c('ring'),
+        background: c('background'),
+        foreground: c('foreground'),
+        primary: { DEFAULT: c('primary'), foreground: c('primary-foreground') },
+        secondary: { DEFAULT: c('secondary'), foreground: c('secondary-foreground') },
+        destructive: { DEFAULT: c('destructive'), foreground: c('destructive-foreground') },
+        muted: { DEFAULT: c('muted'), foreground: c('muted-foreground') },
+        accent: { DEFAULT: c('accent'), foreground: c('accent-foreground') },
+        popover: { DEFAULT: c('popover'), foreground: c('popover-foreground') },
+        card: { DEFAULT: c('card'), foreground: c('card-foreground') },
 
-        // Cultgig brand scales
-        plum: {
-          DEFAULT: '#6A2E62',
-          primary: '#6A2E62',
-          hover: '#54234E',
-          active: '#421A3D',
-          deep: '#421A3D',
-          soft: '#F8F3F7',
-          tint: '#EEDFEA',
-          border: '#DFC9DA',
+        /* Cultgig product tokens */
+        brand: {
+          DEFAULT: c('color-brand-primary'),
+          hover: c('color-brand-primary-hover'),
+          pressed: c('color-brand-primary-pressed'),
+          subtle: c('color-brand-primary-subtle'),
+          light: c('color-brand-light'),
+          'light-hover': c('color-brand-light-hover'),
+          'light-subtle': c('color-brand-light-subtle'),
+          ink: c('color-brand-ink'),
+          tertiary: c('color-brand-tertiary'),
         },
-        canvas: '#FCFAFB',
-        surface: { DEFAULT: '#FFFFFF', raised: '#FBF9FA', muted: '#F4EFF2' },
-        ink: { primary: '#20151E', secondary: '#5C4E58', muted: '#84747F', dark: '#181016' },
-        line: { light: '#F0E8EE', DEFAULT: '#E5DCE2', strong: '#CBBEC8' },
-        semantic: {
-          success: '#2B7A58',
-          'success-bg': '#EEF7F2',
-          warning: '#A8681E',
-          'warning-bg': '#FDF6EC',
-          error: '#B02A37',
-          'error-bg': '#FDF2F3',
-          info: '#26689A',
-          'info-bg': '#EDF5FB',
+        page: c('color-page'),
+        surface: {
+          DEFAULT: c('color-surface'),
+          low: c('color-surface-low'),
+          container: c('color-surface-container'),
+          high: c('color-surface-container-high'),
         },
-        ochre: { DEFAULT: '#B88E52', bg: '#FAF5ED' },
+        ink: {
+          DEFAULT: c('color-text-primary'),
+          strong: c('color-text-strong'),
+          secondary: c('color-text-secondary'),
+          muted: c('color-text-muted'),
+          inverse: c('color-text-inverse'),
+        },
+        line: {
+          DEFAULT: raw('color-border'),
+          subtle: raw('color-border-subtle'),
+          strong: c('color-border-strong'),
+          control: raw('color-border-control'),
+          focus: c('color-border-focus'),
+          selected: c('color-border-selected'),
+        },
+        overlay: {
+          warm: raw('color-overlay-warm'),
+          '04': raw('color-overlay-black-04'),
+          '08': raw('color-overlay-black-08'),
+          '20': raw('color-overlay-black-20'),
+          '40': raw('color-overlay-black-40'),
+          'white-70': raw('color-overlay-white-70'),
+        },
+        status: {
+          success: c('color-success'),
+          'success-soft': c('color-success-soft'),
+          'success-border': c('color-success-border'),
+          warning: c('color-warning'),
+          'warning-soft': c('color-warning-soft'),
+          'warning-border': c('color-warning-border'),
+          error: c('color-error'),
+          'error-soft': c('color-error-soft'),
+          'error-border': c('color-error-border'),
+          info: c('color-info'),
+          'info-soft': c('color-info-soft'),
+          'info-border': c('color-info-border'),
+        },
       },
       fontFamily: {
         sans: ['"Lexend"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
@@ -74,14 +101,16 @@ export default {
         '2xl': 'calc(var(--radius) + 8px)',
       },
       boxShadow: {
-        soft: '0 2px 10px rgba(32, 21, 30, 0.04)',
-        card: '0 6px 20px rgba(32, 21, 30, 0.06)',
-        elevated: '0 14px 36px rgba(32, 21, 30, 0.10)',
+        xs: 'var(--shadow-xs)',
+        sm: 'var(--shadow-sm)',
+        DEFAULT: 'var(--shadow-sm)',
+        md: 'var(--shadow-md)',
+        lg: 'var(--shadow-lg)',
+        brand: 'var(--shadow-brand)',
       },
       zIndex: {
         header: '40',
         overlay: '50',
-        modal: '50',
         toast: '100',
       },
       keyframes: {

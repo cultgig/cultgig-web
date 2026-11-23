@@ -139,7 +139,7 @@ export function ExplorePage() {
   return (
     <main id="main-content" className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-6">
       <div className="space-y-2">
-        <h1 className="text-[28px] sm:text-[34px] leading-[1.2] font-bold text-ink-primary">
+        <h1 className="text-[28px] sm:text-[34px] leading-[1.2] font-bold text-ink">
           Explore creative talent across India
         </h1>
         <p className="type-body-lg text-ink-secondary max-w-[720px]">
@@ -173,7 +173,7 @@ export function ExplorePage() {
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
               placeholder="Search artists, instruments, styles, or cities"
-              className="w-full min-h-[44px] pl-10 pr-3 py-2 rounded-md border border-line bg-canvas text-[15px] text-ink-primary"
+              className="w-full min-h-[44px] pl-10 pr-3 py-2 rounded-md border border-line bg-surface-low text-[15px] text-ink"
             />
           </div>
 
@@ -185,7 +185,7 @@ export function ExplorePage() {
               id="explore-category"
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px] text-ink-primary"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px] text-ink"
             >
               <option value="">All 15 creative categories</option>
               {creativeCategories.map((cat) => (
@@ -204,7 +204,7 @@ export function ExplorePage() {
               id="explore-city"
               value={cityFilter}
               onChange={(e) => setCityFilter(e.target.value)}
-              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-canvas text-[14px] text-ink-primary"
+              className="w-full min-h-[44px] px-3 py-2 rounded-md border border-line bg-surface-low text-[14px] text-ink"
             >
               <option value="">All cities</option>
               {indianCities.map((city) => (
@@ -221,7 +221,7 @@ export function ExplorePage() {
             aria-label="Pricing mode"
             value={pricingFilter}
             onChange={(e) => setPricingFilter(e.target.value as PricingMode | "")}
-            className="min-h-[40px] px-3 py-2 rounded-md border border-line bg-surface text-[13px] text-ink-primary"
+            className="min-h-[40px] px-3 py-2 rounded-md border border-line bg-surface text-[13px] text-ink"
           >
             <option value="">Any pricing mode</option>
             <option value="starting_at">Starting at</option>
@@ -234,7 +234,7 @@ export function ExplorePage() {
             aria-label="Max starting budget in INR"
             value={maxBudgetInr}
             onChange={(e) => setMaxBudgetInr(e.target.value)}
-            className="min-h-[40px] px-3 py-2 rounded-md border border-line bg-surface text-[13px] text-ink-primary"
+            className="min-h-[40px] px-3 py-2 rounded-md border border-line bg-surface text-[13px] text-ink"
           >
             <option value="">Any budget</option>
             <option value="15000">Up to ₹15,000</option>
@@ -246,7 +246,7 @@ export function ExplorePage() {
             aria-label="Working mode"
             value={workingModeFilter}
             onChange={(e) => setWorkingModeFilter(e.target.value as WorkingMode | "")}
-            className="min-h-[40px] px-3 py-2 rounded-md border border-line bg-surface text-[13px] text-ink-primary"
+            className="min-h-[40px] px-3 py-2 rounded-md border border-line bg-surface text-[13px] text-ink"
           >
             <option value="">On-site or remote</option>
             <option value="on_site">On-site events</option>
@@ -257,7 +257,7 @@ export function ExplorePage() {
             aria-label="Solo or group"
             value={formatFilter}
             onChange={(e) => setFormatFilter(e.target.value as ArtistFormat | "")}
-            className="min-h-[40px] px-3 py-2 rounded-md border border-line bg-surface text-[13px] text-ink-primary"
+            className="min-h-[40px] px-3 py-2 rounded-md border border-line bg-surface text-[13px] text-ink"
           >
             <option value="">Solo or group</option>
             <option value="solo">Solo artist</option>
@@ -268,7 +268,7 @@ export function ExplorePage() {
             aria-label="Sort results"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as SortKey)}
-            className="min-h-[40px] px-3 py-2 rounded-md border border-line bg-surface text-[13px] text-ink-primary"
+            className="min-h-[40px] px-3 py-2 rounded-md border border-line bg-surface text-[13px] text-ink"
           >
             <option value="relevance">Sort: Relevance</option>
             <option value="price_asc">Starting price: Low to high</option>
@@ -277,13 +277,13 @@ export function ExplorePage() {
           </select>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-line-light">
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-line">
           <label className="inline-flex items-center gap-2 text-[13px] text-ink-secondary cursor-pointer">
             <input
               type="checkbox"
               checked={audioOrVideoOnly}
               onChange={(e) => setAudioOrVideoOnly(e.target.checked)}
-              className="w-4 h-4 accent-plum rounded"
+              className="w-4 h-4 accent-brand rounded"
             />
             <span>Includes audio or video portfolio sample</span>
           </label>
@@ -295,7 +295,7 @@ export function ExplorePage() {
                 setLoadingPreview(true);
                 setTimeout(() => setLoadingPreview(false), 350);
               }}
-              className="type-caption text-ink-secondary hover:text-plum inline-flex items-center gap-1"
+              className="type-caption text-ink-secondary hover:text-brand inline-flex items-center gap-1"
             >
               <SlidersHorizontal size={13} aria-hidden="true" />
               Refresh results
@@ -304,7 +304,7 @@ export function ExplorePage() {
               <button
                 type="button"
                 onClick={clearAll}
-                className="type-label text-plum hover:text-plum-hover"
+                className="type-label text-brand hover:text-brand-hover"
               >
                 Clear all filters
               </button>
@@ -321,7 +321,7 @@ export function ExplorePage() {
               key={filter.label}
               type="button"
               onClick={filter.clear}
-              className="inline-flex items-center gap-1.5 min-h-[34px] px-3 py-1 rounded-md bg-plum-soft border border-[color:var(--color-border-subtle)] text-plum type-caption font-semibold hover:bg-plum-tint hover:text-ink-primary"
+              className="inline-flex items-center gap-1.5 min-h-[34px] px-3 py-1 rounded-md bg-brand-subtle border border-[color:var(--color-border-subtle)] text-brand type-caption font-semibold hover:bg-brand-subtle hover:text-ink"
             >
               <span>{filter.label}</span>
               <X size={13} aria-hidden="true" />
@@ -336,7 +336,7 @@ export function ExplorePage() {
           Showing {Math.min(visibleCount, filteredArtists.length)} of {filteredArtists.length} sample
           {filteredArtists.length === 1 ? " profile" : " profiles"}
         </p>
-        <Link to="/client/gigs/new" className="type-label text-plum hover:text-plum-hover">
+        <Link to="/client/gigs/new" className="type-label text-brand hover:text-brand-hover">
           Need custom quotes? Post an event gig →
         </Link>
       </div>
@@ -346,18 +346,18 @@ export function ExplorePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" aria-busy="true">
           {[1, 2, 3, 4].map((n) => (
             <div key={n} className="bg-surface border border-line rounded-lg overflow-hidden animate-pulse">
-              <div className="aspect-[4/3] bg-surface-muted" />
+              <div className="aspect-[4/3] bg-surface-container" />
               <div className="p-4 space-y-3">
-                <div className="h-4 bg-surface-muted rounded w-2/3" />
-                <div className="h-3 bg-surface-muted rounded w-full" />
-                <div className="h-4 bg-surface-muted rounded w-1/2" />
+                <div className="h-4 bg-surface-container rounded w-2/3" />
+                <div className="h-3 bg-surface-container rounded w-full" />
+                <div className="h-4 bg-surface-container rounded w-1/2" />
               </div>
             </div>
           ))}
         </div>
       ) : filteredArtists.length === 0 ? (
         <div className="bg-surface border border-line rounded-lg p-8 sm:p-12 text-center space-y-4">
-          <h2 className="type-h2 text-ink-primary">No sample artists match those exact filters</h2>
+          <h2 className="type-h2 text-ink">No sample artists match those exact filters</h2>
           <p className="type-body text-ink-secondary max-w-[520px] mx-auto">
             Try clearing a filter, expanding to nearby travel cities, or posting a structured event brief so matching artists can reach out directly.
           </p>
@@ -367,7 +367,7 @@ export function ExplorePage() {
             </Button>
             <Link
               to="/client/gigs/new"
-              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-plum text-white hover:bg-plum-hover type-button"
+              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-md bg-brand text-white hover:bg-brand-hover type-button"
             >
               Post a gig brief
             </Link>
