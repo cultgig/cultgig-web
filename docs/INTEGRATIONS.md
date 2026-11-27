@@ -56,6 +56,24 @@ The UI already has: checkout (`/checkout/:bookingId`), payment pending/success/f
 transaction history (`/client/payments`), booking payment summaries and artist earnings. They read
 `BookingRecord.paymentStatus` and never decide payment success themselves.
 
+The Vercel API routes provide Razorpay Standard Checkout order creation and signature
+verification (`api/create-order.js`, `api/verify-payment.js`). They are an integration
+foundation only; they do not authorize a marketplace fund flow, persist payment records, or mark
+bookings as paid. Keep both `VITE_PAYMENTS_ENABLED` and `PAYMENTS_ENABLED` false until the blockers
+above are resolved and the full Appwrite payment/webhook Functions are deployed.
+
+Configure these variables in the server environment (and locally in ignored `.env`):
+
+- `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` (server only)
+- `VITE_RAZORPAY_KEY_ID` (public key ID only)
+- `PAYMENTS_ENABLED=true` and `VITE_PAYMENTS_ENABLED=true` only after approval
+
+Use `vercel dev` for local testing of `/api/*`; Vite's `npm run dev` serves only the frontend.
+The order endpoint validates integer paise and INR, but this interim route accepts the amount from
+the browser. Do not deploy it for real booking collection until it is changed to load the
+accepted-proposal amount from trusted server-side data, authenticate the booking owner, and add
+idempotency and webhook reconciliation.
+
 Implement a provider behind this interface in an Appwrite Function (never in the browser):
 
 ```ts
