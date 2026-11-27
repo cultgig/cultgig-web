@@ -42,6 +42,7 @@ export const appConfig = {
   },
   googleOAuthEnabled: readEnv("VITE_GOOGLE_OAUTH_ENABLED") === "true",
   paymentsEnabled: readEnv("VITE_PAYMENTS_ENABLED") === "true",
+  razorpayKeyId: readEnv("VITE_RAZORPAY_KEY_ID"),
 } as const;
 
 export const isDemoMode = appConfig.mode === "demo";
