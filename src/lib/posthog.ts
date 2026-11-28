@@ -1,4 +1,5 @@
 import posthog from "posthog-js";
+import "posthog-js/dist/exception-autocapture";
 
 const posthogKey = import.meta.env.VITE_POSTHOG_KEY?.trim();
 
