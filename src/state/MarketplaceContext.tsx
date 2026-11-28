@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { toast } from "sonner";
 import { toUserMessage } from "../domain/errors";
 import type { Backend, MarketplaceSnapshot } from "../services/backend";
+import { identifyPostHogUser, resetPostHogUser } from "../lib/posthog";
 
 const EMPTY_SNAPSHOT: MarketplaceSnapshot = {
   viewer: null,
@@ -60,6 +61,19 @@ export function MarketplaceProvider({ backend, children }: { backend: Backend; c
     void refresh();
     return backend.market.subscribe(() => void refresh());
   }, [backend, refresh]);
+
+  useEffect(() => {
+    if (snapshot.viewer) {
+      identifyPostHogUser(snapshot.viewer.id, {
+        email: snapshot.viewer.email,
+        displayName: snapshot.viewer.displayName,
+        roles: snapshot.viewer.roles,
+        activeRole: snapshot.viewer.activeRole,
+      });
+    } else if (!loading) {
+      resetPostHogUser();
+    }
+  }, [snapshot.viewer, loading]);
 
   const run = useCallback<MarketplaceContextValue["run"]>(
     async (action, options) => {
