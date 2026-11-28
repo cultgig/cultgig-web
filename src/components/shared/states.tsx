@@ -1,4 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
+import { capturePostHogException } from "@/lib/posthog";
 import { ArrowClockwise, MagnifyingGlass, WarningCircle, type Icon } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -136,6 +137,9 @@ export class ErrorBoundary extends Component<{ children: ReactNode; resetKey?: s
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
+    capturePostHogException(error, {
+      component_stack: info.componentStack,
+    });
     if (import.meta.env.DEV) console.error("Cultgig screen error", error, info.componentStack);
   }
 

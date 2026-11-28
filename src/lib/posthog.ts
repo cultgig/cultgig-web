@@ -14,6 +14,7 @@ export function initPostHog() {
     defaults: "2026-08-30",
     capture_pageview: false,
     capture_pageleave: true,
+    capture_exceptions: true,
   });
 }
 
@@ -35,4 +36,9 @@ export function identifyPostHogUser(
 export function resetPostHogUser() {
   if (!posthogKey || !posthog.__loaded) return;
   posthog.reset();
+}
+
+export function capturePostHogException(error: unknown, additionalProperties?: Record<string, unknown>) {
+  if (!posthogKey || !posthog.__loaded) return;
+  posthog.captureException(error, additionalProperties);
 }
