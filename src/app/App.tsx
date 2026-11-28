@@ -9,12 +9,16 @@ import { RouterProvider, useRouter } from "@/lib/router";
 import { initBackend, type BackendInit } from "@/services/backend";
 import { MarketplaceProvider } from "@/state/MarketplaceContext";
 import { ConfigurationErrorPage } from "@/pages/shared/ConfigurationErrorPage";
+import { capturePostHogPageView } from "@/lib/posthog";
 import { resolveRoute } from "./routes";
 
 function Shell() {
-  const { pathname } = useRouter();
+  const { pathname, search } = useRouter();
   const route = resolveRoute(pathname);
   const bare = route.layout === "bare";
+  useEffect(() => {
+    capturePostHogPageView(pathname, search);
+  }, [pathname, search]);
   return (
     <div className="flex min-h-screen flex-col">
       <a
